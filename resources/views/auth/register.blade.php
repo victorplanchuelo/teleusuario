@@ -40,6 +40,21 @@
 										</span>
 									@endif
 								</div>
+								<div class="form-block {{ $errors->has('genre') ? ' has-error has-feedback' : '' }}">
+									<div class="form-group form-genre">
+										<label class="radio-inline">
+											<input type="radio" name="genre" id="male" value="1"> {{trans('validation.male')}}
+										</label>
+										<label class="radio-inline">
+											<input type="radio" name="genre" id="female" value="2"> {{trans('validation.female')}}
+										</label>
+									</div>
+									@if ($errors->has('genre'))
+										<span class="help-block no-margin">
+											<strong>{{ $errors->first('genre') }}</strong>
+										</span>
+									@endif
+								</div>
 								<div class="form-block {{ $errors->has('birthdate') ? ' has-error has-feedback' : '' }}">
 									<?php
 									$now = \Carbon\Carbon::now();

@@ -316,8 +316,19 @@ input[type=submit]:focus {
 }
 
 
+/************************************************
+** Añadimos estilos para radio
+*************************************************/
+.radio-inline {
+	color: #333;
+}
+.form-genre {
+	margin: 0 0 15px 25px;
+}
 
-
+.radio-inline input[type=radio] {
+	margin-top: 0;
+}
 
 
 

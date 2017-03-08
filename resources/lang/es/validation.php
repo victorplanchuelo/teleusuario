@@ -21,6 +21,8 @@ return [
 	'birthdate'			   => 'Fecha de Nacimiento',
 	'password'			   => 'Contraseña (sólo letras y números)',
 	'password_confirmation'=> 'Repite Contraseña',
+	'male'                 => 'Masculino',
+	'female'               => 'Femenino',
 	
 	
 	//Formulario del Login

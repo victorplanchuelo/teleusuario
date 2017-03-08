@@ -20,6 +20,9 @@ return [
 	'birthdate'			   => 'Date of birth',
 	'password'			   => 'Password (only letters and numbers)',
 	'password_confirmation'=> 'Repeat Password',
+
+	'male'                 => 'Male',
+	'female'               => 'Female',
 	
 	'code_user'			   => 'Code',
 	'password_login'	   => 'Password',

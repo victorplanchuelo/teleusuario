@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
 use App\Http\Controllers\Controller;
+use App\UserApplication;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -48,9 +48,11 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed',
+	        'name' => 'required|max:100|regex:/^[\pL\s\-]+$/u',
+	        'email' => 'required|email|unique:users',
+	        'phone' => 'required|size:9|regex:/[6789][0-9]{8}/',
+	        'birthdate' => 'required|date|age',
+	        'password' => 'required|min:6|regex:/(^[A-Za-z0-9]+$)+/|confirmed',
         ]);
     }
 
@@ -62,10 +64,23 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+
+	    // Recogemos los valores de la fecha de hoy
+	    $hoy = Carbon::now()->toDateString();
+	    $token = str_random(10);
+
+        return UserApplication::create([
             'name' => $data['name'],
             'email' => $data['email'],
+	        'phone' => $data['phone'],
+	        'birthdate' => Carbon::parse($data['birthdate'])->format('d/m/Y'),
             'password' => bcrypt($data['password']),
+	        'genre'=>$data['genre'],
+	        'application_date' => $hoy,
+	        'ip' => \Request::ip(),
+	        'validation_token'=> $token,
+	        'validated_email'=>false,
+	        'motive'=>'',
         ]);
     }
 }
