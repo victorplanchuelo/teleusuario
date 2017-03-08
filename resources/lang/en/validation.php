@@ -1,6 +1,42 @@
 <?php
 
 return [
+	
+	'email_validate'	   => 'Your E-Mail has been validated successfully. A person will contact you soon in order to complete your register.',
+	'remember_phone'	   => "Please rememeber to validate your phone number if you haven't done it yet",
+	
+	
+	'mail_subject'		   => 'E-Mail Verification',
+	'verification_message' => "We've sent you an e-mail to your account in order to verify it.",
+	
+	'email_already_validate' => "Previously you've already validated your e-mail",
+	'user_already_exist'   => 'There is already a user with that E-Mail/Phone number',
+	
+	'TextoSMS'			   => 'Thank you for registering. Please, validate your Phone Number here: ',
+	
+	'full_name'			   => 'Full Name',
+	'phone'				   => 'Phone Number',
+	'email_ph'			   => 'E-Mail',
+	'birthdate'			   => 'Date of birth',
+	'password'			   => 'Password (only letters and numbers)',
+	'password_confirmation'=> 'Repeat Password',
+	
+	'code_user'			   => 'Code',
+	'password_login'	   => 'Password',
+	
+	
+	'title_form'		   => 'Sign up',
+	'terms'				   => 'You must accept Terms and Conditions checkbox',
+	'sign_up'			   => 'Sign Up',
+	'login'				   => 'Sign In',
+	'remember'			   => 'Remember',
+	'register_label'	   => 'New in Teleusuario?',
+	'register_a'		   => 'Create an account',
+	'login_label'	       => 'Already have an account?',
+	'login_a'		       => 'Sign in',
+	'accept_terms'		   => 'I agree to the terms of service',
+	'age' 				   => 'You must be, at least, 18 years old',
+	'phone_with_800_or_900'=> 'Phone numbers with prefix 80... or 90... are not allowed',
 
     /*
     |--------------------------------------------------------------------------
@@ -12,17 +48,15 @@ return [
     | as the size rules. Feel free to tweak each of these messages here.
     |
     */
-
+	
     'accepted'             => 'The :attribute must be accepted.',
     'active_url'           => 'The :attribute is not a valid URL.',
     'after'                => 'The :attribute must be a date after :date.',
-    'after_or_equal'       => 'The :attribute must be a date after or equal to :date.',
     'alpha'                => 'The :attribute may only contain letters.',
     'alpha_dash'           => 'The :attribute may only contain letters, numbers, and dashes.',
     'alpha_num'            => 'The :attribute may only contain letters and numbers.',
     'array'                => 'The :attribute must be an array.',
     'before'               => 'The :attribute must be a date before :date.',
-    'before_or_equal'      => 'The :attribute must be a date before or equal to :date.',
     'between'              => [
         'numeric' => 'The :attribute must be between :min and :max.',
         'file'    => 'The :attribute must be between :min and :max kilobytes.',
@@ -32,15 +66,13 @@ return [
     'boolean'              => 'The :attribute field must be true or false.',
     'confirmed'            => 'The :attribute confirmation does not match.',
     'date'                 => 'The :attribute is not a valid date.',
-    'date_format'          => 'The :attribute does not match the format :format.',
+    'date_format'          => 'The :attribute does not match the format dd/mm/yyyy',
     'different'            => 'The :attribute and :other must be different.',
     'digits'               => 'The :attribute must be :digits digits.',
     'digits_between'       => 'The :attribute must be between :min and :max digits.',
-    'dimensions'           => 'The :attribute has invalid image dimensions.',
     'distinct'             => 'The :attribute field has a duplicate value.',
     'email'                => 'The :attribute must be a valid email address.',
     'exists'               => 'The selected :attribute is invalid.',
-    'file'                 => 'The :attribute must be a file.',
     'filled'               => 'The :attribute field is required.',
     'image'                => 'The :attribute must be an image.',
     'in'                   => 'The selected :attribute is invalid.',
@@ -55,7 +87,6 @@ return [
         'array'   => 'The :attribute may not have more than :max items.',
     ],
     'mimes'                => 'The :attribute must be a file of type: :values.',
-    'mimetypes'            => 'The :attribute must be a file of type: :values.',
     'min'                  => [
         'numeric' => 'The :attribute must be at least :min.',
         'file'    => 'The :attribute must be at least :min kilobytes.',
@@ -83,7 +114,6 @@ return [
     'string'               => 'The :attribute must be a string.',
     'timezone'             => 'The :attribute must be a valid zone.',
     'unique'               => 'The :attribute has already been taken.',
-    'uploaded'             => 'The :attribute failed to upload.',
     'url'                  => 'The :attribute format is invalid.',
 
     /*
