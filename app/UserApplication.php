@@ -20,12 +20,12 @@ class UserApplication extends Model
 	 */
 	protected $fillable = [
 		'name', 'phone', 'birthdate', 'email', 'password',
-		'validate_email', 'application_date', 'genre', 'ip',
-		'validation_token', 'checked_by', 'motive'
+		'validate_email', 'application_date', 'end_date', 'genre', 'ip',
+		'validation_token', 'checked_by', 'motive', 'notes',
 	];
 
 	public function user()
 	{
-		return $this->hasOne('App\User');
+		return $this->belongsTo('App\User');
 	}
 }

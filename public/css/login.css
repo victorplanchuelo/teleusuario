@@ -21,22 +21,27 @@ body {
 	line-height: 18px;
 	color: #FFFFFF;
 	height: 100%;
-	background: #47759e; /* Old browsers */
-	background: -moz-radial-gradient(center, ellipse cover,  #BF7A6A 0%, #0b264e 100%); /* FF3.6+ */
-	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#BF7A6A), color-stop(100%,#0b264e)); /* Chrome,Safari4+ */
-	background: -webkit-radial-gradient(center, ellipse cover,  #BF7A6A 0%,#0b264e 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-radial-gradient(center, ellipse cover,  #BF7A6A 0%,#0b264e 100%); /* Opera 12+ */
-	background: -ms-radial-gradient(center, ellipse cover,  #BF7A6A 0%,#0b264e 100%); /* IE10+ */
-	background: radial-gradient(ellipse at center,  #BF7A6A 0%,#0b264e 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#BF7A6A', endColorstr='#0b264e',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+
+	background: #ebebeb;
+
+
+	/*background: #47759e;*/ /* Old browsers */
+	/*background: -moz-radial-gradient(center, ellipse cover,  #BF7A6A 0%, #0b264e 100%);*/ /* FF3.6+ */
+	/*background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#BF7A6A), color-stop(100%,#0b264e));*/ /* Chrome,Safari4+ */
+	/*background: -webkit-radial-gradient(center, ellipse cover,  #BF7A6A 0%,#0b264e 100%);*/ /* Chrome10+,Safari5.1+ */
+	/*background: -o-radial-gradient(center, ellipse cover,  #BF7A6A 0%,#0b264e 100%);*/ /* Opera 12+ */
+	/*background: -ms-radial-gradient(center, ellipse cover,  #BF7A6A 0%,#0b264e 100%);*/ /* IE10+ */
+	/*background: radial-gradient(ellipse at center,  #BF7A6A 0%,#0b264e 100%);*/ /* W3C */
+	/*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#BF7A6A', endColorstr='#0b264e',GradientType=1 );*/ /* IE6-9 fallback on horizontal gradient */
 }
 .clearfix:before,
 .clearfix:after{
-  display: table;
-  content: " ";
+	display: table;
+	content: " ";
 }
 .clearfix:after{
-  clear: both;
+	clear: both;
 }
 
 h5{
@@ -87,13 +92,33 @@ h5{
 .form-block {
 	position: relative;
 }
+
+
+/***************************************
+***************************************
+ Cambiamos right por left en
+lo siguiente para que los iconos
+del registro/login aparezca a la izquierda
+***************************************
+****************************************/
+
+
 .form-block i{
 	position: absolute;
-	right: 40px;
+	left: 40px;
+	/*right: 40px;*/
 	top: 17px;
 	color: #666;
 	font-size: 16px;
 }
+
+
+
+/***************************************
+***************************************
+****************************************/
+
+
 
 #inputs {
 	width: 100%;
@@ -102,6 +127,16 @@ h5{
 	position: relative;
 }
 
+
+/***************************************
+***************************************
+ Modificamos el padding de lo siguiente
+para que los iconos del registro/login aparezca
+a la izquierda y al escribir en el input
+no escriba por encima del icono
+Por defecto venía a padding: 15px;
+***************************************
+****************************************/
 input[type=text], input[type=password], input[type=email] {
 	width: 270px;
 	height: 48px;
@@ -109,10 +144,16 @@ input[type=text], input[type=password], input[type=email] {
 	margin: 0 auto;
 	display: block;
 	margin-bottom: 10px;
-	padding: 15px;
+	padding: 15px 0px 15px 40px;
+	/*padding: 15px;*/
 	box-sizing: border-box;
 	font-size: 13px;
 }
+
+/***************************************
+***************************************
+****************************************/
+
 
 input[type=text], input[type=password], input[type=email] {
 	border: thin solid #ddd;
@@ -179,92 +220,92 @@ input[type=submit]:focus {
 	margin-right: 5px;
 }
 .switch {
-  position: relative;
-  display: inline-block;
-  vertical-align: top;
-  width: 56px;
-  height: 18px;
-  border-radius: 30px;
-  cursor: pointer; 
+	position: relative;
+	display: inline-block;
+	vertical-align: top;
+	width: 56px;
+	height: 18px;
+	border-radius: 30px;
+	cursor: pointer;
 }
 .switch-input {
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0; 
+	position: absolute;
+	top: 0;
+	left: 0;
+	opacity: 0;
 }
 .switch-label {
-  position: relative;
-  display: block;
-  height: inherit;
-  font-size: 10px;
-  text-transform: uppercase;
-  background: #999999;
-  border-radius: inherit;
-  -webkit-transition: 0.15s ease-out;
-  -moz-transition: 0.15s ease-out;
-  -o-transition: 0.15s ease-out;
-  transition: 0.15s ease-out;
-  -webkit-transition-property: opacity background;
-  -moz-transition-property: opacity background;
-  -o-transition-property: opacity background;
-  transition-property: opacity background; 
+	position: relative;
+	display: block;
+	height: inherit;
+	font-size: 10px;
+	text-transform: uppercase;
+	background: #999999;
+	border-radius: inherit;
+	-webkit-transition: 0.15s ease-out;
+	-moz-transition: 0.15s ease-out;
+	-o-transition: 0.15s ease-out;
+	transition: 0.15s ease-out;
+	-webkit-transition-property: opacity background;
+	-moz-transition-property: opacity background;
+	-o-transition-property: opacity background;
+	transition-property: opacity background;
 }
 .switch-label:before, .switch-label:after {
-  position: absolute;
-  top: 50%;
-  margin-top: -0.5em;
-  line-height: 1;
-  -webkit-transition: inherit;
-  -moz-transition: inherit;
-  -o-transition: inherit;
-  transition: inherit; 
+	position: absolute;
+	top: 50%;
+	margin-top: -0.5em;
+	line-height: 1;
+	-webkit-transition: inherit;
+	-moz-transition: inherit;
+	-o-transition: inherit;
+	transition: inherit;
 }
 .switch-label:before {
-  content: attr(data-off);
-  right: 11px;
-  color: #ffffff;
+	content: attr(data-off);
+	right: 11px;
+	color: #ffffff;
 }
 .switch-label:after {
-  content: attr(data-on);
-  left: 11px;
-  color: #ffffff;
-  opacity: 0;
+	content: attr(data-on);
+	left: 11px;
+	color: #ffffff;
+	opacity: 0;
 }
 .switch-input:checked ~ .switch-label {
-  background: #32AB52;
+	background: #32AB52;
 }
 .switch-input:checked ~ .switch-label:before {
-  opacity: 0;
+	opacity: 0;
 }
 .switch-input:checked ~ .switch-label:after {
-  opacity: 1;
+	opacity: 1;
 }
 .switch-handle {
-  position: absolute;
-  top: 1px;
-  left: 1px;
-  width: 16px;
-  height: 16px;
-  background: #ffffff;
-  border-radius: 10px;
-  -webkit-transition: left 0.15s ease-out;
-  -moz-transition: left 0.15s ease-out;
-  -o-transition: left 0.15s ease-out;
-  transition: left 0.15s ease-out; 
+	position: absolute;
+	top: 1px;
+	left: 1px;
+	width: 16px;
+	height: 16px;
+	background: #ffffff;
+	border-radius: 10px;
+	-webkit-transition: left 0.15s ease-out;
+	-moz-transition: left 0.15s ease-out;
+	-o-transition: left 0.15s ease-out;
+	transition: left 0.15s ease-out;
 }
 .switch-handle:before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin: -5px 0 0 -5px;
-  width: 10px;
-  height: 10px;
-  background: #ffffff; 
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -5px 0 0 -5px;
+	width: 10px;
+	height: 10px;
+	background: #ffffff;
 }
 .switch-input:checked ~ .switch-handle {
-  left: 39px;
+	left: 39px;
 }
 
 .center-text {
@@ -272,4 +313,181 @@ input[type=submit]:focus {
 }
 .or {
 	color: #353C48;
+}
+
+
+/************************************************
+** Añadimos estilos para radio
+*************************************************/
+.radio-inline {
+	color: #333;
+}
+.form-genre {
+	margin: 0 25px 15px 25px;
+}
+
+.radio-inline input[type=radio] {
+	margin-top: 0;
+}
+
+
+
+/************************************************
+** Añadimos un margen para centrar el checkbox
+*************************************************/
+
+.chk_terms {
+	margin-left: 45px;
+}
+
+.chk_terms .checkbox {
+	margin-top: 0px;
+	margin-bottom: 10px;
+}
+
+
+/************************************************
+** Añadimos los estilos para el boton de registro
+*************************************************/
+
+.register {
+	color: #fff;
+	font-size: 18px;
+	background-color: #E84234;
+	border: 0;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	transition: all .2s ease;
+	cursor: pointer;
+	width: 270px;
+	height: 48px;
+	margin: 0 auto;
+	display: block;
+	margin-bottom: 10px;
+	padding: 15px;
+}
+
+.register:hover {
+	background-color: #C32619;
+	color: #fff;
+}
+.register:focus {
+	outline: none;
+	border: 0;
+}
+
+
+
+/************************************************
+** Modificamos el estilo de los input type=date
+************************************************/
+input[type=date] {
+	width: 270px;
+	height: 48px;
+	position: relative;
+	margin: 0 auto;
+	display: block;
+	margin-bottom: 10px;
+	box-sizing: border-box;
+	font-size: 13px;
+	border: thin solid #ddd;
+	color: #4f4f4f;
+
+	/*Añadimos el padding para que el texto que escribamos no pise el icono*/
+	padding: 15px 0px 15px 40px;
+
+	line-height: 0px;
+}
+
+input[type=date]:hover {
+	border: thin solid #47759e;
+	-webkit-transition: all .4s ease;
+	-moz-transition: all .4s ease;
+	-o-transition: all .4s ease;
+	transition: all .4s ease;
+}
+
+input[type=date]:focus {
+	border: thin solid #ddd;
+	border-left: thin solid #eb4343;
+	outline: none;
+}
+
+
+/**********************************************
+ PARA SAFARI: AL INTRODUCIR LA FECHA
+ BAJA EL TEXTO PARA ABAJO
+ NO FUNCIONA. COMPROBAR MAS TARDE
+**********************************************/
+input[type=date]::-webkit-input-placeholder {
+	line-height: 34px !important;
+}
+/*********************************************/
+
+
+
+
+
+/*******************************************
+* Añadimos estilo para el anchor de los terminos
+*******************************************/
+.terms {
+	text-decoration: none;
+	color: black;
+}
+
+.terms:hover {
+	text-decoration: none;
+	color: blue;
+}
+
+
+
+/*******************************************
+* Añadimos estilo para la letra pequeña de
+registrarse/iniciar sesion
+*******************************************/
+
+.reg_mini, .log_mini {
+	width: 100%;
+	float: left;
+	margin-top: 10px;
+}
+
+
+/*******************************************
+* Añadimos estilo para cuando haya un error en
+el formulario
+*******************************************/
+.help-block {
+	font-size: 11px; }
+
+
+.has-error .help-block, .has-error .control-label, .has-error .radio, .has-error .checkbox, .has-error .radio-inline, .has-error .checkbox-inline {
+	color: #E84234;
+	margin-left: 25px;
+}
+
+.has-error .form-control {
+	border-color: #E84234;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	color: #E84234;
+}
+.has-error .form-control:focus {
+	border-color: #d12618;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+.has-error .form-control-feedback {
+	color: #E84234;
+}
+.has-error .input-group-addon {
+	border-color: #E84234;
+}
+
+
+.panel {
+	border: 0;
 }
