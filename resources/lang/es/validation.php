@@ -4,15 +4,12 @@ return [
 	
 	//Mensajes que aparecen en Login
 	'email_validate'	   => 'Tu correo electrónico se ha validado correctamente. En breve una persona se pondrá en contacto para finalizar su registro.',
-	'remember_phone'	   => 'Recuerda validar tu número de teléfono si no lo has hecho',
 	
 	// Parte del MAIL
 	'mail_subject'		   => 'Verificación de Correo Electrónico',
+
+	//Mensaje cuando se ha insertado el usuario en el registro previo.
 	'verification_message' => "Te hemos enviado un correo electrónico para verificar los cuenta de correo electrónico",
-	
-	'email_already_validate' => 'Ya habías validado tu correo electrónico con anterioridad',
-	'user_already_exist'   => 'Ya existe un usuario con ese Telefono/Correo Electrónico',
-	
 	
 	//Placeholders de los campos en el registro de usuarios
 	'full_name'			   => 'Nombre y Apellidos',
@@ -42,7 +39,7 @@ return [
 	'login_a'		       => 'Inicia sesión',
 	'accept_terms'		   => 'Acepto terminos y condiciones de uso',
 	'age' 				   => 'Debes tener, al menos, 18 años para poder registrarte',
-	'phone_with_800_or_900'=> 'No se permiten telefonos con prefijo 80... o 90...',
+	'phone_prefix'         => 'No se permiten telefonos con prefijo 80... o 90...',
 
     /*
     |--------------------------------------------------------------------------
@@ -150,7 +147,16 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+    	'name' => 'Nombre',
+	    'email' => 'Correo Electrónico',
+	    'phone' => 'Teléfono',
+	    'genre' => 'Género',
+	    'birthdate' => 'Fecha de Nacimiento',
+	    'password' => 'Contraseña',
+	    'password_confirmation' => 'Confirmación de contraseña',
+	    'code' => 'Código',
+    ],
 
 ];
 

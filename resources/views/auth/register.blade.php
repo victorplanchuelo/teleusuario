@@ -2,10 +2,19 @@
 
 @section('content')
 	<div class="container">
+		@if (count($errors) > 0)
+			<div class="alert alert-danger">
+				<ul>
+					@foreach ($errors->all() as $error)
+						<li>{{ $error }}</li>
+					@endforeach
+				</ul>
+			</div>
+		@endif
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2">
 				<div class="panel panel-default">
-					<form action="#" method="post" id="registro">
+					<form action="#" method="post" id="register">
 						<div id="box" class="animated bounceIn">
 							<div id="top_header">
 								<img src="{{asset('img/logo.png')}}" alt="Teleusuario Logo" />
@@ -31,7 +40,7 @@
 										</span>
 									@endif
 								</div>
-								<div class="form-block {{ $errors->has('phone') ? ' has-error has-feedback' : '' }}">
+								<div class="form-block {{ $errors->has('phone') ? ' has-error has-feedback' : 'no-tiene' }}">
 									<input type="text" class="form-control" id="phone" name="phone" title="{{trans('validation.phone')}}" placeholder="{{trans('validation.phone')}}" value="{{old('phone')}}">
 									<i class="icon-phone"></i>
 									@if ($errors->has('phone'))
@@ -43,10 +52,10 @@
 								<div class="form-block {{ $errors->has('genre') ? ' has-error has-feedback' : '' }}">
 									<div class="form-group form-genre">
 										<label class="radio-inline">
-											<input type="radio" name="genre" id="male" value="1"> {{trans('validation.male')}}
+											<input type="radio" name="genre" id="male" value="1" @if(old('genre')=="1") checked @endif> {{trans('validation.male')}}
 										</label>
-										<label class="radio-inline">
-											<input type="radio" name="genre" id="female" value="2"> {{trans('validation.female')}}
+										<label class="radio-inline pull-right">
+											<input type="radio" name="genre" id="female" value="2" @if(old('genre')=="2") checked @endif> {{trans('validation.female')}}
 										</label>
 									</div>
 									@if ($errors->has('genre'))
@@ -96,7 +105,6 @@
 										<a class="terms" href="{{ url('/terms') }}">{{ trans('validation.accept_terms') }}</a>
 									</div>
 								</div>
-
 								<input type="button" class="register" value="{{ trans('validation.sign_up') }}">
 							</div>
 							<div class="log_mini">
@@ -153,7 +161,6 @@
 	<script type="text/javascript">
 		$( document ).ready(function() {
 
-
 			$('#birthdate').focus(function() {
 				$(this).attr('placeholder', '');
 			});
@@ -163,7 +170,6 @@
 					$('#register').submit();
 				} else {
 					$('<div class="alert alert-danger"><ul><li>{{ trans('validation.terms') }}</li></ul></div>').insertBefore('#register');
-					//alert("Debe aceptar los terminos y condiciones para continuar");
 					return false;
 				}
 			});

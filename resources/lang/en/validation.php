@@ -2,18 +2,11 @@
 
 return [
 	
-	'email_validate'	   => 'Your E-Mail has been validated successfully. A person will contact you soon in order to complete your register.',
-	'remember_phone'	   => "Please rememeber to validate your phone number if you haven't done it yet",
-	
-	
+	'email_validate'	   => 'Your E-Mail has been validated successfully. A person will contact you soon in order to complete your registration.',
+
 	'mail_subject'		   => 'E-Mail Verification',
 	'verification_message' => "We've sent you an e-mail to your account in order to verify it.",
-	
-	'email_already_validate' => "Previously you've already validated your e-mail",
-	'user_already_exist'   => 'There is already a user with that E-Mail/Phone number',
-	
-	'TextoSMS'			   => 'Thank you for registering. Please, validate your Phone Number here: ',
-	
+
 	'full_name'			   => 'Full Name',
 	'phone'				   => 'Phone Number',
 	'email_ph'			   => 'E-Mail',
@@ -39,7 +32,7 @@ return [
 	'login_a'		       => 'Sign in',
 	'accept_terms'		   => 'I agree to the terms of service',
 	'age' 				   => 'You must be, at least, 18 years old',
-	'phone_with_800_or_900'=> 'Phone numbers with prefix 80... or 90... are not allowed',
+	'phone_prefix'         => 'Phone numbers with prefix 80... or 90... are not allowed',
 
     /*
     |--------------------------------------------------------------------------
@@ -147,6 +140,15 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+	    'name' => 'Name',
+	    'email' => 'E-Mail',
+	    'phone' => 'Phone',
+	    'genre' => 'Genre',
+	    'birthdate' => 'Birthdate',
+	    'password' => 'Password',
+	    'password_confirmation' => 'Password Confirmation',
+	    'code' => 'Code',
+    ],
 
 ];

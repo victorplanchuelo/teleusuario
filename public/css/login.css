@@ -323,7 +323,7 @@ input[type=submit]:focus {
 	color: #333;
 }
 .form-genre {
-	margin: 0 0 15px 25px;
+	margin: 0 25px 15px 25px;
 }
 
 .radio-inline input[type=radio] {
@@ -485,4 +485,9 @@ el formulario
 }
 .has-error .input-group-addon {
 	border-color: #E84234;
+}
+
+
+.panel {
+	border: 0;
 }

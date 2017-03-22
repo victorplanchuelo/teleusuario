@@ -3,9 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RegisterRequest;
+use App\Mail\VerificationMail;
 use App\UserApplication;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Carbon\Carbon;
 
 class RegisterController extends Controller
 {
@@ -40,23 +45,6 @@ class RegisterController extends Controller
     }
 
     /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-	        'name' => 'required|max:100|regex:/^[\pL\s\-]+$/u',
-	        'email' => 'required|email|unique:users',
-	        'phone' => 'required|size:9|regex:/[6789][0-9]{8}/',
-	        'birthdate' => 'required|date|age',
-	        'password' => 'required|min:6|regex:/(^[A-Za-z0-9]+$)+/|confirmed',
-        ]);
-    }
-
-    /**
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
@@ -66,21 +54,89 @@ class RegisterController extends Controller
     {
 
 	    // Recogemos los valores de la fecha de hoy
-	    $hoy = Carbon::now()->toDateString();
-	    $token = str_random(10);
+	    $hoy = Carbon::now();
+	    //$token = str_random(10);
+
 
         return UserApplication::create([
             'name' => $data['name'],
             'email' => $data['email'],
 	        'phone' => $data['phone'],
-	        'birthdate' => Carbon::parse($data['birthdate'])->format('d/m/Y'),
-            'password' => bcrypt($data['password']),
+	        'birthdate' => Carbon::parse($data['birthdate']),
+            'password' => $data['password'],
 	        'genre'=>$data['genre'],
 	        'application_date' => $hoy,
 	        'ip' => \Request::ip(),
-	        'validation_token'=> $token,
+	        'validation_token'=> $data['_token'], //$token,
 	        'validated_email'=>false,
-	        'motive'=>'',
         ]);
     }
+
+	/**
+	 * Handle a registration request for the application.
+	 *
+	 * @param  \App\Http\Requests\RegisterRequest  $request
+	 * @return \Illuminate\Http\Response
+	 */
+	public function register(RegisterRequest $request)
+	{
+		$registro = UserApplication::where('email', $request['email'])
+			->orWhere('phone', $request['phone'])
+			->orderBy('id', 'desc')
+			->first();
+
+		if($registro)
+		{
+			if($registro->user != null)
+			{
+				if($registro['end_date']!=null)
+				{
+					//Dado de baja
+					return back()
+						->withInput()
+						->withErrors(['errors' => trans('auth.registration.error.user_deleted')]);
+				}
+
+				//Sino, Usuario ya validado por las compañeras
+				return back()
+					->withInput()
+					->withErrors(['errors' => trans('auth.registration.error.user_already_exist')]);
+			}
+
+
+			if($registro['validated_email']==1)
+			{
+				return back()
+					->withInput()
+					->withErrors(['errors' => trans('auth.registration.error.pending_validate')]);
+			}
+
+
+			//Sino, Usuario se registró y trata de volver a registrarse
+			return back()
+				->withInput()
+				->withErrors(['errors' => trans('auth.registration.error.pending_validate_email')]);
+		}
+
+
+		//Si llega aquí es porque no hay registro de usuario
+		//Se crea el registro de usuario y se le manda el mail
+		$user = $this->create($request->all());
+
+
+		if(!$user)
+		{
+			return back()
+				->withInput()
+				->withErrors(['errors' => trans('auth.error.created_application_user')]);
+		}
+
+		Log::info("Se creó el usuario " . $user->name);
+
+		//Se envia el mail
+		Mail::to($user)
+			->send(new VerificationMail($user));
+
+		return redirect('/login')->with('success', trans('validation.verification_message'));
+	}
 }

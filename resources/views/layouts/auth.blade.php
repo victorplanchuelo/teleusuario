@@ -25,13 +25,13 @@
 	<link href="{{ asset('/css/bootstrap.min.css') }}" rel="stylesheet" media="screen" />
 
 	<!-- Error CSS -->
-	<link href="{{ asset('css/login.css') }}" rel="stylesheet" media="screen">
+	<link href="{{ asset('/css/login.css') }}" rel="stylesheet" media="screen">
 
 	<!-- Animate CSS -->
-	<link href="{{ asset('css/animate.css') }}" rel="stylesheet" media="screen">
+	<link href="{{ asset('/css/animate.css') }}" rel="stylesheet" media="screen">
 
 	<!-- Ion Icons -->
-	<link href="{{ asset('fonts/icomoon/icomoon.css') }}" rel="stylesheet" />
+	<link href="{{ asset('/fonts/icomoon/icomoon.css') }}" rel="stylesheet" />
 
 	<!-- Scripts -->
 	<script>
@@ -46,7 +46,9 @@
 </div>
 
 <!-- Scripts -->
-<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('/js/app.js') }}"></script>
+
+
 @yield('scripts')
 </body>
 </html>

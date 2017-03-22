@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('connection_phone',16)->nullable();
             $table->date('birthdate');
             $table->string('email',128)->unique();
-            $table->string('password',40);
+            $table->string('password',64);
             $table->string('real_password',16);
             $table->dateTime('start_date');
             $table->dateTime('end_date')->nullable();
