@@ -10,7 +10,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Carbon\Carbon;
+//use Carbon\Carbon;
 
 class RegisterController extends Controller
 {
@@ -48,14 +48,13 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return User
+     * @return UserApplication
      */
     protected function create(array $data)
     {
-
+		/*
 	    // Recogemos los valores de la fecha de hoy
 	    $hoy = Carbon::now();
-	    //$token = str_random(10);
 
 
         return UserApplication::create([
@@ -69,7 +68,7 @@ class RegisterController extends Controller
 	        'ip' => \Request::ip(),
 	        'validation_token'=> $data['_token'], //$token,
 	        'validated_email'=>false,
-        ]);
+        ]);*/
     }
 
 	/**
@@ -80,16 +79,20 @@ class RegisterController extends Controller
 	 */
 	public function register(RegisterRequest $request)
 	{
-		$registro = UserApplication::where('email', $request['email'])
+
+
+		/*$registro = UserApplication::where('email', $request['email'])
 			->orWhere('phone', $request['phone'])
 			->orderBy('id', 'desc')
-			->first();
+			->first();*/
 
-		if($registro)
+		$record = UserApplication::checkUserApplication($request['email'], $request['phone'])->get();
+
+		if($record)
 		{
-			if($registro->user != null)
+			if($record->user != null)
 			{
-				if($registro['end_date']!=null)
+				if($record['end_date']!=null)
 				{
 					//Dado de baja
 					return back()
@@ -104,7 +107,7 @@ class RegisterController extends Controller
 			}
 
 
-			if($registro['validated_email']==1)
+			if($record['validated_email']==1)
 			{
 				return back()
 					->withInput()
@@ -116,12 +119,14 @@ class RegisterController extends Controller
 			return back()
 				->withInput()
 				->withErrors(['errors' => trans('auth.registration.error.pending_validate_email')]);
+			
 		}
 
 
 		//Si llega aquí es porque no hay registro de usuario
 		//Se crea el registro de usuario y se le manda el mail
-		$user = $this->create($request->all());
+		//$user = $this->create($request->all());
+		$user = UserApplication::createUserApplication($request->all());
 
 
 		if(!$user)

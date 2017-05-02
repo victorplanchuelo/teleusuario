@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class UserApplication extends Model
@@ -27,5 +28,45 @@ class UserApplication extends Model
 	public function user()
 	{
 		return $this->belongsTo('App\User');
+	}
+
+
+	/**
+	 * @param $query
+	 * @param $email
+	 * @param $phone
+	 * @return UserApplication
+	 */
+	public function scopeCheckUserApplication($query, $email, $phone)
+	{
+		return $query->where('email', $email)
+			->orWhere('phone', $phone)
+			->orderBy('id', 'desc')
+			->first();
+	}
+
+	/**
+	 * @param $query
+	 * @param $data
+	 * @return UserApplication
+	 */
+	public function scopeCreateUserApplication($query, $data)
+	{
+		// Recogemos los valores de la fecha de hoy
+		$hoy = Carbon::now();
+
+
+		return $query->create([
+			'name' => $data['name'],
+			'email' => $data['email'],
+			'phone' => $data['phone'],
+			'birthdate' => Carbon::parse($data['birthdate']),
+			'password' => $data['password'],
+			'genre'=>$data['genre'],
+			'application_date' => $hoy,
+			'ip' => \Request::ip(),
+			'validation_token'=> $data['_token'], //$token,
+			'validated_email'=>false,
+		]);
 	}
 }
