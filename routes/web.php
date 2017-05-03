@@ -17,7 +17,7 @@ Route::get('/', function () {
 	if (\Illuminate\Support\Facades\Auth::check()) {
 		return redirect('/dashboard');
 	}
-	
+
 	return redirect('/login');
 });
 

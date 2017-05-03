@@ -2,21 +2,22 @@
 @section('head')
     @parent
     @include('layouts.head')
-    <!-- Login CSS -->
-    <link href="{{ asset('/css/login.css') }}" rel="stylesheet" media="screen">
+
+    @include('main.main_head')
 @endsection
 @section('header')
-    @include('layouts.header')
+    @include('main.main_header')
 @endsection
 @section('main')
-    @include('main.login_main')
+    @include('main.main_sidebar')
+    @include('main.main_index')
 @endsection
 @section('footer')
-    @include('layouts.footer')
+    @include('main.main_footer')
 @endsection
 @section('scripts')
     @include('layouts.scripts')
 @endsection
 @section('scripts_extra')
-    @include('main.login_scripts')
+    @include('main.main_scripts')
 @endsection

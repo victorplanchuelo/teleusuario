@@ -27,6 +27,6 @@ class HomeController extends Controller
 		//Para tener los datos del usuario
     	//dd(Auth::user());
 
-        return view('home');
+        return view('dashboard.home');
     }
 }
