@@ -9,8 +9,8 @@
 			<div class="row gutter">
 				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 					<div class="page-title">
-						<h3>Dashboard</h3>
-						<p>Welcome to Admin Dashboard</p>
+						<h3>{{ trans('dashboard.dasboard_title') }}</h3>
+						<p>{{ trans('dashboard.dasboard_welcome_message') }}</p>
 					</div>
 				</div>
 			</div>
