@@ -8,14 +8,10 @@
 	<meta name="keywords" content="Teleusuario" />
 	<meta name="author" content="Cartuja Ele S.L." />
 	<link rel="shortcut icon" href="{{ asset('img/fav.png') }}">
-	<title>Teleusuario</title>
+	<title>{{ config('app.name', 'Teleusuario') }}</title>
 
 	<!-- CSRF Token -->
 	<meta name="csrf-token" content="{{ csrf_token() }}">
-
-	<title>{{ config('app.name', 'Teleusuario') }}</title>
-
-
 
 
 	<!-- JQUERY UI CSS -->
