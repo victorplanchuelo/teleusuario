@@ -26,4 +26,8 @@ return [
 		],
 	],
 
+	'validated_email' => [
+		'error'            => 'Se ha producido un error en la validación de su correo electrónico. Por favor, pongasé en contacto con nosotros para solucionar el problema',
+	],
+
 ];

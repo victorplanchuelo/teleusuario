@@ -39,6 +39,7 @@ class RegisterController extends Controller
      *
      * @return void
      */
+
     public function __construct()
     {
         $this->middleware('guest');
@@ -86,9 +87,9 @@ class RegisterController extends Controller
 			->orderBy('id', 'desc')
 			->first();*/
 
-		$record = UserApplication::checkUserApplication($request['email'], $request['phone'])->get();
+		$record = UserApplication::checkUserApplication($request['email'], $request['phone'])->first();
 
-		if($record)
+		if($record->count())
 		{
 			if($record->user != null)
 			{
@@ -105,7 +106,6 @@ class RegisterController extends Controller
 					->withInput()
 					->withErrors(['errors' => trans('auth.registration.error.user_already_exist')]);
 			}
-
 
 			if($record['validated_email']==1)
 			{
@@ -133,15 +133,56 @@ class RegisterController extends Controller
 		{
 			return back()
 				->withInput()
-				->withErrors(['errors' => trans('auth.error.created_application_user')]);
+				->withErrors(['errors' => trans('auth.registration.error.created_application_user')]);
 		}
 
-		Log::info("Se creó el usuario " . $user->name);
+		//Log::info("Se creó el usuario " . $user->name);
 
 		//Se envia el mail
 		Mail::to($user)
 			->send(new VerificationMail($user));
 
 		return redirect('/login')->with('success', trans('validation.verification_message'));
+	}
+
+	public function activation($token)
+	{
+		//Se supone que ha pulsado el botón de validar correo en el e-mail Enviado
+		//Comprobaremos que el token enviado coincide con alguno de los usuarios
+		//Si existe, modifica el validated_email y eliminaremos el token
+
+		$user = UserApplication::validateToken($token);
+
+		if($user->count())
+		{
+			if($user['validated_email'])
+			{
+				//Si es true es que el email ya ha sido validado previamente
+				//Mostraremos error en la pantalla de login
+				return redirect('/login')
+					->withErrors(['errors' => trans('auth.validated_email.error')]);
+			}
+
+			// Si llega hasta aqui quiere decir que el usuario existe, el token está correcto y el campo validated_email es false
+			// Hacemos el update para eliminar el token y poner a true el validated_email
+			$update_user = UserApplication::updateValidatedEmail($user['id']);
+
+			if(!$update_user)
+			{
+				//Si entra aquí se habrá producido un error en la actualización
+				return redirect('/login')
+					->withErrors(['errors' => trans('auth.validated_email.error')]);
+			}
+
+			//Si llega es que se ha actualizado bien. Le redirigimos al login, indicando que una persona se pondrá en contacto con ella
+			return redirect('/login')->with('success', trans('validation.email_validate'));
+		}
+
+
+		//En el caso de que el count de 0, quiere decirse que no existe un usuario con ese token
+		//Eso es cuando el usuario ya ha validado el correo electrónico
+
+		return redirect('/login')
+			->withErrors(['errors' => trans('validation.email_already_validate')]);
 	}
 }

@@ -25,4 +25,8 @@ return [
 			'email_already_validate'   => "Previously you've already validated your e-mail",
 		],
 	],
+
+	'validated_email' => [
+		'error'            => 'An error occurred validating your e-mail. Please, contact us in order to solve this problem',
+	],
 ];

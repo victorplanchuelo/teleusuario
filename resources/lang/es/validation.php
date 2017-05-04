@@ -3,43 +3,44 @@
 return [
 	
 	//Mensajes que aparecen en Login
-	'email_validate'	   => 'Tu correo electrónico se ha validado correctamente. En breve una persona se pondrá en contacto para finalizar su registro.',
-	
+	'email_validate'	    => 'Tu correo electrónico se ha validado correctamente. En breve una persona se pondrá en contacto para finalizar su registro.',
+	'email_already_validate'=> 'Tu correo ya fue validado con antelación. En breve una persona se pondrá en contacto para finalizar su registro.',
+
 	// Parte del MAIL
-	'mail_subject'		   => 'Verificación de Correo Electrónico',
+	'mail_subject'		    => 'Verificación de Correo Electrónico',
 
 	//Mensaje cuando se ha insertado el usuario en el registro previo.
-	'verification_message' => "Te hemos enviado un correo electrónico para verificar los cuenta de correo electrónico",
+	'verification_message'  => "Te hemos enviado un correo electrónico para verificar tu cuenta de correo electrónico",
 	
 	//Placeholders de los campos en el registro de usuarios
-	'full_name'			   => 'Nombre y Apellidos',
-	'phone'				   => 'Teléfono',
-	'email_ph'			   => 'Correo Electrónico',
-	'birthdate'			   => 'Fecha de Nacimiento',
-	'password'			   => 'Contraseña (sólo letras y números)',
-	'password_confirmation'=> 'Repite Contraseña',
-	'male'                 => 'Masculino',
-	'female'               => 'Femenino',
+	'full_name'			    => 'Nombre y Apellidos',
+	'phone'				    => 'Teléfono',
+	'email_ph'			    => 'Correo Electrónico',
+	'birthdate'			    => 'Fecha de Nacimiento',
+	'password'			    => 'Contraseña (sólo letras y números)',
+	'password_confirmation' => 'Repite Contraseña',
+	'male'                  => 'Masculino',
+	'female'                => 'Femenino',
 	
 	
 	//Formulario del Login
-	'code_user'			   => 'Código',
-	'password_login'	   => 'Contraseña',
+	'code_user'			    => 'Código',
+	'password_login'	    => 'Contraseña',
 	
 	
 	//Formulario de registro
-	'title_form'		   => 'Registro de nuevo usuario.',
-	'terms'				   => 'Debe aceptar los términos y condiciones',
-	'sign_up'			   => 'Registrarse',
-	'login'				   => 'Iniciar Sesión',
-	'remember'			   => 'Recordar sesión',
-	'register_label'	   => '¿Nuevo/a en Teleusuario?',
-	'register_a'		   => 'Regístrate',
-	'login_label'	       => '¿Ya tienes cuenta?',
-	'login_a'		       => 'Inicia sesión',
-	'accept_terms'		   => 'Acepto terminos y condiciones de uso',
-	'age' 				   => 'Debes tener, al menos, 18 años para poder registrarte',
-	'phone_prefix'         => 'No se permiten telefonos con prefijo 80... o 90...',
+	'title_form'		    => 'Registro de nuevo usuario.',
+	'terms'				    => 'Debe aceptar los términos y condiciones',
+	'sign_up'			    => 'Registrarse',
+	'login'				    => 'Iniciar Sesión',
+	'remember'			    => 'Recordar sesión',
+	'register_label'	    => '¿Nuevo/a en Teleusuario?',
+	'register_a'		    => 'Regístrate',
+	'login_label'	        => '¿Ya tienes cuenta?',
+	'login_a'		        => 'Inicia sesión',
+	'accept_terms'		    => 'Acepto terminos y condiciones de uso',
+	'age' 				    => 'Debes tener, al menos, 18 años para poder registrarte',
+	'phone_prefix'          => 'No se permiten telefonos con prefijo 80... o 90...',
 
     /*
     |--------------------------------------------------------------------------

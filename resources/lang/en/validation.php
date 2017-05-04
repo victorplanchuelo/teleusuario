@@ -2,37 +2,38 @@
 
 return [
 	
-	'email_validate'	   => 'Your E-Mail has been validated successfully. A person will contact you soon in order to complete your registration.',
+	'email_validate'	    => 'Your E-Mail has been validated successfully. A person will contact you soon in order to complete your registration.',
+	'email_already_validate'=> 'Your E-Mail was already validated. A person will contact you soon in order to complete your registration.',
 
-	'mail_subject'		   => 'E-Mail Verification',
-	'verification_message' => "We've sent you an e-mail to your account in order to verify it.",
+	'mail_subject'		    => 'E-Mail Verification',
+	'verification_message'  => "We've sent you an e-mail to your account in order to verify it.",
 
-	'full_name'			   => 'Full Name',
-	'phone'				   => 'Phone Number',
-	'email_ph'			   => 'E-Mail',
-	'birthdate'			   => 'Date of birth',
-	'password'			   => 'Password (only letters and numbers)',
-	'password_confirmation'=> 'Repeat Password',
+	'full_name'			    => 'Full Name',
+	'phone'				    => 'Phone Number',
+	'email_ph'			    => 'E-Mail',
+	'birthdate'			    => 'Date of birth',
+	'password'			    => 'Password (only letters and numbers)',
+	'password_confirmation' => 'Repeat Password',
 
-	'male'                 => 'Male',
-	'female'               => 'Female',
+	'male'                  => 'Male',
+	'female'                => 'Female',
 	
-	'code_user'			   => 'Code',
-	'password_login'	   => 'Password',
+	'code_user'			    => 'Code',
+	'password_login'	    => 'Password',
 	
 	
-	'title_form'		   => 'Sign up',
-	'terms'				   => 'You must accept Terms and Conditions checkbox',
-	'sign_up'			   => 'Sign Up',
-	'login'				   => 'Sign In',
-	'remember'			   => 'Remember',
-	'register_label'	   => 'New in Teleusuario?',
-	'register_a'		   => 'Create an account',
-	'login_label'	       => 'Already have an account?',
-	'login_a'		       => 'Sign in',
-	'accept_terms'		   => 'I agree to the terms of service',
-	'age' 				   => 'You must be, at least, 18 years old',
-	'phone_prefix'         => 'Phone numbers with prefix 80... or 90... are not allowed',
+	'title_form'		    => 'Sign up',
+	'terms'				    => 'You must accept Terms and Conditions checkbox',
+	'sign_up'			    => 'Sign Up',
+	'login'				    => 'Sign In',
+	'remember'			    => 'Remember',
+	'register_label'	    => 'New in Teleusuario?',
+	'register_a'		    => 'Create an account',
+	'login_label'	        => 'Already have an account?',
+	'login_a'		        => 'Sign in',
+	'accept_terms'		    => 'I agree to the terms of service',
+	'age' 				    => 'You must be, at least, 18 years old',
+	'phone_prefix'          => 'Phone numbers with prefix 80... or 90... are not allowed',
 
     /*
     |--------------------------------------------------------------------------

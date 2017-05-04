@@ -69,4 +69,16 @@ class UserApplication extends Model
 			'validated_email'=>false,
 		]);
 	}
+
+	public function scopeValidateToken($query,$token)
+	{
+		return  $query->where('validation_token', $token)
+					 ->first(['validated_email', 'id']);
+	}
+
+	public function scopeUpdateValidatedEmail($query, $id)
+	{
+		return $query->where('id',$id)
+			               ->update(['validated_email' => 1, 'validation_token' => '']);
+	}
 }
