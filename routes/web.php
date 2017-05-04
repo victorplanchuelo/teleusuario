@@ -12,8 +12,6 @@
 */
 
 Route::get('/', function () {
-    //return view('welcome');
-
 	if (\Illuminate\Support\Facades\Auth::check()) {
 		return redirect('/dashboard');
 	}

@@ -13,8 +13,8 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
-	//'default' => env('DB_CONNECTION', 'sqlsrv'),
+    //'default' => env('DB_CONNECTION', 'mysql'),
+	'default' => env('DB_CONNECTION', 'sqlsrv'),
 
     /*
     |--------------------------------------------------------------------------
@@ -40,15 +40,16 @@ return [
             'prefix' => '',
         ],
 
-	    /*'sqlsrv' => [
+	    'sqlsrv' => [
 		    'driver' => 'sqlsrv',
-		    'host' => env('DB_HOST', '192.168.25.45'),
+		    'host' => env('DB_HOST', '85.62.169.130'),
+		    'port' => env('DB_PORT', '14330'),
 		    'database' => env('DB_DATABASE', 'Teleusuario'),
-		    'username' => env('DB_USERNAME', 'oficina'),
-		    'password' => env('DB_PASSWORD', 'Madrid2015a'),
+		    'username' => env('DB_USERNAME', 'sa'),
+		    'password' => env('DB_PASSWORD', 'heston0651'),
 		    'charset' => 'utf8',
 		    'prefix' => '',
-	    ],*/
+	    ],
 
         'mysql' => [
             'driver' => 'mysql',
