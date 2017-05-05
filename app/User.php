@@ -20,6 +20,8 @@ class User extends Authenticatable
 	// Para no tener problemas indicamos el nombre de la tabla
 	protected $table = 'users';
 
+	//protected $dateFormat = 'M j Y h:i:s:000A';
+
 
 
     /**

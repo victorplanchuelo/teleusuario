@@ -56,4 +56,9 @@
 			</div>
 		</div>
 	</div>
+	<!--<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			 <a class="btn btn-warning" href="{{ url('/insert_fake_user')}}"> Insertar Usuario en tabla User</a>
+		</div>
+	</div>-->
 </div>

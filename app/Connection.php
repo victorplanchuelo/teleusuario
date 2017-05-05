@@ -15,6 +15,8 @@ class Connection extends Model
 	// Ya que Eloquent por defecto busca 'id'
 	protected $primaryKey = ['user_id', 'date'];
 
+	//protected $dateFormat = 'M j Y h:i:s:000A';
+
 
 
 	/**

@@ -116,7 +116,15 @@
 					<a href="profile.html">Edit Profile</a>
 					<a href="forgot-pwd.html">Change Password</a>
 					<a href="styled-inputs.html">Settings</a>
-					<a href="{{ url('/logout')  }}">{{ trans('dashboard.logout') }}</a>
+					<a href="{{ url('logout') }}"
+					   onclick="event.preventDefault();
+                       document.getElementById('logout-form').submit();">
+						{{ trans('dashboard.logout') }}
+					</a>
+
+					<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+						{{ csrf_field() }}
+					</form>
 				</li>
 			</ul>
 		</li>

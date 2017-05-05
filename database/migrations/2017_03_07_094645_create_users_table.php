@@ -66,6 +66,8 @@ class CreateUsersTable extends Migration
 	        //Se llamará por API a tabla Responsables
 	        $table->unsignedTinyInteger('responsible');
 
+	        $table->rememberToken();
+
 
         });
     }

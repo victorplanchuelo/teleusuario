@@ -12,6 +12,7 @@ class UserApplication extends Model
 	// Para no tener problemas indicamos el nombre de la tabla
 	protected $table = 'user_applications';
 
+	//protected $dateFormat = 'M j Y h:i:s:000A';
 
 
 	/**

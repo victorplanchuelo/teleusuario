@@ -89,39 +89,41 @@ class RegisterController extends Controller
 
 		$record = UserApplication::checkUserApplication($request['email'], $request['phone'])->first();
 
-		if($record->count())
+		if(isset($record))
 		{
-			if($record->user != null)
+			if($record->count())
 			{
-				if($record['end_date']!=null)
+				if($record->user != null)
 				{
-					//Dado de baja
+					if($record['end_date']!=null)
+					{
+						//Dado de baja
+						return back()
+							->withInput()
+							->withErrors(['errors' => trans('auth.registration.error.user_deleted')]);
+					}
+
+					//Sino, Usuario ya validado por las compañeras
 					return back()
 						->withInput()
-						->withErrors(['errors' => trans('auth.registration.error.user_deleted')]);
+						->withErrors(['errors' => trans('auth.registration.error.user_already_exist')]);
 				}
 
-				//Sino, Usuario ya validado por las compañeras
+				if($record['validated_email']==1)
+				{
+					return back()
+						->withInput()
+						->withErrors(['errors' => trans('auth.registration.error.pending_validate')]);
+				}
+
+
+				//Sino, Usuario se registró y trata de volver a registrarse
 				return back()
 					->withInput()
-					->withErrors(['errors' => trans('auth.registration.error.user_already_exist')]);
+					->withErrors(['errors' => trans('auth.registration.error.pending_validate_email')]);
+
 			}
-
-			if($record['validated_email']==1)
-			{
-				return back()
-					->withInput()
-					->withErrors(['errors' => trans('auth.registration.error.pending_validate')]);
-			}
-
-
-			//Sino, Usuario se registró y trata de volver a registrarse
-			return back()
-				->withInput()
-				->withErrors(['errors' => trans('auth.registration.error.pending_validate_email')]);
-			
 		}
-
 
 		//Si llega aquí es porque no hay registro de usuario
 		//Se crea el registro de usuario y se le manda el mail
@@ -153,29 +155,32 @@ class RegisterController extends Controller
 
 		$user = UserApplication::validateToken($token);
 
-		if($user->count())
+		if(isset($user))
 		{
-			if($user['validated_email'])
+			if ($user->count())
 			{
-				//Si es true es que el email ya ha sido validado previamente
-				//Mostraremos error en la pantalla de login
-				return redirect('/login')
-					->withErrors(['errors' => trans('auth.validated_email.error')]);
+				if($user['validated_email'])
+				{
+					//Si es true es que el email ya ha sido validado previamente
+					//Mostraremos error en la pantalla de login
+					return redirect('/login')
+						->withErrors(['errors' => trans('auth.validated_email.error')]);
+				}
+
+				// Si llega hasta aqui quiere decir que el usuario existe, el token está correcto y el campo validated_email es false
+				// Hacemos el update para eliminar el token y poner a true el validated_email
+				$update_user = UserApplication::updateValidatedEmail($user['id']);
+
+				if(!$update_user)
+				{
+					//Si entra aquí se habrá producido un error en la actualización
+					return redirect('/login')
+						->withErrors(['errors' => trans('auth.validated_email.error')]);
+				}
+
+				//Si llega es que se ha actualizado bien. Le redirigimos al login, indicando que una persona se pondrá en contacto con ella
+				return redirect('/login')->with('success', trans('validation.email_validate'));
 			}
-
-			// Si llega hasta aqui quiere decir que el usuario existe, el token está correcto y el campo validated_email es false
-			// Hacemos el update para eliminar el token y poner a true el validated_email
-			$update_user = UserApplication::updateValidatedEmail($user['id']);
-
-			if(!$update_user)
-			{
-				//Si entra aquí se habrá producido un error en la actualización
-				return redirect('/login')
-					->withErrors(['errors' => trans('auth.validated_email.error')]);
-			}
-
-			//Si llega es que se ha actualizado bien. Le redirigimos al login, indicando que una persona se pondrá en contacto con ella
-			return redirect('/login')->with('success', trans('validation.email_validate'));
 		}
 
 

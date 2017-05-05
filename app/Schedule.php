@@ -11,6 +11,8 @@ class Schedule extends Model
 	// Para no tener problemas indicamos el nombre de la tabla
 	protected $table = 'schedules';
 
+	//protected $dateFormat = 'M j Y h:i:s:000A';
+
 
 
 	/**

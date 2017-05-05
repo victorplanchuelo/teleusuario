@@ -11,6 +11,8 @@ class DeliveryNote extends Model
 	// Para no tener problemas indicamos el nombre de la tabla
 	protected $table = 'delivery_notes';
 
+	//protected $dateFormat = 'M j Y h:i:s:000A';
+
 
 
 	/**

@@ -81,6 +81,71 @@ class LoginController extends Controller
 	{
 
 		return $this->guard()->attempt(
-			$this->credentials($request));
+			$this->credentials($request), true);
+	}
+
+
+	public function insertFakeUser()
+	{
+		//Creamos compañia, bancos, estados de contrato y usuario
+		/*$company = \App\Company::create([
+			'name' => 'Compañia Prueba 1',
+			'address' => 'Avenida de Lugo 10 - 1ºI',
+			'country' => 1,
+			'province' => 32,
+			'city' => 126, //4362
+			'cp' => '28035',
+			'iva' => 0.021,
+			'irpf' => 0.017,
+			'corporation_tax' => 0.015,
+		]);
+
+		$bank1 = \App\Bank::create([
+			'name' => 'ING',
+			'swift' => 'INGESMM111',
+			'code' => '1465',
+		]);
+
+		$bank2 = \App\Bank::create([
+			'name' => 'Bankia',
+			'swift' => 'CAHMESMM123',
+			'code' => '2038',
+		]);
+
+		$contract_state = \App\ContractState::create([
+			'name' => 'SIN CONTRATO',
+		]);*/
+
+		/*$fecha = \Carbon\Carbon::now();
+
+		$user_application = \App\UserApplication::where('validated_email', 1)->first();
+
+		//dd($user_application);
+		//dd(\Carbon\Carbon::createFromFormat('M d Y h:i:s:A', trim($user_application['birthdate'])));
+		//dd(\Carbon\Carbon::parse($user_application['birthdate']));
+
+		$user = \App\User::create([
+			'code' => '111111',
+			'name' => $user_application['name'],
+			'contact_phone' => $user_application['phone'],
+			'birthdate' => \Carbon\Carbon::createFromFormat('M d Y h:i:s:A',$user_application['birthdate']),
+			'email' => $user_application['email'],
+			'password'=> Hash::make($user_application['password']),
+			'real_password' => $user_application['password'],
+			'start_date' => $fecha,
+			'genre' => $user_application['genre'],
+			'application_id' => $user_application['id'],
+			'alias' => 'Victor',
+			'country' => 1,
+			'province' => 32,
+			'city' => 120, //4374
+			'address' => 'Calle Bailén 3 - 5 Izquierda',
+			'cp' => '28934',
+			'nif' => '43987699S',
+			'company_id' => 1,
+			'bank_id' => 1,
+			'contract_state_id' => 1,
+			'responsible' => 1,
+		]);*/
 	}
 }

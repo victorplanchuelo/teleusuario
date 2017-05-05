@@ -15,6 +15,8 @@ class ServiceUser extends Model
 	// Ya que Eloquent por defecto busca 'id'
 	protected $primaryKey = ['user_id', 'service_id'];
 
+	//protected $dateFormat = 'M j Y h:i:s:000A';
+
 
 
 	/**
