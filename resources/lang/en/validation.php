@@ -27,6 +27,7 @@ return [
 	'sign_up'			    => 'Sign Up',
 	'login'				    => 'Sign In',
 	'remember'			    => 'Remember',
+	'recovery_label'	    => 'Forgot your password?',
 	'register_label'	    => 'New in Teleusuario?',
 	'register_a'		    => 'Create an account',
 	'login_label'	        => 'Already have an account?',

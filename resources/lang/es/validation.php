@@ -36,6 +36,7 @@ return [
 	'remember'			    => 'Recordar sesión',
 	'register_label'	    => '¿Nuevo/a en Teleusuario?',
 	'register_a'		    => 'Regístrate',
+	'recovery_label'	    => '¿Olvidaste tu contraseña?',
 	'login_label'	        => '¿Ya tienes cuenta?',
 	'login_a'		        => 'Inicia sesión',
 	'accept_terms'		    => 'Acepto terminos y condiciones de uso',

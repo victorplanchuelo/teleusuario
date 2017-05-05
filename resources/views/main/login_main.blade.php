@@ -50,6 +50,9 @@
 							<div class="reg_mini">
 								<h5>{{ trans('validation.register_label') }} <a href="{{ url('/register')}}"> {{ trans('validation.register_a') }}</a></h5>
 							</div>
+							<div class="reg_mini">
+								<h5><a href="{{ url('/password_reset')}}"> {{ trans('validation.recovery_label') }}</a></h5>
+							</div>
 						</div>
 					</div>
 				</form>
