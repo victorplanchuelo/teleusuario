@@ -33,6 +33,9 @@
 							<div class="reg_mini">
 								<h5>{{ trans('validation.register_label') }} <a href="{{ url('/register')}}"> {{ trans('validation.register_a') }}</a></h5>
 							</div>
+							<div class="reg_mini">
+								<h5>{{ trans('validation.login_label') }} <a href="{{ url('/login')}}"> {{ trans('validation.login_a') }}</a></h5>
+							</div>
 						</div>
 					</div>
 				</form>
