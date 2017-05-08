@@ -31,6 +31,7 @@ return [
 		'submit' => 'Change password',
 		'message' => [
 			'success' => 'Password was changed successfuly',
+			'error' => 'New password cannot be the same than the old one.'
 		],
 	],
 ];

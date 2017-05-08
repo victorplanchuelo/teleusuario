@@ -3,14 +3,14 @@
 	@parent
 	@include('layouts.head')
 
-	@include('main.main_head')
+	@include('main.change_pwd_head')
 @endsection
 @section('header')
 	@include('main.main_header')
 @endsection
 @section('main')
 	@include('main.main_sidebar')
-	@include('main.main_change_pwd')
+	@include('main.change_pwd_main')
 @endsection
 @section('footer')
 	@include('main.main_footer')
@@ -19,5 +19,5 @@
 	@include('layouts.scripts')
 @endsection
 @section('scripts_extra')
-	@include('main.main_scripts')
+	@include('main.change_pwd_scripts')
 @endsection

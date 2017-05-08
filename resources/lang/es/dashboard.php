@@ -30,7 +30,8 @@ return [
 		'password_confirm' => 'Repite contraseña',
 		'submit' => 'Cambiar contraseña',
 		'message' => [
-			'success' => 'La contraseña se cambió correctamente',
+			'success' => 'La contraseña se cambió correctamente.',
+			'error' => 'La nueva contraseña no puede ser igual a la anterior.'
 		],
 	],
 

@@ -8,6 +8,11 @@
 				{{ session('success') }}
 			</div>
 		@endif
+			@if (session('error'))
+				<div class="alert alert-danger text-center">
+					{{ session('error') }}
+				</div>
+		@endif
 		<!-- Top Bar Starts -->
 		<div class="top-bar clearfix">
 			<div class="row gutter">
@@ -40,7 +45,7 @@
 								</div>
 								<div class="form-group row gutter">
 									<div class="col-lg-4 col-lg-offset-5">
-										<button type="submit" class="btn btn-success">{{ trans('dashboard.change_password.submit') }}</button>
+										<button type="submit" class="btn btn-info">{{ trans('dashboard.change_password.submit') }}</button>
 									</div>
 								</div>
 							</form>
