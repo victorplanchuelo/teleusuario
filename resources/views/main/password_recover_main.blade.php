@@ -29,6 +29,11 @@
 							@endif
 							<input type="submit" value="{{ trans('passwords.sent_email_submit') }}">
 						</div>
+						<div id="button" class="clearfix">
+							<div class="reg_mini">
+								<h5>{{ trans('validation.register_label') }} <a href="{{ url('/register')}}"> {{ trans('validation.register_a') }}</a></h5>
+							</div>
+						</div>
 					</div>
 				</form>
 			</div>

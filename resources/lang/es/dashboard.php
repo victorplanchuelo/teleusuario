@@ -9,10 +9,29 @@ return [
 	|
 	*/
 
-	'code_header'                   => 'Código',
-	'logout'                        => 'Desconectar',
-	'teleusuario'                   => 'Teleusuario',
-	'dasboard_title'                => 'Panel de Control',
-	'dasboard_welcome_message'      => 'Bienvenido/a al Panel de Control de Teleusuario',
+
+	'title'                => 'Panel de Control',
+	'welcome_message'      => 'Bienvenido/a al Panel de Control de Teleusuario',
+
+	'header' => [
+		'logout' => 'Desconectar',
+		'code'   => 'Código',
+		'profile' => 'Ver perfil',
+		'change_pwd' => 'Cambiar contraseña',
+	],
+
+	'navbar' => [
+		'teleusuario' => 'Teleusuario',
+	],
+
+	'change_password' => [
+		'title' => 'Cambiar Contraseña',
+		'password' => 'Contraseña',
+		'password_confirm' => 'Repite contraseña',
+		'submit' => 'Cambiar contraseña',
+		'message' => [
+			'success' => 'La contraseña se cambió correctamente',
+		],
+	],
 
 ];

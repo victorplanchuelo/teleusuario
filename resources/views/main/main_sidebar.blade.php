@@ -22,13 +22,13 @@
 		<li class="active selected">
 			<a href="#">
 				<i class="icon-air-play"></i>
-				<span class="menu-item">{{ trans('dashboard.dasboard_title') }}</span>
+				<span class="menu-item">{{ trans('dashboard.title') }}</span>
 			</a>
 		</li>
 		<li>
 			<a href="#">
 				<i class="icon-lab3"></i>
-				<span class="menu-item">{{ trans('dashboard.teleusuario') }}</span>
+				<span class="menu-item">{{ trans('dashboard.navbar.teleusuario') }}</span>
 				<span class="down-arrow"></span>
 			</a>
 			<ul>

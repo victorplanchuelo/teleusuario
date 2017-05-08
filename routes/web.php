@@ -25,5 +25,10 @@ Route::get('/dashboard', 'HomeController@index');
 Route::get('/activate/{token}', 'Auth\RegisterController@activation');
 
 
+//Ruta para el cambio de contraseña
+Route::get('/password/change',  'UserController@getChangePassword');
+Route::post('/password/change',  'UserController@postChangePassword')->name('dashboard.change_pwd');
+
+
 //Para poder crear usuarios. Borrar cuando esté
 Route::get('/insert_fake_user', 'Auth\LoginController@insertFakeUser');

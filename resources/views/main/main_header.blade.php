@@ -106,20 +106,20 @@
 		<li class="list-box user-admin hidden-xs dropdown">
 			<div class="admin-details">
 				<div class="name"><strong>{!! Auth::user()->name !!}</strong></div>
-				<div class="designation"><strong>{{ trans('dashboard.code_header') }}</strong> {!! Auth::user()->code !!}</div>
+				<div class="designation"><strong>{{ trans('dashboard.header.code') }}</strong> {!! Auth::user()->code !!}</div>
 			</div>
 			<a id="drop4" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
 				<i class="icon-user"></i>
 			</a>
 			<ul class="dropdown-menu sm">
 				<li class="dropdown-content">
-					<a href="profile.html">Edit Profile</a>
-					<a href="forgot-pwd.html">Change Password</a>
+					<a href="profile.html">{{ trans('dashboard.header.profile') }}</a>
+					<a href="{{ url('password/change') }}">{{ trans('dashboard.header.change_pwd') }}</a>
 					<a href="styled-inputs.html">Settings</a>
 					<a href="{{ url('logout') }}"
 					   onclick="event.preventDefault();
                        document.getElementById('logout-form').submit();">
-						{{ trans('dashboard.logout') }}
+						{{ trans('dashboard.header.logout') }}
 					</a>
 
 					<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

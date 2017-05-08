@@ -1,0 +1,23 @@
+@extends('layouts.master')
+@section('head')
+	@parent
+	@include('layouts.head')
+
+	@include('main.main_head')
+@endsection
+@section('header')
+	@include('main.main_header')
+@endsection
+@section('main')
+	@include('main.main_sidebar')
+	@include('main.main_change_pwd')
+@endsection
+@section('footer')
+	@include('main.main_footer')
+@endsection
+@section('scripts')
+	@include('layouts.scripts')
+@endsection
+@section('scripts_extra')
+	@include('main.main_scripts')
+@endsection

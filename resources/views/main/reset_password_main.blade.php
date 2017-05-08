@@ -51,6 +51,9 @@
 								<input type="submit" class="btn btn-primary" value="{{ trans('passwords.submit') }}">
 							</div>
 						</div>
+						<div class="log_mini">
+							<h5>{{ trans('validation.login_label') }} <a href="{{ url('/')}}"> {{ trans('validation.login_a') }}</a></h5>
+						</div>
 					</div>
 				</form>
 			</div>
