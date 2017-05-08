@@ -19,4 +19,18 @@ return [
     'token' => 'El token para restablecer la contraseña es inválido.',
     'user' => "No podemos encontrase un usuario con el correo electrónico que nos ha indicado.",
 
+
+	//Formulario para el envio de mail para resetear la contraseña
+	'sent_email_form' => '¿Olvidaste tu contraseña?',
+	'sent_email_title' => 'Introduce tu e-mail para resetear la contraseña.',
+	'sent_email_submit' => 'Enviar',
+
+
+
+	'title_form' => 'Restablecer nueva contraseña',
+	'email' => 'Correo electrónico',
+	'password_lbl' => 'Contraseña',
+	'password_confirmation' => 'Confirma contraseña',
+	'submit' => 'Restablece contraseña',
+
 ];

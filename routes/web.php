@@ -25,7 +25,5 @@ Route::get('/dashboard', 'HomeController@index');
 Route::get('/activate/{token}', 'Auth\RegisterController@activation');
 
 
-
-
 //Para poder crear usuarios. Borrar cuando esté
 Route::get('/insert_fake_user', 'Auth\LoginController@insertFakeUser');

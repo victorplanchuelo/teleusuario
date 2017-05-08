@@ -19,4 +19,16 @@ return [
     'token' => 'This password reset token is invalid.',
     'user' => "We can't find a user with that e-mail address.",
 
+
+
+	//Formulario para el envio de mail para resetear la contraseña
+	'sent_email_form' => 'Forgot your password?',
+	'sent_email_title' => 'Enter your e-mail address below to reset your password.',
+	'sent_email_submit' => 'Submit',
+
+	'title_form' => 'Reset new password',
+	'email' => 'Email',
+	'password_lbl' => 'Password',
+	'password_confirmation' => 'Confirm password',
+	'submit' => 'Reset password',
 ];

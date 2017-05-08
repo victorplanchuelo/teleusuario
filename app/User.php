@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Notifications\ResetPasswordNotification;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -45,6 +46,26 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'real_password',
     ];
+
+
+	/**
+	 * Send the password reset notification.
+	 *
+	 * @param  string  $token
+	 * @return void
+	 */
+	public function sendPasswordResetNotification($token)
+	{
+		$this->notify(new ResetPasswordNotification($token));
+	}
+
+
+	/**
+	 *
+	 *
+	 * RELACIONES DEL MODELO
+	 *
+	 */
 
 
     public function application()
