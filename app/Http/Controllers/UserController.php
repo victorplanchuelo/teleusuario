@@ -30,4 +30,15 @@ class UserController extends Controller
 	    return back()->with('success', trans('dashboard.change_password.message.success'));
 
     }
+
+    public function getProfile()
+    {
+    	//Muestra el formulario del perfil del usuario
+	    return view('dashboard.profile', ['user' => Auth::user()]);
+    }
+
+    public function postProfile()
+    {
+    	//Se hacen los cambios del perfil
+    }
 }

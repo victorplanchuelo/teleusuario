@@ -35,4 +35,32 @@ return [
 		],
 	],
 
+	'profile' => [
+		'title' => 'Perfil de usuario',
+
+		'tabs' => [
+			'personal' => 'Datos personales',
+			'bank' => 'Datos bancarios',
+			'services' => 'Servicios',
+		],
+		'labels' => [
+			'code' => 'Código Usuario',
+			'alias' => 'Alias',
+			'name' => 'Nombre completo',
+			'phone' => 'Teléfono de contacto',
+			'connection_phone' => 'Teléfono de conexión',
+			'email' => 'Correo Electrónico',
+			'country' => 'Pais',
+			'province' => 'Provincia',
+			'city' => 'Población',
+			'address' => 'Dirección',
+			'cp' => 'Código postal',
+			'genre' => 'Género',
+			'birthdate' => 'Fecha nacimiento',
+			'age' => 'Edad',
+			'nif' => 'NIF',
+		],
+
+	],
+
 ];

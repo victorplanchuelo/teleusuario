@@ -24,7 +24,6 @@ class User extends Authenticatable
 	//protected $dateFormat = 'M j Y h:i:s:000A';
 
 
-
     /**
      * The attributes that are mass assignable.
      *
@@ -58,6 +57,9 @@ class User extends Authenticatable
 	{
 		$this->notify(new ResetPasswordNotification($token));
 	}
+
+
+
 
 
 	/**

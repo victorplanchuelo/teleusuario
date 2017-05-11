@@ -34,4 +34,33 @@ return [
 			'error' => 'New password cannot be the same than the old one.'
 		],
 	],
+
+	'profile' => [
+		'title' => 'User profile',
+
+		'tabs' => [
+			'personal' => 'Personal data',
+			'bank' => 'Bank data',
+			'services' => 'Services',
+		],
+
+		'labels' => [
+			'code' => 'User code',
+			'alias' => 'Alias',
+			'name' => 'Full name',
+			'phone' => 'Contact phone number',
+			'connection_phone' => 'Connection phone number',
+			'email' => 'E-mail',
+			'country' => 'Country',
+			'province' => 'Province',
+			'city' => 'City',
+			'address' => 'Address',
+			'cp' => 'Postal code',
+			'genre' => 'Genre',
+			'birthdate' => 'Birthdate',
+			'age' => 'Age',
+			'nif' => 'Id Number',
+		],
+
+	],
 ];

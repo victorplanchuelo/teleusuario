@@ -1,13 +1,7 @@
-<!-- Scripts -->
-<script src="{{ asset('js/app.js') }}"></script>
-
 <!-- Sparkline Graphs -->
 <!-- <script src="js/sparkline/sparkline.js"></script> -->
 <script src="{{ asset('js/sparkline/retina.js') }}"></script>
 <script src="{{ asset('js/sparkline/custom-sparkline.js') }}"></script>
-
-<!-- jquery ScrollUp JS -->
-<script src="{{ asset('js/scrollup/jquery.scrollUp.js') }}"></script>
 
 <!-- D3 JS -->
 <script src="{{ asset('js/d3/d3.v3.min.js') }}"></script>
@@ -36,14 +30,6 @@
 <script src="{{ asset('js/gaugemeter/gaugeMeter-2.0.0.min.js') }}"></script>
 <script src="{{ asset('js/gaugemeter/gaugemeter.custom.js') }}"></script>
 
-<!-- Calendar Heatmap JS -->
-<!--<script src="{{ asset('js/heatmap/cal-heatmap.min.js') }}"></script>
-    <script src="{{ asset('js/heatmap/cal-heatmap.custom.js') }}"></script>-->
-
-<!-- Odometer JS -->
-<!--<script src="{{ asset('js/odometer/odometer.min.js') }}"></script>
-    <script src="{{ asset('js/odometer/custom-odometer.js') }}"></script>-->
-
 <!-- Peity JS -->
 <script src="{{ asset('js/peity/peity.min.js') }}"></script>
 <script src="{{ asset('js/peity/custom-peity.js') }}"></script>
@@ -52,5 +38,3 @@
 <script src="{{ asset('js/circliful/circliful.min.js') }}"></script>
 <script src="{{ asset('js/circliful/circliful.custom.js') }}"></script>
 
-<!-- Custom JS -->
-<script src="{{ asset('js/custom.js') }}"></script>
