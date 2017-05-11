@@ -34,7 +34,7 @@ Route::get('/activate/{token}', 'Auth\RegisterController@activation');
  */
 //Página principal del panel de control
 
-Route::group(['prefix' => 'dashboard'], function () {
+Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
 	Route::get('/', 'HomeController@index')->name('dashboard.home');
 
 	//Ruta para el cambio de contraseña
