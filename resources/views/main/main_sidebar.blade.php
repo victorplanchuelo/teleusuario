@@ -9,7 +9,7 @@
 
 	<!-- Current user starts -->
 	<div class="user-details clearfix">
-		<a href="profile.html" class="user-img">
+		<a href="{{ route('dashboard.profile') }}" class="user-img">
 			<img src="{{ asset('/img/thumbs/user.png') }}" alt="User Info">
 			<!--<span class="likes-info">9</span>-->
 		</a>

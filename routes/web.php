@@ -19,15 +19,47 @@ Route::get('/', function () {
 	return redirect('/login');
 });
 
+//Rutas por defecto para login/registro/reseteo contraseña
 Auth::routes();
 
-Route::get('/dashboard', 'HomeController@index');
+//Ruta de confirmación de correo electrónico (se llama desde el e-mail que se envía una vez terminado el registro)
 Route::get('/activate/{token}', 'Auth\RegisterController@activation');
 
 
-//Ruta para el cambio de contraseña
-Route::get('/password/change',  'UserController@getChangePassword');
-Route::post('/password/change',  'UserController@postChangePassword')->name('dashboard.change_pwd');
+
+/*
+ *
+ * PANEL DE CONTROL
+ *
+ */
+//Página principal del panel de control
+
+Route::group(['prefix' => 'dashboard'], function () {
+	Route::get('/', 'HomeController@index')->name('dashboard.home');
+
+	//Ruta para el cambio de contraseña
+	Route::get('/password/change',  'UserController@getChangePassword')->name('dashboard.change_pwd');
+	Route::post('/password/change',  'UserController@postChangePassword')->name('dashboard.change_pwd.edit');
+
+	//Rutas para el perfil de usuario
+	Route::get('/profile',  'UserController@getProfile')->name('dashboard.profile');
+	Route::post('/profile',  'UserController@postProfile')->name('dashboard.profile.edit');
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //Para poder crear usuarios. Borrar cuando esté

@@ -113,8 +113,8 @@
 			</a>
 			<ul class="dropdown-menu sm">
 				<li class="dropdown-content">
-					<a href="profile.html">{{ trans('dashboard.header.profile') }}</a>
-					<a href="{{ url('password/change') }}">{{ trans('dashboard.header.change_pwd') }}</a>
+					<a href="{{ route('dashboard.profile') }}">{{ trans('dashboard.header.profile') }}</a>
+					<a href="{{ route('dashboard.change_pwd') }}">{{ trans('dashboard.header.change_pwd') }}</a>
 					<a href="styled-inputs.html">Settings</a>
 					<a href="{{ url('logout') }}"
 					   onclick="event.preventDefault();
