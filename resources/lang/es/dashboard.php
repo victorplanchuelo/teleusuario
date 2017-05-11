@@ -59,6 +59,10 @@ return [
 			'birthdate' => 'Fecha nacimiento',
 			'age' => 'Edad',
 			'nif' => 'NIF',
+			'bank' => 'Nombre del banco',
+			'bank_code' => 'Código banco',
+			'iban' => 'IBAN',
+			'swift' => 'Swift/BIC',
 		],
 
 	],

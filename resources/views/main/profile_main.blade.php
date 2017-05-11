@@ -120,7 +120,27 @@
 										</div>
 									</div>
 									<div class="tab-pane" id="tabTwo">
+										<div class="form-group row gutter has-feedback">
+											<div class="col-md-4 col-md-offset-1">
+												<label class="control-label">{{ trans('dashboard.profile.labels.bank') }}</label>
+												<input type="text" class="form-control input-sm" id="bank" name="bank" value="{!! $user->bank->name !!}" disabled />
+											</div>
+											<div class="col-md-2 col-md-offset-1">
+												<label class="control-label">{{ trans('dashboard.profile.labels.bank_code') }}</label>
+												<input type="text" class="form-control input-sm" id="bank_code" name="bank_code" value="{!! $user->bank->code !!}" disabled />
+											</div>
+											<div class="col-md-2 col-md-offset-1">
+												<label class="control-label">{{ trans('dashboard.profile.labels.swift') }}</label>
+												<input type="text" class="form-control input-sm" id="swift" name="swift" value="{!! $user->bank->swift !!}" disabled />
+											</div>
+										</div>
+										<div class="form-group row gutter has-feedback">
+											<div class="col-md-4 col-md-offset-1">
+												<label class="control-label">{{ trans('dashboard.profile.labels.iban') }}</label>
+												<input type="text" class="form-control input-sm" id="iban" name="iban" value="{!! $user->iban !!}" disabled />
+											</div>
 
+										</div>
 									</div>
 									<div class="tab-pane" id="tabThree">
 

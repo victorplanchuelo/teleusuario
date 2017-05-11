@@ -60,6 +60,10 @@ return [
 			'birthdate' => 'Birthdate',
 			'age' => 'Age',
 			'nif' => 'Id Number',
+			'bank' => 'Bank name',
+			'bank_code' => 'Bank code',
+			'iban' => 'IBAN',
+			'swift' => 'Swift/BIC',
 		],
 
 	],
