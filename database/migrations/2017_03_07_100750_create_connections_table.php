@@ -16,12 +16,13 @@ class CreateConnectionsTable extends Migration
         Schema::create('connections', function (Blueprint $table) {
             //Esta tabla es muy curiosa. Tenemos como PK los campos user_id y fecha
 	        //Además, user_id es una FK a la tabla usuarios
+	        $table->increments('id');
         	$table->unsignedSmallInteger('user_id');
 	        $table->foreign('user_id')->references('id')->on('users');
 
             $table->dateTime('date');
 
-	        $table->primary(['user_id', 'date']);
+	        $table->unique(['user_id', 'date']);
         });
     }
 

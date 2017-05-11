@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Connection extends Model
@@ -10,10 +11,6 @@ class Connection extends Model
 
 	// Para no tener problemas indicamos el nombre de la tabla
 	protected $table = 'connections';
-
-	// Para no tener problemas para los UPDATES/DELETES se debe indicar cual es el Id de la tabla
-	// Ya que Eloquent por defecto busca 'id'
-	protected $primaryKey = ['user_id', 'date'];
 
 	//protected $dateFormat = 'M j Y h:i:s:000A';
 
@@ -27,6 +24,24 @@ class Connection extends Model
 	protected $fillable = [
 		'user_id', 'date'
 	];
+
+
+	/**
+	 * @param $query
+	 * @param $data
+	 * @return UserApplication
+	 */
+	public function scopeCreateConnectionApplication($query, $user_id)
+	{
+		// Recogemos los valores de la fecha de hoy
+		$now = Carbon::now();
+
+		return $query->create([
+			'user_id' => $user_id,
+			'date' => $now,
+		]);
+	}
+
 
 	public function user()
 	{

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Connection;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use \Illuminate\Http\Request;
@@ -62,6 +63,10 @@ class LoginController extends Controller
 
 
 		if ($this->attemptLogin($request)) {
+			//Si entra por aquí, quiere decirse que el usuario existe
+			// por lo que hay que añadir una fila nueva por la conexión
+			$connection = Connection::createConnectionApplication(Auth::user()->id);
+
 			return $this->sendLoginResponse($request);
 		}
 
