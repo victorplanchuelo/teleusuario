@@ -110,21 +110,21 @@ $dribbble: #ea4c89;
 // Open Sans Light
 @font-face {
 	font-family: 'Open Sans';
-	src: url('../fonts/open-sans/OpenSans-Light.ttf') format('ttf');
+	src: url('/../fonts/open-sans/OpenSans-Light.ttf') format('ttf');
 	font-weight: 300;
 	font-style: normal;
 }
 // Open Sans Regular
 @font-face {
 	font-family: 'Open Sans';
-	src: url('../fonts/open-sans/OpenSans-Regular.ttf') format('ttf');
+	src: url('/../fonts/open-sans/OpenSans-Regular.ttf') format('ttf');
 	font-weight: 400;
 	font-style: normal;
 }
 // Open Sans Bold
 @font-face {
 	font-family: 'Open Sans';
-	src: url('../fonts/open-sans/OpenSans-Bold.ttf') format('ttf');
+	src: url('/../fonts/open-sans/OpenSans-Bold.ttf') format('ttf');
 	font-weight: 700;
 	font-style: normal;
 }
@@ -951,7 +951,7 @@ ul#header-actions {
 
 // Panel BG
 .panel-bg-one {
-	background: url(../img/watercolour.jpg) no-repeat;
+	background: url(/../img/watercolour.jpg) no-repeat;
 	background-size: 100% 100%;
 }
 
@@ -2791,7 +2791,7 @@ ul.menu {
 		left: 0;
 	}
 	.vertical-nav-sm {
-		width: 90px;
+		width: 120px;
 		.user-details {
 			margin: 30px 10px 20px 10px;
 			.user-img {
@@ -2882,7 +2882,7 @@ ul.menu {
 
 // Thumbnails Small
 .thumbs-sm {
-	background: url(../img/thumbs-sm.png) no-repeat;
+	background: url(/../img/thumbs-sm.png) no-repeat;
 	width: 36px;
 	height: 36px;
 	-webkit-border-radius: 4px;
@@ -2926,7 +2926,7 @@ ul.menu {
 	}
 }
 .thumbs-md {
-	background: url(../img/thumbs-md.jpg) no-repeat;
+	background: url(/../img/thumbs-md.jpg) no-repeat;
 	width: 60px;
 	height: 60px;
 	@include border-radius(4px);
@@ -3160,7 +3160,7 @@ ul.menu {
 }
 
 // Loading
-@-webkit-keyframes "loading" {
+@-webkit-keyframes loading {
 	0% {
 		opacity: 0;
 	}
@@ -3168,7 +3168,7 @@ ul.menu {
 		opacity: 1;
 	}
 }
-@-moz-keyframes "loading" {
+@-moz-keyframes loading {
 	0% {
 		opacity: 0;
 	}
@@ -3176,7 +3176,7 @@ ul.menu {
 		opacity: 1;
 	}
 }
-@-o-keyframes "loading" {
+@-o-keyframes loading {
 	0% {
 		opacity: 0;
 	}
@@ -3184,7 +3184,7 @@ ul.menu {
 		opacity: 1;
 	}
 }
-@keyframes "loading" {
+@keyframes loading {
 	0% {
 		opacity: 0;
 	}
@@ -4290,9 +4290,6 @@ label~.form-control-feedback {
 .input-group-addon {
 	border: 1px solid darken($body-bg, 15%);
 	background: $body-bg;
-}
-.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
-	background: lighten($body-bg, 12%);
 }
 
 // Has Success
