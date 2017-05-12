@@ -1,0 +1,14 @@
+.chk_profile_active {
+    margin-top: 15px;
+}
+
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+    background-color: #eee !important;
+}
+
+@media (min-width: 992px)
+{
+    .vertical-nav-sm {
+        width: 120px !important;
+    }
+}

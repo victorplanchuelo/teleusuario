@@ -2,7 +2,7 @@
 @section('head')
 	@parent
 	@include('layouts.head')
-
+	@include('layouts.dashboard_head')
 	@include('main.profile_head')
 @endsection
 @section('header')

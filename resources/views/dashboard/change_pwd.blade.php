@@ -2,7 +2,7 @@
 @section('head')
 	@parent
 	@include('layouts.head')
-
+	@include('layouts.dashboard_head')
 	@include('main.change_pwd_head')
 @endsection
 @section('header')

@@ -64,6 +64,9 @@ return [
 			'bank_code' => 'Código banco',
 			'iban' => 'IBAN',
 			'swift' => 'Swift/BIC',
+			'start_date' => 'Fecha inicio',
+			'end_date' => 'Fecha fin',
+			'active' => 'Activo',
 		],
 
 	],

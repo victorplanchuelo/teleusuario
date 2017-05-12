@@ -109,13 +109,30 @@
 											</div>
 										</div>
 										<div class="form-group row gutter has-feedback">
-											<div class="col-lg-4 col-lg-offset-1 col-md-7 col-md-offset-1 col-sm-12 col-xs-12">
+											<div class="col-lg-5 col-lg-offset-1 col-md-7 col-md-offset-1 col-sm-12 col-xs-12">
 												<label for="address" class="control-label">{{ trans('dashboard.profile.labels.address') }}</label>
 												<input type="text" class="form-control input-sm" id="address" name="address" value="{!! $user->address !!}"  disabled />
 											</div>
 											<div class="col-lg-2 col-lg-offset-1 col-md-3 col-md-offset-1 col-sm-12 col-xs-12">
 												<label for="cp" class="control-label">{{ trans('dashboard.profile.labels.cp') }}</label>
 												<input type="text" class="form-control input-sm" id="cp" name="cp" value="{!! $user->cp !!}"  disabled />
+											</div>
+										</div>
+
+										<div class="form-group row gutter has-feedback">
+											<div class="col-lg-2 col-lg-offset-1 col-md-3 col-md-offset-1 col-sm-12 col-xs-12">
+												<label for="start_date" class="control-label">{{ trans('dashboard.profile.labels.start_date') }}</label>
+												<input type="text" class="form-control input-sm" id="start_date" name="start_date" value="{{\Carbon\Carbon::parse($user->start_date)->format('d/m/Y') }}" disabled />
+											</div>
+
+											<div class="col-lg-2 col-lg-offset-1 col-md-3 col-md-offset-1 col-sm-12 col-xs-12">
+												<label for="end_date" class="control-label">{{ trans('dashboard.profile.labels.end_date') }}</label>
+												<input type="text" class="form-control input-sm" id="end_date" name="end_date" value="{{ (!is_null($user->end_date)) ? \Carbon\Carbon::parse($user->end_date)->format('d/m/Y') : ''}}" disabled />
+											</div>
+											<div class="col-lg-2 col-lg-offset-1 col-md-2 col-md-offset-1 col-sm-12 col-xs-12 chk_profile_active">
+												<div class="checkbox">
+													<input type="checkbox" name="active" id="active" {{ ($user->active)? 'checked=checked':'' }} disabled> {{ trans('dashboard.profile.labels.active') }}
+												</div>
 											</div>
 										</div>
 									</div>
