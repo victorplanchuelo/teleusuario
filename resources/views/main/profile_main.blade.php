@@ -47,99 +47,98 @@
 								<div class="tab-content">
 									<div class="tab-pane active" id="tabOne">
 										<div class="form-group row gutter has-feedback">
-											<div class="col-md-2 col-md-offset-1">
-												<label class="control-label">{{ trans('dashboard.profile.labels.code') }}</label>
+											<div class="col-lg-2 col-lg-offset-1 col-md-3 col-md-offset-1 col-sm-12 col-xs-12">
+												<label for="code" class="control-label">{{ trans('dashboard.profile.labels.code') }}</label>
 												<input type="text" class="form-control input-sm" id="code" name="code" value="{!! $user->code !!}" disabled />
 											</div>
-											<div class="col-md-2 col-md-offset-2">
-												<label class="control-label">{{ trans('dashboard.profile.labels.nif') }}</label>
+											<div class="col-lg-2 col-lg-offset-1 col-md-3 col-md-offset-1 col-sm-12 col-xs-12">
+												<label for="nif" class="control-label">{{ trans('dashboard.profile.labels.nif') }}</label>
 												<input type="text" class="form-control input-sm" id="nif" name="nif" value="{!! $user->nif !!}" disabled />
 											</div>
-										</div>
-										<div class="form-group row gutter has-feedback">
-											<div class="col-md-6 col-md-offset-1">
-												<label class="control-label">{{ trans('dashboard.profile.labels.name') }}</label>
-												<input type="text" class="form-control input-sm" id="name" name="name" value="{!! $user->name !!}"  disabled />
-											</div>
-											<div class="col-md-3 col-md-offset-1">
-												<label class="control-label">{{ trans('dashboard.profile.labels.alias') }}</label>
+											<div class="col-lg-2 col-lg-offset-1 col-md-3 col-md-offset-1 col-sm-12 col-xs-12">
+												<label for="alias" class="control-label">{{ trans('dashboard.profile.labels.alias') }}</label>
 												<input type="text" class="form-control input-sm" id="alias" name="alias" value="{!! $user->alias !!}" disabled />
 											</div>
 										</div>
 										<div class="form-group row gutter has-feedback">
-											<div class="col-md-2 col-md-offset-1">
-												<label class="control-label">{{ trans('dashboard.profile.labels.phone') }}</label>
-												<input type="text" class="form-control input-sm" id="phone" name="phone" value="{!! $user->contact_phone !!}"  disabled />
-											</div>
-											<div class="col-md-2 col-md-offset-1">
-												<label class="control-label">{{ trans('dashboard.profile.labels.connection_phone') }}</label>
-												<input type="text" class="form-control input-sm" id="connection_phone" name="connection_phone" value="{!! $user->connection_phone !!}" disabled />
-											</div>
-											<div class="col-md-4 col-md-offset-1">
-												<label class="control-label">{{ trans('dashboard.profile.labels.genre') }}</label>
-												<input type="text" class="form-control input-sm" id="genre" name="genre" value="{!! $user->genre !!}" disabled />
-											</div>
-										</div>
-										<div class="form-group row gutter has-feedback">
-											<div class="col-md-4 col-md-offset-1">
-												<label class="control-label">{{ trans('dashboard.profile.labels.email') }}</label>
-												<input type="email" class="form-control input-sm" id="email" name="email" value="{!! $user->email !!}"  disabled />
-											</div>
-											<div class="col-md-2 col-md-offset-1">
-												<label class="control-label">{{ trans('dashboard.profile.labels.birthdate') }}</label>
+											<div class="col-lg-2 col-lg-offset-1 col-md-3 col-md-offset-1 col-sm-12 col-xs-12">
+												<label for="birthdate" class="control-label">{{ trans('dashboard.profile.labels.birthdate') }}</label>
 												<input type="text" class="form-control input-sm" id="birthdate" name="birthdate" value="{{ \Carbon\Carbon::createFromFormat("M d Y h:i:s:A", $user->birthdate)->format('Y-m-d') }}" disabled />
 											</div>
-											<div class="col-md-2 col-md-offset-1">
-												<label class="control-label">{{ trans('dashboard.profile.labels.age') }}</label>
+											<div class="col-lg-1 col-lg-offset-1 col-md-2 col-md-offset-1 col-sm-12 col-xs-12">
+												<label for="age" class="control-label">{{ trans('dashboard.profile.labels.age') }}</label>
 												<input type="number" class="form-control input-sm" id="age" name="age" readonly="readonly" disabled />
 											</div>
 										</div>
 										<div class="form-group row gutter has-feedback">
-											<div class="col-md-4 col-md-offset-1">
-												<label class="control-label">{{ trans('dashboard.profile.labels.address') }}</label>
-												<input type="text" class="form-control input-sm" id="address" name="address" value="{!! $user->address !!}"  disabled />
+											<div class="col-lg-4 col-lg-offset-1 col-md-5 col-md-offset-1 col-sm-12 col-xs-12">
+												<label for="name" class="control-label">{{ trans('dashboard.profile.labels.name') }}</label>
+												<input type="text" class="form-control input-sm" id="name" name="name" value="{!! $user->name !!}"  disabled />
 											</div>
-											<div class="col-md-2 col-md-offset-1">
-												<label class="control-label">{{ trans('dashboard.profile.labels.cp') }}</label>
-												<input type="text" class="form-control input-sm" id="cp" name="cp" value="{!! $user->cp !!}"  disabled />
+											<div class="col-lg-3 col-lg-offset-1 col-md-5 col-md-offset-1 col-sm-12 col-xs-12">
+												<label for="email" class="control-label">{{ trans('dashboard.profile.labels.email') }}</label>
+												<input type="email" class="form-control input-sm" id="email" name="email" value="{!! $user->email !!}"  disabled />
 											</div>
 										</div>
 										<div class="form-group row gutter has-feedback">
-											<div class="col-md-4 col-md-offset-1">
-												<label class="control-label">{{ trans('dashboard.profile.labels.city') }}</label>
+											<div class="col-lg-2 col-lg-offset-1 col-md-3 col-md-offset-1 col-sm-12 col-xs-12">
+												<label for="phone" class="control-label">{{ trans('dashboard.profile.labels.phone') }}</label>
+												<input type="text" class="form-control input-sm" id="phone" name="phone" value="{!! $user->contact_phone !!}"  disabled />
+											</div>
+											<div class="col-lg-2 col-lg-offset-1 col-md-3 col-md-offset-1 col-sm-12 col-xs-12">
+												<label for="connection_phone" class="control-label">{{ trans('dashboard.profile.labels.connection_phone') }}</label>
+												<input type="text" class="form-control input-sm" id="connection_phone" name="connection_phone" value="{!! $user->connection_phone !!}" disabled />
+											</div>
+											<div class="col-lg-2 col-lg-offset-1 col-md-3 col-md-offset-1 col-sm-12 col-xs-12">
+												<label for="genre" class="control-label">{{ trans('dashboard.profile.labels.genre') }}</label>
+												<input type="text" class="form-control input-sm" id="genre" name="genre" value="{!! $user->genre !!}" disabled />
+											</div>
+										</div>
+										<div class="form-group row gutter has-feedback">
+											<div class="col-lg-2 col-lg-offset-1 col-md-3 col-md-offset-1 col-sm-12 col-xs-12">
+												<label for="city" class="control-label">{{ trans('dashboard.profile.labels.city') }}</label>
 												<input type="text" class="form-control input-sm" id="city" name="city" value="{!! $user->city !!}"  disabled />
 											</div>
-											<div class="col-md-3">
-												<label class="control-label">{{ trans('dashboard.profile.labels.province') }}</label>
+											<div class="col-lg-2 col-lg-offset-1 col-md-3 col-md-offset-1 col-sm-12 col-xs-12">
+												<label for="province" class="control-label">{{ trans('dashboard.profile.labels.province') }}</label>
 												<input type="text" class="form-control input-sm" id="province" name="province" value="{!! $user->province !!}" disabled />
 											</div>
-											<div class="col-md-3">
-												<label class="control-label">{{ trans('dashboard.profile.labels.country') }}</label>
+											<div class="col-lg-2 col-lg-offset-1 col-md-3 col-md-offset-1 col-sm-12 col-xs-12">
+												<label for="country" class="control-label">{{ trans('dashboard.profile.labels.country') }}</label>
 												<input type="text" class="form-control input-sm" id="country" name="country" value="{!! $user->country !!}" disabled />
+											</div>
+										</div>
+										<div class="form-group row gutter has-feedback">
+											<div class="col-lg-4 col-lg-offset-1 col-md-7 col-md-offset-1 col-sm-12 col-xs-12">
+												<label for="address" class="control-label">{{ trans('dashboard.profile.labels.address') }}</label>
+												<input type="text" class="form-control input-sm" id="address" name="address" value="{!! $user->address !!}"  disabled />
+											</div>
+											<div class="col-lg-2 col-lg-offset-1 col-md-3 col-md-offset-1 col-sm-12 col-xs-12">
+												<label for="cp" class="control-label">{{ trans('dashboard.profile.labels.cp') }}</label>
+												<input type="text" class="form-control input-sm" id="cp" name="cp" value="{!! $user->cp !!}"  disabled />
 											</div>
 										</div>
 									</div>
 									<div class="tab-pane" id="tabTwo">
 										<div class="form-group row gutter has-feedback">
-											<div class="col-md-4 col-md-offset-1">
+											<div class="col-lg-4 col-lg-offset-1 col-md-5 col-md-offset-1 col-sm-12 col-xs-12">
 												<label class="control-label">{{ trans('dashboard.profile.labels.bank') }}</label>
 												<input type="text" class="form-control input-sm" id="bank" name="bank" value="{!! $user->bank->name !!}" disabled />
 											</div>
-											<div class="col-md-2 col-md-offset-1">
+											<div class="col-lg-2 col-lg-offset-1 col-md-3 col-md-offset-1 col-sm-12 col-xs-12">
 												<label class="control-label">{{ trans('dashboard.profile.labels.bank_code') }}</label>
 												<input type="text" class="form-control input-sm" id="bank_code" name="bank_code" value="{!! $user->bank->code !!}" disabled />
 											</div>
-											<div class="col-md-2 col-md-offset-1">
-												<label class="control-label">{{ trans('dashboard.profile.labels.swift') }}</label>
-												<input type="text" class="form-control input-sm" id="swift" name="swift" value="{!! $user->bank->swift !!}" disabled />
-											</div>
 										</div>
 										<div class="form-group row gutter has-feedback">
-											<div class="col-md-4 col-md-offset-1">
+											<div class="col-lg-4 col-lg-offset-1 col-md-5 col-md-offset-1 col-sm-12 col-xs-12">
 												<label class="control-label">{{ trans('dashboard.profile.labels.iban') }}</label>
 												<input type="text" class="form-control input-sm" id="iban" name="iban" value="{!! $user->iban !!}" disabled />
 											</div>
-
+											<div class="col-lg-2 col-lg-offset-1 col-md-3 col-md-offset-1 col-sm-12 col-xs-12">
+												<label class="control-label">{{ trans('dashboard.profile.labels.swift') }}</label>
+												<input type="text" class="form-control input-sm" id="swift" name="swift" value="{!! $user->bank->swift !!}" disabled />
+											</div>
 										</div>
 									</div>
 									<div class="tab-pane" id="tabThree">
