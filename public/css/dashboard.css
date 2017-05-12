@@ -1,3 +1,10 @@
 .chk_profile_active {
     margin-top: 15px;
 }
+
+@media screen and (max-width: 992px) {
+    #active {
+        position: static !important;
+        margin-left: 0px !important;
+    }
+}

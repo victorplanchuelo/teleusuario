@@ -39,7 +39,7 @@ return [
 		'title' => 'Perfil de usuario',
 
 		'tabs' => [
-			'personal' => 'Datos personales',
+			'general' => 'Información general',
 			'bank' => 'Datos bancarios',
 			'services' => 'Servicios',
 			'invoices' => 'Facturas',
@@ -56,7 +56,11 @@ return [
 			'city' => 'Población',
 			'address' => 'Dirección',
 			'cp' => 'Código postal',
-			'genre' => 'Género',
+			'genre' => [
+				'title' => 'Género',
+				'male' => 'Masculino',
+				'female' => 'Femenino',
+			],
 			'birthdate' => 'Fecha nacimiento',
 			'age' => 'Edad',
 			'nif' => 'NIF',
@@ -67,6 +71,11 @@ return [
 			'start_date' => 'Fecha inicio',
 			'end_date' => 'Fecha fin',
 			'active' => 'Activo',
+		],
+
+		'fieldsets' => [
+			'user_data' => 'Datos de usuario',
+			'personal_data' => 'Datos personales',
 		],
 
 	],

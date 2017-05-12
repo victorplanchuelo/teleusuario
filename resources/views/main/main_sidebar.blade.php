@@ -20,7 +20,7 @@
 	<!-- Sidebar menu start -->
 	<ul class="menu clearfix">
 		<li class="active selected">
-			<a href="#">
+			<a href="{{ route('dashboard.home') }}">
 				<i class="icon-air-play"></i>
 				<span class="menu-item">{{ trans('dashboard.title') }}</span>
 			</a>
