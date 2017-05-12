@@ -36,9 +36,4 @@ class UserController extends Controller
     	//Muestra el formulario del perfil del usuario
 	    return view('dashboard.profile', ['user' => Auth::user()]);
     }
-
-    public function postProfile()
-    {
-    	//Se hacen los cambios del perfil
-    }
 }

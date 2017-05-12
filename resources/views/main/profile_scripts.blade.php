@@ -1,13 +1,13 @@
 <script type="text/javascript">
-	function calculateAge(birthday) { // birthday is a date
-		var today = new Date();
-		var birthDate = new Date(birthday);
-		var age = today.getFullYear() - birthDate.getFullYear();
-		var m = today.getMonth() - birthDate.getMonth();
-		if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-			age--;
+	function calculateAge(birthDay){
+		var now = new Date();
+		var b_split = birthDay.split('/');
+		if(b_split.length==3){
+			var birthDate = new Date(b_split[2], b_split[1]*1-1, b_split[0]);
+			var age = Math.floor((now.getTime() - birthDate.getTime()) / (365.25 * 24 * 60 * 60 * 1000));
+			return age;
 		}
-		return age;
+		return 0;
 	}
 
 	$(document).ready(function(){

@@ -26,26 +26,26 @@
 		<div class="row gutter">
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 				<div class="panel">
-					<div class="panel-heading">
-						<h4>{{ trans('dashboard.profile.title') }}</h4>
-					</div>
 					<div class="panel-body">
 						<form method="POST" action="{{ route('dashboard.change_pwd.edit') }}">
 							{{ csrf_field() }}
 							<div class="tabbable tabs-left clearfix">
 								<ul class="nav nav-tabs">
 									<li class="active">
-										<a href="#tabOne" data-toggle="tab">{{ trans('dashboard.profile.tabs.personal') }}</a>
+										<a href="#tabPersonal" data-toggle="tab">{{ trans('dashboard.profile.tabs.personal') }}</a>
 									</li>
 									<li>
-										<a href="#tabTwo" data-toggle="tab">{{ trans('dashboard.profile.tabs.bank') }}</a>
+										<a href="#tabBank" data-toggle="tab">{{ trans('dashboard.profile.tabs.bank') }}</a>
 									</li>
 									<li>
-										<a href="#tabThree" data-toggle="tab">{{ trans('dashboard.profile.tabs.services') }}</a>
+										<a href="#tabServices" data-toggle="tab">{{ trans('dashboard.profile.tabs.services') }}</a>
+									</li>
+									<li>
+										<a href="#tabInvoices" data-toggle="tab">{{ trans('dashboard.profile.tabs.invoices') }}</a>
 									</li>
 								</ul>
 								<div class="tab-content">
-									<div class="tab-pane active" id="tabOne">
+									<div class="tab-pane active" id="tabPersonal">
 										<div class="form-group row gutter has-feedback">
 											<div class="col-lg-2 col-lg-offset-1 col-md-3 col-md-offset-1 col-sm-12 col-xs-12">
 												<label for="code" class="control-label">{{ trans('dashboard.profile.labels.code') }}</label>
@@ -63,7 +63,7 @@
 										<div class="form-group row gutter has-feedback">
 											<div class="col-lg-2 col-lg-offset-1 col-md-3 col-md-offset-1 col-sm-12 col-xs-12">
 												<label for="birthdate" class="control-label">{{ trans('dashboard.profile.labels.birthdate') }}</label>
-												<input type="text" class="form-control input-sm" id="birthdate" name="birthdate" value="{{ \Carbon\Carbon::createFromFormat("M d Y h:i:s:A", $user->birthdate)->format('Y-m-d') }}" disabled />
+												<input type="text" class="form-control input-sm" id="birthdate" name="birthdate" value="{{ \Carbon\Carbon::createFromFormat("M d Y h:i:s:A", $user->birthdate)->format('d/m/Y') }}" disabled />
 											</div>
 											<div class="col-lg-1 col-lg-offset-1 col-md-2 col-md-offset-1 col-sm-12 col-xs-12">
 												<label for="age" class="control-label">{{ trans('dashboard.profile.labels.age') }}</label>
@@ -119,7 +119,7 @@
 											</div>
 										</div>
 									</div>
-									<div class="tab-pane" id="tabTwo">
+									<div class="tab-pane" id="tabBank">
 										<div class="form-group row gutter has-feedback">
 											<div class="col-lg-4 col-lg-offset-1 col-md-5 col-md-offset-1 col-sm-12 col-xs-12">
 												<label class="control-label">{{ trans('dashboard.profile.labels.bank') }}</label>
@@ -141,7 +141,10 @@
 											</div>
 										</div>
 									</div>
-									<div class="tab-pane" id="tabThree">
+									<div class="tab-pane" id="tabServices">
+
+									</div>
+									<div class="tab-pane" id="tabInvoices">
 
 									</div>
 								</div>

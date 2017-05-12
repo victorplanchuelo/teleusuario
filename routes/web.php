@@ -43,7 +43,6 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
 
 	//Rutas para el perfil de usuario
 	Route::get('/profile',  'UserController@getProfile')->name('dashboard.profile');
-	Route::post('/profile',  'UserController@postProfile')->name('dashboard.profile.edit');
 });
 
 

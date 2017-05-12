@@ -42,6 +42,7 @@ return [
 			'personal' => 'Datos personales',
 			'bank' => 'Datos bancarios',
 			'services' => 'Servicios',
+			'invoices' => 'Facturas',
 		],
 		'labels' => [
 			'code' => 'Código Usuario',

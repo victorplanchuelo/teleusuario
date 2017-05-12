@@ -42,6 +42,7 @@ return [
 			'personal' => 'Personal data',
 			'bank' => 'Bank data',
 			'services' => 'Services',
+			'invoices' => 'Invoices',
 		],
 
 		'labels' => [
