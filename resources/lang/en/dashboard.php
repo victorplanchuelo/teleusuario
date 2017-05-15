@@ -39,7 +39,9 @@ return [
 		'submit' => 'Change password',
 		'message' => [
 			'success' => 'Password was changed successfuly',
-			'error' => 'New password cannot be the same than the old one.'
+			'error' => 'New password cannot be the same than the old one.',
+			'label1' =>'Remember!',
+			'label2' => 'Password must contain alphanumeric characters and must be at least 6 characters long',
 		],
 	],
 

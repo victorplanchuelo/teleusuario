@@ -40,7 +40,9 @@ return [
 		'submit' => 'Cambiar contraseña',
 		'message' => [
 			'success' => 'La contraseña se cambió correctamente.',
-			'error' => 'La nueva contraseña no puede ser igual a la anterior.'
+			'error' => 'La nueva contraseña no puede ser igual a la anterior.',
+			'label1' =>'¡Recuerda!',
+			'label2' => 'La contraseña debe contener caracteres alfanuméricos y debe tener un tamaño mínimo de 6 caracteres',
 		],
 	],
 

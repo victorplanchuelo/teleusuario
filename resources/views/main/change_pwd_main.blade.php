@@ -26,6 +26,9 @@
 		<div class="row gutter">
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 				<div class="panel">
+					<div class="panel-heading text-center">
+						<span class="label label-danger label-bdr"><strong>{{ trans('dashboard.change_password.message.label1') }}</strong> {{ trans('dashboard.change_password.message.label2') }}</span>
+					</div>
 					<div class="panel-body">
 						<form class="form-horizontal" method="POST" action="{{ route('dashboard.change_pwd.edit') }}">
 							{{ csrf_field() }}
