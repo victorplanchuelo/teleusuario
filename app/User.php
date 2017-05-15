@@ -5,6 +5,7 @@ namespace App;
 use App\Notifications\ResetPasswordNotification;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -59,7 +60,23 @@ class User extends Authenticatable
 	}
 
 
-
+	/**
+	 * @param $city
+	 * @param $province
+	 * @param $country
+	 */
+	public static function getPlace($city, $province, $country)
+	{
+		return DB::connection('sqlsrv2')
+		    ->table('Paises')
+		    ->join('Provincias', 'Paises.IdPais', '=', 'Provincias.PaisProvincia')
+		    ->join('Poblacion', 'Provincias.IdProvincia', '=', 'Poblacion.IdProvinciaPob')
+		    ->select('Poblacion.CiudadPob as ciudad', 'Provincias.NombreProvincia as provincia', 'Paises.NombrePais as pais')
+		    ->where('Poblacion.CMUN', $city)
+		    ->where('Provincias.IdProvincia', $province)
+		    ->where('Paises.IdPais', $country)
+		    ->first();
+	}
 
 
 	/**
