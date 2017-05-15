@@ -24,6 +24,8 @@ class CreateServicesUsersTable extends Migration
 	        $table->dateTime('end_date')->nullable();
 	        $table->boolean('active')->default(0);
 
+	        $table->string('path',64);
+
 	        $table->primary(['user_id', 'service_id']);
         });
     }

@@ -1,3 +1,6 @@
+<!-- Custom JS -->
+<script src="{{ asset('js/custom.js') }}"></script>
+
 @if (session('success'))
 <script type="text/javascript">
 	$(document).ready(function() {

@@ -1,3 +1,6 @@
+<!-- Custom JS -->
+<script src="{{ asset('js/custom.js') }}"></script>
+
 <!-- Sparkline Graphs -->
 <!-- <script src="js/sparkline/sparkline.js"></script> -->
 <script src="{{ asset('js/sparkline/retina.js') }}"></script>

@@ -8,9 +8,8 @@
 <script src="{{ asset('js/alertify/alertify.js') }}"></script>
 <script src="{{ asset('js/alertify/alertify-custom.js') }}"></script>
 
-<!-- Custom JS -->
-<script src="{{ asset('js/custom.js') }}"></script>
-
+<!-- JQuery Scripts -->
+<script src="{{ asset('js/jquery-ui.min.js') }}"></script>
 
 <!-- JQuery Scripts -->
 <!--<script src="{{ asset('js/jquery.js') }}"></script>-->

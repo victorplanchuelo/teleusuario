@@ -1,3 +1,6 @@
+<!-- Custom JS -->
+<script src="{{ asset('js/custom.js') }}"></script>
+
 <script type="text/javascript">
 	function calculateAge(birthDay){
 		var now = new Date();

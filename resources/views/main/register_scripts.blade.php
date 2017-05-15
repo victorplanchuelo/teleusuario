@@ -30,8 +30,9 @@
 			};
 			$.datepicker.setDefaults($.datepicker.regional['es']);
 
-
 			$('#birthdate').datepicker();
+			$('#birthdate').css('padding-top','7px');
+
 		})
 	}
 </script>
