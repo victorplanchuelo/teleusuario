@@ -1,3 +1,4 @@
+
 <!-- Dashboard Wrapper Start -->
 <div class="dashboard-wrapper dashboard-wrapper-lg">
 
@@ -117,15 +118,15 @@
 											<div class="form-group row gutter has-feedback">
 												<div class="col-lg-2 col-lg-offset-1 col-md-3 col-md-offset-1 col-sm-12 col-xs-12">
 													<label for="city" class="control-label">{{ trans('dashboard.profile.labels.city') }}</label>
-													<input type="text" class="form-control input-sm" id="city" name="city" value="{!! $user->city !!}"  disabled />
+													<input type="text" class="form-control input-sm" id="city" name="city" value="{!! $place->ciudad !!}"  disabled />
 												</div>
 												<div class="col-lg-2 col-lg-offset-1 col-md-3 col-md-offset-1 col-sm-12 col-xs-12">
 													<label for="province" class="control-label">{{ trans('dashboard.profile.labels.province') }}</label>
-													<input type="text" class="form-control input-sm" id="province" name="province" value="{!! $user->province !!}" disabled />
+													<input type="text" class="form-control input-sm" id="province" name="province" value="{!! $place->provincia !!}" disabled />
 												</div>
 												<div class="col-lg-2 col-lg-offset-1 col-md-3 col-md-offset-1 col-sm-12 col-xs-12">
 													<label for="country" class="control-label">{{ trans('dashboard.profile.labels.country') }}</label>
-													<input type="text" class="form-control input-sm" id="country" name="country" value="{!! $user->country !!}" disabled />
+													<input type="text" class="form-control input-sm" id="country" name="country" value="{!! $place->pais !!}" disabled />
 												</div>
 											</div>
 											<div class="form-group row gutter has-feedback">

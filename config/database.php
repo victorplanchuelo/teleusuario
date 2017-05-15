@@ -51,6 +51,17 @@ return [
 		    'prefix' => '',
 	    ],
 
+	    'sqlsrv2' => [
+		    'driver' => 'sqlsrv',
+		    'host' => env('DB_HOST', '85.62.169.130'),
+		    'port' => env('DB_PORT', '14330'),
+		    'database' => env('DB_DATABASE', 'MuroAnuncios'),
+		    'username' => env('DB_USERNAME', 'sa'),
+		    'password' => env('DB_PASSWORD', 'heston0651'),
+		    'charset' => 'utf8',
+		    'prefix' => '',
+	    ],
+
         'mysql' => [
             'driver' => 'mysql',
             'host' => env('DB_HOST', '127.0.0.1'),

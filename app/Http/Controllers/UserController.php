@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ChangePasswordRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -33,7 +34,17 @@ class UserController extends Controller
 
     public function getProfile()
     {
+    	$place = DB::connection('sqlsrv2')
+		    ->table('Paises')
+		    ->join('Provincias', 'Paises.IdPais', '=', 'Provincias.PaisProvincia')
+		    ->join('Poblacion', 'Provincias.IdProvincia', '=', 'Poblacion.IdProvinciaPob')
+		    ->select('Poblacion.CiudadPob as ciudad', 'Provincias.NombreProvincia as provincia', 'Paises.NombrePais as pais')
+		    ->where('Poblacion.CMUN', Auth::user()->city)
+		    ->where('Provincias.IdProvincia', Auth::user()->province)
+		    ->where('Paises.IdPais', Auth::user()->country)
+		    ->first();
+
     	//Muestra el formulario del perfil del usuario
-	    return view('dashboard.profile', ['user' => Auth::user()]);
+	    return view('dashboard.profile', ['user' => Auth::user(), 'place' => $place]);
     }
 }
