@@ -20,7 +20,15 @@ return [
 	],
 
 	'navbar' => [
-		'teleusuario' => 'Teleusuario',
+		'teleusuario' => [
+			'title' => 'Teleusuario',
+		],
+		'settings' => [
+			'title' => 'Settings',
+			'profile' => 'User profile',
+			'change_pwd' => 'Change password',
+			'logout' => 'Logout',
+		],
 	],
 
 

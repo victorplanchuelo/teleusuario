@@ -34,7 +34,6 @@ class UserController extends Controller
 
     public function getProfile()
     {
-
     	$city = Auth::user()->city;
     	$province = Auth::user()->province;
     	$country = Auth::user()->country;

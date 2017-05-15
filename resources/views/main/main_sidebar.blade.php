@@ -19,7 +19,7 @@
 
 	<!-- Sidebar menu start -->
 	<ul class="menu clearfix">
-		<li class="active selected">
+		<li class="{{request()->is('dashboard') ? 'active selected' : ''}}">
 			<a href="{{ route('dashboard.home') }}">
 				<i class="icon-air-play"></i>
 				<span class="menu-item">{{ trans('dashboard.title') }}</span>
@@ -28,7 +28,7 @@
 		<li>
 			<a href="#">
 				<i class="icon-lab3"></i>
-				<span class="menu-item">{{ trans('dashboard.navbar.teleusuario') }}</span>
+				<span class="menu-item">{{ trans('dashboard.navbar.teleusuario.title') }}</span>
 				<span class="down-arrow"></span>
 			</a>
 			<ul>
@@ -43,6 +43,32 @@
 				</li>
 				<li>
 					<a href='project-list.html'>Project List</a>
+				</li>
+			</ul>
+		</li>
+
+		<li class="{{ (request()->is('dashboard/profile') || request()->is('dashboard/password/change'))?'active':'' }}">
+			<a href="#">
+				<i class="icon-settings"></i>
+				<span class="menu-item">{{ trans('dashboard.navbar.settings.title') }}</span>
+				<span class="down-arrow"></span>
+			</a>
+			<ul>
+				<li class="{{request()->is('dashboard/profile') ? 'active selected' : ''}}">
+					<a href='{{ route('dashboard.profile') }}'>{{ trans('dashboard.navbar.settings.profile') }}</a>
+				</li>
+				<li class="{{request()->is('dashboard/password/change') ? 'active selected' : ''}}">
+					<a href='{{ route('dashboard.change_pwd') }}'>{{ trans('dashboard.navbar.settings.change_pwd') }}</a>
+				</li>
+				<li>
+					<a href="{{ url('logout') }}"
+					   onclick="event.preventDefault();
+                       document.getElementById('logout-form1').submit();">
+						{{ trans('dashboard.navbar.settings.logout') }}
+					</a>
+					<form id="logout-form1" action="{{ route('logout') }}" method="POST" style="display: none;">
+						{{ csrf_field() }}
+					</form>
 				</li>
 			</ul>
 		</li>

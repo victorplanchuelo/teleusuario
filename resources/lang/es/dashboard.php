@@ -21,7 +21,16 @@ return [
 	],
 
 	'navbar' => [
-		'teleusuario' => 'Teleusuario',
+		'teleusuario' => [
+			'title' => 'Teleusuario',
+		],
+		'settings' => [
+			'title' => 'Configuración',
+			'profile' => 'Perfil usuario',
+			'change_pwd' => 'Cambio contraseña',
+			'logout' => 'Desconectarse',
+		],
+
 	],
 
 	'change_password' => [
