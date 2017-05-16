@@ -2,6 +2,10 @@
     margin-top: 15px;
 }
 
+.index_navigator {
+    padding-top: 25px;
+}
+
 @media screen and (max-width: 992px) {
     #active {
         position: static !important;

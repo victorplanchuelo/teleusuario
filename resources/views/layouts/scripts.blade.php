@@ -1,6 +1,9 @@
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
 
+<!-- JQuery Scripts -->
+<script src="{{ asset('js/jquery-ui.min.js') }}"></script>
+
 <!-- jquery ScrollUp JS -->
 <script src="{{ asset('js/scrollup/jquery.scrollUp.js') }}"></script>
 
@@ -9,7 +12,7 @@
 <script src="{{ asset('js/alertify/alertify-custom.js') }}"></script>
 
 <!-- JQuery Scripts -->
-<script src="{{ asset('js/jquery-ui.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
 
 <!-- JQuery Scripts -->
 <!--<script src="{{ asset('js/jquery.js') }}"></script>-->
