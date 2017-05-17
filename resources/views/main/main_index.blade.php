@@ -423,6 +423,14 @@ https://mattstauffer.co/blog/customizing-pagination-templates-in-laravel-5-3
 https://laravel.com/docs/5.4/pagination
 */
 
+/*
+ * PARA USAR AJAX EN EL LOGIN/REGISTRO
+ * http://code4fun.io/post/laravel-ajax-register-and-login
+ *
+ * PARA USAR AJAX EN LARAVEL
+ * https://styde.net/ajax-y-laravel-usando-jquery/
+ * https://github.com/AmirMustafa/AJAX-Form-Submit-Laravel-5.4
+*/
 
 /*
 SOLUCION PARA MULTIPLES PAGINATORS EN UNA MISMA VISTA
