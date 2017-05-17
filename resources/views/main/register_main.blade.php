@@ -102,7 +102,7 @@
 									<a class="terms" href="{{ url('/terms') }}">{{ trans('validation.accept_terms') }}</a>
 								</div>
 							</div>
-							<input type="button" class="register" value="{{ trans('validation.sign_up') }}">
+							<input type="button" class="register" value="{{ trans('validation.sign_up') }}" />
 						</div>
 						<div class="log_mini">
 							<h5>{{ trans('validation.login_label') }} <a href="{{ url('/')}}"> {{ trans('validation.login_a') }}</a></h5>

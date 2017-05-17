@@ -51,6 +51,10 @@
 				$('<div class="alert alert-danger"><ul><li>{{ trans('validation.terms') }}</li></ul></div>').insertBefore('#register');
 				return false;
 			}
+
+			$('.register').attr("disabled", true);
+			$(document.body).css('cursor', 'wait');
+
 		});
 	});
 </script>
