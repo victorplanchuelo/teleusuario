@@ -43,6 +43,10 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
 
 	//Rutas para el perfil de usuario
 	Route::get('/profile',  'UserController@getProfile')->name('dashboard.profile');
+
+	Route::group(['prefix' => 'tasks'], function() {
+		Route::get('/ranking', 'UserController@getRanking')->name('dashboard.tasks.ranking');
+	});
 });
 
 

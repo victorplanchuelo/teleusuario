@@ -31,6 +31,12 @@ return [
 			'logout' => 'Desconectarse',
 		],
 
+		'tasks' => [
+			'title' => 'Tasks',
+			'completed_tasks' => 'Completed Tasks',
+			'ranking' => 'Ranking',
+		],
+
 	],
 
 	'change_password' => [

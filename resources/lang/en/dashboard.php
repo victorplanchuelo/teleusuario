@@ -29,6 +29,11 @@ return [
 			'change_pwd' => 'Change password',
 			'logout' => 'Logout',
 		],
+		'tasks' => [
+			'title' => 'Tasks',
+			'completed_tasks' => 'Completed Tasks',
+			'ranking' => 'Ranking',
+		],
 	],
 
 

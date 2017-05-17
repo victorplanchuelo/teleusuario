@@ -47,6 +47,22 @@
 			</ul>
 		</li>
 
+		<li class="{{ (request()->is('dashboard/tasks/completed_tasks') || request()->is('dashboard/tasks/ranking'))?'active':'' }}">
+			<a href="#">
+				<i class="icon-trophy"></i>
+				<span class="menu-item">{{ trans('dashboard.navbar.tasks.title') }}</span>
+				<span class="down-arrow"></span>
+			</a>
+			<ul>
+				<li class="{{request()->is('dashboard/tasks/completed_tasks') ? 'active selected' : ''}}">
+					<a href='#'>{{ trans('dashboard.navbar.tasks.completed_tasks') }}</a>
+				</li>
+				<li class="{{request()->is('dashboard/tasks/ranking') ? 'active selected' : ''}}">
+					<a href='{{ route('dashboard.tasks.ranking') }}'>{{ trans('dashboard.navbar.tasks.ranking') }}</a>
+				</li>
+			</ul>
+		</li>
+
 		<li class="{{ (request()->is('dashboard/profile') || request()->is('dashboard/password/change'))?'active':'' }}">
 			<a href="#">
 				<i class="icon-settings"></i>

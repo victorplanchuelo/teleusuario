@@ -15,6 +15,9 @@ $violet: #597FC5;
 $purple: #C790E1;
 $peach: #FF9997;
 $brown: #987345;
+$gold: #FFD700;
+$silver: #C0C0C0;
+$bronze: #CD7F32;
 
 /*  Border Radius  */
 @mixin border-radius($radius) {
@@ -277,6 +280,27 @@ $brown: #987345;
 		border-top: 2px solid $brown;
 		img.card-avatar {
 			border: 2px solid $brown;
+		}
+	}
+
+	&.gold {
+		border-top: 2px solid $gold;
+		img.card-avatar {
+			border: 2px solid $gold;
+		}
+	}
+
+	&.silver {
+		border-top: 2px solid $silver;
+		img.card-avatar {
+			border: 2px solid $silver;
+		}
+	}
+
+	&.bronze {
+		border-top: 2px solid $bronze;
+		img.card-avatar {
+			border: 2px solid $bronze;
 		}
 	}
 }
