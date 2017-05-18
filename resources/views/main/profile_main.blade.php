@@ -77,6 +77,12 @@
 													</div>
 												</div>
 											</div>
+											<div class="form-group row gutter has-feedback">
+												<div class="col-lg-5 col-lg-offset-1 col-md-7 col-md-offset-1 col-sm-12 col-xs-12">
+													<label for="leave_reason" class="control-label">{{ trans('dashboard.profile.labels.end_date') }}</label>
+													<textarea rows="2" class="form-control" id="leave_reason" name="leave_reason" disabled>{{ $user->leave_reason}}</textarea>
+												</div>
+											</div>
 										</fieldset>
 										<fieldset>
 											<legend>{{ trans('dashboard.profile.fieldsets.personal_data') }}</legend>
