@@ -2070,6 +2070,11 @@ ul.contacts {
 			padding-bottom: 0;
 			border-bottom: 0;
 		}
+		&:hover {
+			background-color: darken($body-bg, 7%);
+			color: $black;
+			cursor: pointer;
+		}
 	}
 }
 
