@@ -4,18 +4,13 @@
 	<!-- Container fluid Starts -->
 	<div class="container-fluid">
 
-		<!-- Top Bar Starts -->
-		<div class="top-bar clearfix">
-			<div class="row gutter">
-				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-					<div class="page-title">
-						<h3>{{ trans('dashboard.title') }}</h3>
-						<p>{{ trans('dashboard.welcome_message') }}</p>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- Top Bar Ends -->
+		@component('main.inc.top_bar')
+			@slot('top_title', trans('dashboard.title'))
+			@slot('top_message', trans('dashboard.welcome_message'))
+
+			@slot('top_level', 1)
+			@slot('top_score', 25)
+		@endcomponent
 
 		<!-- Row starts -->
 		<div class="row gutter">

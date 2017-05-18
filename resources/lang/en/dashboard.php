@@ -11,6 +11,8 @@ return [
 
 	'title'                => 'Dashboard',
 	'welcome_message'      => 'Welcome to Teleusuario Dashboard',
+	'level'                => 'Level',
+	'scores'               => 'Scores',
 
 	'header' => [
 		'logout' => 'Logout',

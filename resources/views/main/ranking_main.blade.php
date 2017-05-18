@@ -2,16 +2,13 @@
 <div class="dashboard-wrapper dashboard-wrapper-lg">
 	<!-- Container fluid Starts -->
 	<div class="container-fluid">
-		<!-- Top Bar Starts -->
-		<div class="top-bar clearfix">
-			<div class="row gutter">
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<div class="page-title">
-						<h3>{{ trans('dashboard.ranking.title') }}</h3>
-					</div>
-				</div>
-			</div>
-		</div>
+		@component('main.inc.top_bar')
+			@slot('top_title', trans('dashboard.ranking.title'))
+			@slot('top_message', ''))
+
+			@slot('top_level', 2)
+			@slot('top_score', 25)
+		@endcomponent
 		<div class="row gutter">
 			<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
 				<div class="card-wrapper gold">

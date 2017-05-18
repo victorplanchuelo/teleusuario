@@ -14,16 +14,18 @@
 					{{ session('error') }}
 				</div>
 		@endif
-		<!-- Top Bar Starts -->
-		<div class="top-bar clearfix">
-			<div class="row gutter">
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<div class="page-title">
-						<h3>{{ trans('dashboard.profile.title') }}</h3>
-					</div>
-				</div>
-			</div>
-		</div>
+
+
+
+		@component('main.inc.top_bar')
+			@slot('top_title', trans('dashboard.profile.title'))
+			@slot('top_message', ''))
+
+			@slot('top_level', 3)
+			@slot('top_score', 25)
+		@endcomponent
+
+
 		<div class="row gutter">
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 				<div class="panel">

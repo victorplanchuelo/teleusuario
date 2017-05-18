@@ -12,6 +12,8 @@ return [
 
 	'title'                => 'Panel de Control',
 	'welcome_message'      => 'Bienvenido/a al Panel de Control de Teleusuario',
+	'level'                => 'Nivel',
+	'scores'               => 'Puntuación',
 
 	'header' => [
 		'logout' => 'Desconectar',
