@@ -25,6 +25,9 @@ Auth::routes();
 //Ruta de confirmación de correo electrónico (se llama desde el e-mail que se envía una vez terminado el registro)
 Route::get('/activate/{token}', 'Auth\RegisterController@activation');
 
+//Ruta para acceder a los terminos y condiciones en el registro del usuario
+Route::get('/terms', 'Auth\RegisterController@getTerms');
+
 
 
 /*

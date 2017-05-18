@@ -190,4 +190,9 @@ class RegisterController extends Controller
 		return redirect('/login')
 			->withErrors(['errors' => trans('validation.email_already_validate')]);
 	}
+
+	public function getTerms()
+	{
+		return view('statics.terms');
+	}
 }
