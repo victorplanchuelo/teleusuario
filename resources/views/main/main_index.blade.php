@@ -38,11 +38,11 @@
 										<span class="email">mail.kelly@mail.ro</span>
 									</p>
 									<ul class="icons-nav">
-										<li>
+										<!--<li>
 											<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete">
 												<i class="icon-cross"></i>
 											</a>
-										</li>
+										</li>-->
 										<li>
 											<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Contact">
 												<i class="icon-speech-bubble"></i>
@@ -59,11 +59,6 @@
 										<span class="email">id.will@mail.io</span>
 									</p>
 									<ul class="icons-nav">
-										<li>
-											<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete">
-												<i class="icon-cross"></i>
-											</a>
-										</li>
 										<li>
 											<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Contact">
 												<i class="icon-speech-bubble"></i>
@@ -81,11 +76,6 @@
 									</p>
 									<ul class="icons-nav">
 										<li>
-											<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete">
-												<i class="icon-cross"></i>
-											</a>
-										</li>
-										<li>
 											<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Contact">
 												<i class="icon-speech-bubble"></i>
 											</a>
@@ -101,11 +91,6 @@
 										<span class="email">sams@mail.com</span>
 									</p>
 									<ul class="icons-nav">
-										<li>
-											<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete">
-												<i class="icon-cross"></i>
-											</a>
-										</li>
 										<li>
 											<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Contact">
 												<i class="icon-speech-bubble"></i>
@@ -123,11 +108,6 @@
 									</p>
 									<ul class="icons-nav">
 										<li>
-											<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete">
-												<i class="icon-cross"></i>
-											</a>
-										</li>
-										<li>
 											<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Contact">
 												<i class="icon-speech-bubble"></i>
 											</a>
@@ -143,11 +123,6 @@
 										<span class="email">id.will@mail.io</span>
 									</p>
 									<ul class="icons-nav">
-										<li>
-											<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete">
-												<i class="icon-cross"></i>
-											</a>
-										</li>
 										<li>
 											<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Contact">
 												<i class="icon-speech-bubble"></i>
@@ -165,11 +140,6 @@
 									</p>
 									<ul class="icons-nav">
 										<li>
-											<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete">
-												<i class="icon-cross"></i>
-											</a>
-										</li>
-										<li>
 											<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Contact">
 												<i class="icon-speech-bubble"></i>
 											</a>
@@ -185,11 +155,6 @@
 										<span class="email">sams@mail.com</span>
 									</p>
 									<ul class="icons-nav">
-										<li>
-											<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete">
-												<i class="icon-cross"></i>
-											</a>
-										</li>
 										<li>
 											<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Contact">
 												<i class="icon-speech-bubble"></i>
@@ -207,11 +172,6 @@
 									</p>
 									<ul class="icons-nav">
 										<li>
-											<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete">
-												<i class="icon-cross"></i>
-											</a>
-										</li>
-										<li>
 											<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Contact">
 												<i class="icon-speech-bubble"></i>
 											</a>
@@ -227,11 +187,6 @@
 										<span class="email">id.will@mail.io</span>
 									</p>
 									<ul class="icons-nav">
-										<li>
-											<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete">
-												<i class="icon-cross"></i>
-											</a>
-										</li>
 										<li>
 											<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="" data-original-title="Contact">
 												<i class="icon-speech-bubble"></i>
@@ -268,7 +223,9 @@
 
 			<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
 				<div class="task-wrapper" id="opened">
-					<h4 class="task-name text-info">In Progress - <span id="taskOdometer2" class="odometer odometer-auto-theme"><div class="odometer-inside"><span class="odometer-digit"><span class="odometer-digit-spacer">8</span><span class="odometer-digit-inner"><span class="odometer-ribbon"><span class="odometer-ribbon-inner"><span class="odometer-value">1</span></span></span></span></span><span class="odometer-digit"><span class="odometer-digit-spacer">8</span><span class="odometer-digit-inner"><span class="odometer-ribbon"><span class="odometer-ribbon-inner"><span class="odometer-value">0</span></span></span></span></span><span class="odometer-digit"><span class="odometer-digit-spacer">8</span><span class="odometer-digit-inner"><span class="odometer-ribbon"><span class="odometer-ribbon-inner"><span class="odometer-value">2</span></span></span></span></span></div></span></h4>
+					<h4 class="task-name text-info">In Progress -
+						<span id="taskOdometer2" class="odometer odometer-auto-theme"></span>
+					</h4>
 					<div class="task-block complete">
 						<h5 class="task-id">Ari-12<i class="icon-controller-record"></i></h5>
 						<div class="assigned-user">

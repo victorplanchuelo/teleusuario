@@ -2004,6 +2004,11 @@ ul.contacts {
 	li.client {
 		padding: 11px 0;
 		border-bottom: 1px solid $body-bg;
+		-webkit-transition: all 0.5s ease-in-out;
+		-moz-transition: all 0.5s ease-in-out;
+		-ms-transition: all 0.5s ease-in-out;
+		-o-transition: all 0.5s ease-in-out;
+		transition: all 0.5s ease-in-out;
 		img.avatar {
 			height: 36px;
 			width: 36px;
@@ -2062,13 +2067,6 @@ ul.contacts {
 					}
 				}
 			}
-		}
-		&:first-child {
-			padding-top: 0;
-		}
-		&:last-child {
-			padding-bottom: 0;
-			border-bottom: 0;
 		}
 		&:hover {
 			background-color: darken($body-bg, 7%);

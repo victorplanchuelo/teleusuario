@@ -32,8 +32,8 @@ return [
 		],
 
 		'tasks' => [
-			'title' => 'Tasks',
-			'completed_tasks' => 'Completed Tasks',
+			'title' => 'Tareas',
+			'completed_tasks' => 'Tareas completadas',
 			'ranking' => 'Ranking',
 		],
 
@@ -95,6 +95,10 @@ return [
 			'personal_data' => 'Datos personales',
 		],
 
+	],
+
+	'ranking' => [
+		'title' => 'Ranking',
 	],
 
 ];

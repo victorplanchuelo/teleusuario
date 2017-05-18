@@ -95,4 +95,8 @@ return [
 		],
 
 	],
+
+	'ranking' => [
+		'title' => 'Ranking',
+	],
 ];

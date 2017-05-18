@@ -7,7 +7,7 @@
 			<div class="row gutter">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="page-title">
-						<h3>{{ trans('dashboard.change_password.title') }}</h3>
+						<h3>{{ trans('dashboard.ranking.title') }}</h3>
 					</div>
 				</div>
 			</div>
