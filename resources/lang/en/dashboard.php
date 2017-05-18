@@ -79,6 +79,7 @@ return [
 				'male' => 'Male',
 				'female' => 'Female',
 			],
+			'leave_reason' => 'Leave reason',
 			'birthdate' => 'Birthdate',
 			'age' => 'Age',
 			'nif' => 'Id Number',

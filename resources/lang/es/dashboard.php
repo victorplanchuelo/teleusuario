@@ -80,6 +80,7 @@ return [
 				'male' => 'Masculino',
 				'female' => 'Femenino',
 			],
+			'leave_reason' => 'Motivo de baja',
 			'birthdate' => 'Fecha nacimiento',
 			'age' => 'Edad',
 			'nif' => 'NIF',
