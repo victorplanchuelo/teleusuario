@@ -44,6 +44,11 @@ class UserController extends Controller
 	    return view('dashboard.profile', ['user' => Auth::user(), 'place' => $place]);
     }
 
+    public function postProfile(Request $request)
+    {
+    	//dd($request);
+    }
+
 
     public function getRanking()
     {
