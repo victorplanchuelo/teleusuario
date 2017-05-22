@@ -68,6 +68,9 @@ class CreateUsersTable extends Migration
 
 	        $table->rememberToken();
 
+	        $table->string('image_path', 100)->nullable();
+	        $table->string('thumb_path', 100)->nullable();
+
 
         });
     }

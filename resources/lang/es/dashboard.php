@@ -64,6 +64,7 @@ return [
 			'invoices' => 'Facturas',
 		],
 		'labels' => [
+			'upload_image' => 'Subir imagen',
 			'code' => 'Código Usuario',
 			'alias' => 'Alias',
 			'name' => 'Nombre completo',
@@ -96,6 +97,10 @@ return [
 		'fieldsets' => [
 			'user_data' => 'Datos de usuario',
 			'personal_data' => 'Datos personales',
+		],
+		'messages' => [
+			'success' => 'La imagen de perfil se ha subido correctamente.',
+			'error' => 'Se ha producido un error al subir la imagen de perfil.',
 		],
 
 	],

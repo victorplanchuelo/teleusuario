@@ -54,7 +54,6 @@ return [
 
 	'profile' => [
 		'title' => 'User profile',
-
 		'tabs' => [
 			'general' => 'General information',
 			'bank' => 'Bank data',
@@ -63,6 +62,7 @@ return [
 		],
 
 		'labels' => [
+			'upload_image' => 'Upload image',
 			'code' => 'User code',
 			'alias' => 'Alias',
 			'name' => 'Full name',
@@ -95,6 +95,10 @@ return [
 		'fieldsets' => [
 			'user_data' => 'User data',
 			'personal_data' => 'Personal data',
+		],
+		'messages' => [
+			'success' => 'Profile image has been upload successfully',
+			'error' => 'An error has occurred uploading the profile image',
 		],
 
 	],

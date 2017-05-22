@@ -54,7 +54,7 @@
 												<div class="form-group row gutter has-feedback">
 													<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 														<div class="user-img">
-															<img class="img-thumbnail img-responsive" src="{{ asset('img/thumbs/user.png') }}" alt="User Info">
+															<img id="image" class="img-thumbnail img-responsive" src="@if(is_null($user->thumb_path)) {{ asset('img/thumbs/user.png') }} @else {{ asset('storage/'.$user->thumb_path) }}@endif" alt="User Info">
 														</div>
 													</div>
 													<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -63,7 +63,12 @@
 																<form class="upload" action="{{ route('dashboard.profile.update') }}" method="post" enctype="multipart/form-data">
 																	{{ csrf_field() }}
 																	<input type="file" id="user_image" class="hidden" />
-																	<a class="btn btn-info" id="upload-image"><i class="icon-upload4"></i>Subir imagen</a>
+																	<a class="btn btn-info" id="upload-image"><i class="icon-upload4"></i>{{ trans('dashboard.profile.labels.upload_image') }}</a>
+																	@if ($errors->has('file'))
+																		<span class="help-block no-margin">
+																			<strong>{{ $errors->first('file') }}</strong>
+																		</span>
+																	@endif
 																</form>
 															</div>
 														</div>
@@ -108,7 +113,7 @@
 												</div>
 												<div class="form-group row gutter has-feedback">
 													<div class="col-lg-7 col-md-9 col-md-offset-1 col-sm-12 col-xs-12">
-														<label for="leave_reason" class="control-label">{{ trans('dashboard.profile.labels.end_date') }}</label>
+														<label for="leave_reason" class="control-label">{{ trans('dashboard.profile.labels.leave_reason') }}</label>
 														<textarea rows="2" class="form-control" id="leave_reason" name="leave_reason" disabled>{{ $user->leave_reason}}</textarea>
 													</div>
 												</div>

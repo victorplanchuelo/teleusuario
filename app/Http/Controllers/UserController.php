@@ -46,7 +46,22 @@ class UserController extends Controller
 
     public function postProfile(Request $request)
     {
-    	//dd($request);
+	    $file = $request->file('file');
+
+
+	    // Double check file validity
+	    if(!$file->isValid())
+		    return response()->json([
+			    'success' => 0,
+		    ]);;
+
+	    $this->validate($request, [
+		    // check validation for image or file
+		    'file' => 'required|image|mimes:jpg,png,jpeg|max:2048',
+	    ]);
+
+	    return User::setImageFromFile($file);
+
     }
 
 

@@ -6,6 +6,9 @@ use App\Notifications\ResetPasswordNotification;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -35,7 +38,8 @@ class User extends Authenticatable
 	    'email', 'password', 'real_password', 'start_date', 'end_date', 'genre',
 	    'application_id', 'active', 'alias', 'country', 'province', 'city', 'address',
 	    'cp', 'nif', 'rec_conversations', 'company_id', 'bank_id', 'iban', 'leave_reason',
-	    'contract_state_id','contract_date', 'responsible'
+	    'contract_state_id','contract_date', 'responsible', 'image_path', 'thumb_path' ,
+	    'remember_token',
     ];
 
     /**
@@ -76,6 +80,49 @@ class User extends Authenticatable
 		    ->where('Provincias.IdProvincia', $province)
 		    ->where('Paises.IdPais', $country)
 		    ->first();
+	}
+
+
+
+	public static function setImageFromFile($file)
+	{
+		//Guardamos la imagen original
+		$image = Storage::disk('public')->putFile('profiles/'. Auth::user()->code, $file);
+
+		$avatarName = explode('.', explode('/',$image)[2])[0];
+
+		//Creación de thumbnail
+		$stream = Image::make(Storage::disk('public')->get($image))->fit(130, 130)->stream();
+		$thumb = 'profiles/'. Auth::user()->code . '/' . $avatarName .'_thumb.' . $file->getClientOriginalExtension();
+		Storage::disk('public')->put($thumb, $stream);
+
+		//Actualizamos el path de la imagen y el thumbnail en la BBDD
+		$user = User::find(Auth::user()->id);
+
+		//Primero recuperamos el path de la imagen anterior;
+		$old_image = 'public/' . $user->image_path;
+		$old_thumb = 'public/' . $user->thumb_path;
+
+		if(!is_null($old_image) && $old_image!='')
+		{
+			//Si ya tenia imágenes guardadas, las borramos
+			Storage::delete([$old_image, $old_thumb]);
+		}
+
+		//Actualizamos la base de datos
+		$user->image_path = $image;
+		$user->thumb_path = $thumb;
+		$user->save();
+
+		if($image)
+			return response()->json([
+				'success' => 1,
+				'file' => Storage::url($thumb),
+			]);
+
+		return response()->json([
+			'success' => 0,
+		]);
 	}
 
 

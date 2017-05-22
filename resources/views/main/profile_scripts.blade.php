@@ -31,9 +31,10 @@
 		$('.upload').submit(function(e) {
 			var file_data = $('#user_image').prop('files')[0];
 			var form_data = new FormData();
+			form_data.append('_token', $('input[name="_token"]').val());
 			form_data.append('file', file_data);
 
-			$('.progress').show();
+			$('#image_pbar').removeClass('hidden');
 
 			$.ajax({
 				type:'POST',
@@ -42,7 +43,7 @@
 				xhr: function() {
 					var myXhr = $.ajaxSettings.xhr();
 					if(myXhr.upload){
-						myXhr.upload.addEventListener('progress',function(){
+						myXhr.upload.addEventListener('progress',function(e){
 							if(e.lengthComputable){
 								var max = e.total;
 								var current = e.loaded;
@@ -52,7 +53,8 @@
 
 								if(Percentage === 100)
 								{
-									$('.progress').hide().attr("aria-valuenow", '0').css('width', '0%').text('0%');
+									$('#image_pbar').addClass('hidden');
+									$('.progress-bar').attr("aria-valuenow", '0').css('width', '0%').text('0%');
 								}
 							}
 						});
@@ -64,14 +66,20 @@
 				processData: false,
 
 				success:function(data){
-					console.log(data);
+					if(data.success===1)
+					{
+						alertify.success('{{ trans('dashboard.profile.messages.success') }}');
+						$('#image').attr('src',  data.file);
+						$('#user-image').val('');
+					}
+					else
+						alertify.error('{{ trans('dashboard.profile.messages.error') }}');
 
-					alert('data returned successfully');
 
 				},
 
 				error: function(data){
-					console.log(data);
+					alertify.error('{{ trans('dashboard.profile.messages.error') }}');
 				}
 			});
 
