@@ -65,7 +65,7 @@ class UserController extends Controller
 	    ];
 
 	    $validator = Validator::make($request->all(), [
-		    'file' => 'required|image|mimes:jpg,png,jpeg|max:2048',
+		    'file' => 'required|image|mimes:jpg,png,jpeg|max:2048', //2048 (2Mb) o 5120 (5MB)
 	    ], $messages);
 
 	    if ($validator->fails()) {
