@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\User;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -55,10 +56,24 @@ class UserController extends Controller
 			    'success' => 0,
 		    ]);;
 
-	    $this->validate($request, [
-		    // check validation for image or file
+
+	    $messages = [
+		    'file.required' => trans('validation.custom.profile_image.required'),
+		    'file.image' => trans('validation.custom.profile_image.image'),
+		    'file.max' => trans('validation.custom.profile_image.max'),
+		    'file.mime' => trans('validation.custom.profile_image.mime'),
+	    ];
+
+	    $validator = Validator::make($request->all(), [
 		    'file' => 'required|image|mimes:jpg,png,jpeg|max:2048',
-	    ]);
+	    ], $messages);
+
+	    if ($validator->fails()) {
+	    	return response()->json([
+	    		'success' => 0,
+			    'error' => $validator->errors()->all(),
+		    ]);
+	    }
 
 	    return User::setImageFromFile($file);
 

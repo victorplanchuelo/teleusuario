@@ -73,13 +73,18 @@
 						$('#user-image').val('');
 					}
 					else
-						alertify.error('{{ trans('dashboard.profile.messages.error') }}');
-
-
+					{
+						data.error.forEach(function(element){
+							alertify.error(element);
+						});
+					}
 				},
 
 				error: function(data){
-					alertify.error('{{ trans('dashboard.profile.messages.error') }}');
+					var errors = $.parseJSON(data.responseText);
+					errors.file.forEach(function(element) {
+						alertify.error( element );
+					});
 				}
 			});
 

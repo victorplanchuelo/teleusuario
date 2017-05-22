@@ -133,9 +133,12 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
-        ],
+	    'profile_image' => [
+		    'required' => 'La imagen de perfil es un valor requerido',
+		    'max' => 'La imagen de perfil no puede superar los 2048 kilobytes',
+		    'mime' => 'La imagen de perfil debe ser de tipo: jpeg,jpg o png',
+		    'image' => 'La imagen de perfil debe ser una imagen',
+	    ],
     ],
 
     /*
