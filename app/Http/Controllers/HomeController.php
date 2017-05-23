@@ -24,8 +24,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-    	//Recuperamos los servicios del usuario
-	    $services = Auth::user()->services()->where('active', true)->get(['name', 'path']);
-        return view('dashboard.home',compact('services'));
+        return view('dashboard.home');
     }
 }
