@@ -17,6 +17,7 @@
 @endsection
 @section('scripts')
 	@include('layouts.scripts')
+	@include('layouts.dashboard_scripts')
 @endsection
 @section('scripts_extra')
 	@include('main.profile_scripts')
