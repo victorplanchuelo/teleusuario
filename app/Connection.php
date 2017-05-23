@@ -22,7 +22,7 @@ class Connection extends Model
 	 * @var array
 	 */
 	protected $fillable = [
-		'user_id', 'date'
+		'user_id', 'start_date', 'end_date',
 	];
 
 
@@ -38,7 +38,7 @@ class Connection extends Model
 
 		return $query->create([
 			'user_id' => $user_id,
-			'date' => $now,
+			'start_date' => $now,
 		]);
 	}
 

@@ -20,9 +20,10 @@ class CreateConnectionsTable extends Migration
         	$table->unsignedSmallInteger('user_id');
 	        $table->foreign('user_id')->references('id')->on('users');
 
-            $table->dateTime('date');
+            $table->dateTime('start_date');
+	        $table->dateTime('end_date')->nullable();
 
-	        $table->unique(['user_id', 'date']);
+	        $table->unique(['user_id', 'start_date']);
         });
     }
 

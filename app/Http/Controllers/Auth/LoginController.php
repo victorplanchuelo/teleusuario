@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Connection;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use \Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -88,6 +89,38 @@ class LoginController extends Controller
 		return $this->guard()->attempt(
 			$this->credentials($request), true);
 	}
+
+
+
+	/**
+	 * Log the user out of the application.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @return \Illuminate\Http\Response
+	 */
+	public function logout(Request $request)
+	{
+
+		//Antes de realizar el logout de la persona
+		//guardamos la fecha en la que lo  ha realizado
+		$conn = Connection::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->first();
+		$conn->end_date = $now = Carbon::now();
+		$conn->save();
+
+
+		$this->guard()->logout();
+
+		$request->session()->flush();
+
+		$request->session()->regenerate();
+
+		return redirect('/');
+	}
+
+
+
+
+
 
 
 	public function insertFakeUser()
