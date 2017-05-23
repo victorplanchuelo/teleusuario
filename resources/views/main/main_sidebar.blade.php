@@ -10,7 +10,7 @@
 	<!-- Current user starts -->
 	<div class="user-details clearfix">
 		<a href="{{ route('dashboard.profile') }}" class="user-img">
-			<img src="{{ asset('/img/thumbs/user.png') }}" alt="User Info">
+			<img id="img-sidebar" src="@if(is_null(Auth::user()->thumb_path)) {{ asset('/img/thumbs/user.png') }} @else {{ asset('/storage/'.Auth::user()->thumb_path) }} @endif" alt="User Info">
 			<!--<span class="likes-info">9</span>-->
 		</a>
 		<h5 class="user-name">{!! Auth::user()->name !!}</h5>
@@ -34,7 +34,7 @@
 			<ul>
 
 				@foreach($services as $service)
-					<li>
+					<li class="{{request()->is('dashboard/' . $service->name) ? 'active selected' : ''}}">
 						<a href='{{ url($service->path) }}'>{{ trans('dashboard.navbar.teleusuario.' . $service->name) }}</a>
 					</li>
 				@endforeach

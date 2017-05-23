@@ -103,7 +103,7 @@ class User extends Authenticatable
 		$old_image = 'public/' . $user->image_path;
 		$old_thumb = 'public/' . $user->thumb_path;
 
-		if(!is_null($old_image) && $old_image!='')
+		if(!is_null($user->image_path) && $user->image_path!='')
 		{
 			//Si ya tenia imágenes guardadas, las borramos
 			Storage::delete([$old_image, $old_thumb]);
