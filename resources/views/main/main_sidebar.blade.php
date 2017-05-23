@@ -32,18 +32,12 @@
 				<span class="down-arrow"></span>
 			</a>
 			<ul>
-				<li>
-					<a href='tasks.html'>Tasks</a>
-				</li>
-				<li>
-					<a href='cards.html'>Cards</a>
-				</li>
-				<li>
-					<a href='users.html'>Users</a>
-				</li>
-				<li>
-					<a href='project-list.html'>Project List</a>
-				</li>
+
+				@foreach($services as $service)
+					<li>
+						<a href='{{ url($service->path) }}'>{{ trans('dashboard.navbar.teleusuario.' . $service->name) }}</a>
+					</li>
+				@endforeach
 			</ul>
 		</li>
 

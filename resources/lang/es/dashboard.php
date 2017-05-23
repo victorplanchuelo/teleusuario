@@ -23,9 +23,6 @@ return [
 	],
 
 	'navbar' => [
-		'teleusuario' => [
-			'title' => 'Teleusuario',
-		],
 		'settings' => [
 			'title' => 'Configuración',
 			'profile' => 'Perfil usuario',
@@ -37,6 +34,17 @@ return [
 			'title' => 'Tareas',
 			'completed_tasks' => 'Tareas completadas',
 			'ranking' => 'Ranking',
+		],
+
+		'teleusuario' => [
+			'title' => 'Servicios activos',
+			'messages' => 'Mensajes',
+			'winks' => 'Guiños',
+			'chats' => 'Chats',
+			'muropost' => 'Muropost',
+			'publish_posts' => 'Anuncios publicados',
+			'liruch_calls' => 'Llamadas Liruch',
+			'erotic_calls' => 'Llamadas eróticas',
 		],
 
 	],

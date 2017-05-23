@@ -9,7 +9,7 @@ class ServiceUser extends Model
 	public $timestamps = false;
 
 	// Para no tener problemas indicamos el nombre de la tabla
-	protected $table = 'services_users';
+	protected $table = 'service_user';
 
 	// Para no tener problemas para los UPDATES/DELETES se debe indicar cual es el Id de la tabla
 	// Ya que Eloquent por defecto busca 'id'

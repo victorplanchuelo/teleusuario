@@ -22,9 +22,6 @@ return [
 	],
 
 	'navbar' => [
-		'teleusuario' => [
-			'title' => 'Teleusuario',
-		],
 		'settings' => [
 			'title' => 'Settings',
 			'profile' => 'User profile',
@@ -35,6 +32,17 @@ return [
 			'title' => 'Tasks',
 			'completed_tasks' => 'Completed Tasks',
 			'ranking' => 'Ranking',
+		],
+
+		'teleusuario' => [
+			'title' => 'Active services',
+			'messages' => 'Messages',
+			'winks' => 'Winks',
+			'chats' => 'Chats',
+			'muropost' => 'Muropost',
+			'publish_posts' => 'Publish posts',
+			'liruch_calls' => 'Liruch calls',
+			'erotic_calls' => ' Erotics calls',
 		],
 	],
 
