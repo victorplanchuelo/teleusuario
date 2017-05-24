@@ -46,11 +46,26 @@
 <script src="{{ asset('js/circliful/circliful.custom.js') }}"></script>-->
 
 <!-- Odometer JS -->
-<script src="{{ asset('js/odometer/odometer.min.js') }}"></script>-->
+<!--<script src="{{ asset('js/odometer/odometer.min.js') }}"></script>-->
 
 
 <script type="text/javascript">
-	window.onload=function(){
+
+	$(document).ready(function() {
+		var d = $('.panel-task-messages');
+		d.scrollTop(d.prop("scrollHeight"));
+	});
+
+	/*PARA CUANDO SE AÑADA EL MENSAJE ESCRITO POR LA AUTONOMA
+
+	 window.setInterval(function() {
+	 var elem = document.getElementById('data');
+	 elem.scrollTop = elem.scrollHeight;
+	 }, 5000);
+
+	* */
+
+	/*window.onload=function(){
 		setTimeout(function(){
 			taskOdometer.innerHTML = 147;
 		}, 500);
@@ -59,5 +74,5 @@
 			taskOdometer2.innerHTML = 147;
 		}, 500);
 
-	}
+	}*/
 </script>

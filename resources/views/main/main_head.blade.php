@@ -14,8 +14,9 @@
 <!--<link href="{{ asset('/css/circliful/circliful.css') }}" rel="stylesheet" media="screen">-->
 
 <!-- Odometer  -->
-<link href="{{ asset('/css/odometer.css') }}" rel="stylesheet" />
+<!--<link href="{{ asset('/css/odometer.css') }}" rel="stylesheet" />-->
 
-<!-- Odometer  -->
+
 <link href="{{ asset('/css/tasks.css') }}" rel="stylesheet" />
+<link href="{{ asset('/css/users.css') }}" rel="stylesheet" />
 

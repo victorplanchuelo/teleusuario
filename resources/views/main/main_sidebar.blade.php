@@ -25,7 +25,20 @@
 				<span class="menu-item">{{ trans('dashboard.title') }}</span>
 			</a>
 		</li>
-		<li>
+
+		<?php
+			$clase=0;
+			foreach($services as $service)
+			{
+				if(request()->is('dashboard/' . $service->name))
+				{
+					$clase=1;
+					break;
+				}
+			}
+		?>
+
+		<li @if($clase!=0) class="active" @endif>
 			<a href="#">
 				<i class="icon-lab3"></i>
 				<span class="menu-item">{{ trans('dashboard.navbar.teleusuario.title') }}</span>

@@ -4636,3 +4636,15 @@ label {
 	padding-right: 7px;
 	padding-left: 7px;
 }
+
+
+//Panel that will contain task info
+.panel-task-info
+{
+	height: 590px;
+}
+//Panel that will contain task messages
+.panel-task-messages {
+	max-height: 425px;
+	overflow-y: scroll;
+}
