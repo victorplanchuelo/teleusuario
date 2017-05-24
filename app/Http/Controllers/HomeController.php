@@ -3,19 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Repositories\Services;
 
 class HomeController extends Controller
 {
+	protected $services;
+
+
     /**
      * Create a new controller instance.
-     *
+     * @var Services
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+	public function __construct(Services $services)
+	{
+		$this->services = $services;
+		$this->middleware('auth');
+	}
 
     /**
      * Show the application dashboard.
@@ -24,6 +28,12 @@ class HomeController extends Controller
      */
     public function index()
     {
+
+
+		$this->services = $this->services->getMessages(4);
+
+		dd(json_decode($this->services->getBody()->getContents()));
+
         return view('dashboard.home');
     }
 }
