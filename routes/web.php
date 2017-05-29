@@ -42,6 +42,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
 
 	//Carga de tareas en la página inicial
 	Route::get('/tasks', 'HomeController@getTask')->name('dashboard.tasks');
+	Route::post('/tasks/note', 'HomeController@postCreateNote')->name('dashboard.tasks.create_note');
 
 	//Ruta para el cambio de contraseña
 	Route::get('/password/change',  'UserController@getChangePassword')->name('dashboard.change_pwd');

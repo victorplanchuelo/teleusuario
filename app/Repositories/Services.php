@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Auth;
 
 class Services extends APIRepository
 {
+	protected CONST token_seguridad = 'jjashegdg127352782hdhwhge9eyexy2gshdjfg9477ykjhfdsgds737shsdhf';
+
 	public function getIdsMessages($num, $fecha) {
 
 		//Aqui devolveremos la vista del home del dashboard

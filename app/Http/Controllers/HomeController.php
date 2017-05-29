@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Repositories\Services;
+use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
 {
@@ -98,5 +99,31 @@ class HomeController extends Controller
     	$message = $this->data;
 
 	    return view('main.inc.task.message', compact('success', 'message', 'strErr'));
+    }
+
+
+    public function postCreateNote(Request $request)
+    {
+
+	    $messages = [
+		    'texto.required' => trans('validation.custom.task.messages.note.required'),
+		    'texto.min' => trans('validation.custom.task.messages.note.min'),
+	    ];
+
+	    $validator = Validator::make($request->all(), [
+		    'texto' => 'required|min:4',
+	    ], $messages);
+
+	    if ($validator->fails()) {
+		    return response()->json([
+			    'success' => 0,
+			    'error' => $validator->errors()->all(),
+		    ]);
+	    }
+
+	    //Si pasa la validación pasamos los datos al servicio.
+	    //OJO, si conversación viene como 0 es que no tiene chat creado con el usuario (habrá que ver como hacerlo en el servicio)
+
+
     }
 }

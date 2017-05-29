@@ -138,6 +138,10 @@ return [
 			'info' => [
 				'location' => 'Ubicación',
 			],
+			'create_note' => [
+				'success' => 'Se ha creado correctamente la nueva nota',
+				'error' => 'Se ha producido un error creando la nueva nota',
+			],
 		],
 	],
 ];

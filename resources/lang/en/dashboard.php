@@ -135,6 +135,10 @@ return [
 			'info' => [
 				'location' => 'Location',
 			],
+			'create_note' => [
+				'success' => 'The new note has been created successfully',
+				'error' => 'An error occurred creating the new note',
+			],
 		],
 	],
 ];
