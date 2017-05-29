@@ -114,4 +114,27 @@ return [
 	'ranking' => [
 		'title' => 'Ranking',
 	],
+
+	'messages' => [
+		'title' => 'Messages Service',
+		'form' => [
+			'start_date' => 'Start date',
+			'end_date' => 'End date',
+			'submit' => 'Submit',
+		],
+	],
+
+	'task' => [
+		'message' => [
+			'conversation' => [
+				'error' => [
+					'code_not_valid' => 'Code has not been able to send correctly.',
+					'general_error' => 'An error occurred asking for task messages.',
+				],
+			],
+			'info' => [
+				'location' => 'Location',
+			],
+		],
+	],
 ];

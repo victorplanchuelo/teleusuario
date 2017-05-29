@@ -19,4 +19,6 @@
 
 <link href="{{ asset('/css/tasks.css') }}" rel="stylesheet" />
 <link href="{{ asset('/css/users.css') }}" rel="stylesheet" />
+<link href="{{ asset('/css/spinner.css') }}" rel="stylesheet" />
+
 

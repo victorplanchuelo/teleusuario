@@ -180,6 +180,7 @@ return [
 
 
 	    Intervention\Image\ImageServiceProvider::class,
+	    Barryvdh\Debugbar\ServiceProvider::class,
     ],
 
     /*
@@ -229,7 +230,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
-	    'Image' => Intervention\Image\Facades\Image::class
+	    'Image' => Intervention\Image\Facades\Image::class,
+	    'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
     ],
 

@@ -40,6 +40,9 @@ Route::get('/terms', 'Auth\RegisterController@getTerms');
 Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
 	Route::get('/', 'HomeController@index')->name('dashboard.home');
 
+	//Carga de tareas en la página inicial
+	Route::get('/tasks', 'HomeController@getTask')->name('dashboard.tasks');
+
 	//Ruta para el cambio de contraseña
 	Route::get('/password/change',  'UserController@getChangePassword')->name('dashboard.change_pwd');
 	Route::post('/password/change',  'UserController@postChangePassword')->name('dashboard.change_pwd.edit');
@@ -51,6 +54,10 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
 	Route::group(['prefix' => 'tasks'], function() {
 		Route::get('/ranking', 'UserController@getRanking')->name('dashboard.tasks.ranking');
 	});
+
+	//Rutas para el apartado mensajes
+	Route::get('/messages', 'ServiceController@getMessages');
+	Route::post('/messages', 'ServiceController@postMessages');
 });
 
 

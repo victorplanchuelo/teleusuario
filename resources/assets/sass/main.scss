@@ -4638,13 +4638,13 @@ label {
 }
 
 
-//Panel that will contain task info
-.panel-task-info
-{
-	height: 590px;
-}
 //Panel that will contain task messages
-.panel-task-messages {
-	max-height: 425px;
+.panel-task-messages, .panel-task-messages-info {
+	max-height: 604px;
 	overflow-y: scroll;
+}
+
+//Button to init tasks
+.init-tasks {
+	margin-top: 20px;
 }

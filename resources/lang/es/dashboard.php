@@ -117,4 +117,27 @@ return [
 		'title' => 'Ranking',
 	],
 
+	'messages' => [
+		'title' => 'Servicio de Mensajes',
+		'form' => [
+			'start_date' => 'Fecha inicio',
+			'end_date' => 'Fecha fin',
+			'submit' => 'Enviar',
+		],
+	],
+
+
+	'task' => [
+		'message' => [
+			'conversation' => [
+				'error' => [
+					'code_not_valid' => 'No se ha podido enviar correctamente el código.',
+					'general_error' => 'Se ha producido un error en la petición de mensajes de la tarea',
+				],
+			],
+			'info' => [
+				'location' => 'Ubicación',
+			],
+		],
+	],
 ];

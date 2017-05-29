@@ -75,22 +75,26 @@ $bronze: #CD7F32;
 				white-space: nowrap;
 				overflow: hidden;				
 			}
+			.message_info_name {
+				margin: 0 0 2px 0;
+			}
 		}
 	}
 	ul.users-footer {
 		background: darken($body-bg, 6%);
 		li {
 			float: left;
-			width: 40%;
+			/*width: 40%;*/
+			width: 60%;
 			padding: 10px 10px 10px 15px; 
 			box-sizing: border-box;
 			border-left: 1px solid darken($body-bg, 12%);
 			&:first-child {
 				border-left: 0;
+				width: 40%;
 			}
 			&:last-child {
-				width: 20%;
-				border-left: 0;
+				/*border-left: 0;*/
 			}
 			p {
 				margin: 0;
@@ -111,7 +115,7 @@ $bronze: #CD7F32;
 				-ms-transition: all 0.3s ease-in-out;
 				-o-transition: all 0.3s ease-in-out;
 				transition: all 0.3s ease-in-out;
-				float: right;
+				/*float: right;*/
 				@include border-radius(30px);
 				background: $body-bg;
 				width: 30px;
@@ -130,6 +134,47 @@ $bronze: #CD7F32;
 				}
 				&.added {
 					background: $green;
+					i {
+						color: $white;
+					}
+				}
+			}
+			//Botón para fotos de usuario
+			.add-btn-info {
+				-webkit-transition: all 0.3s ease-in-out;
+				-moz-transition: all 0.3s ease-in-out;
+				-ms-transition: all 0.3s ease-in-out;
+				-o-transition: all 0.3s ease-in-out;
+				transition: all 0.3s ease-in-out;
+				@include border-radius(30px);
+				background: $body-bg;
+				height: 30px;
+				text-align: center;
+				display: block;
+				i {
+					-webkit-transition: all 0.3s ease-in-out;
+					-moz-transition: all 0.3s ease-in-out;
+					-ms-transition: all 0.3s ease-in-out;
+					-o-transition: all 0.3s ease-in-out;
+					transition: all 0.3s ease-in-out;
+					color: $green;
+					font-size: 20px;
+					line-height: 30px;
+				}
+
+				.count-photos {
+					color: $white;
+					margin-left: 3px;
+				}
+
+				&.added {
+					background: $green;
+					i {
+						color: $white;
+					}
+				}
+				&.added-red {
+					background: $red;
 					i {
 						color: $white;
 					}

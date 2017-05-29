@@ -37,13 +37,11 @@ class APIRepository
 	{
 		//Se hace la llamada por POST
 		return $this->client->request(
-			'GET',
+			'POST',
 			'servicio.php',
 			[
 				'query' => ['operacion' => $url],
-				'form_params' => [
-					$data,
-				],
+				'form_params' => $data,
 			]
 		);
 	}
