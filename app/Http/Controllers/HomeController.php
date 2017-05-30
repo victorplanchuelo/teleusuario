@@ -104,6 +104,7 @@ class HomeController extends Controller
 
     public function postCreateNote(Request $request)
     {
+	    $strErr = '';
 
 	    $messages = [
 		    'texto.required' => trans('validation.custom.task.messages.note.required'),
@@ -123,7 +124,20 @@ class HomeController extends Controller
 
 	    //Si pasa la validación pasamos los datos al servicio.
 	    //OJO, si conversación viene como 0 es que no tiene chat creado con el usuario (habrá que ver como hacerlo en el servicio)
+	    $created_note = json_decode($this->services->postCreateNote($request['texto'], $request['conversacion'])->getBody()->getContents());
 
+	    $success = ($created_note->exito <= 0) ? 0 : 1 ;
+
+	    if($success <= 0)
+	    {
+	    	$strErr = trans('dashboard.task.message.create_note.error');
+	    }
+
+	    return response()->json([
+		    'success' => $success,
+		    'error' => [$strErr],
+		    'strDate' => \Carbon\Carbon::now()->format('d/m/Y'),
+	    ]);
 
     }
 }

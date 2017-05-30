@@ -66,31 +66,40 @@
 					$('#create_new_note').on('submit',function(e){
 						e.preventDefault();
 
+						//var form = $(this).serialize();
+
+						var txtNota = $('.text-note').val();
+						var token_seguridad = $('input[name="_token"]').val();
+
 						//AJAX que se llamará cuando la autónoma va a crear una nueva nota sobre la conversación
 						action = "{{ route('dashboard.tasks.create_note') }}";
+
+						/*var nueva_nota = new FormData();
+						nueva_nota.append("texto", txtNota);
+						nueva_nota.append("conversacion", $(this).data('conversation'));
+						nueva_nota.append("_token", token_seguridad);*/
+
+						var formData = {
+							texto: txtNota,
+							conversacion: $(this).data('conversation'),
+							_token: token_seguridad,
+						};
 
 						// CSRF protection
 						$.ajaxSetup(
 						{
 							headers:
 								{
-									'X-CSRF-Token': $('input[name="_token"]').val()
+									'X-CSRF-Token': token_seguridad
 								}
 						});
-
-						var nueva_nota = new FormData();
-						nueva_nota.append('texto',$('.text-note').val());
-						nueva_nota.append('task', $(this).data('task'));
-						nueva_nota.append('conversacion', $(this).data('conversation'));
 
 						$.ajax({
 							url: action,
 							type: "POST",
-							data: nueva_nota,
-							processData: false,
-							contentType: false,
+							data: formData,
 							success: function (data) {
-								if(data.success == 0)
+								if(data.success === 0)
 								{
 									$.each(data.error, function(index, msg){
 										alertify.error(msg);
@@ -101,6 +110,12 @@
 
 								//Si no es 0 quiere decirse que se ha guardado la nota bien
 								alertify.success('{{ trans('dashboard.task.message.create_note.success') }}');
+
+								//Añadimos la nueva nota en el apartado de las notas
+								$('#collapseTwo .panel-body ul').prepend('<li>(' + data.strDate + ') ' + txtNota + '</li>');
+							},
+							error: function(response) {
+								alertify.error(response.responseText);
 							}
 						});
 

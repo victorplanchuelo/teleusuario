@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Auth;
 
 class Services extends APIRepository
 {
-	protected CONST token_seguridad = 'jjashegdg127352782hdhwhge9eyexy2gshdjfg9477ykjhfdsgds737shsdhf';
+	protected $token_seguridad = 'jjashegdg127352782hdhwhge9eyexy2gshdjfg9477ykjhfdsgds737shsdhf';
 
 	public function getIdsMessages($num, $fecha) {
 
@@ -36,6 +36,24 @@ class Services extends APIRepository
 		return $this->post('bandeja_entrada_leer_conversacion_premium',
 			[
 				'conversacion' => $conversation_id,
+			]
+		);
+	}
+
+	/**
+	 * Create a new note for this conversation.
+	 * @var String $texto
+	 * @var String $conversacion
+	 * @return Integer
+	 */
+	public function postCreateNote($texto, $conversacion)
+	{
+		return $this->post('chat_guardar_nota_conversacion',
+			[
+				'texto' => $texto,
+				'conversacion' => $conversacion,
+				'token_seguridad' => $this->token_seguridad,
+				'animadora' => Auth::user()->code,
 			]
 		);
 	}
