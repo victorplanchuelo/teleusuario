@@ -72,6 +72,7 @@
 					baguetteBox.run('.galleryPremium', {
 						animation: 'fadeIn',
 					});
+					baguetteBox.run('.img-messages')
 
 					$('#create_new_note').on('submit',function(e){
 						e.preventDefault();

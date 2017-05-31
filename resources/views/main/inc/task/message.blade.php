@@ -36,8 +36,8 @@
 									@if(collect($message->usuario_premium->imagenes)->count()>0)
 										<div class="galleryPremium">
 											@foreach($message->usuario_premium->imagenes as $img)
-												<a href="https://static.liruch.com{{ $img->{'250x250'} }}">
-													<img src="https://static.liruch.com{{ $img->{'32x32'} }}" />
+												<a href="{{ config('constants.URL_STATIC') . $img->{'250x250'} }}">
+													<img src="{{ config('constants.URL_STATIC') . $img->{'32x32'} }}" />
 												</a>
 											@endforeach
 										</div>
@@ -71,8 +71,8 @@
 									@if(collect($message->usuario_cliente->imagenes)->count()>0)
 										<div class="galleryClient">
 											@foreach($message->usuario_cliente->imagenes as $img)
-												<a href="https://static.liruch.com{{ $img->{'250x250'} }}">
-												<img src="https://static.liruch.com{{ $img->{'32x32'} }}" />
+												<a href="{{ config('constants.URL_STATIC') . $img->{'250x250'} }}">
+												<img src="{{ config('constants.URL_STATIC') . $img->{'32x32'} }}" />
 											</a>
 											@endforeach
 										</div>
@@ -136,15 +136,31 @@
 					@foreach($message->conversacion as $item)
 						<li class="@if($item->usuario_destino == $message->usuario_premium->usuario) in @else out @endif">
 							<img class="avatar" alt=""
-							     src="
-												@if($item->usuario_destino == $message->usuario_premium->usuario)
-							     @if($message->usuario_cliente->imagen == '') {{ asset('/img/thumbs/user.png') }} @else {{ $message->usuario_cliente->imagen }} @endif
-							     @else
-							     @if($message->usuario_premium->imagen == '') {{ asset('/img/thumbs/user.png') }} @else {{ $message->usuario_premium->imagen }} @endif
-							     @endif">
+							     src="@if($item->usuario_destino == $message->usuario_premium->usuario) @if($message->usuario_cliente->imagen == '') {{ asset('/img/thumbs/user.png') }} @else {{ $message->usuario_cliente->imagen }} @endif @else @if($message->usuario_premium->imagen == '') {{ asset('/img/thumbs/user.png') }} @else {{ $message->usuario_premium->imagen }} @endif @endif">
 							<div class="message">
 								<p class="date">@if($item->usuario_destino == $message->usuario_premium->usuario){{ $message->usuario_cliente->nombre }} @else {{$message->usuario_premium->nombre}} @endif - {{$item->fecha}} {{$item->hora}}</p>
-								<p class="inffo">{{$item->texto}}</p>
+								<p class="inffo">
+									{{$item->texto}}
+									@if($item->num_fotos!= "")
+										<div class="img-messages">
+										@foreach($item->fotos as $foto)
+											<a href="{{ $foto }}">
+												<img class="img-responsive image-msg" src="{{ $foto }}">
+											</a>
+										@endforeach
+										</div>
+									@endif
+
+									@if(isset($item->regalo_deluxe))
+										<div class="tarjeta_regalo" id="regalo_deluxe_{{$item->regalo_deluxe->id}}">
+												<span class="hidden-xs">
+													De {{$item->regalo_deluxe->nombre_origen}} para {{$item->regalo_deluxe->nombre_destino}}
+												</span>
+											<img class="img-responsive img_tarjeta_regalo" src="{{ config('constants.URL_STATIC') }}{{$item->regalo_deluxe->tarjeta}}" />
+										</div>
+									@endif
+								</p>
+
 							</div>
 						</li>
 					@endforeach
