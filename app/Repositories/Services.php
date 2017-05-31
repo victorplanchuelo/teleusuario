@@ -36,6 +36,7 @@ class Services extends APIRepository
 		return $this->post('bandeja_entrada_leer_conversacion_premium',
 			[
 				'conversacion' => $conversation_id,
+				'teleusuario_nuevo' => 1,
 			]
 		);
 	}
