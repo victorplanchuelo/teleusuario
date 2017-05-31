@@ -125,7 +125,7 @@
 								alertify.success('{{ trans('dashboard.task.message.create_note.success') }}');
 
 								//Añadimos la nueva nota en el apartado de las notas
-								$('#collapseTwo .panel-body ul').prepend('<li>(' + data.strDate + ') ' + txtNota + '</li>');
+								$('#collapseTwo .panel-body ul').prepend('<li>(' + data.strDate + ') ' + txtNota.replace(/\n/g, '<br>\n')  + '</li>');
 							},
 							error: function(response) {
 								alertify.error(response.responseText);

@@ -117,7 +117,7 @@
 									<ul>
 										@if($message->conversacion_chat > 0)
 											@foreach($message->notas as $nota)
-												<li>({{\Carbon\Carbon::parse($nota->fecha)->format('d/m/Y')}}) {{ $nota->texto }}</li>
+												<li>({{\Carbon\Carbon::parse($nota->fecha)->format('d/m/Y')}}) {!! nl2br($nota->texto) !!}</li>
 											@endforeach
 										@endif
 									</ul>
