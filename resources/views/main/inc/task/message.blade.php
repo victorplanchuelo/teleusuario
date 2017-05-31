@@ -36,9 +36,11 @@
 									@if(collect($message->usuario_premium->imagenes)->count()>0)
 										<div class="galleryPremium">
 											@foreach($message->usuario_premium->imagenes as $img)
-												<a href="{{ config('constants.URL_STATIC') . $img->{'250x250'} }}">
-													<img src="{{ config('constants.URL_STATIC') . $img->{'32x32'} }}" />
-												</a>
+												@if($img->borrado === "")
+													<a href="{{ config('constants.URL_STATIC') . $img->{'250x250'} }}">
+														<img @if($img->privada===1) class="border-red" @endif src="{{ config('constants.URL_STATIC') . $img->{'32x32'} }}" />
+													</a>
+												@endif
 											@endforeach
 										</div>
 									@endif
@@ -71,9 +73,11 @@
 									@if(collect($message->usuario_cliente->imagenes)->count()>0)
 										<div class="galleryClient">
 											@foreach($message->usuario_cliente->imagenes as $img)
-												<a href="{{ config('constants.URL_STATIC') . $img->{'250x250'} }}">
-												<img src="{{ config('constants.URL_STATIC') . $img->{'32x32'} }}" />
-											</a>
+												@if($img->borrado === "")
+													<a href="{{ config('constants.URL_STATIC') . $img->{'250x250'} }}">
+														<img src="{{ config('constants.URL_STATIC') . $img->{'32x32'} }}" />
+													</a>
+												@endif
 											@endforeach
 										</div>
 									@endif
@@ -135,12 +139,11 @@
 
 					@foreach($message->conversacion as $item)
 						<li class="@if($item->usuario_destino == $message->usuario_premium->usuario) in @else out @endif">
-							<img class="avatar" alt=""
-							     src="@if($item->usuario_destino == $message->usuario_premium->usuario) @if($message->usuario_cliente->imagen == '') {{ asset('/img/thumbs/user.png') }} @else {{ $message->usuario_cliente->imagen }} @endif @else @if($message->usuario_premium->imagen == '') {{ asset('/img/thumbs/user.png') }} @else {{ $message->usuario_premium->imagen }} @endif @endif">
+							<img class="avatar" alt="" src="@if($item->usuario_destino == $message->usuario_premium->usuario) @if($message->usuario_cliente->imagen == '') {{ asset('/img/thumbs/user.png') }} @else {{ $message->usuario_cliente->imagen }} @endif @else @if($message->usuario_premium->imagen == '') {{ asset('/img/thumbs/user.png') }} @else {{ $message->usuario_premium->imagen }} @endif @endif" />
 							<div class="message">
-								<p class="date">@if($item->usuario_destino == $message->usuario_premium->usuario){{ $message->usuario_cliente->nombre }} @else {{$message->usuario_premium->nombre}} @endif - {{$item->fecha}} {{$item->hora}}</p>
+								<p class="date"><strong>@if($item->usuario_destino == $message->usuario_premium->usuario){{ $message->usuario_cliente->nombre }} @else {{$message->usuario_premium->nombre}} @endif - {{$item->fecha}} {{$item->hora}}</strong></p>
 								<p class="inffo">
-									{{$item->texto}}
+									{!! nl2br(e($item->texto))!!}
 									@if($item->num_fotos!= "")
 										<div class="img-messages">
 										@foreach($item->fotos as $foto)
@@ -166,7 +169,7 @@
 					@endforeach
 				</ul>
 			</div>
-			<form method="post" action="#">
+			<form id="send-message" method="post" action="#">
 				<div class="row gutter">
 					{{ csrf_field() }}
 					<textarea class="form-control" rows="3"></textarea>

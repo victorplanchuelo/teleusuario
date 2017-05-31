@@ -72,7 +72,15 @@
 					baguetteBox.run('.galleryPremium', {
 						animation: 'fadeIn',
 					});
-					baguetteBox.run('.img-messages')
+					baguetteBox.run('.img-messages');
+
+					$('#send-message').on('click',function(e){
+						e.preventDefault();
+
+						//Se envía el mensaje escrito
+
+					});
+
 
 					$('#create_new_note').on('submit',function(e){
 						e.preventDefault();
@@ -110,6 +118,8 @@
 									});
 									return false;
 								}
+
+								$('.text-note').val('')
 
 								//Si no es 0 quiere decirse que se ha guardado la nota bien
 								alertify.success('{{ trans('dashboard.task.message.create_note.success') }}');

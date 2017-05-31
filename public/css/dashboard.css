@@ -21,6 +21,11 @@
     display: inline;
 }
 
+.border-red
+{
+    border: 3px solid red;
+}
+
 @media screen and (max-width: 992px) {
     #active {
         position: static !important;
