@@ -2,6 +2,10 @@
 <script src="{{ asset('js/custom.js') }}"></script>
 <script src="{{ asset('js/loading-overlay.min.js') }}"></script>
 
+<!-- Gallery JS -->
+<script src="{{ asset('js/gallery/baguetteBox.js') }}"></script>
+<script src="{{ asset('js/gallery/plugins.js') }}"></script>
+
 <script type="text/javascript">
 
 	$(document).ready(function() {
@@ -62,22 +66,21 @@
 					$('.panel-group').on('hidden.bs.collapse', toggleIcon);
 					$('.panel-group').on('shown.bs.collapse', toggleIcon);
 
+					if(typeof oldIE === 'undefined' && Object.keys)
+						hljs.initHighlighting();
+					baguetteBox.run('.galleryClient');
+					baguetteBox.run('.galleryPremium', {
+						animation: 'fadeIn',
+					});
 
 					$('#create_new_note').on('submit',function(e){
 						e.preventDefault();
-
-						//var form = $(this).serialize();
 
 						var txtNota = $('.text-note').val();
 						var token_seguridad = $('input[name="_token"]').val();
 
 						//AJAX que se llamará cuando la autónoma va a crear una nueva nota sobre la conversación
 						action = "{{ route('dashboard.tasks.create_note') }}";
-
-						/*var nueva_nota = new FormData();
-						nueva_nota.append("texto", txtNota);
-						nueva_nota.append("conversacion", $(this).data('conversation'));
-						nueva_nota.append("_token", token_seguridad);*/
 
 						var formData = {
 							texto: txtNota,
@@ -106,7 +109,6 @@
 									});
 									return false;
 								}
-
 
 								//Si no es 0 quiere decirse que se ha guardado la nota bien
 								alertify.success('{{ trans('dashboard.task.message.create_note.success') }}');

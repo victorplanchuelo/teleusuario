@@ -5,4 +5,7 @@
 <link href="{{ asset('/css/alertify/core.css') }}" rel="stylesheet">
 <link href="{{ asset('/css/alertify/default.css') }}" rel="stylesheet">
 
+<!-- Gallery -->
+<link href="{{ asset('/css/gallery.css') }}" rel="stylesheet">
+
 

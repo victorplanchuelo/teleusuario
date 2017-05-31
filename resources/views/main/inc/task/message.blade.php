@@ -33,12 +33,15 @@
 							</div>
 							<ul class="users-footer clearfix">
 								<li>
-									<a href="#" class="add-btn-info @if(collect($message->usuario_premium->imagenes)->count()>0) added @else added-red @endif">
-													<span>
-														<i class="icon-camera2"></i>
-													</span>
-										<span class="count-photos">{{ collect($message->usuario_premium->imagenes)->count() }}</span>
-									</a>
+									@if(collect($message->usuario_premium->imagenes)->count()>0)
+										<div class="galleryPremium">
+											@foreach($message->usuario_premium->imagenes as $img)
+												<a href="https://static.liruch.com{{ $img->{'250x250'} }}">
+													<img src="https://static.liruch.com{{ $img->{'32x32'} }}" />
+												</a>
+											@endforeach
+										</div>
+									@endif
 								</li>
 								<li>
 									<p class="light">{{ trans('dashboard.task.message.info.location') }}</p>
@@ -65,12 +68,15 @@
 							</div>
 							<ul class="users-footer clearfix">
 								<li>
-									<a href="#" class="add-btn-info @if(collect($message->usuario_cliente->imagenes)->count()>0) added @else added-red @endif">
-													<span>
-														<i class="icon-camera2"></i>
-													</span>
-										<span class="count-photos">{{ collect($message->usuario_cliente->imagenes)->count() }}</span>
-									</a>
+									@if(collect($message->usuario_cliente->imagenes)->count()>0)
+										<div class="galleryClient">
+											@foreach($message->usuario_cliente->imagenes as $img)
+												<a href="https://static.liruch.com{{ $img->{'250x250'} }}">
+												<img src="https://static.liruch.com{{ $img->{'32x32'} }}" />
+											</a>
+											@endforeach
+										</div>
+									@endif
 								</li>
 								<li>
 									<p class="light">{{ trans('dashboard.task.message.info.location') }}</p>
@@ -89,7 +95,7 @@
 							</a>
 							<div id="collapseOne" class="panel-collapse collapse">
 								<div class="panel-body">
-									<form id="create_new_note" method="POST" data-conversation=@if($message->conversacion_chat > 0) "{{$message->conversacion_chat}}" @else "0" @endif action="#">
+									<form id="create_new_note" method="POST" data-conversation="@if($message->conversacion_chat > 0) {{$message->conversacion_chat}} @else 0 @endif" action="#">
 										{{ csrf_field() }}
 										<textarea class="form-control text-note" rows="3"></textarea>
 										<button type="submit" class="btn btn-info">Enviar</button>
