@@ -41,6 +41,10 @@ class HomeController extends Controller
      * Recupera X mensajes (indicados por parámetro por la tarea a realizar)
      * Una vez recuperados los Ids de esas conversaciones se elegirá una al azar y se mostrarán sus mensajes
      * Aparte estos datos quedan guardados en la session
+     *
+     * AÑADIDO EL 1 de JUNIO de 2017
+     * Se ha creado un listener que saltará cuando se pulse el botón de comenzar la tarea. Si en la session ya
+     * estan cargados los IDs, no debe lanzar el evento
      */
     public function getMessage()
     {

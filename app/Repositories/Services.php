@@ -71,13 +71,12 @@ class Services extends APIRepository
 	 */
 	public function postSendMessage($texto, $conversacion, $guinyo)
 	{
-		return $this->post('bandeja_entrada_enviar_mensaje_premium',
+		return $this->post('bandeja_entrada_enviar_mensaje_premium_nuevo_teleusuario',
 			[
 				'animadora' => Auth::user()->code,
 				'texto' => $texto,
 				'conversacion' => $conversacion,
 				'guinyo' => $guinyo,
-				'teleusuario_nuevo' => 1,
 			]
 		);
 	}
