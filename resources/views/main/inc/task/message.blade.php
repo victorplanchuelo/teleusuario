@@ -20,7 +20,7 @@
 						<div class="users-wrapper red">
 							<div class="users-info clearfix">
 								<div class="users-avatar">
-									<img src="@if($message->usuario_premium->imagen == '') {{ asset('/img/thumbs/user.png') }} @else {{ $message->usuario_premium->imagen }} @endif" class="img-responsive" alt="{{$message->usuario_premium->nombre}}">
+									<img src="@if($message->usuario_premium->imagen == '') {{ asset('/img/thumbs/user.png') }} @else {{ $message->usuario_premium->imagen }} @endif" class="img-responsive img-premium" alt="{{$message->usuario_premium->nombre}}">
 								</div>
 								<div class="users-detail">
 									<h5 class="message_info_name">
@@ -33,6 +33,7 @@
 							</div>
 							<ul class="users-footer clearfix">
 								<li>
+									<p class="light">Click para ampliar</p>
 									@if(collect($message->usuario_premium->imagenes)->count()>0)
 										<div class="galleryPremium">
 											@foreach($message->usuario_premium->imagenes as $img)
@@ -57,7 +58,7 @@
 						<div class="users-wrapper red">
 							<div class="users-info clearfix">
 								<div class="users-avatar">
-									<img src="@if($message->usuario_cliente->imagen == '') {{ asset('/img/thumbs/user.png') }} @else {{ $message->usuario_cliente->imagen }} @endif" class="img-responsive" alt="Arise Admin">
+									<img src="@if($message->usuario_cliente->imagen == '') {{ asset('/img/thumbs/user.png') }} @else {{ $message->usuario_cliente->imagen }} @endif" class="img-responsive img-cliente" alt="Arise Admin">
 								</div>
 								<div class="users-detail">
 									<h5 class="message_info_name">
@@ -70,6 +71,7 @@
 							</div>
 							<ul class="users-footer clearfix">
 								<li>
+									<p class="light">Click para ampliar</p>
 									@if(collect($message->usuario_cliente->imagenes)->count()>0)
 										<div class="galleryClient">
 											@foreach($message->usuario_cliente->imagenes as $img)
@@ -169,10 +171,11 @@
 					@endforeach
 				</ul>
 			</div>
-			<form id="send-message" method="post" action="#">
+			<form id="send-message" method="POST" action="#">
 				<div class="row gutter">
 					{{ csrf_field() }}
-					<textarea class="form-control" rows="3"></textarea>
+					<input type="hidden" id="name-msg" data-name="{{$message->usuario_premium->nombre}}" />
+					<textarea class="form-control new-message" rows="3"></textarea>
 					<button type="submit" class="btn btn-info">Enviar</button>
 				</div>
 			</form>

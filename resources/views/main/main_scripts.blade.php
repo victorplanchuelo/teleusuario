@@ -8,6 +8,20 @@
 
 <script type="text/javascript">
 
+	function AnyadirMensaje(fecha, texto)
+	{
+		$('ul.chats').append('<li class="out"><img class="avatar" src="' + $(".img-premium").attr("src") + '" /><div class="message"><p class="date"><strong>' + $("#name-msg").data('name') + ' - ' + fecha + '</strong></p><p class="inffo">' + texto.replace(/\n/g, "<br>\n") + '</p></li>');
+	}
+
+	function MostrarUltimoMensaje()
+	{
+		if($('.panel-task-messages').length)
+		{
+			var d = $('.panel-task-messages');
+			d.scrollTop(d.prop("scrollHeight"));
+		}
+	}
+
 	$(document).ready(function() {
 
 		$("#spinner").hide();
@@ -17,13 +31,6 @@
 				.parent()
 				.find('i')
 				.toggleClass('icon-plus3 icon-minus4');
-		}
-
-
-		if($('.panel-task-messages').length)
-		{
-			var d = $('.panel-task-messages');
-			d.scrollTop(d.prop("scrollHeight"));
 		}
 
 		$('.init-tasks').click(function (e) {
@@ -74,10 +81,62 @@
 					});
 					baguetteBox.run('.img-messages');
 
-					$('#send-message').on('click',function(e){
+					MostrarUltimoMensaje();
+
+					$('#send-message').on('submit',function(e){
 						e.preventDefault();
 
 						//Se envía el mensaje escrito
+						var txtMensaje = $('.new-message').val();
+						var token_seguridad = $('input[name="_token"]').val();
+
+						//AJAX que se llamará cuando la autónoma va a crear una nueva nota sobre la conversación
+						action = "{{ route('dashboard.tasks.send_message') }}";
+
+						var formData = {
+							texto: txtMensaje,
+							_token: token_seguridad,
+						};
+
+						// CSRF protection
+						$.ajaxSetup(
+							{
+								headers:
+									{
+										'X-CSRF-Token': token_seguridad
+									}
+							});
+
+						$.ajax({
+							url: action,
+							type: "POST",
+							data: formData,
+							success: function (data) {
+								if(data.success === 0)
+								{
+									$.each(data.error, function(index, msg){
+										alertify.error(msg);
+									});
+									return false;
+								}
+
+								//Si no es 0 quiere decirse que se ha guardado la nota bien
+								alertify.success('{{ trans('dashboard.task.message.create_note.success') }}');
+
+								$('.new-message').val('');
+
+								//Añadimos la nueva nota en el apartado de las notas
+								AnyadirMensaje(data.strDate, txtMensaje);
+
+								MostrarUltimoMensaje();
+
+							},
+							error: function(response) {
+								alertify.error(response.responseText);
+							}
+						});
+
+						e.stopPropagation();
 
 					});
 
@@ -93,7 +152,7 @@
 
 						var formData = {
 							texto: txtNota,
-							conversacion: $(this).data('conversation'),
+							conversacion_chat: $(this).data('conversation'),
 							_token: token_seguridad,
 						};
 
@@ -119,10 +178,10 @@
 									return false;
 								}
 
-								$('.text-note').val('')
-
 								//Si no es 0 quiere decirse que se ha guardado la nota bien
 								alertify.success('{{ trans('dashboard.task.message.create_note.success') }}');
+
+								$('.text-note').val('');
 
 								//Añadimos la nueva nota en el apartado de las notas
 								$('#collapseTwo .panel-body ul').prepend('<li>(' + data.strDate + ') ' + txtNota.replace(/\n/g, '<br>\n')  + '</li>');

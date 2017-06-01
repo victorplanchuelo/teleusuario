@@ -142,6 +142,9 @@ return [
 				'success' => 'Se ha creado correctamente la nueva nota',
 				'error' => 'Se ha producido un error creando la nueva nota',
 			],
+			'send_message' => [
+				'error' => 'Se ha producido un error enviando el mensaje.',
+			],
 		],
 	],
 ];

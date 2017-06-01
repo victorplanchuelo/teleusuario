@@ -139,6 +139,9 @@ return [
 				'success' => 'The new note has been created successfully',
 				'error' => 'An error occurred creating the new note',
 			],
+			'send_message' => [
+				'error' => 'An error occurred sending the message.',
+			],
 		],
 	],
 ];

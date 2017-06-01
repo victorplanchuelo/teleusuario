@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use Illuminate\Support\Facades\Auth;
+use phpDocumentor\Reflection\Types\Integer;
 
 class Services extends APIRepository
 {
@@ -47,14 +48,36 @@ class Services extends APIRepository
 	 * @var String $conversacion
 	 * @return Integer
 	 */
-	public function postCreateNote($texto, $conversacion)
+	public function postCreateNote($texto, $conversacion_chat)
 	{
 		return $this->post('chat_guardar_nota_conversacion',
 			[
 				'texto' => $texto,
-				'conversacion' => $conversacion,
+				'conversacion' => $conversacion_chat,
 				'token_seguridad' => $this->token_seguridad,
 				'animadora' => Auth::user()->code,
+			]
+		);
+	}
+
+
+	/**
+	 * Send new message to a client
+	 * @var String $animadora
+	 * @var String $texto
+	 * @var String $conversacion
+	 * @var Integer $guinyo
+	 * @return Integer
+	 */
+	public function postSendMessage($texto, $conversacion, $guinyo)
+	{
+		return $this->post('bandeja_entrada_enviar_mensaje_premium',
+			[
+				'animadora' => Auth::user()->code,
+				'texto' => $texto,
+				'conversacion' => $conversacion,
+				'guinyo' => $guinyo,
+				'teleusuario_nuevo' => 1,
 			]
 		);
 	}

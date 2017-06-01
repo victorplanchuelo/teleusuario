@@ -38,8 +38,9 @@ class HomeController extends Controller
 	}
 
     /**
-     * Show the application dashboard.
-     *
+     * Recupera X mensajes (indicados por parámetro por la tarea a realizar)
+     * Una vez recuperados los Ids de esas conversaciones se elegirá una al azar y se mostrarán sus mensajes
+     * Aparte estos datos quedan guardados en la session
      */
     public function getMessage()
     {
@@ -73,12 +74,17 @@ class HomeController extends Controller
         return 1;
     }
 
+
+	/**
+	 * @param Request $request
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 *
+	 * Llega aquí cuando la autónoma ha pulsado "iniciar/Continuar tareas"
+	 * Primero, ya teniendo la tarea, debemos comprobar si hay datos guardados en la session
+	 * para saber si tiene que hacer una cosa u otra
+	 */
     public function getTask(Request $request)
     {
-
-    	//Llega aquí cuando la autónoma ha pulsado "iniciar/Continuar tareas"
-	    // Primero, ya teniendo la tarea, debemos comprobar si hay datos guardados en la session
-	    // para saber si tiene que hacer una cosa u otra
 
     	$task =  $request['task'];
     	$strErr = '';
@@ -102,6 +108,13 @@ class HomeController extends Controller
     }
 
 
+	/**
+	 * @param Request $request
+	 * @return \Illuminate\Http\JsonResponse
+	 *
+	 * Función llamada cuando el usuario escriba una nueva nota
+	 * sobre la conversación
+	 */
     public function postCreateNote(Request $request)
     {
 	    $strErr = '';
@@ -124,7 +137,11 @@ class HomeController extends Controller
 
 	    //Si pasa la validación pasamos los datos al servicio.
 	    //OJO, si conversación viene como 0 es que no tiene chat creado con el usuario (habrá que ver como hacerlo en el servicio)
-	    $created_note = json_decode($this->services->postCreateNote($request['texto'], $request['conversacion'])->getBody()->getContents());
+	    //-----------------------------------------------------------------------------------------------------------------------------------
+	    //OJO. Como segundo parámetro se le pasa el ID DE LA CONVERSACION DE CHAT
+	    // que es diferente al Id de la conversación
+	    //-----------------------------------------------------------------------------------------------------------------------------------
+	    $created_note = json_decode($this->services->postCreateNote($request['texto'], $request['conversacion_chat'])->getBody()->getContents());
 
 	    $success = ($created_note->exito <= 0) ? 0 : 1 ;
 
@@ -139,5 +156,48 @@ class HomeController extends Controller
 		    'strDate' => \Carbon\Carbon::now()->format('d/m/Y'),
 	    ]);
 
+    }
+
+	/**
+	 * @param Request $request
+	 * @return \Illuminate\Http\JsonResponse
+	 *
+	 * Función que será llamado cuando se envíe (el mensaje, guiño, ...)
+	 * Provisionalmente se está haciendo sólo para mensaje
+	 */
+    public function postSend(Request $request)
+    {
+    	$strErr ='';
+	    $messages = [
+		    'texto.required' => trans('validation.custom.task.messages.message.required'),
+		    'texto.min' => trans('validation.custom.task.messages.message.min'),
+	    ];
+
+	    $validator = Validator::make($request->all(), [
+		    'texto' => 'required|min:4',
+	    ], $messages);
+
+	    if ($validator->fails()) {
+		    return response()->json([
+			    'success' => 0,
+			    'error' => $validator->errors()->all(),
+		    ]);
+	    }
+
+	    //Si supera la validación se puede enviar el mensaje con los parámetros que se nos pide desde el servicio
+	    $send_msg = json_decode($this->services->postSendMessage($request['texto'], session('conversacion_actual'), 0)->getBody()->getContents());
+
+	    $success = ($send_msg->exito <= 0) ? 0 : 1 ;
+
+	    if($success <= 0)
+	    {
+		    $strErr = trans('dashboard.task.message.send_message.error') . ' ERROR - '. $send_msg->error;
+	    }
+
+	    return response()->json([
+		    'success' => $success,
+		    'error' => [$strErr],
+		    'strDate' => \Carbon\Carbon::now()->format('d/m/Y'),
+	    ]);
     }
 }
