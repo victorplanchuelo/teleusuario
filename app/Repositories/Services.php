@@ -9,7 +9,7 @@ class Services extends APIRepository
 {
 	protected $token_seguridad = 'jjashegdg127352782hdhwhge9eyexy2gshdjfg9477ykjhfdsgds737shsdhf';
 
-	public function getIdsMessages($num, $fecha) {
+	public function getIdsMessages($num, $fecha, $aleatorio) {
 
 		//Aqui devolveremos la vista del home del dashboard
 		//con las llamadas a API necesarias
@@ -18,6 +18,7 @@ class Services extends APIRepository
 				'animadora' => Auth::user()->code,
 				'num_mensajes' => $num,
 				'fecha' => $fecha,
+				'aleatorio' => $aleatorio,
 			]
 		);
 

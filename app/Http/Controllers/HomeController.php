@@ -15,8 +15,7 @@ class HomeController extends Controller
 
     /**
      * Create a new controller instance.
-     * @var Services
-     * @return void
+     * @param Services $services
      */
 	public function __construct(Services $services)
 	{
@@ -50,7 +49,7 @@ class HomeController extends Controller
     {
 	    if(!session()->get('ids_conversaciones'))
 	    {
-		    $this->idsMessages = json_decode($this->services->getIdsMessages(10, 20170401)->getBody()->getContents());
+		    $this->idsMessages = json_decode($this->services->getIdsMessages(1, 20170401, 0)->getBody()->getContents());
 
 		    if($this->idsMessages->success !=1)
 		    {
@@ -197,6 +196,10 @@ class HomeController extends Controller
 	    {
 		    $strErr = trans('dashboard.task.message.send_message.error') . ' ERROR - '. $send_msg->error;
 	    }
+
+
+	    //Si se ha enviado correctamente el mensaje, borramos el id de la conversación actual (ya que ha sido terminada)
+	    //Habría que comprobar si
 
 	    return response()->json([
 		    'success' => $success,

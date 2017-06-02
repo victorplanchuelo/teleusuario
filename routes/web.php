@@ -58,8 +58,11 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
 	});
 
 	//Rutas para el apartado mensajes
-	Route::get('/messages', 'ServiceController@getMessages');
-	Route::post('/messages', 'ServiceController@postMessages');
+	Route::get('/messages', 'ServiceController@getMessage')->name('dashboard.message');
+	Route::post('/messages', 'ServiceController@postMessages')->name('dashboard.message.send_message');
+	Route::post('/messages/note/create', 'ServiceController@postCreateNote')->name('dashboard.message.create_note');
+	Route::get('/messages/load', 'ServiceController@getNewMessage')->name('dashboard.message.load_new_message');
+
 });
 
 
