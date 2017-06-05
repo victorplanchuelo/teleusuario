@@ -124,6 +124,10 @@ return [
 		],
 	],
 
+	'wink' => [
+		'title' => 'Winks Service',
+	],
+
 	'task' => [
 		'message' => [
 			'conversation' => [
@@ -141,6 +145,11 @@ return [
 			],
 			'send_message' => [
 				'error' => 'An error occurred sending the message.',
+			],
+		],
+		'wink' => [
+			'info' => [
+				'location' => 'Location',
 			],
 		],
 	],

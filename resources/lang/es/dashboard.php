@@ -126,6 +126,10 @@ return [
 		],
 	],
 
+	'wink' => [
+		'title' => 'Servicio de Guiños',
+	],
+
 
 	'task' => [
 		'message' => [
@@ -144,6 +148,11 @@ return [
 			],
 			'send_message' => [
 				'error' => 'Se ha producido un error enviando el mensaje.',
+			],
+		],
+		'wink' => [
+			'info' => [
+				'location' => 'Ubicación',
 			],
 		],
 	],

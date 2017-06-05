@@ -25,7 +25,7 @@
 								<div class="users-detail">
 									<h5 class="wink_info_name">
 										<strong>{{ $wink->nombre_premium }}</strong>
-										<a target="_blank" href="{{ $wink->link_premium }}">({{ $wink->id_link_premium }})</a>
+										<a target="_blank" href="{{ $wink->link_premium . '?teleusuario=1' }}">({{ $wink->id_link_premium }})</a>
 									</h5>
 									<h5><strong>{{ $wink->titulo_premium }}</strong></h5>
 									<small>{{ $wink->contenido_premium }}</small>
@@ -48,7 +48,7 @@
 								</li>
 								<li>
 									<p class="light">{{ trans('dashboard.task.wink.info.location') }}</p>
-									<p> {{ $wink->ciudad_premium }} ({{ $wink->provincia_premium }})</p>
+									<p class="location""> {{ $wink->ciudad_premium }} ({{ $wink->provincia_premium }})</p>
 								</li>
 							</ul>
 						</div>
@@ -63,7 +63,7 @@
 								<div class="users-detail">
 									<h5 class="wink_info_name">
 										<strong>{{ $wink->nombre_cliente }}</strong>
-										<a target="_blank" href="{{ $wink->link_cliente }}">({{ $wink->id_link_cliente }})</a>
+										<a target="_blank" href="{{ $wink->link_cliente . '?teleusuario=1' }}">({{ $wink->id_link_cliente }})</a>
 									</h5>
 									<h5><strong>{{ $wink->titulo_cliente }}</strong></h5>
 									<small>{{ $wink->contenido_cliente }}</small>
@@ -86,7 +86,7 @@
 								</li>
 								<li>
 									<p class="light">{{ trans('dashboard.task.wink.info.location') }}</p>
-									<p> {{ $wink->ciudad_cliente }} ({{ $wink->provincia_cliente }})</p>
+									<p class="location"> {{ $wink->ciudad_cliente }} ({{ $wink->provincia_cliente }})</p>
 								</li>
 							</ul>
 						</div>

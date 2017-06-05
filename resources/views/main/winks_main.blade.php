@@ -2,7 +2,7 @@
 	<div class="container-fluid">
 
 		@component('main.inc.top_bar')
-			@slot('top_title', trans('dashboard.winks.title'))
+			@slot('top_title', trans('dashboard.wink.title'))
 			@slot('top_message', ''))
 
 			@slot('top_level', 4)

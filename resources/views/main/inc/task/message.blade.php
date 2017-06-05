@@ -25,7 +25,7 @@
 								<div class="users-detail">
 									<h5 class="message_info_name">
 										<strong>{{ $message->usuario_premium->nombre }}</strong>
-										<a target="_blank" href="{{ $message->usuario_premium->enlace }}">({{ $message->usuario_premium->anuncio }})</a>
+										<a target="_blank" href="{{ $message->usuario_premium->enlace . '?teleusuario=1' }}">({{ $message->usuario_premium->anuncio }})</a>
 									</h5>
 									<h5><strong>{{ $message->usuario_premium->titulo }}</strong></h5>
 									<small>{{ $message->usuario_premium->descripcion }}</small>
@@ -48,7 +48,7 @@
 								</li>
 								<li>
 									<p class="light">{{ trans('dashboard.task.message.info.location') }}</p>
-									<p> {{ $message->usuario_premium->ciudad }} ({{ $message->usuario_premium->provincia }})</p>
+									<p class="location"> {{ $message->usuario_premium->ciudad }} ({{ $message->usuario_premium->provincia }})</p>
 								</li>
 							</ul>
 						</div>
@@ -63,7 +63,7 @@
 								<div class="users-detail">
 									<h5 class="message_info_name">
 										<strong>{{ $message->usuario_cliente->nombre }}</strong>
-										<a target="_blank" href="{{ $message->usuario_cliente->enlace }}">({{ $message->usuario_cliente->anuncio }})</a>
+										<a target="_blank" href="{{ $message->usuario_cliente->enlace . '?teleusuario=1' }}">({{ $message->usuario_cliente->anuncio }})</a>
 									</h5>
 									<h5><strong>{{ $message->usuario_cliente->titulo }}</strong></h5>
 									<small>{{ $message->usuario_cliente->descripcion }}</small>
@@ -86,7 +86,7 @@
 								</li>
 								<li>
 									<p class="light">{{ trans('dashboard.task.message.info.location') }}</p>
-									<p> {{ $message->usuario_cliente->ciudad }} ({{ $message->usuario_cliente->provincia }})</p>
+									<p class="location"> {{ $message->usuario_cliente->ciudad }} ({{ $message->usuario_cliente->provincia }})</p>
 								</li>
 							</ul>
 						</div>
