@@ -63,6 +63,10 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
 	Route::post('/messages/note/create', 'ServiceController@postCreateNote')->name('dashboard.message.create_note');
 	Route::get('/messages/load', 'ServiceController@getNewMessage')->name('dashboard.message.load_new_message');
 
+
+	//Rutas para los guiños
+	Route::get('/winks', 'ServiceController@getWink')->name('dashboard.wink');
+
 });
 
 

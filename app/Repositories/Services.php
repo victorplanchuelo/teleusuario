@@ -9,6 +9,21 @@ class Services extends APIRepository
 {
 	protected $token_seguridad = 'jjashegdg127352782hdhwhge9eyexy2gshdjfg9477ykjhfdsgds737shsdhf';
 
+
+
+	/*
+	 * PARTE API PARA MENSAJES
+	 */
+
+	/**
+	 * Get a selected number of message Ids, random or not,
+	 * from a selected date and a given "Animadora"
+	 *
+	 * @param $num
+	 * @param $fecha
+	 * @param $aleatorio
+	 * @return mixed|\Psr\Http\Message\ResponseInterface
+	 */
 	public function getIdsMessages($num, $fecha, $aleatorio) {
 
 		//Aqui devolveremos la vista del home del dashboard
@@ -31,8 +46,11 @@ class Services extends APIRepository
 		return $arrMsg[$rand_keys];
 	}
 
-
-
+	/**
+	 * Get all data from given message
+	 * @param $conversation_id
+	 * @return mixed|\Psr\Http\Message\ResponseInterface
+	 */
 	public function getDataMessage($conversation_id)
 	{
 		return $this->post('bandeja_entrada_leer_conversacion_premium',
@@ -61,7 +79,6 @@ class Services extends APIRepository
 		);
 	}
 
-
 	/**
 	 * Send new message to a client
 	 * @var String $animadora
@@ -78,6 +95,30 @@ class Services extends APIRepository
 				'texto' => $texto,
 				'conversacion' => $conversacion,
 				'guinyo' => $guinyo,
+			]
+		);
+	}
+
+
+
+	/*
+	 * PARTE API PARA GUINYOS
+	 */
+
+	/**
+	 * Get all data from given wink
+	 * @param num_winks
+	 * @param $id_animadora
+	 * @param $wink_id
+	 * @return mixed|\Psr\Http\Message\ResponseInterface
+	 */
+	public function getDataWink($num_winks, $id_animadora, $wink_id=0)
+	{
+		return $this->post('guinyo_obtener_guinyo_nuevo_teleusuario',
+			[
+				'animadora' => $id_animadora,
+				'num_guinyos' => $num_winks,
+				'id_guinyo' => $wink_id,
 			]
 		);
 	}

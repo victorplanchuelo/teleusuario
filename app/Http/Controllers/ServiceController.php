@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Repositories\Services;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -24,7 +25,7 @@ class ServiceController extends Controller
 	}
 
 	/**
-	 * Show the application dashboard.
+	 * Show the content of the messages section.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
@@ -74,10 +75,6 @@ class ServiceController extends Controller
 		return view('dashboard.messages', compact('success', 'message', 'strErr'));
 	}
 
-
-
-
-
 	public function getNewMessage()
 	{
 		$success=1;
@@ -108,25 +105,6 @@ class ServiceController extends Controller
 
 		return view('main.inc.task.message', compact('success', 'message', 'strErr'));
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 	/**
 	 * @param Request $request
@@ -223,5 +201,36 @@ class ServiceController extends Controller
 			'error' => [$strErr],
 			'strDate' => Carbon::now()->format('d/m/Y'),
 		]);
+	}
+
+
+
+	/*
+	 * PARA LA PARTE DE GUIÑOS
+	 */
+	public function getWink()
+	{
+		$wink_id = (session()->has('guinyo_actual')) ? session()->get('guinyo_actual') : 0;
+		$wink = json_decode($this->services->getDataWink(1, Auth::user()->code, $wink_id)->getBody()->getContents());
+
+		if($wink->success !=1)
+		{
+			$success=0;
+			$strErr = trans('dashboard.task.wink.conversation.error');
+			$wink='';
+		}
+		else
+		{
+			$success=1;
+			$strErr='';
+			$wink = $wink->guinyo[0];
+
+			//Guardamos en sesión/cache
+			session()->put('guinyo_actual', $wink->id_guinyo);
+			session()->save();
+
+		}
+
+		return view('dashboard.winks',  compact('success', 'wink', 'strErr'));
 	}
 }

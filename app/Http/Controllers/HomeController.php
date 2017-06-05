@@ -36,7 +36,7 @@ class HomeController extends Controller
 		return view('dashboard.home', compact('success','message','strErr'));
 	}
 
-    /**
+   /**
      * Recupera X mensajes (indicados por parámetro por la tarea a realizar)
      * Una vez recuperados los Ids de esas conversaciones se elegirá una al azar y se mostrarán sus mensajes
      * Aparte estos datos quedan guardados en la session
@@ -45,7 +45,7 @@ class HomeController extends Controller
      * Se ha creado un listener que saltará cuando se pulse el botón de comenzar la tarea. Si en la session ya
      * estan cargados los IDs, no debe lanzar el evento
      */
-    public function getMessage()
+ /*   public function getMessage()
     {
 	    if(!session()->get('ids_conversaciones'))
 	    {
@@ -75,7 +75,7 @@ class HomeController extends Controller
 
 	    $this->data = json_decode($this->services->getDataMessage($id)->getBody()->getContents());
         return 1;
-    }
+    }*/
 
 
 	/**
@@ -86,7 +86,7 @@ class HomeController extends Controller
 	 * Primero, ya teniendo la tarea, debemos comprobar si hay datos guardados en la session
 	 * para saber si tiene que hacer una cosa u otra
 	 */
-    public function getTask(Request $request)
+    /*public function getTask(Request $request)
     {
 
     	$task =  $request['task'];
@@ -108,7 +108,7 @@ class HomeController extends Controller
     	$message = $this->data;
 
 	    return view('main.inc.task.message', compact('success', 'message', 'strErr'));
-    }
+    }*/
 
 
 	/**
@@ -118,7 +118,7 @@ class HomeController extends Controller
 	 * Función llamada cuando el usuario escriba una nueva nota
 	 * sobre la conversación
 	 */
-    public function postCreateNote(Request $request)
+    /*public function postCreateNote(Request $request)
     {
 	    $strErr = '';
 
@@ -159,7 +159,7 @@ class HomeController extends Controller
 		    'strDate' => \Carbon\Carbon::now()->format('d/m/Y'),
 	    ]);
 
-    }
+    }*/
 
 	/**
 	 * @param Request $request
@@ -168,7 +168,7 @@ class HomeController extends Controller
 	 * Función que será llamado cuando se envíe (el mensaje, guiño, ...)
 	 * Provisionalmente se está haciendo sólo para mensaje
 	 */
-    public function postSend(Request $request)
+    /*public function postSend(Request $request)
     {
     	$strErr ='';
 	    $messages = [
@@ -206,5 +206,5 @@ class HomeController extends Controller
 		    'error' => [$strErr],
 		    'strDate' => \Carbon\Carbon::now()->format('d/m/Y'),
 	    ]);
-    }
+    }*/
 }
