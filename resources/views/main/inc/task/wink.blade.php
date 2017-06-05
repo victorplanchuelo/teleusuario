@@ -10,9 +10,6 @@
 <div class="row gutter">
 	<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
 		<div class="panel panel-task-info">
-			<div class="panel-heading">
-				<h4>Información de la tarea</h4>
-			</div>
 			<div class="panel-body">
 				<div class="panel-task-winks-info">
 					<fieldset class="fieldset_info">
@@ -148,9 +145,6 @@
 
 		<div class="col-lg-8 col-md-6 col-sm-6 col-xs-12">
 		<div class="panel">
-			<div class="panel-heading">
-				<h4>Conversación (si tiene)</h4>
-			</div>
 			<div class="panel-body panel-task-messages">
 				<ul class="chats">
 
