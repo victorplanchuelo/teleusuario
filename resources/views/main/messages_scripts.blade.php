@@ -131,6 +131,8 @@
 
 		});
 
+
+
 		$('#create_new_note').on('submit',function(e){
 			e.preventDefault();
 

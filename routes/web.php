@@ -62,6 +62,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
 	Route::post('/messages', 'ServiceController@postMessages')->name('dashboard.message.send_message');
 	Route::post('/messages/note/create', 'ServiceController@postCreateNote')->name('dashboard.message.create_note');
 	Route::get('/messages/load', 'ServiceController@getNewMessage')->name('dashboard.message.load_new_message');
+	Route::post('/messages/private-key', 'ServiceController@postSendPrivateKey')->name('dashboard.message.send_private_key');
 
 
 	//Rutas para los guiños

@@ -7,7 +7,7 @@
 @endif
 
 <!-- Row ends -->
-<div class="row gutter">
+<div clsass="row gutter">
 	<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
 		<div class="panel panel-task-info">
 			<div class="panel-body">
@@ -21,8 +21,8 @@
 								</div>
 								<div class="users-detail">
 									<h5 class="message_info_name">
-										<strong>{{ $message->usuario_premium->nombre }}</strong>
-										<a target="_blank" href="{{ $message->usuario_premium->enlace . '?teleusuario=1' }}">({{ $message->usuario_premium->anuncio }})</a>
+										<strong class="nombre_premium">{{ $message->usuario_premium->nombre }}</strong>
+										<a target="_blank" class="id_anuncio_premium" data-anuncio="{{ $message->usuario_premium->anuncio }}" href="{{ $message->usuario_premium->enlace }}">({{ $message->usuario_premium->anuncio }})</a>
 									</h5>
 									<h5><strong>{{ $message->usuario_premium->titulo }}</strong></h5>
 									<small>{{ $message->usuario_premium->descripcion }}</small>
@@ -36,7 +36,7 @@
 											@foreach($message->usuario_premium->imagenes as $img)
 												@if($img->borrado === "")
 													<a href="{{ config('constants.URL_STATIC') . $img->{'250x250'} }}">
-														<img @if($img->privada===1) class="border-red" @endif src="{{ config('constants.URL_STATIC') . $img->{'32x32'} }}" />
+														<img @if($img->privada===1 || $img->clasificacion!="1") class="border-red" @endif src="{{ config('constants.URL_STATIC') . $img->{'32x32'} }}" />
 													</a>
 												@endif
 											@endforeach
@@ -59,8 +59,8 @@
 								</div>
 								<div class="users-detail">
 									<h5 class="message_info_name">
-										<strong>{{ $message->usuario_cliente->nombre }}</strong>
-										<a target="_blank" href="{{ $message->usuario_cliente->enlace . '?teleusuario=1' }}">({{ $message->usuario_cliente->anuncio }})</a>
+										<strong class="nombre_cliente">{{ $message->usuario_cliente->nombre }}</strong>
+										<a target="_blank" class="id_anuncio_cliente" data-anuncio="{{ $message->usuario_cliente->anuncio }}" href="{{ $message->usuario_cliente->enlace }}">({{ $message->usuario_cliente->anuncio }})</a>
 									</h5>
 									<h5><strong>{{ $message->usuario_cliente->titulo }}</strong></h5>
 									<small>{{ $message->usuario_cliente->descripcion }}</small>
@@ -73,9 +73,11 @@
 										<div class="galleryClient">
 											@foreach($message->usuario_cliente->imagenes as $img)
 												@if($img->borrado === "")
-													<a href="{{ config('constants.URL_STATIC') . $img->{'250x250'} }}">
-														<img src="{{ config('constants.URL_STATIC') . $img->{'32x32'} }}" />
-													</a>
+													@if(($img->privada===0 || $img->clasificacion==="1") || $message->permiso_fotos_privadas===true)
+														<a href="{{ config('constants.URL_STATIC') . $img->{'250x250'} }}">
+															<img @if($img->privada===1 || $img->clasificacion!=="1") class="border-red" @endif src="{{ config('constants.URL_STATIC') . $img->{'32x32'} }}" />
+														</a>
+													@endif
 												@endif
 											@endforeach
 										</div>
@@ -165,14 +167,30 @@
 					@endforeach
 				</ul>
 			</div>
-			<form id="send-message" method="POST" action="#">
-				<div class="row gutter">
-					{{ csrf_field() }}
-					<input type="hidden" id="name-msg" data-name="{{$message->usuario_premium->nombre}}" />
-					<textarea class="form-control new-message" rows="3"></textarea>
-					<button type="submit" class="btn btn-info">Enviar</button>
-				</div>
-			</form>
+			<div class="panel-footer">
+				<form id="send-message" method="POST" action="#">
+					<div class="row gutter">
+						<div class="col-lg-10 col-sm-10 col-md-10 col-xs-12">
+							{{ csrf_field() }}
+							<input type="hidden" id="name-msg" data-name="{{$message->usuario_premium->nombre}}" />
+							<textarea class="form-control new-message" rows="3"></textarea>
+						</div>
+						<div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
+							<button type="submit" class="btn btn-success">{{trans('dashboard.messages.form.submit')}}</button>
+						</div>
+					</div>
+				</form>
+				@if($message->tiene_fotos_privadas)
+					<form id="send-private-key" method="POST" action="{{ route('dashboard.message.send_private_key') }}">
+						<input type="hidden" id="pkey-msg" data-message="{{trans('dashboard.messages.form.pkey.message')}}" />
+						<a href="#" class="btn btn-info" id="send-private-key">
+							<span class="circless animate" style="height: 80px; width: 80px; top: -19px; left: -6.26562px;"></span>
+							<i class="icon-key"></i>
+							{{trans('dashboard.messages.form.pkey.title')}}
+						</a>
+					</form>
+				@endif
+			</div>
 		</div>
 	</div>
 </div>

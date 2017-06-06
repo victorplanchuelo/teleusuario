@@ -204,6 +204,39 @@ class ServiceController extends Controller
 	}
 
 
+	public function postSendPrivateKey(Request $request)
+	{
+		$strErr='';
+		$strAlert=trans('dashboard.messages.form.pkey.success');
+
+		//Si supera la validación se puede enviar el mensaje con los parámetros que se nos pide desde el servicio
+		$sendPKey = json_decode($this->services->postSendPrivateKey(session('conversacion_actual'), $request['autonoma'], $request['cliente'])->getBody()->getContents());
+
+		$success = ($sendPKey->exito <= 0) ? 0 : 1 ;
+
+		if($success <= 0)
+		{
+			$strAlert = trans('dashboard.messages.form.pkey.error') . ' ERROR - '. $sendPKey->error;
+			$strMsg='';
+		}
+		else
+		{
+			$strMsg = trans('dashboard.messages.form.pkey.msg_success');
+		}
+
+
+		//Si se ha enviado correctamente el mensaje, borramos el id de la conversación actual (ya que ha sido terminada)
+		//Habría que comprobar si
+
+		return response()->json([
+			'success' => $success,
+			'alert' => $strAlert,
+			'message' => $strMsg,
+			'strDate' => Carbon::now()->format('d/m/Y'),
+		]);
+	}
+
+
 
 	/*
 	 * PARA LA PARTE DE GUIÑOS

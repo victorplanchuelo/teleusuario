@@ -53,7 +53,7 @@ class Services extends APIRepository
 	 */
 	public function getDataMessage($conversation_id)
 	{
-		return $this->post('bandeja_entrada_leer_conversacion_premium',
+		return $this->post('bandeja_entrada_leer_conversacion_premium_nuevo_teleusuario',
 			[
 				'conversacion' => $conversation_id,
 				'teleusuario_nuevo' => 1,
@@ -99,6 +99,23 @@ class Services extends APIRepository
 		);
 	}
 
+	/**
+	 * Send the private key to the user
+	 * @param $conversacion
+	 * @return mixed|\Psr\Http\Message\ResponseInterface
+	 */
+	public function postSendPrivateKey($conversacion, $autonoma, $cliente)
+	{
+		return $this->post('bandeja_entrada_enviar_llave_privada',
+			[
+				"id_conversacion" => $conversacion,
+				"id_anuncio_autonoma" => $autonoma,
+				"id_anuncio_cliente" => $cliente,
+				"animadora" => Auth::user()->code,
+
+			]
+		);
+	}
 
 
 	/*
