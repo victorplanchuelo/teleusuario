@@ -64,6 +64,7 @@
 									</h5>
 									<h5><strong>{{ $message->usuario_cliente->titulo }}</strong></h5>
 									<small>{{ $message->usuario_cliente->descripcion }}</small>
+									<small class="pull-right"><h6>Créditos: <strong>{{$message->usuario_cliente->creditos}}</strong></h6></small>
 								</div>
 							</div>
 							<ul class="users-footer clearfix">
