@@ -41,9 +41,11 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
 	Route::get('/', 'HomeController@index')->name('dashboard.home');
 
 	//Carga de tareas en la página inicial
-	Route::get('/tasks', 'HomeController@getTask')->name('dashboard.tasks');
+	//AUN NO SON NECESARIOS YA QUE ES LA CARGA DE LA PAGINA PRINCIPAL
+	//REVISAR LAS RUTAS YA QUE HAY MÁS ABAJO UN PREFIX A TASKS Y PUEDE HABER PROBLEMAS
+	/*Route::get('/tasks', 'HomeController@getTask')->name('dashboard.tasks');
 	Route::post('/tasks/note', 'HomeController@postCreateNote')->name('dashboard.tasks.create_note');
-	Route::post('/tasks/send', 'HomeController@postSend')->name('dashboard.tasks.send_message');
+	Route::post('/tasks/send', 'HomeController@postSend')->name('dashboard.tasks.send_message');*/
 
 	//Ruta para el cambio de contraseña
 	Route::get('/password/change',  'UserController@getChangePassword')->name('dashboard.change_pwd');

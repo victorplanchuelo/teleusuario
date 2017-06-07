@@ -25,19 +25,6 @@ class ServiceController extends Controller
 	}
 
 	/**
-	 * Show the content of the messages section.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function index()
-	{
-		$success=1;
-		$strErr='';
-		$message=[];
-		return view('dashboard.messages', compact('success','message','strErr'));
-	}
-
-	/**
 	 * Recupera X mensajes (indicados por parámetro por la tarea a realizar)
 	 * Una vez recuperados los Ids de esas conversaciones se elegirá una al azar y se mostrarán sus mensajes
 	 * Aparte estos datos quedan guardados en la session
