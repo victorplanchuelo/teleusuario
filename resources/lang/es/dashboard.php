@@ -123,6 +123,17 @@ return [
 			'start_date' => 'Fecha inicio',
 			'end_date' => 'Fecha fin',
 			'submit' => 'Enviar',
+			'profile' => [
+				'yours' => [
+					'data' => 'Tus datos',
+					'zoom' => 'Click para ampliar imagen',
+				],
+				'client' => [
+					'data' => 'Datos del cliente',
+					'zoom' => 'Click para ampliar imagen',
+					'credits' => 'Créditos:',
+				],
+			],
 			'pkey' => [
 				'title' => 'Enviar llave privada',
 				'message' => 'Recuerda que este servicio se usa para mantener a los clientes con algo de suspense, 
@@ -132,11 +143,27 @@ return [
 				'error' => 'Se ha producido un error enviando la llave privada. Por favor, inténtelo de nuevo más tarde.',
 				'msg_success' => 'Llave privada enviada. Ahora puedes ver todas sus fotos.',
 			],
+			'notes' => [
+				'write' => 'Escribir notas',
+				'send' => 'Enviar',
+				'notes' => 'Notas de la conversación',
+			],
 		],
 	],
 
 	'wink' => [
 		'title' => 'Servicio de Guiños',
+		'profile' => [
+			'yours' => [
+				'data' => 'Tus datos',
+				'zoom' => 'Click para ampliar imagen',
+			],
+			'client' => [
+				'data' => 'Datos del cliente',
+				'zoom' => 'Click para ampliar imagen',
+				'credits' => 'Créditos:',
+			],
+		],
 	],
 
 

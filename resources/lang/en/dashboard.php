@@ -121,6 +121,17 @@ return [
 			'start_date' => 'Start date',
 			'end_date' => 'End date',
 			'submit' => 'Submit',
+			'profile' => [
+				'yours' => [
+					'data' => 'Your profile',
+					'zoom' => 'Click to enlarge image',
+				],
+				'client' => [
+					'data' => 'Client profile',
+					'zoom' => 'Click to enlarge image',
+					'credits' => 'Credits:',
+				],
+			],
 			'pkey' => [
 				'title' => 'Send Private Key',
 				'message' => 'Remember that this service is used to maintain clients with a bit of suspense,
@@ -130,11 +141,27 @@ return [
 				'error' => 'An error occurred sending the private key. Please, try it again later.',
 				'msg_success' => 'Private key sent. Now you can watch all her photos.',
 			],
+			'notes' => [
+				'write' => 'Write notes',
+				'send' => 'Send',
+				'notes' => 'Notes of the conversation',
+			],
 		],
 	],
 
 	'wink' => [
 		'title' => 'Winks Service',
+		'profile' => [
+			'yours' => [
+				'data' => 'Your profile',
+				'zoom' => 'Click to enlarge image',
+			],
+			'client' => [
+				'data' => 'Client profile',
+				'zoom' => 'Click to enlarge image',
+				'credits' => 'Credits:',
+			],
+		],
 	],
 
 	'task' => [

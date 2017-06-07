@@ -13,7 +13,7 @@
 			<div class="panel-body">
 				<div class="panel-task-winks-info">
 					<fieldset class="fieldset_info">
-						<legend>Tus datos</legend>
+						<legend>{{ trans('dashboard.wink.profile.yours.data') }}</legend>
 						<div class="users-wrapper red">
 							<div class="users-info clearfix">
 								<div class="users-avatar">
@@ -22,7 +22,7 @@
 								<div class="users-detail">
 									<h5 class="wink_info_name">
 										<strong>{{ $wink->nombre_premium }}</strong>
-										<a target="_blank" href="{{ $wink->link_premium . '?teleusuario=1' }}">({{ $wink->id_link_premium }})</a>
+										<a target="_blank" href="{{ $wink->link_premium }}">({{ $wink->id_link_premium }})</a>
 									</h5>
 									<h5><strong>{{ $wink->titulo_premium }}</strong></h5>
 									<small>{{ $wink->contenido_premium }}</small>
@@ -30,7 +30,7 @@
 							</div>
 							<ul class="users-footer clearfix">
 								<li>
-									<p class="light">Click para ampliar</p>
+									<p class="light">{{ trans('dashboard.wink.profile.yours.zoom') }}</p>
 									@if(collect($wink->imagenes_premium)->count()>0)
 										<div class="galleryPremium">
 											@foreach($wink->imagenes_premium as $img)
@@ -51,7 +51,7 @@
 						</div>
 					</fieldset>
 					<fieldset class="fieldset_info">
-						<legend>Datos del cliente</legend>
+						<legend>{{ trans('dashboard.wink.profile.client.data') }}</legend>
 						<div class="users-wrapper red">
 							<div class="users-info clearfix">
 								<div class="users-avatar">
@@ -60,15 +60,16 @@
 								<div class="users-detail">
 									<h5 class="wink_info_name">
 										<strong>{{ $wink->nombre_cliente }}</strong>
-										<a target="_blank" href="{{ $wink->link_cliente . '?teleusuario=1' }}">({{ $wink->id_link_cliente }})</a>
+										<a target="_blank" href="{{ $wink->link_cliente }}">({{ $wink->id_link_cliente }})</a>
 									</h5>
 									<h5><strong>{{ $wink->titulo_cliente }}</strong></h5>
 									<small>{{ $wink->contenido_cliente }}</small>
+									<small class="pull-right"><h6>{{ trans('dashboard.wink.form.profile.client.credits') }} <strong>{{$wink->creditos}}</strong></h6></small>
 								</div>
 							</div>
 							<ul class="users-footer clearfix">
 								<li>
-									<p class="light">Click para ampliar</p>
+									<p class="light">{{ trans('dashboard.wink.profile.client.zoom') }}</p>
 									@if(collect($wink->imagenes_cliente)->count()>0)
 										<div class="galleryClient">
 											@foreach($wink->imagenes_cliente as $img)

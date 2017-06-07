@@ -13,7 +13,7 @@
 			<div class="panel-body">
 				<div class="panel-task-messages-info">
 					<fieldset class="fieldset_info">
-						<legend>Tus datos</legend>
+						<legend>{{ trans('dashboard.messages.form.profile.yours.data') }}</legend>
 						<div class="users-wrapper red">
 							<div class="users-info clearfix">
 								<div class="users-avatar">
@@ -30,7 +30,7 @@
 							</div>
 							<ul class="users-footer clearfix">
 								<li>
-									<p class="light">Click para ampliar</p>
+									<p class="light">{{ trans('dashboard.messages.form.profile.yours.zoom') }}</p>
 									@if(collect($message->usuario_premium->imagenes)->count()>0)
 										<div class="galleryPremium">
 											@foreach($message->usuario_premium->imagenes as $img)
@@ -51,7 +51,7 @@
 						</div>
 					</fieldset>
 					<fieldset class="fieldset_info">
-						<legend>Datos del cliente</legend>
+						<legend>{{ trans('dashboard.messages.form.profile.client.data') }}</legend>
 						<div class="users-wrapper red">
 							<div class="users-info clearfix">
 								<div class="users-avatar">
@@ -64,12 +64,12 @@
 									</h5>
 									<h5><strong>{{ $message->usuario_cliente->titulo }}</strong></h5>
 									<small>{{ $message->usuario_cliente->descripcion }}</small>
-									<small class="pull-right"><h6>Créditos: <strong>{{$message->usuario_cliente->creditos}}</strong></h6></small>
+									<small class="pull-right"><h6>{{ trans('dashboard.messages.form.profile.client.credits') }} <strong>{{$message->usuario_cliente->creditos}}</strong></h6></small>
 								</div>
 							</div>
 							<ul class="users-footer clearfix">
 								<li>
-									<p class="light">Click para ampliar</p>
+									<p class="light">{{ trans('dashboard.messages.form.profile.client.zoom') }}</p>
 									@if(collect($message->usuario_cliente->imagenes)->count()>0)
 										<div class="galleryClient">
 											@foreach($message->usuario_cliente->imagenes as $img)
@@ -96,7 +96,7 @@
 					<div class="panel-group" id="accordion">
 						<fieldset class="fieldset_info">
 							<a class="escribir_nota add-btn added" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-								<legend>Escribir Notas <i class="icon-plus3 pull-right"></i></legend>
+								<legend>{{ trans('dashboard.messages.form.notes.write') }} <i class="icon-plus3 pull-right"></i></legend>
 
 							</a>
 							<div id="collapseOne" class="panel-collapse collapse">
@@ -104,14 +104,14 @@
 									<form id="create_new_note" method="POST" data-conversation="@if($message->conversacion_chat > 0) {{$message->conversacion_chat}} @else 0 @endif" action="#">
 										{{ csrf_field() }}
 										<textarea class="form-control text-note" rows="3"></textarea>
-										<button type="submit" class="btn btn-info">Enviar</button>
+										<button type="submit" class="btn btn-info">{{ trans('dashboard.messages.form.notes.send') }}</button>
 									</form>
 								</div>
 							</div>
 						</fieldset>
 						<fieldset class="fieldset_info">
 							<a class="escribir_nota" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-								<legend>Notas de la conversación <i class="icon-plus3 pull-right"></i></legend>
+								<legend>{{ trans('dashboard.messages.form.notes.notes') }} <i class="icon-plus3 pull-right"></i></legend>
 
 							</a>
 							<div id="collapseTwo" class="panel-collapse collapse">
