@@ -67,13 +67,45 @@ class Services extends APIRepository
 	 * @var String $conversacion
 	 * @return Integer
 	 */
-	public function postCreateNote($texto, $conversacion_chat)
+	public function postCreateNote($texto, $conversacion_chat, $nombre_premium, $nombre_cliente,
+									$foto_premium, $foto_cliente, $anuncio_premium, $anuncio_cliente,
+									$ciudad_premium, $ciudad_cliente, $provincia_premium, $provincia_cliente,
+									$enlace_premium, $enlace_cliente, $usuario_premium, $usuario_cliente)
 	{
-		return $this->post('chat_guardar_nota_conversacion',
+
+
+		$premium = [
+			'nombre' => $nombre_premium,
+			'foto' => $foto_premium,
+			'anuncio' => $anuncio_premium,
+			'ciudad' => $ciudad_premium,
+			'provincia' => $provincia_premium,
+			'enlace' => $enlace_premium,
+			'usuario' => $usuario_premium,
+			'premium' => 1,
+			'animadora' => Auth::user()->code,
+		];
+
+		$cliente = [
+			'nombre' => $nombre_cliente,
+			'foto' => $foto_cliente,
+			'anuncio' => $anuncio_cliente,
+			'ciudad' => $ciudad_cliente,
+			'provincia' => $provincia_cliente,
+			'enlace' => $enlace_cliente,
+			'usuario' => $usuario_cliente,
+			'premium' => 0,
+			'animadora' => 0,
+		];
+
+
+		return $this->post('chat_guardar_nota_conversacion_nuevo_teleusuario',
 			[
 				'texto' => $texto,
 				'conversacion' => $conversacion_chat,
 				'token_seguridad' => $this->token_seguridad,
+				'origen' => $premium,
+				'destino' => $cliente,
 				'animadora' => Auth::user()->code,
 			]
 		);

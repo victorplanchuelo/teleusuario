@@ -139,7 +139,24 @@ class ServiceController extends Controller
 		//OJO. Como segundo parámetro se le pasa el ID DE LA CONVERSACION DE CHAT
 		// que es diferente al Id de la conversación
 		//-----------------------------------------------------------------------------------------------------------------------------------
-		$created_note = json_decode($this->services->postCreateNote($request['texto'], $request['conversacion_chat'])->getBody()->getContents());
+		$created_note = json_decode($this->services->postCreateNote(
+			$request['texto'],
+			$request['conversacion_chat'],
+			$request['nombre_cliente'],
+			$request['nombre_premium'],
+			$request['foto_premium'],
+			$request['foto_cliente'],
+			$request['anuncio_premium'],
+			$request['anuncio_cliente'],
+			$request['ciudad_premium'],
+			$request['ciudad_cliente'],
+			$request['provincia_premium'],
+			$request['provincia_cliente'],
+			$request['enlace_premium'],
+			$request['enlace_cliente'],
+			$request['usuario_premium'],
+			$request['usuario_cliente']
+		)->getBody()->getContents());
 
 		$success = ($created_note->exito <= 0) ? 0 : 1 ;
 

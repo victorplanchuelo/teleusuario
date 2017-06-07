@@ -153,15 +153,25 @@ return [
 
 	'wink' => [
 		'title' => 'Servicio de Guiños',
-		'profile' => [
-			'yours' => [
-				'data' => 'Tus datos',
-				'zoom' => 'Click para ampliar imagen',
+		'form' => [
+			'profile' => [
+				'yours' => [
+					'data' => 'Tus datos',
+					'zoom' => 'Click para ampliar imagen',
+				],
+				'client' => [
+					'data' => 'Datos del cliente',
+					'zoom' => 'Click para ampliar imagen',
+					'credits' => 'Créditos:',
+				],
 			],
-			'client' => [
-				'data' => 'Datos del cliente',
-				'zoom' => 'Click para ampliar imagen',
-				'credits' => 'Créditos:',
+			'notes' => [
+				'write' => 'Escribir notas',
+				'send' => 'Enviar',
+				'notes' => 'Notas de la conversación',
+			],
+			'info' => [
+				'location' => 'Ubicación',
 			],
 		],
 	],
@@ -184,6 +194,7 @@ return [
 			],
 			'send_message' => [
 				'error' => 'Se ha producido un error enviando el mensaje.',
+				'success' => 'The message was sent successfully.',
 			],
 		],
 		'wink' => [

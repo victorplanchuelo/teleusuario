@@ -116,7 +116,7 @@ return [
 	],
 
 	'messages' => [
-		'title' => 'Messages Service',
+		'title' => 'Message Service',
 		'form' => [
 			'start_date' => 'Start date',
 			'end_date' => 'End date',
@@ -150,16 +150,26 @@ return [
 	],
 
 	'wink' => [
-		'title' => 'Winks Service',
-		'profile' => [
-			'yours' => [
-				'data' => 'Your profile',
-				'zoom' => 'Click to enlarge image',
+		'title' => 'Wink Service',
+		'form' => [
+			'profile' => [
+				'yours' => [
+					'data' => 'Your profile',
+					'zoom' => 'Click to enlarge image',
+				],
+				'client' => [
+					'data' => 'Client profile',
+					'zoom' => 'Click to enlarge image',
+					'credits' => 'Credits:',
+				],
 			],
-			'client' => [
-				'data' => 'Client profile',
-				'zoom' => 'Click to enlarge image',
-				'credits' => 'Credits:',
+			'notes' => [
+				'write' => 'Write notes',
+				'send' => 'Send',
+				'notes' => 'Notes of the conversation',
+			],
+			'info' => [
+				'location' => 'Location',
 			],
 		],
 	],
@@ -181,6 +191,7 @@ return [
 			],
 			'send_message' => [
 				'error' => 'An error occurred sending the message.',
+				'success' => 'The message was sent successfully.',
 			],
 		],
 		'wink' => [

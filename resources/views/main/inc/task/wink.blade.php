@@ -13,7 +13,7 @@
 			<div class="panel-body">
 				<div class="panel-task-winks-info">
 					<fieldset class="fieldset_info">
-						<legend>{{ trans('dashboard.wink.profile.yours.data') }}</legend>
+						<legend>{{ trans('dashboard.wink.form.profile.yours.data') }}</legend>
 						<div class="users-wrapper red">
 							<div class="users-info clearfix">
 								<div class="users-avatar">
@@ -30,7 +30,7 @@
 							</div>
 							<ul class="users-footer clearfix">
 								<li>
-									<p class="light">{{ trans('dashboard.wink.profile.yours.zoom') }}</p>
+									<p class="light">{{ trans('dashboard.wink.form.profile.yours.zoom') }}</p>
 									@if(collect($wink->imagenes_premium)->count()>0)
 										<div class="galleryPremium">
 											@foreach($wink->imagenes_premium as $img)
@@ -44,14 +44,14 @@
 									@endif
 								</li>
 								<li>
-									<p class="light">{{ trans('dashboard.task.wink.info.location') }}</p>
+									<p class="light">{{ trans('dashboard.wink.form.info.location') }}</p>
 									<p class="location""> {{ $wink->ciudad_premium }} ({{ $wink->provincia_premium }})</p>
 								</li>
 							</ul>
 						</div>
 					</fieldset>
 					<fieldset class="fieldset_info">
-						<legend>{{ trans('dashboard.wink.profile.client.data') }}</legend>
+						<legend>{{ trans('dashboard.wink.form.profile.client.data') }}</legend>
 						<div class="users-wrapper red">
 							<div class="users-info clearfix">
 								<div class="users-avatar">
@@ -69,7 +69,7 @@
 							</div>
 							<ul class="users-footer clearfix">
 								<li>
-									<p class="light">{{ trans('dashboard.wink.profile.client.zoom') }}</p>
+									<p class="light">{{ trans('dashboard.wink.form.profile.client.zoom') }}</p>
 									@if(collect($wink->imagenes_cliente)->count()>0)
 										<div class="galleryClient">
 											@foreach($wink->imagenes_cliente as $img)
@@ -83,7 +83,7 @@
 									@endif
 								</li>
 								<li>
-									<p class="light">{{ trans('dashboard.task.wink.info.location') }}</p>
+									<p class="light">{{ trans('dashboard.wink.form.info.location') }}</p>
 									<p class="location"> {{ $wink->ciudad_cliente }} ({{ $wink->provincia_cliente }})</p>
 								</li>
 							</ul>

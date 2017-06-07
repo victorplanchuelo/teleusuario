@@ -84,8 +84,8 @@
 						return false;
 					}
 
-					//Si no es 0 quiere decirse que se ha guardado la nota bien
-					alertify.success('{{ trans('dashboard.task.message.create_note.success') }}');
+					//Si no es 0 quiere decirse que se ha enviado el mensaje
+					alertify.success('{{ trans('dashboard.task.message.send_message.success') }}');
 
 					//Habría que quitar las 3 ultimas lineas de código, ya que al enviar el mensaje bien
 					// debería cerrar el div de los datos, lanzar el spinner y mostrar los datos de otro mensaje
@@ -145,7 +145,21 @@
 			var formData = {
 				texto: txtNota,
 				conversacion_chat: $(this).data('conversation'),
-				_token: token_seguridad,
+				nombre_premium: $('.nombre_premium').text(),
+				nombre_cliente: $('.nombre_cliente').text(),
+				foto_premium: $('.img-premium').attr('src'),
+				foto_cliente: $('.img-cliente').attr('src'),
+				anuncio_premium: $('.id_anuncio_premium').data('anuncio'),
+				anuncio_cliente: $('.id_anuncio_cliente').data('anuncio'),
+				ciudad_premium: $('.ciudad_premium').text(),
+				ciudad_cliente: $('.ciudad_cliente').text(),
+				provincia_premium: $('.provincia_premium').text(),
+				provincia_cliente: $('.provincia_cliente').text(),
+				enlace_premium: $('.id_anuncio_premium').data('enlace_mini'),
+				enlace_cliente: $('.id_anuncio_cliente').data('enlace_mini'),
+				usuario_premium: $('.id_anuncio_premium').data('usuario'),
+				usuario_cliente: $('.id_anuncio_cliente').data('usuario'),
+				_token: token_seguridad
 			};
 
 			// CSRF protection

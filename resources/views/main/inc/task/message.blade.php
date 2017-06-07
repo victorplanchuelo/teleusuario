@@ -22,7 +22,7 @@
 								<div class="users-detail">
 									<h5 class="message_info_name">
 										<strong class="nombre_premium">{{ $message->usuario_premium->nombre }}</strong>
-										<a target="_blank" class="id_anuncio_premium" data-anuncio="{{ $message->usuario_premium->anuncio }}" href="{{ $message->usuario_premium->enlace }}">({{ $message->usuario_premium->anuncio }})</a>
+										<a target="_blank" class="id_anuncio_premium" data-usuario="{{ $message->usuario_premium->usuario }}" data-enlace="{{ $message->usuario_premium->enlace_mini }}" data-anuncio="{{ $message->usuario_premium->anuncio }}" href="{{ $message->usuario_premium->enlace }}">({{ $message->usuario_premium->anuncio }})</a>
 									</h5>
 									<h5><strong>{{ $message->usuario_premium->titulo }}</strong></h5>
 									<small>{{ $message->usuario_premium->descripcion }}</small>
@@ -45,7 +45,7 @@
 								</li>
 								<li>
 									<p class="light">{{ trans('dashboard.task.message.info.location') }}</p>
-									<p class="location"> {{ $message->usuario_premium->ciudad }} ({{ $message->usuario_premium->provincia }})</p>
+									<p class="location"> <span class="ciudad_premium">{{ $message->usuario_premium->ciudad }}</span>  (<span class="provincia_premium">{{ $message->usuario_premium->provincia }}</span>)</p>
 								</li>
 							</ul>
 						</div>
@@ -60,7 +60,7 @@
 								<div class="users-detail">
 									<h5 class="message_info_name">
 										<strong class="nombre_cliente">{{ $message->usuario_cliente->nombre }}</strong>
-										<a target="_blank" class="id_anuncio_cliente" data-anuncio="{{ $message->usuario_cliente->anuncio }}" href="{{ $message->usuario_cliente->enlace }}">({{ $message->usuario_cliente->anuncio }})</a>
+										<a target="_blank" class="id_anuncio_cliente" data-usuario="{{ $message->usuario_cliente->usuario }}" data-enlace="{{ $message->usuario_cliente->enlace_mini }}" data-anuncio="{{ $message->usuario_cliente->anuncio }}" href="{{ $message->usuario_cliente->enlace }}">({{ $message->usuario_cliente->anuncio }})</a>
 									</h5>
 									<h5><strong>{{ $message->usuario_cliente->titulo }}</strong></h5>
 									<small>{{ $message->usuario_cliente->descripcion }}</small>
@@ -86,7 +86,7 @@
 								</li>
 								<li>
 									<p class="light">{{ trans('dashboard.task.message.info.location') }}</p>
-									<p class="location"> {{ $message->usuario_cliente->ciudad }} ({{ $message->usuario_cliente->provincia }})</p>
+									<p class="location"> <span class="ciudad_cliente">{{ $message->usuario_cliente->ciudad }}</span> (<span class="provincia_cliente">{{ $message->usuario_cliente->provincia }}</span>)</p>
 								</li>
 							</ul>
 						</div>
