@@ -36,7 +36,7 @@
 											@foreach($message->usuario_premium->imagenes as $img)
 												@if($img->borrado === "")
 													<a href="{{ config('constants.URL_STATIC') . $img->{'250x250'} }}">
-														<img @if($img->privada===1 || $img->clasificacion!="1") class="border-red" @endif src="{{ config('constants.URL_STATIC') . $img->{'32x32'} }}" />
+														<img @if($img->privada===1 || ($img->clasificacion!="1" && $img->clasificacion!="2")) class="border-red" @endif src="{{ config('constants.URL_STATIC') . $img->{'32x32'} }}" />
 													</a>
 												@endif
 											@endforeach
@@ -76,7 +76,7 @@
 												@if($img->borrado === "")
 													@if(($img->privada===0 || $img->clasificacion==="1") || $message->permiso_fotos_privadas===true)
 														<a href="{{ config('constants.URL_STATIC') . $img->{'250x250'} }}">
-															<img @if($img->privada===1 || $img->clasificacion!=="1") class="border-red" @endif src="{{ config('constants.URL_STATIC') . $img->{'32x32'} }}" />
+															<img @if($img->privada===1 || ($img->clasificacion!="1" && $img->clasificacion!="2")) class="border-red" @endif src="{{ config('constants.URL_STATIC') . $img->{'32x32'} }}" />
 														</a>
 													@endif
 												@endif
