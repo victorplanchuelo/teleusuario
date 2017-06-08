@@ -132,7 +132,7 @@
 									<ul>
 										@if($message->conversacion_chat > 0)
 											@foreach($message->notas as $nota)
-												<li>({{\Carbon\Carbon::parse($nota->fecha)->format('d/m/Y')}}) {!! nl2br($nota->texto) !!}</li>
+												<li class="notes">({{\Carbon\Carbon::parse($nota->fecha)->format('d/m/Y')}}) {!! nl2br($nota->texto) !!}</li>
 											@endforeach
 										@endif
 									</ul>
@@ -182,28 +182,36 @@
 				</ul>
 			</div>
 			<div class="panel-footer">
-				<form id="send-message" method="POST" action="#">
+				<div class="row gutter">
 					<div class="row gutter">
-						<div class="col-lg-10 col-sm-10 col-md-10 col-xs-12">
-							{{ csrf_field() }}
-							<input type="hidden" id="name-msg" data-name="{{$message->usuario_premium->nombre}}" />
-							<textarea class="form-control new-message" rows="3"></textarea>
-						</div>
-						<div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
-							<button type="submit" class="btn btn-success">{{trans('dashboard.messages.form.submit')}}</button>
-						</div>
+						<form id="send-message" method="POST" action="#">
+							<div class="col-lg-10 col-sm-8 col-md-12 col-xs-12">
+								{{ csrf_field() }}
+								<input type="hidden" id="name-msg" data-name="{{$message->usuario_premium->nombre}}" />
+								<textarea class="form-control new-message" rows="3"></textarea>
+							</div>
+							<div class="col-lg-2 col-sm-4 col-md-12 col-xs-12">
+								<button type="submit" class="btn btn-success btn-block">{{trans('dashboard.messages.form.submit')}}</button>
+							</div>
+						</form>
 					</div>
-				</form>
-				@if($message->tiene_fotos_privadas)
-					<form id="send-private-key" method="POST" action="{{ route('dashboard.message.send_private_key') }}">
-						<input type="hidden" id="pkey-msg" data-message="{{trans('dashboard.messages.form.pkey.message')}}" />
-						<a href="#" class="btn btn-info" id="send-private-key">
-							<span class="circless animate" style="height: 80px; width: 80px; top: -19px; left: -6.26562px;"></span>
-							<i class="icon-key"></i>
-							{{trans('dashboard.messages.form.pkey.title')}}
-						</a>
-					</form>
-				@endif
+
+					@if($message->tiene_fotos_privadas)
+						<br/>
+						<div class="row gutter">
+							<form id="send-private-key" method="POST" action="{{ route('dashboard.message.send_private_key') }}">
+								<div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
+									<input type="hidden" id="pkey-msg" data-message="{{trans('dashboard.messages.form.pkey.message')}}" />
+									<a href="#" class="btn btn-info" id="send-private-key">
+										<span class="circless animate" style="height: 80px; width: 80px; top: -19px; left: -6.26562px;"></span>
+										<i class="icon-key"></i>
+										{{trans('dashboard.messages.form.pkey.title')}}
+									</a>
+								</div>
+							</form>
+						</div>
+					@endif
+				</div>
 			</div>
 		</div>
 	</div>

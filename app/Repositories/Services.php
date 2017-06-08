@@ -155,7 +155,7 @@ class Services extends APIRepository
 	 */
 
 	/**
-	 * Get all data from given wink
+	 * Get all data from wink (could be given wink or not)
 	 * @param num_winks
 	 * @param $id_animadora
 	 * @param $wink_id
