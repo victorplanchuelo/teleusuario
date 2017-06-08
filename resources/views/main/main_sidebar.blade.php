@@ -30,7 +30,7 @@
 			$clase=0;
 			foreach($services as $service)
 			{
-				if(request()->is('dashboard/' . $service->name))
+				if(request()->is('dashboard/services/' . $service->name))
 				{
 					$clase=1;
 					break;
@@ -47,7 +47,7 @@
 			<ul>
 
 				@foreach($services as $service)
-					<li class="{{request()->is('dashboard/' . $service->name) ? 'active selected' : ''}}">
+					<li class="{{request()->is('dashboard/services/' . $service->name) ? 'active selected' : ''}}">
 						<a href='{{ url($service->path) }}'>{{ trans('dashboard.navbar.teleusuario.' . $service->name) }}</a>
 					</li>
 				@endforeach

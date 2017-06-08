@@ -43,9 +43,9 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
 	//Carga de tareas en la página inicial
 	//AUN NO SON NECESARIOS YA QUE ES LA CARGA DE LA PAGINA PRINCIPAL
 	//REVISAR LAS RUTAS YA QUE HAY MÁS ABAJO UN PREFIX A TASKS Y PUEDE HABER PROBLEMAS
-	/*Route::get('/tasks', 'HomeController@getTask')->name('dashboard.tasks');
+	Route::get('/tasks', 'HomeController@getTask')->name('dashboard.tasks');
 	Route::post('/tasks/note', 'HomeController@postCreateNote')->name('dashboard.tasks.create_note');
-	Route::post('/tasks/send', 'HomeController@postSend')->name('dashboard.tasks.send_message');*/
+	Route::post('/tasks/send', 'HomeController@postSend')->name('dashboard.tasks.send_message');
 
 	//Ruta para el cambio de contraseña
 	Route::get('/password/change',  'UserController@getChangePassword')->name('dashboard.change_pwd');
@@ -55,20 +55,26 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
 	Route::get('/profile',  'UserController@getProfile')->name('dashboard.profile');
 	Route::post('/profile',  'UserController@postProfile')->name('dashboard.profile.update');
 
-	Route::group(['prefix' => 'tasks'], function() {
+
+
+	Route::group(['prefix' => 'task'], function() {
 		Route::get('/ranking', 'UserController@getRanking')->name('dashboard.tasks.ranking');
 	});
 
-	//Rutas para el apartado mensajes
-	Route::get('/messages', 'ServiceController@getMessage')->name('dashboard.message');
-	Route::post('/messages', 'ServiceController@postMessages')->name('dashboard.message.send_message');
-	Route::post('/messages/note/create', 'ServiceController@postCreateNote')->name('dashboard.message.create_note');
-	Route::get('/messages/load', 'ServiceController@getNewMessage')->name('dashboard.message.load_new_message');
-	Route::post('/messages/private-key', 'ServiceController@postSendPrivateKey')->name('dashboard.message.send_private_key');
 
 
-	//Rutas para los guiños
-	Route::get('/winks', 'ServiceController@getWink')->name('dashboard.wink');
+	Route::group(['prefix' => 'services'], function() {
+		//Rutas para el apartado mensajes
+		Route::get('/messages', 'ServiceController@getMessage')->name('dashboard.message');
+		Route::post('/messages', 'ServiceController@postMessages')->name('dashboard.message.send_message');
+		Route::post('/messages/note/create', 'ServiceController@postCreateNote')->name('dashboard.message.create_note');
+		Route::get('/messages/load', 'ServiceController@getNewMessage')->name('dashboard.message.load_new_message');
+		Route::post('/messages/private-key', 'ServiceController@postSendPrivateKey')->name('dashboard.message.send_private_key');
+
+
+		//Rutas para los guiños
+		Route::get('/winks', 'ServiceController@getWink')->name('dashboard.wink');
+	});
 
 });
 
