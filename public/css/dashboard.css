@@ -39,6 +39,10 @@ li.notes {
     padding: 0;
 }
 
+.new-message {
+    resize:vertical;
+}
+
 @media screen and (max-width: 992px) {
     #active {
         position: static !important;

@@ -7,7 +7,7 @@
 @endif
 
 <!-- Row ends -->
-<div clsass="row gutter">
+<div class="row gutter">
 	<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
 		<div class="panel panel-task-info">
 			<div class="panel-body">
