@@ -194,7 +194,7 @@ return [
 			],
 			'send_message' => [
 				'error' => 'Se ha producido un error enviando el mensaje.',
-				'success' => 'The message was sent successfully.',
+				'success' => 'El mensaje se ha enviado correctamente.',
 			],
 		],
 		'wink' => [

@@ -142,47 +142,6 @@ $bronze: #CD7F32;
 					}
 				}
 			}
-			//Botón para fotos de usuario
-			.add-btn-info {
-				-webkit-transition: all 0.3s ease-in-out;
-				-moz-transition: all 0.3s ease-in-out;
-				-ms-transition: all 0.3s ease-in-out;
-				-o-transition: all 0.3s ease-in-out;
-				transition: all 0.3s ease-in-out;
-				@include border-radius(30px);
-				background: $body-bg;
-				height: 30px;
-				text-align: center;
-				display: block;
-				i {
-					-webkit-transition: all 0.3s ease-in-out;
-					-moz-transition: all 0.3s ease-in-out;
-					-ms-transition: all 0.3s ease-in-out;
-					-o-transition: all 0.3s ease-in-out;
-					transition: all 0.3s ease-in-out;
-					color: $green;
-					font-size: 20px;
-					line-height: 30px;
-				}
-
-				.count-photos {
-					color: $white;
-					margin-left: 3px;
-				}
-
-				&.added {
-					background: $green;
-					i {
-						color: $white;
-					}
-				}
-				&.added-red {
-					background: $red;
-					i {
-						color: $white;
-					}
-				}
-			}
 		}
 	}
 }
@@ -349,6 +308,40 @@ $bronze: #CD7F32;
 		border-top: 2px solid $bronze;
 		img.card-avatar {
 			border: 2px solid $bronze;
+		}
+	}
+}
+
+
+
+//////////// PARA LOS BOTONES DE LAS NOTAS DE LOS MENSAJES
+.btn-bkg {
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-ms-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+	/*float: right;*/
+	@include border-radius(30px);
+	background: $body-bg;
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	display: block;
+	i {
+		-webkit-transition: all 0.3s ease-in-out;
+		-moz-transition: all 0.3s ease-in-out;
+		-ms-transition: all 0.3s ease-in-out;
+		-o-transition: all 0.3s ease-in-out;
+		transition: all 0.3s ease-in-out;
+		color: $green;
+		font-size: 20px;
+		line-height: 30px;
+	}
+	&.added {
+		background: $green;
+		i {
+			color: $white;
 		}
 	}
 }

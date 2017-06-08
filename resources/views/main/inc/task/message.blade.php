@@ -95,8 +95,15 @@
 				<div class="panel notes">
 					<div class="panel-group" id="accordion">
 						<fieldset class="fieldset_info">
-							<a class="escribir_nota add-btn added" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-								<legend>{{ trans('dashboard.messages.form.notes.write') }} <i class="icon-plus3 pull-right"></i></legend>
+							<a class="escribir_nota" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+								<legend>
+									<span class="no-margin">
+										{{ trans('dashboard.messages.form.notes.write') }}
+									</span>
+									<span class="btn-bkg added pull-right">
+										<i class="icon-plus3"></i>
+									</span>
+								</legend>
 
 							</a>
 							<div id="collapseOne" class="panel-collapse collapse">
@@ -110,9 +117,15 @@
 							</div>
 						</fieldset>
 						<fieldset class="fieldset_info">
-							<a class="escribir_nota" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-								<legend>{{ trans('dashboard.messages.form.notes.notes') }} <i class="icon-plus3 pull-right"></i></legend>
-
+								<legend>
+									<a class="escribir_nota" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+									<span class="no-margin">
+										{{ trans('dashboard.messages.form.notes.notes') }}
+									</span>
+									<span class="btn-bkg added pull-right">
+										<i class="icon-plus3"></i>
+									</span>
+								</legend>
 							</a>
 							<div id="collapseTwo" class="panel-collapse collapse">
 								<div class="panel-body">

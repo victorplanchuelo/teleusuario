@@ -29,6 +29,7 @@
 
 	//Función para crear la animación de cuando el usuario abre/cierra la parte de las notas
 	function toggleIcon(e) {
+		e.preventDefault();
 		$(e.target)
 			.parent()
 			.find('i')
@@ -37,7 +38,9 @@
 
 	$(document).ready(function() {
 
-		$('.panel-group').on('hidden.bs.collapse', toggleIcon).on('shown.bs.collapse', toggleIcon);
+		$('.panel-group')
+			.on('hidden.bs.collapse', toggleIcon)
+			.on('shown.bs.collapse', toggleIcon);
 
 		if(typeof oldIE === 'undefined' && Object.keys)
 			hljs.initHighlighting();
