@@ -53,7 +53,7 @@ return [
 		'password_confirm' => 'Password confirm',
 		'submit' => 'Change password',
 		'message' => [
-			'success' => 'Password was changed successfuly',
+			'success' => 'Password was changed successfully',
 			'error' => 'New password cannot be the same than the old one.',
 			'label1' =>'Remember!',
 			'label2' => 'Password must contain alphanumeric characters and must be at least 6 characters long',
@@ -174,6 +174,20 @@ return [
 		],
 	],
 
+	'chats' => [
+		'title' => 'Chat Service',
+		'errors' => [
+			'entertainer_not_sent' => 'The entertainer\'s code was not sent successfully',
+			'last_conn_not_updated' => 'An unexpected error was given back while updating data into database.',
+			'data_not_sent_correctly' => 'Some of required data was not sent successfully to the server.',
+			'not_valid_message' => 'You must write something within the message textbox of this conversation.',
+			'invalid_conversation' => 'There have been an error in the conversation and your message has not been able to be sent.',
+			'message_not_sent' => 'An error has occurred sending the message. Please, try again.',
+			'introduce_message' => 'Please, introduce a valid message',
+			'not_close_client_havent_time' => 'You cannot close this chat. The client haven\'t got time to speak with you yet.',
+		],
+	],
+
 	'task' => [
 		'message' => [
 			'conversation' => [
@@ -198,6 +212,36 @@ return [
 			'info' => [
 				'location' => 'Location',
 			],
+		],
+		'chats' => [
+			'update_last_conn_entertainer' => [
+				'error' => 'An error occurred updating entertainer\'s last connection.',
+			],
+			'update_last_premium_connection' => [
+				'error' => 'An error occurred updating premium\'s last connection.',
+			],
+			'load_conversation' => [
+				'error' => 'An error occurred loading the conversation.',
+			],
+			'video_chat' => [
+				'error' => 'An error occurred loading the VideoChat.',
+			],
+			'send_chat_message' => [
+				'error' => 'An error occurred sending the message of the chat conversation.',
+			],
+			'mark_message_as_read' => [
+				'error' => 'An error occurred marking the message as read.',
+			],
+			'create_chat_note' => [
+				'error' => 'An error occurred creating a note for this conversation.',
+			],
+			'reversed_chat' => [
+				'error' => 'An error occurred getting the reversed chats.',
+			],
+			'disconnected_reversed_chat' => [
+				'error' => 'An error occurred getting the disconnected reversed chats.',
+			],
+
 		],
 	],
 ];

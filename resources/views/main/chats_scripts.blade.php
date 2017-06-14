@@ -1,0 +1,800 @@
+<!-- Custom JS -->
+<script src="{{ asset('js/custom.js') }}"></script>
+<script src="{{ asset('js/loading-overlay.min.js') }}"></script>
+
+<!-- Gallery JS -->
+<script src="{{ asset('js/gallery/baguetteBox.js') }}"></script>
+<script src="{{ asset('js/gallery/plugins.js') }}"></script>
+
+
+
+<!-- ARCHIVOS NECESARIOS PARA EL TEMA DEL CHAT, QUE VIENE DEL ANTIGUO TELEUSUARIO-->
+<script type="text/javascript" src="https://www.liruch.com/js/TimeCircles.js"></script>';
+
+<!--<script src="{{-- asset('/js/chat.js') --}}"></script>-->
+<script type="text/javascript" src="{{ asset('/js/firebase.js') }}"></script>
+<script src="https://www.gstatic.com/firebasejs/3.4.0/firebase.js"></script>
+
+<script src="https://static.opentok.com/v2/js/opentok.js"></script>
+<script type="text/javascript" src="{{ asset('/js/opentok.js') }}"></script>
+<!-------------------------------- FIN ----------------------------------------------->
+
+
+<script type="text/javascript">
+
+
+
+	/************ Funciones Nueva version *************/
+
+//FUNCIONES REVISADAS/////////////////////////////////////////////////////
+	function ActualizarConexionPremium()
+	{
+		// CSRF protection
+		$.ajaxSetup(
+			{
+				headers:
+					{
+						'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+					}
+			});
+
+		jQuery.ajax({
+			async:true,
+			type: "POST",
+			dataType: "json",
+			contentType: "application/x-www-form-urlencoded",
+			url: "{{ route('dashboard.chats.update_premium_connection') }}",
+			data: {  },
+			beforeSend:function() { },
+			success:function(response) { console.log(response); }
+			,timeout:60000
+			,error:function(objAJAXRequest,strError,response) { }
+		});
+		setTimeout(function(){ ActualizarConexionPremium(); }, 200000);
+	}
+
+	function ExisteConversacionEnPantalla(conversacion)
+	{
+		var existe=false;
+		$('.fila-chat').each(function( index ) {
+			if($(this).attr('id')===conversacion)
+				existe=true;
+		});
+
+		return existe;
+	}
+
+	function HtmlActualizarConversacionesUsuarioPremium(conversacion,datos)
+	{
+		var video_chat=1;
+		if(datos.video===null)
+			video_chat=0;
+
+		if(!ExisteConversacionEnPantalla(conversacion))
+		{
+			if($('#'+conversacion).html()===null)
+			{
+				// CSRF protection
+				$.ajaxSetup(
+					{
+						headers:
+							{
+								'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+							}
+					});
+
+				jQuery.ajax({
+					async:true,
+					type: "POST",
+					dataType: "json",
+					contentType: "application/x-www-form-urlencoded",
+					url:"{{ route('dashboard.chats.load_conversation') }}",
+					data:
+						{
+							"conversacion":conversacion,
+							"video_chat":video_chat
+						},
+					beforeSend:function() { },
+					success:function(response)
+					{
+						if(response.success===0)
+							alertify.error(response.error);
+						else
+						{
+							$('#tabla_chat').append(response.html_fila);
+
+							if(parseInt($('#'+conversacion).attr('revertida'))===1)
+							{
+								var revertida=HtmlRevertida();
+								$('#'+conversacion).find('#chat_mensajes').append(revertida);
+							}
+
+							if(response.segundos_quedan>0)
+							{
+								if(response.segundos_quedan)
+								{
+									IniciarCuentaAtrasUP(conversacion,response.segundos_quedan);
+									duracion=0;
+								}
+								else
+									QuitarCuentaAtrasUP(conversacion);
+							}
+							else
+								QuitarCuentaAtrasUP(conversacion);
+
+
+							$('#'+conversacion).find('#hablando').css('visibility','');
+							$('#'+conversacion).find('#texto_hablando').html('¡Nuevo!');
+							Parpadear($('#'+conversacion).find('#hablando'),1);
+
+							$('#'+conversacion).find('#chat_mensajes').scrollTop($('#'+conversacion).find('#chat_mensajes')[0].scrollHeight);
+
+							if(video_chat && response.token_video_chat!='')
+								IniciarVideoLlamadaUP(conversacion,datos.video.sessionId,response.token_video_chat);
+						}
+					}
+					,timeout:60000
+					,error:function(objAJAXRequest,strError,response) { /*console.log(objAJAXRequest);*/ }
+				});
+			}
+		}
+		else
+		{
+			if(video_chat)
+			{
+				// CSRF protection
+				$.ajaxSetup(
+					{
+						headers:
+							{
+								'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+							}
+					});
+
+				jQuery.ajax({
+					async:true,
+					type: "POST",
+					dataType: "json",
+					contentType: "application/x-www-form-urlencoded",
+					url:"{{ route('dashboard.chats.videochat') }}",
+					data:
+						{
+							"conversacion":conversacion,
+						},
+					success:function(response) { IniciarVideoLlamadaUP(conversacion,datos.video.sessionId,response.token); }
+					,timeout:60000
+					,error:function(objAJAXRequest,strError,response) { console.log(objAJAXRequest); }
+				});
+			}
+			else
+			{
+				if($('#subscriber_'+conversacion).html()!=='')
+					CerrarSesionVideo(conversacion);
+			}
+		}
+	}
+
+	function EnviarMensajeUP2(conversacion)
+	{
+		var foto=$('#'+conversacion).find('#up_foto').attr('src');
+		foto = foto.replace('https://www.liruch.com', '');
+
+		var nombre=$('#'+conversacion).find('#up_nombre').html();
+		var texto_mensaje=$('#'+conversacion).find('#texto_mensaje').val();
+		var html=HtmlMensajePremiumEnviado(texto_mensaje,foto,nombre);
+		var uic=$('#'+conversacion).find('#uic').val();
+		var usuario=$('#'+conversacion).attr('usuario');
+		var revertida=$('#'+conversacion).attr('revertida');
+
+		texto_mensaje=texto_mensaje.trim();
+		console.log('texto_mensaje='+texto_mensaje);
+
+		if(texto_mensaje.length>0 && texto_mensaje!='')
+		{
+			$('#'+conversacion).find('#chat_mensajes').append(html);
+			$('#'+conversacion).find('#chat_mensajes').scrollTop($('#'+conversacion).find('#chat_mensajes')[0].scrollHeight);
+			$('#'+conversacion).find('#texto_mensaje').val('');
+
+
+			// CSRF protection
+			$.ajaxSetup(
+				{
+					headers:
+						{
+							'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+						}
+				});
+
+			jQuery.ajax({
+				async:true,
+				type: "POST",
+				dataType: "json",
+				contentType: "application/x-www-form-urlencoded",
+				url:"{{ route('dashboard.chats.send_message') }}",
+				data:
+					{
+						"conversacion":conversacion,
+						"texto_mensaje":texto_mensaje,
+						"usuario":usuario,
+						"foto":foto,
+						"nombre":nombre,
+						"uic":uic,
+						"revertida":revertida
+					},
+				beforeSend:function() { },
+				success:function(response)
+				{
+					var ultimo=$('#'+conversacion).find('#chat_mensajes').find('.odd').find( ".chat-text" ).last();
+					$('#'+conversacion).attr('revertida','0');
+					console.log(response);
+
+					if(response.segundos_duracion!==null && response.segundos_duracion>0)
+						IniciarCuentaAtrasUP(conversacion,response.segundos_duracion);
+					else
+						console.log('no_segundos_duracion');
+
+
+					if(typeof response.mensaje.id !== 'undefined' && response.mensaje.id>0)
+						$(ultimo).parent().parent().attr('id','mensaje_'+response.mensaje.id);
+
+				}
+				,timeout:60000
+				,error:function(objAJAXRequest,strError,response) { console.log(objAJAXRequest); }
+			});
+		}
+		else
+			alertify.error("{{ trans('dashboard.chats.errors.introduce_message') }}");
+	}
+
+	function IntroEnviarUP2(e,conversacion)
+	{
+		var key = e.keyCode || e.which;
+		if (key === 13)
+			EnviarMensajeUP2(conversacion);
+
+		return true;
+	}
+
+	function HtmlMensajePremiumEnviado(texto,foto,nombre)
+	{
+		var f=new Date();
+		var cad=addZero(f.getHours())+":"+addZero(f.getMinutes());
+
+		if(/sin-foto/.test(foto))
+		{
+			if(!(/static.liruch.com/.test(foto)))
+				foto='https://static.liruch.com'+foto;
+		}
+
+		var html='';
+		html+='<li class="odd">';
+		html+='<div class="chat-image"> <img alt="'+nombre+'" src="'+foto+'"> </div>';
+		html+='<div class="chat-body">';
+		html+='<div class="chat-text">';
+		html+='<h4>'+nombre+'</h4>';
+		html+='<p> '+texto+' </p> <b> '+cad+' </b> </div>';
+		html+='</div>';
+		html+='</li>';
+
+		return html;
+	}
+
+	function ActualizarConversacionPremium(conversacion,mensajes)
+	{
+		var usuario=$('#'+conversacion).attr('usuario');
+		$.each( mensajes, function( key, value ) {
+			var mensaje=value;
+			if(typeof usuario !== 'undefined' && mensaje.origen!==usuario)
+			{
+				if($('#mensaje_'+mensaje.id).html()===null)
+				{
+					var html=HtmlMensajeRecibido(mensaje);
+					$('#'+conversacion).find('#chat_mensajes').append(html);
+					$('#'+conversacion).find('#chat_mensajes').scrollTop($('#'+conversacion).find('#chat_mensajes')[0].scrollHeight);
+
+					MarcarMensajeLeidoUP(mensaje.id,conversacion);
+					if($('#audio-chat').html()!==null)
+						$('#audio-chat')[0].play();
+
+					Notificar();
+					Notificacion(conversacion,'¡Te está hablando!',mensaje);
+					$('#'+conversacion).find('#hablando').css('visibility','');
+					$('#'+conversacion).find('#texto_hablando').html('¡Te está hablando!');
+					Parpadear($('#'+conversacion).find('#hablando'),1);
+				}
+			}
+		});
+	}
+
+	function MarcarMensajeLeidoUP(mensaje,conversacion)
+	{
+		// CSRF protection
+		$.ajaxSetup(
+			{
+				headers:
+					{
+						'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+					}
+			});
+
+		jQuery.ajax({
+			async:true,
+			type: "POST",
+			dataType: "json",
+			contentType: "application/x-www-form-urlencoded",
+			url:"{{ route('dashboard.chats.mark_message_as_read') }}",
+			data:
+				{
+					"mensaje":mensaje,
+					"conversacion":conversacion
+				},
+			beforeSend:function() { },
+			success:function(response) { }
+			,timeout:60000
+			,error:function(objAJAXRequest,strError,response) { }
+		});
+	}
+
+	function IniciarCuentaAtrasUP(conversacion,duracion)
+	{
+		$('#'+conversacion).find("#CountDownTimer").TimeCircles().destroy();
+		$('#'+conversacion).find("#cuenta_atras").html('<div id="CountDownTimer" data-timer="'+duracion+'" style="height:50px;margin-right:18px;"></div>');
+
+		$('#'+conversacion).find("#CountDownTimer").TimeCircles({
+			count_past_zero: false,
+			circle_bg_color: "#FFFFFF",
+			time: {
+				Days: { show: false },
+				Hours: { show: false },
+				Minutes: { color: "#03917d",text:"Minutos" },
+				Seconds: { color: "#eaeaea",text:"",show:false },
+			}
+		})
+
+	}
+
+	function QuitarCuentaAtrasUP(conversacion)
+	{
+		$('#'+conversacion).find("#CountDownTimer").TimeCircles().destroy();
+		$('#'+conversacion).find("#CountDownTimer").css('display','none');
+	}
+
+	function EliminarConversacionesNoActivasUP(conversaciones_activas)
+	{
+		$('.fila-chat').each(function( index ) {
+			var result = jQuery.inArray($(this).attr("id"),conversaciones_activas);
+			if(result===-1)
+				$(this).remove();
+		});
+	}
+
+	function GuardarNotaChatUP(conversacion)
+	{
+		var texto=$('#'+conversacion).find('#texto_nota').val();
+
+		// CSRF protection
+		$.ajaxSetup(
+			{
+				headers:
+					{
+						'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+					}
+			});
+
+		jQuery.ajax({
+			async:true,
+			type: "POST",
+			dataType: "json",
+			contentType: "application/x-www-form-urlencoded",
+			url:"{{ route('dashboard.chats.create_note') }}",
+			data:
+				{
+					"conversacion":conversacion,
+					"texto":texto
+				},
+			beforeSend:function() { },
+			success:function(response)
+			{
+				if(response.success>0)
+				{
+					$('#'+conversacion).find('#notas_conversacion').prepend(response.html_nota);
+					$('#'+conversacion).find('#texto_nota').val("");
+				}
+				else
+					alertify.error(response.error);
+			}
+			,timeout:60000
+			,error:function(objAJAXRequest,strError,response) {/*console.log(objAJAXRequest);*/}
+		});
+	}
+
+	/**
+	 * COMPROBAR AJAX QUE SE LLAMA
+	 */
+	function ObtenerChatRevertido()
+	{
+		if($('#tabla_chat').children().length<=5)
+		{
+			// CSRF protection
+			$.ajaxSetup(
+				{
+					headers:
+						{
+							'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+						}
+				});
+
+			jQuery.ajax({
+				async:true,
+				type: "POST",
+				dataType: "json",
+				contentType: "application/x-www-form-urlencoded",
+				url:"{{ route('dashboard.chats.get_reversed_chat') }}",
+				data: { },
+				beforeSend:function() { },
+				success:function(response)
+				{
+					try
+					{
+						if(response.conversacion!==null && response.conversacion>0)
+						{
+							if(!$('#'+response.conversacion).html()!=='')
+							{
+
+								//////// ESTO ES LO QUE NO SABEMOS /////////
+								var html=HtmlConversacion(response.conversacion,response.opciones.origen);
+								$('#chat_conversaciones').prepend(html);
+
+							}
+
+							$('#'+response.conversacion).attr('revertida','1');
+							Notificar();
+							$('#audio-chat')[0].play();
+							$('#'+response.conversacion).find('#hablando').css('visibility','');
+							$('#'+response.conversacion).find('#texto_hablando').html('¡Chat revertido!');
+							Parpadear($('#'+response.conversacion).find('#hablando'),1);
+							console.log('sonido de obtener chat revertido:'+response.conversacion);
+						}
+					}catch(err) { console.log(err); }
+				}
+				,timeout:60000
+				,error:function(objAJAXRequest,strError,response) { }
+			});
+		}
+		else { console.log('tiene conversaciones'); }
+
+		setTimeout(function(){ ObtenerChatRevertido(); }, 300000);
+	}
+
+	function ObtenerChatRevertidoDesconectado()
+	{
+		if($('#tabla_chat').children().length<=5)
+		{
+			// CSRF protection
+			$.ajaxSetup(
+				{
+					headers:
+						{
+							'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+						}
+				});
+
+			jQuery.ajax({
+				async:true,
+				type: "POST",
+				dataType: "json",
+				contentType: "application/x-www-form-urlencoded",
+				url:"{{ route('dashboard.chats.get_disconnected_reversed_chat') }}",
+				data: { },
+				beforeSend:function() { },
+				success:function(response)
+				{
+					try
+					{
+						if(response.conversacion.id!==null && response.conversacion.id>0)
+						{
+							$('#'+response.conversacion.id).attr('revertida','1');
+							Notificar();
+							$('#audio-chat')[0].play();
+							console.log('sonido de obtener chat revertido desconectado:'+response.conversacion.id);
+							$('#'+response.conversacion).find('#hablando').css('visibility','');
+							$('#'+response.conversacion).find('#texto_hablando').html('¡Chat revertido!');
+							Parpadear($('#'+response.conversacion.id).find('#hablando'),1);
+						}
+					}catch(err) { console.log(err); }
+				}
+				,timeout:60000
+				,error:function(objAJAXRequest,strError,response) { /*console.log(objAJAXRequest);*/ }
+			});
+		}
+		else
+			console.log('tiene conversaciones');
+
+		setTimeout(function(){ ObtenerChatRevertidoDesconectado(); }, 300000);
+	}
+
+	function HtmlRevertida()
+	{
+		var html='';
+		html+='<li style="text-align: center;background-color: white;border: 1px solid #def1ea;padding: 7px;border-radius: 7px;font-weight: bold;color: red;" >';
+		html+="Rescuerda que este chat lo has abierto tú.<br> Se supone que la que has visto el anuncio del chico y le has dado a chatear eres tú.<br>";
+		html+='</li>';
+
+		return html;
+	}
+
+	function QuitarHablando(conversacion)
+	{
+		conversacion_actual=conversacion;
+		$('#'+conversacion).find('#hablando').css('visibility','hidden');
+	}
+
+	function Parpadear(elemento,n)
+	{
+		if (n===undefined)
+			n=1;
+		if (n>=10)
+			elemento.fadeIn(500);
+		else
+		{
+			elemento.fadeIn(500).delay(250).fadeOut(500, function ()
+			{
+				Parpadear(elemento,n+1);
+			});
+		}
+	}
+
+	function InfoChat(conversacion)
+	{
+		if($('#'+conversacion).find('#informacion_chat').hasClass('oculto'))
+			$('#'+conversacion).find('#informacion_chat').removeClass('oculto');
+		else
+			$('#'+conversacion).find('#informacion_chat').addClass('oculto');
+	}
+
+	function Notificacion(conversacion,texto,mensaje)
+	{
+		$('.gritter-item').parent().remove();
+		if(conversacion!=conversacion_actual)
+		{
+			$.gritter.add({
+				title: mensaje.nombre,
+				text: mensaje.texto,
+				image: mensaje.foto,
+				duration: 3000
+			});
+		}
+	}
+
+	function CerrarConversacionChat(conversacion,premium,cliente)
+	{
+		// CSRF protection
+		$.ajaxSetup(
+			{
+				headers:
+					{
+						'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+					}
+			});
+
+		jQuery.ajax({
+			async:true,
+			type: "POST",
+			dataType: "json",
+			contentType: "application/x-www-form-urlencoded",
+			url:"{{ route('dashboard.chats.close_chat_conversation') }}",
+			data:
+				{
+					'id_conversacion':conversacion,
+					'premium':premium,
+					'cliente':cliente
+				},
+			beforeSend:function() { $('body').css('cursor', 'wait'); },
+			success:function(response)
+			{
+				if(response.success===0)
+					alertify.error(response.error);
+
+				$('body').css('cursor', 'default');
+			}
+			,timeout:60000
+			,error:function(objAJAXRequest,strError,response) { $('body').css('cursor', 'default'); }
+		});
+
+	}
+
+
+
+	//FUNCIONES AUXILIARES
+	function addZero(i)
+	{
+		if (i < 10)
+			i = "0" + i;
+		return i;
+	}
+
+	function HtmlMensajeRecibido(mensaje)
+	{
+		var f=new Date();
+		var cad=f.getHours()+":"+f.getMinutes();
+
+		var foto=mensaje.foto;
+
+		if(/sin-foto/.test(foto))
+			foto='https://www.liruch.com'+foto;
+		else
+			foto= foto.replace("http:", "https:");
+
+		var html='';
+		html+='<li id="mensaje_'+mensaje.id+'">';
+		html+='<div class="chat-image"> <img alt="'+mensaje.nombre+'" src="'+foto+'"> </div>';
+		html+='<div class="chat-body">';
+		html+='<div class="chat-text">';
+		html+='<h4>'+mensaje.nombre+'</h4>';
+		html+='<p> '+mensaje.texto+' </p> <b> '+cad+' </b> </div>';
+		html+='</div>';
+		html+='</li>';
+
+		return html;
+	}
+
+	function Notificar()
+	{
+		if (!$('[data-toggle=tab][href=#Chat]').parent().hasClass('active'))
+		{
+			var parpadeo = setInterval(function() {
+				$('[data-toggle=tab][href=#Chat]').parent().css('background-color','#008EB9');
+				$('[data-toggle=tab][href=#Chat]').parent().fadeOut(600, 'swing', function() {
+					$('[data-toggle=tab][href=#Chat]').parent().fadeIn(600, 'swing');
+				});
+			}, 1200);
+
+			$('[data-toggle=tab][href=#Chat]').parent().click(function() {
+				clearInterval(parpadeo);
+				$('[data-toggle=tab][href=#Chat]').parent().css('background-color','');
+			});
+		}
+	}
+
+
+
+	function AbrirChat(chat)
+	{
+		if (!$('#btn-chat-'+chat).hasClass('abierto'))
+		{
+			$.ajax({
+				async:true,
+				type: "POST",
+				dataType: "json",
+				contentType: "application/x-www-form-urlencoded",
+				url:"/ajax.php?section=up_abrir_chat",
+				data: { "chat":chat },
+				beforeSend:function()
+				{
+					$('body').css('cursor', 'wait');
+				},
+				success:function(response)
+				{
+					$('body').css('cursor', 'default');
+
+					if (response.exito == 1)
+					{
+						$('#btn-chat-'+chat).removeClass('btn-info chat').addClass('btn-primary conversation abierto');
+						$('#chats-abiertos').append(response.html);
+					}
+					else
+						alert(response.error);
+				}
+				,timeout:30000
+				,error:function(objAJAXRequest,strError)
+				{
+					$('body').css('cursor', 'default');
+					console.log(objAJAXRequest);
+				}
+			});
+		}
+	}
+
+	function CerrarChat(chat)
+	{
+		$("#chat-"+chat).remove();
+		$("#btn-chat-"+chat).removeClass('abierto');
+	}
+
+	function ActualizarUltimaConexionAnimadora()
+	{
+		console.log('ActualizarUltimaConexionAnimadora');
+
+		// CSRF protection
+		$.ajaxSetup(
+			{
+				headers:
+					{
+						'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+					}
+			});
+
+		$.ajax({
+			async:true,
+			type: "POST",
+			dataType: "json",
+			contentType: "application/x-www-form-urlencoded",
+			url: "{{ route('dashboard.chats.update_last_conn_entertainer') }}",
+			data: {  },
+			beforeSend:function() { },
+			success:function(response)
+			{
+				if (response.exito == 0)
+					console.log("Ha ocurrido un error al actualizar la última conexión de la animadora.");
+				else
+					console.log(response);
+			}
+			,timeout:60000
+			,error:function(objAJAXRequest,strError) { console.log(strError); }
+		});
+	}
+
+
+
+
+	$(document).ready(function() {
+		//////////////VARIABLES GLOBALES
+		var g_movil=0;
+		var conversacion_actual=0;
+		var lenap=1;
+		// $_SERVER['REMOTE_ADDR']
+		var prueba=1;
+		var chat_activo=0;
+		///////////////////////////////////////////
+
+		// Initialize Firebase
+		var config = {
+			apiKey: "AIzaSyCFsXB-qRqacz3JfwliVuYew5o285ELY_c",
+			authDomain: "liruch-50ed4.firebaseapp.com",
+			databaseURL: "https://liruch-50ed4.firebaseio.com",
+			storageBucket: "liruch-50ed4.appspot.com",
+			messagingSenderId: "1092206030458"
+		};
+		firebase.initializeApp(config);
+
+		if (typeof oldIE === 'undefined' && Object.keys)
+			hljs.initHighlighting();
+		baguetteBox.run('.galleryClient');
+		baguetteBox.run('.galleryPremium');
+		baguetteBox.run('.img-messages');
+
+
+		$('.fila-chat').each(function( index ) {
+			var conversacion=$(this).attr("id");
+			$('#'+conversacion).find('#chat_mensajes').scrollTop($('#'+conversacion).find('#chat_mensajes')[0].scrollHeight);
+
+		});
+
+		if(!g_movil)
+		{
+			$(".open-panel").click(function() {
+				$(".chat-left-aside").toggleClass("open-pnl");
+				$(".open-panel i").toggleClass("ti-angle-left");
+			});
+		}
+
+
+
+		var elegido=$('.widget-head').find('.active').find('a').attr('href');
+		if(!chat_activo)
+		{
+			firebase_ConversacionesActivasUP({{ Auth::user()->code  }});
+			setTimeout(function(){
+				ObtenerChatRevertido();
+			}, 300000);
+			setTimeout(function(){
+				ObtenerChatRevertidoDesconectado();
+			}, 520000);
+			ActualizarConexionPremium();
+			ActualizarUltimaConexionAnimadora();
+			setInterval(ActualizarUltimaConexionAnimadora,200000);
+			chat_activo=1;
+		}
+
+	});
+</script>

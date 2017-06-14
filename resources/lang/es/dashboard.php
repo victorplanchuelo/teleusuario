@@ -176,6 +176,20 @@ return [
 		],
 	],
 
+	'chats' => [
+		'title' => 'Servicio de Chats',
+		'errors' => [
+			'entertainer_not_sent' => 'El código de la animadora no fue enviado correctamente',
+			'last_conn_not_updated' => 'La actualización de los datos en la base de datos ha devuelto un error inesperado.',
+			'data_not_sent_correctly' => 'Algunos de los datos requeridos para realizar la acción no fueron enviados correctamente.',
+			'not_valid_message' => 'Debes escribir algo en la caja de texto del mensaje de esa conversación',
+			'invalid_conversation' => 'Ha habido un error en la conversación y tu mensaje no ha podido ser enviado.',
+			'message_not_sent' => 'Se ha producido un error enviando el mensaje. Por favor, intentelo de nuevo.',
+			'introduce_message' => 'Por favor, introduce un mensaje válido',
+			'not_close_client_havent_time' => 'No puedes cerrar este chat. El cliente aún tiene tiempo para hablar contigo.',
+		],
+	],
+
 
 	'task' => [
 		'message' => [
@@ -200,6 +214,36 @@ return [
 		'wink' => [
 			'info' => [
 				'location' => 'Ubicación',
+			],
+		],
+
+		'chats' => [
+			'update_last_conn_entertainer' => [
+				'error' => 'Se ha producido un error actualizando la última conexión de la animadora',
+			],
+			'update_premium_connection' => [
+				'error' => 'Se ha producido un error actualizando la última conexión de la usuaria premium',
+			],
+			'load_conversation' => [
+				'error' => 'Se ha producido un error cargando los mensajes de la conversación.',
+			],
+			'video_chat' => [
+				'error' => 'Se ha producido un error mostrando el VideoChat.',
+			],
+			'send_chat_message' => [
+				'error' => 'Se ha producido un error enviando el mensaje de la conversación de chat.',
+			],
+			'mark_message_as_read' => [
+				'error' => 'Se ha producido un error marcando el mensaje como leído.',
+			],
+			'create_chat_note' => [
+				'error' => 'Se ha producido un error creando una nueva nota para esta conversación.',
+			],
+			'reversed_chat' => [
+				'error' => 'Se ha producido un error obteniendo los chats revertidos.',
+			],
+			'disconnected_reversed_chat' => [
+				'error' => 'Se ha producido un error obteniendo los chats revertidos desconectados.',
 			],
 		],
 	],

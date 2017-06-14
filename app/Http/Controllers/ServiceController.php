@@ -62,6 +62,13 @@ class ServiceController extends Controller
 		return view('dashboard.messages', compact('success', 'message', 'strErr'));
 	}
 
+
+	/**
+	 * Función que será llamada una vez se haya contestado un mensaje
+	 * Recuperará otro ID de mensaje y mostrará los nuevos datos por pantalla
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
 	public function getNewMessage()
 	{
 		$success=1;
@@ -94,6 +101,57 @@ class ServiceController extends Controller
 	}
 
 	/**
+	 * Función que será llamado cuando se envíe (el mensaje, guiño, ...)
+	 * Provisionalmente se está haciendo sólo para mensaje
+	 *
+	 * @param Request $request
+	 * @return \Illuminate\Http\JsonResponse
+	 *
+
+	 */
+	public function postMessages(Request $request)
+	{
+		$strErr ='';
+		$messages = [
+			'texto.required' => trans('validation.custom.task.messages.message.required'),
+			'texto.min' => trans('validation.custom.task.messages.message.min'),
+		];
+
+		$validator = Validator::make($request->all(), [
+			'texto' => 'required|min:4',
+		], $messages);
+
+		if ($validator->fails()) {
+			return response()->json([
+				'success' => 0,
+				'error' => $validator->errors()->all(),
+			]);
+		}
+
+		//Si supera la validación se puede enviar el mensaje con los parámetros que se nos pide desde el servicio
+		$send_msg = json_decode($this->services->postSendMessage($request['texto'], session('conversacion_actual'), 0)->getBody()->getContents());
+
+		$success = ($send_msg->exito <= 0) ? 0 : 1 ;
+
+		if($success <= 0)
+		{
+			$strErr = trans('dashboard.task.message.send_message.error') . ' ERROR - '. $send_msg->error;
+		}
+
+
+		//Si se ha enviado correctamente el mensaje, borramos el id de la conversación actual (ya que ha sido terminada)
+		//Habría que comprobar si
+
+		return response()->json([
+			'success' => $success,
+			'error' => [$strErr],
+			'strDate' => Carbon::now()->format('d/m/Y'),
+		]);
+	}
+
+	/**
+	 * Función que se encarga de crear las notas de la conversación
+	 *
 	 * @param Request $request
 	 * @return \Illuminate\Http\JsonResponse
 	 *
@@ -161,53 +219,11 @@ class ServiceController extends Controller
 	}
 
 	/**
+	 * Función encargada de mandar la Llave privada en los mensajes
+	 *
 	 * @param Request $request
 	 * @return \Illuminate\Http\JsonResponse
-	 *
-	 * Función que será llamado cuando se envíe (el mensaje, guiño, ...)
-	 * Provisionalmente se está haciendo sólo para mensaje
 	 */
-	public function postMessages(Request $request)
-	{
-		$strErr ='';
-		$messages = [
-			'texto.required' => trans('validation.custom.task.messages.message.required'),
-			'texto.min' => trans('validation.custom.task.messages.message.min'),
-		];
-
-		$validator = Validator::make($request->all(), [
-			'texto' => 'required|min:4',
-		], $messages);
-
-		if ($validator->fails()) {
-			return response()->json([
-				'success' => 0,
-				'error' => $validator->errors()->all(),
-			]);
-		}
-
-		//Si supera la validación se puede enviar el mensaje con los parámetros que se nos pide desde el servicio
-		$send_msg = json_decode($this->services->postSendMessage($request['texto'], session('conversacion_actual'), 0)->getBody()->getContents());
-
-		$success = ($send_msg->exito <= 0) ? 0 : 1 ;
-
-		if($success <= 0)
-		{
-			$strErr = trans('dashboard.task.message.send_message.error') . ' ERROR - '. $send_msg->error;
-		}
-
-
-		//Si se ha enviado correctamente el mensaje, borramos el id de la conversación actual (ya que ha sido terminada)
-		//Habría que comprobar si
-
-		return response()->json([
-			'success' => $success,
-			'error' => [$strErr],
-			'strDate' => Carbon::now()->format('d/m/Y'),
-		]);
-	}
-
-
 	public function postSendPrivateKey(Request $request)
 	{
 		$strErr='';
@@ -245,6 +261,12 @@ class ServiceController extends Controller
 	/*
 	 * PARA LA PARTE DE GUIÑOS
 	 */
+
+	/**
+	 * Función que se encarga de mostrar un guiño (SIN TERMINAR)
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
 	public function getWink()
 	{
 		$wink_id = (session()->has('guinyo_actual')) ? session()->get('guinyo_actual') : 0;
@@ -269,5 +291,339 @@ class ServiceController extends Controller
 		}
 
 		return view('dashboard.winks',  compact('success', 'wink', 'strErr'));
+	}
+
+
+	/*
+	 * PARA LA PARTE DE CHATS
+	 */
+
+	/**
+	 * Función que muestra la página de Chats
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+	public function getChats()
+	{
+		return view('dashboard.chats');
+	}
+
+
+
+
+
+	//////// DENTRO DEL APARTADO CHATS ESTAS SON LAS LLAMADAS AJAX
+	/**
+	 * Función que controla la última conexión de la Animadora
+	 * Será lanzada cada 200 segundos (5 minutos)
+	 *
+	 * @param Request $request
+	 * @return \Illuminate\Http\JsonResponse
+	 */
+	public function postLastConnEntertainer(Request $request)
+	{
+		$strErr='';
+		$update_last_conn= json_decode($this->services->postLastConnEntertainer(Auth::user()->code)->getBody()->getContents());
+
+		$success = ($update_last_conn->exito <= 0) ? 0 : 1 ;
+
+		if($success <= 0)
+		{
+			$strErr = trans('dashboard.task.chats.update_last_conn_entertainer.error') . ' ERROR - '. trans($update_last_conn->error);
+		}
+
+
+		return response()->json([
+			'success' => $success,
+			'error' => [$strErr],
+		]);
+	}
+
+	/**
+	 * Función encargada de Actualizar la conexión de la premium cada 200 segundos (5 minutos)
+	 *
+	 * @param Request $request
+	 * @return \Illuminate\Http\JsonResponse
+	 */
+	public function postUpdatePremiumConnection(Request $request)
+	{
+
+		//SE DEBE PASAR EL CODIGO DE LA AUTONOMA Y LA IP
+		$ip = $request->ip();
+		$strErr='';
+		$update_premium_conn= json_decode($this->services->postUpdatePremiumConnection(Auth::user()->code, $ip)->getBody()->getContents());
+
+		$success = ($update_premium_conn->exito <= 0) ? 0 : 1 ;
+
+		if($success <= 0)
+		{
+			$strErr = trans('dashboard.task.chats.update_premium_connection.error') . ' ERROR - '. trans($update_premium_conn->error);
+		}
+
+
+		return response()->json([
+			'success' => $success,
+			'error' => [$strErr],
+		]);
+	}
+
+	/**
+	 * Función encargada de cargar la conversación
+	 *
+	 * @param Request $request
+	 * @return \Illuminate\Http\JsonResponse
+	 */
+	public function postLoadConversation(Request $request)
+	{
+		$conversation = $request['conversacion'];
+		$video_chat = $request['video_chat'];
+
+		$strErr='';
+		$load_conversation= json_decode($this->services->postLoadConversation($conversation, $video_chat, Auth::user()->code)->getBody()->getContents());
+
+		$success = ($load_conversation->exito <= 0) ? 0 : 1 ;
+
+		$html_fila='';
+		$segundos_quedan=0;
+		$token_video_chat='';
+		if($success <= 0)
+			$strErr = trans('dashboard.task.chats.load_conversation.error') . ' ERROR - '. trans($load_conversation->error);
+		else
+		{
+			$html_fila=$load_conversation->html_fila;
+			$segundos_quedan=$load_conversation->segundos_quedan;
+			$token_video_chat = $load_conversation->token_video_chat;
+		}
+
+
+		return response()->json([
+			'success' => $success,
+			'error' => [$strErr],
+			'html_fila' => $html_fila,
+			'segundos_quedan' => $segundos_quedan,
+			'token_video_chat' => $token_video_chat,
+		]);
+	}
+
+	/**
+	 * Función encargada del VideoChat
+	 *
+	 * @param Request $request
+	 * @return \Illuminate\Http\JsonResponse
+	 */
+	public function postVideoChat(Request $request)
+	{
+		$conversation = $request['conversacion'];
+
+		$strErr='';
+		$videochat= json_decode($this->services->postVideoChat($conversation)->getBody()->getContents());
+
+		$success = ($videochat->exito <= 0) ? 0 : 1 ;
+		$token='';
+		if($success <= 0)
+		{
+			$strErr = trans('dashboard.task.chats.video_chat.error') . ' ERROR - '. trans($videochat->error);
+		}
+		else
+			$token = $videochat->token;
+
+
+		return response()->json([
+			'success' => $success,
+			'error' => [$strErr],
+			'token' => $token,
+		]);
+	}
+
+	/**
+	 * Función encargada del envío de mensajes por Chat
+	 *
+	 * @param Request $request
+	 * @return \Illuminate\Http\JsonResponse
+	 */
+	public function postSendChatMessage(Request $request)
+	{
+		$conversation = $request['conversacion'];
+		$message_text = $request['texto_mensaje'];
+		$user = $request['usuario'];
+		$photo = $request['foto'];
+		$name = $request['nombre'];
+		$uic = $request['uic'];
+		$reversed = $request['revertida'];
+		$entertainer = Auth::user()->code;
+
+		$strErr='';
+		$send_message= json_decode($this->services->postSendChatMessage($conversation, $message_text, $user, $photo, $name, $uic, $reversed, $entertainer)->getBody()->getContents());
+
+		$success = ($send_message->exito <= 0) ? 0 : 1 ;
+
+
+		$segundos_duracion=0;
+		$mensaje=[];
+		if($success <= 0)
+		{
+			$strErr = trans('dashboard.task.chats.send_chat_message.error') . ' ERROR - '. trans($send_message->error);
+		}
+		else
+		{
+			$segundos_duracion=$send_message->segundos_duracion;
+			$mensaje=$send_message->mensaje;
+		}
+
+
+		return response()->json([
+			'success' => $success,
+			'error' => [$strErr],
+			'segundos_duracion' =>$segundos_duracion,
+			'mensaje' => $mensaje,
+		]);
+	}
+
+	/**
+	 * Función que controla el marcar el mensaje como leído
+	 *
+	 * @param Request $request
+	 * @return \Illuminate\Http\JsonResponse
+	 */
+	public function postMarkMessageAsRead(Request $request)
+	{
+		$strErr='';
+
+		$message = $request['message'];
+		$conversation = $request['conversacion'];
+
+		$read_message = json_decode($this->services->postMarkMessageAsRead($message, $conversation)->getBody()->getContents());
+
+		$success = ($read_message->exito <= 0) ? 0 : 1 ;
+
+		if($success <= 0)
+		{
+			$strErr = trans('dashboard.task.chats.mark_message_as_read.error') . ' ERROR - '. trans($read_message->error);
+		}
+
+
+		return response()->json([
+			'success' => $success,
+			'error' => [$strErr],
+		]);
+	}
+
+	/**
+	 * Función que controla el crear una nota de chat
+	 *
+	 * @param Request $request
+	 * @return \Illuminate\Http\JsonResponse
+	 */
+	public function postCreateChatNote(Request $request)
+	{
+		$strErr='';
+		$strNote='';
+
+		$note = $request['texto'];
+		$conversation = $request['conversacion'];
+
+		$create_note = json_decode($this->services->postCreateChatNote($note, $conversation)->getBody()->getContents());
+
+		$success = ($create_note->exito <= 0) ? 0 : 1 ;
+
+		if($success <= 0)
+		{
+			$strErr = trans('dashboard.task.chats.create_chat_note.error') . ' ERROR - '. trans($create_note->error);
+		}
+		else
+		{
+			//SI DEVUELVE EXITO EL SERVICIO GENERAMOS EL HTML DE LA NOTA
+		}
+
+
+		return response()->json([
+			'success' => $success,
+			'error' => [$strErr],
+			'html_nota' => $strNote,
+		]);
+	}
+
+	/**
+	 * Función que controla la obtención de los chats revertidos
+	 *
+	 * @param Request $request
+	 * @return \Illuminate\Http\JsonResponse
+	 */
+	public function postReversedChat(Request $request)
+	{
+		$strErr='';
+		$opciones=[];
+		$conversacion=0;
+
+		$reversed = json_decode($this->services->postReversedChat()->getBody()->getContents());
+
+		$success = ($reversed->exito <= 0) ? 0 : 1 ;
+
+		if($success <= 0)
+			$strErr = trans('dashboard.task.chats.reversed_chat.error') . ' ERROR - '. trans($reversed->error);
+		else
+		{
+			//SI DEVUELVE EXITO RECUPERAMOS LOS DATOS QUE NECESITAMOS
+			$conversacion = $reversed->conversacion;
+			$opciones = $reversed->opciones;
+		}
+
+
+		return response()->json([
+			'success' => $success,
+			'error' => [$strErr],
+			'conversacion' => $conversacion,
+			'opciones' => $opciones,
+		]);
+	}
+
+	/**
+	 * Función que controla la obtención de los chats revertidos desconectados
+	 *
+	 * @param Request $request
+	 * @return \Illuminate\Http\JsonResponse
+	 */
+	public function postDisconnectedReversedChat(Request $request)
+	{
+		$strErr='';
+		$conversacion=0;
+
+		$disconn_reversed = json_decode($this->services->postDisconnectedReversedChat()->getBody()->getContents());
+
+		$success = ($disconn_reversed->exito <= 0) ? 0 : 1 ;
+
+		if($success <= 0)
+			$strErr = trans('dashboard.task.chats.disconnected_reversed_chat.error') . ' ERROR - '. trans($disconn_reversed->error);
+		else
+			$conversacion = $disconn_reversed->conversacion;
+
+		return response()->json([
+			'success' => $success,
+			'error' => [$strErr],
+			'conversacion' => $conversacion,
+		]);
+	}
+
+	/**
+	 * Función que controla el cierre del chat (de una conversación)
+	 *
+	 * @param Request $request
+	 * @return \Illuminate\Http\JsonResponse
+	 */
+	public function postCloseChatConversation(Request $request)
+	{
+		$strErr='';
+
+		$close_chat = json_decode($this->services->postCloseChatConversation($request['conversacion'], $request['premium'], $request['cliente'])->getBody()->getContents());
+
+		$success = ($close_chat->exito <= 0) ? 0 : 1 ;
+
+		if($success <= 0)
+			$strErr = trans('dashboard.task.chats.disconnected_reversed_chat.error') . ' ERROR - '. trans($close_chat->error);
+
+		return response()->json([
+			'success' => $success,
+			'error' => [$strErr],
+		]);
 	}
 }

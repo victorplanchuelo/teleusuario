@@ -74,6 +74,24 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
 
 		//Rutas para los guiños
 		Route::get('/winks', 'ServiceController@getWink')->name('dashboard.wink');
+
+		//Rutas para los chats
+		Route::get('/chats', 'ServiceController@getChats')->name('dashboard.chats');
+
+		Route::group(['prefix' => 'chats'], function() {
+			// ESTAS RUTAS SON LAS LLAMADAS POR AJAX DE LA PARTE DE LOS CHATS
+			Route::post('/last-conn-entertainer', 'ServiceController@postLastConnEntertainer')->name('dashboard.chats.update_last_conn_entertainer');
+			Route::post('/update-premium-connection', 'ServiceController@postUpdatePremiumConnection')->name('dashboard.chats.update_premium_connection');
+			Route::post('/load-conversation', 'ServiceController@postLoadConversation')->name('dashboard.chats.load_conversation');
+			Route::post('/videochat', 'ServiceController@postVideoChat')->name('dashboard.chats.videochat');
+			Route::post('/send-message', 'ServiceController@postSendChatMessage')->name('dashboard.chats.send_message');
+			Route::post('/mark-message-read', 'ServiceController@postMarkMessageAsRead')->name('dashboard.chats.mark_message_as_read');
+			Route::post('/create-note', 'ServiceController@postCreateChatNote')->name('dashboard.chats.create_note');
+			Route::post('/get-reversed-chat', 'ServiceController@postReversedChat')->name('dashboard.chats.get_reversed_chat');
+			Route::post('/get-disconnected-reversed-chat', 'ServiceController@postDisconnectedReversedChat')->name('dashboard.chats.get_disconnected_reversed_chat');
+
+			Route::post('/close-chat-conversation', 'ServiceController@postCloseChatConversation')->name('dashboard.chats.close_chat_conversation');
+		});
 	});
 
 });

@@ -1,0 +1,24 @@
+@extends('layouts.master')
+@section('head')
+	@parent
+	@include('layouts.head')
+	@include('layouts.dashboard_head')
+	@include('main.chats_head')
+@endsection
+@section('header')
+	@include('main.main_header')
+@endsection
+@section('main')
+	@include('main.main_sidebar')
+	@include('main.chats_main')
+@endsection
+@section('footer')
+	@include('main.main_footer')
+@endsection
+@section('scripts')
+	@include('layouts.scripts')
+	@include('layouts.dashboard_scripts')
+@endsection
+@section('scripts_extra')
+	@include('main.chats_scripts')
+@endsection

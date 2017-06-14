@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use Illuminate\Support\Facades\Auth;
-use phpDocumentor\Reflection\Types\Integer;
 
 class Services extends APIRepository
 {
@@ -168,6 +167,199 @@ class Services extends APIRepository
 				'animadora' => $id_animadora,
 				'num_guinyos' => $num_winks,
 				'id_guinyo' => $wink_id,
+			]
+		);
+	}
+
+
+
+	/*
+	 * PARTE API PARA CHATS
+	 */
+	/**
+	 * Update the entertainer last connection into database
+	 *
+	 * @param $user
+	 * @return mixed|\Psr\Http\Message\ResponseInterface
+	 */
+	public function postLastConnEntertainer($user)
+	{
+		return $this->post('chat_actualizar_ultima_conexion_animadora',
+			[
+				"animadora" => $user,
+
+			]
+		);
+	}
+
+	/**
+	 * Update the Premium Connection
+	 *
+	 * @param $user
+	 * @param $ip
+	 * @return mixed|\Psr\Http\Message\ResponseInterface
+	 */
+	public function postUpdatePremiumConnection($user, $ip)
+	{
+		return $this->post('chat_actualizar_conexion_premium',
+			[
+				"animadora" => $user,
+				"ip" => $ip,
+
+			]
+		);
+	}
+
+
+	/**
+	 * Load chat conversation
+	 *
+	 * @param $conversation
+	 * @param $video_chat
+	 * @param $user
+	 * @return mixed|\Psr\Http\Message\ResponseInterface
+	 */
+	public function postLoadConversation($conversation, $video_chat, $user)
+	{
+		return $this->post('chat_cargar_conversacion_nuevo_teleusuario',
+			[
+				"animadora" => $user,
+				"conversacion" => $conversation,
+				"video_chat" => $video_chat,
+
+			]
+		);
+	}
+
+
+	/**
+	 * VIDEOCHAT
+	 *
+	 * @param $conversation
+	 * @return mixed|\Psr\Http\Message\ResponseInterface
+	 */
+	public function postVideoChat($conversation)
+	{
+		return $this->post('chat_token_video_nuevo_teleusuario',
+			[
+				"conversacion" => $conversation,
+			]
+		);
+	}
+
+
+	/**
+	 * Send Chat Message
+	 *
+	 * @param $conversation
+	 * @param $message_text
+	 * @param $user
+	 * @param $photo
+	 * @param $name
+	 * @param $uic
+	 * @param $reversed
+	 * @param $entertainer
+	 * @return mixed|\Psr\Http\Message\ResponseInterface
+	 */
+	public function postSendChatMessage($conversation, $message_text, $user, $photo, $name, $uic, $reversed, $entertainer)
+	{
+		return $this->post('chat_enviar_mensaje_nuevo_teleusuario',
+			[
+				"conversacion" => $conversation,
+				"texto_mensaje" => $message_text,
+				"usuario" => $user,
+				"foto" => $photo,
+				"nombre" => $name,
+				"uic" => $uic,
+				"revertida" => $reversed,
+				"animadora" => $entertainer,
+			]
+		);
+	}
+
+
+	/**
+	 * Mark message as read
+	 *
+	 * @param $message
+	 * @param $conversation
+	 * @return mixed|\Psr\Http\Message\ResponseInterface
+	 */
+	public function postMarkMessageAsRead($message, $conversation)
+	{
+		return $this->post('chat_marcar_mensaje_leido',
+			[
+				"conversacion" => $conversation,
+				"mensaje" => $message,
+			]
+		);
+	}
+
+	/**
+	 * Create Chat Note
+	 *
+	 * @param $note
+	 * @param $conversation
+	 * @return mixed|\Psr\Http\Message\ResponseInterface
+	 */
+	public function postCreateChatNote($note, $conversation)
+	{
+		return $this->post('chat_guardar_nota_conversacion_nuevo_teleusuario',
+			[
+				"conversacion" => $conversation,
+				"texto" => $note,
+				"animadora" => Auth::user()->code,
+				"token_seguridad" => $this->token_seguridad,
+			]
+		);
+	}
+
+	/**
+	 * Getting Reversed Chats
+	 *
+	 * @return mixed|\Psr\Http\Message\ResponseInterface
+	 */
+	public function postReversedChat()
+	{
+		return $this->post('chat_obtener_chat_revertido',
+			[
+				"animadora" => Auth::user()->code,
+				"token_seguridad" => $this->token_seguridad,
+			]
+		);
+	}
+
+	/**
+	 * Getting Disconnected Reversed Chats
+	 *
+	 * @return mixed|\Psr\Http\Message\ResponseInterface
+	 */
+	public function postDisconnectedReversedChat()
+	{
+		return $this->post('chat_obtener_chat_revertido_desconectado',
+			[
+				"animadora" => Auth::user()->code,
+				"token_seguridad" => $this->token_seguridad,
+			]
+		);
+	}
+
+	/**
+	 * Close Chat
+	 *
+	 * @param $conversation
+	 * @param $premium
+	 * @param $client
+	 * @return mixed|\Psr\Http\Message\ResponseInterface
+	 */
+	public function postCloseChatConversation($conversation, $premium, $client)
+	{
+		return $this->post('chat_cerrar_conversacion',
+			[
+				"id_conversacion" => $conversation,
+				"token_seguridad" => $this->token_seguridad,
+				"cliente" => $client,
+				"premium" => $premium,
 			]
 		);
 	}
