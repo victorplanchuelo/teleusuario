@@ -226,6 +226,7 @@ class Services extends APIRepository
 				"animadora" => $user,
 				"conversacion" => $conversation,
 				"video_chat" => $video_chat,
+				"nuevo_teleusuario" => 1,
 
 			]
 		);

@@ -31,19 +31,6 @@ function firebase_ConversacionesActivasUP(usuario)
 
 function firebase_ActualizarConversacion(conversacion)
 {
-
-	if(typeof lenap === 'undefined')
-	{
-		var liruch=1;
-	}
-	else
-	{
-		if(typeof prueba === 'undefined')
-			liruch=1;
-		else
-			liruch=0;
-	}
-
 	//orderByChild('conversacion').equalTo(conversacion)
 	var mensajes_conversacionRef = firebase.database().ref('chats/conversaciones/'+conversacion).orderByChild('leido').equalTo(0);
 	mensajes_conversacionRef.off();
@@ -51,13 +38,9 @@ function firebase_ActualizarConversacion(conversacion)
 		//console.log(snapshot.val());
 		if(snapshot.val()!=null)
 		{
-			if(liruch==1)
-				ActualizarConversacion(conversacion,snapshot.val());	//modal_chat
-			else
-				ActualizarConversacionPremium(conversacion,snapshot.val());
+			ActualizarConversacionPremium(conversacion,snapshot.val());
 		}
 	});
 }
-
 
 ///////////////// FIN FUNCIONES QUE SE USAN

@@ -45,7 +45,7 @@
 								</li>
 								<li>
 									<p class="light">{{ trans('dashboard.wink.form.info.location') }}</p>
-									<p class="location""> {{ $wink->ciudad_premium }} ({{ $wink->provincia_premium }})</p>
+									<p class="location"> {{ $wink->ciudad_premium }} ({{ $wink->provincia_premium }})</p>
 								</li>
 							</ul>
 						</div>

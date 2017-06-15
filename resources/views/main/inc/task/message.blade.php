@@ -119,14 +119,14 @@
 						<fieldset class="fieldset_info">
 								<legend>
 									<a class="escribir_nota" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-									<span class="no-margin">
-										{{ trans('dashboard.messages.form.notes.notes') }}
-									</span>
-									<span class="btn-bkg added pull-right">
-										<i class="icon-plus3"></i>
-									</span>
+										<span class="no-margin">
+											{{ trans('dashboard.messages.form.notes.notes') }}
+										</span>
+										<span class="btn-bkg added pull-right">
+											<i class="icon-plus3"></i>
+										</span>
+									</a>
 								</legend>
-							</a>
 							<div id="collapseTwo" class="panel-collapse collapse">
 								<div class="panel-body">
 									<ul>
