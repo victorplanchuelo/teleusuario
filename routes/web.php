@@ -67,9 +67,12 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
 		//Rutas para el apartado mensajes
 		Route::get('/messages', 'ServiceController@getMessage')->name('dashboard.message');
 		Route::post('/messages', 'ServiceController@postMessages')->name('dashboard.message.send_message');
-		Route::post('/messages/note/create', 'ServiceController@postCreateNote')->name('dashboard.message.create_note');
-		Route::get('/messages/load', 'ServiceController@getNewMessage')->name('dashboard.message.load_new_message');
-		Route::post('/messages/private-key', 'ServiceController@postSendPrivateKey')->name('dashboard.message.send_private_key');
+
+		Route::group(['prefix' => 'messages'], function() {
+			Route::post('/note/create', 'ServiceController@postCreateNote')->name('dashboard.message.create_note');
+			Route::get('/load', 'ServiceController@getNewMessage')->name('dashboard.message.load_new_message');
+			Route::post('/private-key', 'ServiceController@postSendPrivateKey')->name('dashboard.message.send_private_key');
+		});
 
 
 		//Rutas para los guiños
@@ -92,6 +95,10 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
 
 			Route::post('/close-chat-conversation', 'ServiceController@postCloseChatConversation')->name('dashboard.chats.close_chat_conversation');
 		});
+
+
+		//Rutas para el muropost
+		Route::get('/muropost', 'ServiceController@getMuropost')->name('dashboard.muropost');
 	});
 
 });

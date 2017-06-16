@@ -258,6 +258,16 @@ class ServiceController extends Controller
 
 
 
+
+
+
+
+
+
+
+
+
+
 	/*
 	 * PARA LA PARTE DE GUIÑOS
 	 */
@@ -294,6 +304,19 @@ class ServiceController extends Controller
 	}
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 	/*
 	 * PARA LA PARTE DE CHATS
 	 */
@@ -307,8 +330,6 @@ class ServiceController extends Controller
 	{
 		return view('dashboard.chats');
 	}
-
-
 
 
 
@@ -376,7 +397,7 @@ class ServiceController extends Controller
 	public function postLoadConversation(Request $request)
 	{
 		$conversation = $request['conversacion'];
-		$video_chat = $request['video_chat'];
+		$video_chat = 0; //$request['video_chat'];
 
 		$strErr='';
 		$load_conversation= json_decode($this->services->postLoadConversation($conversation, $video_chat, Auth::user()->code)->getBody()->getContents());
@@ -625,5 +646,34 @@ class ServiceController extends Controller
 			'success' => $success,
 			'error' => [$strErr],
 		]);
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	/*
+	 *
+	 * ESTO ES PARA EL MUROPOST
+	 * SE HA HECHO ANTES PARA PODER PROGRAMAR LOS HTMLs DE LOS CHATS
+	 *
+	 */
+	public function getMuropost()
+	{
+		$success=1;
+		$strErr='';
+
+		return view('dashboard.muropost', compact('success', 'strErr'));
 	}
 }
