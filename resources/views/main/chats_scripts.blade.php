@@ -429,35 +429,6 @@
 		});
 	}
 
-	function getDateNow()
-	{
-		var today = new Date();
-		var dd = today.getDate();
-		var mm = today.getMonth()+1; //January is 0!
-
-		var yyyy = today.getFullYear();
-		var time = getTime();
-		if(dd<10){
-			dd='0'+dd;
-		}
-		if(mm<10){
-			mm='0'+mm;
-		}
-		return yyyy+'-'+mm+'-'+dd+' '+time;
-	}
-
-	function checkTime(i) {
-		return (i < 10) ? "0" + i : i;
-	}
-
-	function getTime() {
-		var today = new Date(),
-			h = checkTime(today.getHours()),
-			m = checkTime(today.getMinutes()),
-			s = checkTime(today.getSeconds());
-		return h + ":" + m + ":" + s;
-	}
-
 	/**
 	 * COMPROBAR AJAX QUE SE LLAMA
 	 */
@@ -660,6 +631,35 @@
 
 
 	//FUNCIONES AUXILIARES
+	function getDateNow()
+	{
+		var today = new Date();
+		var dd = today.getDate();
+		var mm = today.getMonth()+1; //January is 0!
+
+		var yyyy = today.getFullYear();
+		var time = getTime();
+		if(dd<10){
+			dd='0'+dd;
+		}
+		if(mm<10){
+			mm='0'+mm;
+		}
+		return yyyy+'-'+mm+'-'+dd+' '+time;
+	}
+
+	function checkTime(i) {
+		return (i < 10) ? "0" + i : i;
+	}
+
+	function getTime() {
+		var today = new Date(),
+			h = checkTime(today.getHours()),
+			m = checkTime(today.getMinutes()),
+			s = checkTime(today.getSeconds());
+		return h + ":" + m + ":" + s;
+	}
+
 	function addZero(i)
 	{
 		if (i < 10)

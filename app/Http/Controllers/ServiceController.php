@@ -397,7 +397,7 @@ class ServiceController extends Controller
 	public function postLoadConversation(Request $request)
 	{
 		$conversation = $request['conversacion'];
-		$video_chat = 0; //$request['video_chat'];
+		$video_chat = $request['video_chat'];
 
 		$strErr='';
 		$load_conversation= json_decode($this->services->postLoadConversation($conversation, $video_chat, Auth::user()->code)->getBody()->getContents());
