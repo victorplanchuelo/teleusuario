@@ -418,7 +418,7 @@
 			{
 				if(response.success>0)
 				{
-					$('#'+conversacion).find('#notas_conversacion').prepend(response.html_nota);
+					$('#'+conversacion).find('#notas_conversacion ul').prepend('<li id="' + response.exito + '" class="notes">(' + getDateNow() + ') ' + $('#'+conversacion).find('#texto_nota').val().replace(/\n/g, '<br>\n')  + '</li>');
 					$('#'+conversacion).find('#texto_nota').val("");
 				}
 				else
@@ -427,6 +427,35 @@
 			,timeout:60000
 			,error:function(objAJAXRequest,strError,response) {/*console.log(objAJAXRequest);*/}
 		});
+	}
+
+	function getDateNow()
+	{
+		var today = new Date();
+		var dd = today.getDate();
+		var mm = today.getMonth()+1; //January is 0!
+
+		var yyyy = today.getFullYear();
+		var time = getTime();
+		if(dd<10){
+			dd='0'+dd;
+		}
+		if(mm<10){
+			mm='0'+mm;
+		}
+		return yyyy+'-'+mm+'-'+dd+' '+time;
+	}
+
+	function checkTime(i) {
+		return (i < 10) ? "0" + i : i;
+	}
+
+	function getTime() {
+		var today = new Date(),
+			h = checkTime(today.getHours()),
+			m = checkTime(today.getMinutes()),
+			s = checkTime(today.getSeconds());
+		return h + ":" + m + ":" + s;
 	}
 
 	/**

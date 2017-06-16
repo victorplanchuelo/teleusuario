@@ -538,7 +538,6 @@ class ServiceController extends Controller
 	public function postCreateChatNote(Request $request)
 	{
 		$strErr='';
-		$strNote='';
 
 		$note = $request['texto'];
 		$conversation = $request['conversacion'];
@@ -548,19 +547,11 @@ class ServiceController extends Controller
 		$success = ($create_note->exito <= 0) ? 0 : 1 ;
 
 		if($success <= 0)
-		{
 			$strErr = trans('dashboard.task.chats.create_chat_note.error') . ' ERROR - '. trans($create_note->error);
-		}
-		else
-		{
-			//SI DEVUELVE EXITO EL SERVICIO GENERAMOS EL HTML DE LA NOTA
-		}
-
 
 		return response()->json([
 			'success' => $success,
 			'error' => [$strErr],
-			'html_nota' => $strNote,
 		]);
 	}
 
