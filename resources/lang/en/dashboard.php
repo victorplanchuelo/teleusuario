@@ -176,6 +176,9 @@ return [
 
 	'chats' => [
 		'title' => 'Chat Service',
+		'text' => [
+			'wrote' => 'wrote: ',
+		],
 		'errors' => [
 			'entertainer_not_sent' => 'The entertainer\'s code was not sent successfully',
 			'last_conn_not_updated' => 'An unexpected error was given back while updating data into database.',

@@ -21,11 +21,15 @@
 
 <script type="text/javascript">
 
+	//////////////VARIABLES GLOBALES
+	var g_movil=0;
+	var conversacion_actual=0;
+	var lenap=1;
+	// $_SERVER['REMOTE_ADDR']
+	var prueba=1;
+	var chat_activo=0;
+	///////////////////////////////////////////
 
-
-	/************ Funciones Nueva version *************/
-
-//FUNCIONES REVISADAS/////////////////////////////////////////////////////
 	function ActualizarConexionPremium()
 	{
 		// CSRF protection
@@ -52,16 +56,7 @@
 		setTimeout(function(){ ActualizarConexionPremium(); }, 200000);
 	}
 
-	function ExisteConversacionEnPantalla(conversacion)
-	{
-		var existe=false;
-		$('.fila-chat').each(function( index ) {
-			if($(this).attr('id')===conversacion)
-				existe=true;
-		});
 
-		return existe;
-	}
 
 	function HtmlActualizarConversacionesUsuarioPremium(conversacion,datos)
 	{
@@ -88,8 +83,8 @@
 					});
 
 				jQuery.ajax({
-					async:true,
 					type: "POST",
+					async: false,
 					dataType: "json",
 					contentType: "application/x-www-form-urlencoded",
 					url:"{{ route('dashboard.chats.load_conversation') }}",
@@ -237,8 +232,9 @@
 				beforeSend:function() { },
 				success:function(response)
 				{
-					var ultimo=$('#'+conversacion).find('#chat_mensajes').find('.odd').find( ".chat-text" ).last();
+					var ultimo=$('#'+conversacion).find('#chat_mensajes').find('.right').last();
 					$('#'+conversacion).attr('revertida','0');
+					console.log('Enviado');
 					console.log(response);
 
 					if(response.segundos_duracion!==null && response.segundos_duracion>0)
@@ -248,7 +244,7 @@
 
 
 					if(typeof response.mensaje.id !== 'undefined' && response.mensaje.id>0)
-						$(ultimo).parent().parent().attr('id','mensaje_'+response.mensaje.id);
+						$(ultimo).attr('id','mensaje_'+response.mensaje.id);
 
 				}
 				,timeout:60000
@@ -257,70 +253,6 @@
 		}
 		else
 			alertify.error("{{ trans('dashboard.chats.errors.introduce_message') }}");
-	}
-
-	function IntroEnviarUP2(e,conversacion)
-	{
-		var key = e.keyCode || e.which;
-		if (key === 13)
-			EnviarMensajeUP2(conversacion);
-
-		return true;
-	}
-
-	function HtmlMensajePremiumEnviado(texto,foto,nombre)
-	{
-		var f=new Date();
-		var cad=addZero(f.getHours())+":"+addZero(f.getMinutes());
-
-		if(/sin-foto/.test(foto))
-		{
-			if(!(/static.liruch.com/.test(foto)))
-				foto='https://static.liruch.com'+foto;
-		}
-
-		var html='';
-		html+='<div class="direct-chat-msg right" id="mensaje_id">';
-		html+='<div class="direct-chat-info clearfix">';
-		html+='<span class="direct-chat-name pull-right">' + nombre + '</span>';
-		html+='<span class="direct-chat-timestamp pull-left">' + cad + '</span>';
-		html+='</div>';
-		html+='<!-- /.direct-chat-info -->';
-		html+='<img class="direct-chat-img" src="' + foto + '" alt="' + foto + '">';
-		html+='<!-- /.direct-chat-img -->';
-		html+='<div class="direct-chat-text"> ' + texto + ' </div>';
-		html+='<!-- /.direct-chat-text -->';
-		html+='</div>';
-
-		return html;
-	}
-
-	function ActualizarConversacionPremium(conversacion,mensajes)
-	{
-		var usuario=$('#'+conversacion).attr('usuario');
-		$.each( mensajes, function( key, value ) {
-			var mensaje=value;
-			if(typeof usuario !== 'undefined' && mensaje.origen!==usuario)
-			{
-				if($('#mensaje_'+mensaje.id).html()===null)
-				{
-					var html=HtmlMensajeRecibido(mensaje);
-					$('#'+conversacion).find('#chat_mensajes').append(html);
-					$('#'+conversacion).find('#chat_mensajes').scrollTop($('#'+conversacion).find('#chat_mensajes')[0].scrollHeight);
-
-					MarcarMensajeLeidoUP(mensaje.id,conversacion);
-					if($('#audio-chat').html()!==null)
-						$('#audio-chat')[0].play();
-
-					//Notificar a la premium
-
-					Notificacion(conversacion,'¡Te está hablando!',mensaje);
-					$('#'+conversacion).find('#hablando').css('visibility','');
-					$('#'+conversacion).find('#texto_hablando').html('¡Te está hablando!');
-					Parpadear($('#'+conversacion).find('#hablando'),1);
-				}
-			}
-		});
 	}
 
 	function MarcarMensajeLeidoUP(mensaje,conversacion)
@@ -349,43 +281,6 @@
 			success:function(response) { }
 			,timeout:60000
 			,error:function(objAJAXRequest,strError,response) { }
-		});
-	}
-
-	function IniciarCuentaAtrasUP(conversacion,duracion)
-	{
-		if($('#'+conversacion).find("#CountDownTimer").length > 0)
-			$('#'+conversacion).find("#CountDownTimer").TimeCircles().destroy();
-		$('#'+conversacion).find("#cuenta_atras").html('<div id="CountDownTimer" data-timer="'+duracion+'" style="height:50px;margin-right:18px;"></div>');
-
-		$('#'+conversacion).find("#CountDownTimer").TimeCircles({
-			count_past_zero: false,
-			circle_bg_color: "#4286F7",
-			time: {
-				Days: { show: false },
-				Hours: { show: false },
-				Minutes: { color: "#4286F7",text:"Minutos" },
-				Seconds: { color: "#4286F7",text:"",show:false }
-			}
-		})
-
-	}
-
-	function QuitarCuentaAtrasUP(conversacion)
-	{
-		if($('#'+conversacion).find("#CountDownTimer").length > 0)
-		{
-			$('#'+conversacion).find("#CountDownTimer").TimeCircles().destroy();
-			$('#'+conversacion).find("#CountDownTimer").css('display','none');
-		}
-	}
-
-	function EliminarConversacionesNoActivasUP(conversaciones_activas)
-	{
-		$('.fila-chat').each(function( index ) {
-			var result = jQuery.inArray($(this).attr("id"),conversaciones_activas);
-			if(result===-1)
-				$(this).remove();
 		});
 	}
 
@@ -429,9 +324,7 @@
 		});
 	}
 
-	/**
-	 * COMPROBAR AJAX QUE SE LLAMA
-	 */
+
 	function ObtenerChatRevertido()
 	{
 		if($('#tabla_chat').children().length<=5)
@@ -538,59 +431,6 @@
 		setTimeout(function(){ ObtenerChatRevertidoDesconectado(); }, 300000);
 	}
 
-	function HtmlRevertida()
-	{
-		var html='';
-		html+='<li style="text-align: center;background-color: white;border: 1px solid #def1ea;padding: 7px;border-radius: 7px;font-weight: bold;color: red;" >';
-		html+="Rescuerda que este chat lo has abierto tú.<br> Se supone que la que has visto el anuncio del chico y le has dado a chatear eres tú.<br>";
-		html+='</li>';
-
-		return html;
-	}
-
-	function QuitarHablando(conversacion)
-	{
-		conversacion_actual=conversacion;
-		$('#'+conversacion).find('#hablando').css('visibility','hidden');
-	}
-
-	function Parpadear(elemento,n)
-	{
-		if (n===undefined)
-			n=1;
-		if (n>=10)
-			elemento.fadeIn(500);
-		else
-		{
-			elemento.fadeIn(500).delay(250).fadeOut(500, function ()
-			{
-				Parpadear(elemento,n+1);
-			});
-		}
-	}
-
-	function InfoChat(conversacion)
-	{
-		if($('#'+conversacion).find('#informacion_chat').hasClass('oculto'))
-			$('#'+conversacion).find('#informacion_chat').removeClass('oculto');
-		else
-			$('#'+conversacion).find('#informacion_chat').addClass('oculto');
-	}
-
-	function Notificacion(conversacion,texto,mensaje)
-	{
-		$('.gritter-item').parent().remove();
-		if(conversacion!=conversacion_actual)
-		{
-			$.gritter.add({
-				title: mensaje.nombre,
-				text: mensaje.texto,
-				image: mensaje.foto,
-				duration: 3000
-			});
-		}
-	}
-
 	function CerrarConversacionChat(conversacion,premium,cliente)
 	{
 		// CSRF protection
@@ -631,6 +471,121 @@
 
 
 	//FUNCIONES AUXILIARES
+	function ActualizarConversacionPremium(conversacion,mensajes)
+	{
+		var usuario=$('#'+conversacion).attr('usuario');
+		$.each( mensajes, function( key, value ) {
+			var mensaje=value;
+			if(typeof usuario !== 'undefined' && mensaje.origen!==usuario)
+			{
+				if($('#mensaje_'+mensaje.id).html()===null || typeof $('#mensaje_'+mensaje.id).html()==='undefined')
+				{
+					var html=HtmlMensajeRecibido(mensaje);
+					$('#'+conversacion).find('#chat_mensajes').append(html);
+					$('#'+conversacion).find('#chat_mensajes').scrollTop($('#'+conversacion).find('#chat_mensajes')[0].scrollHeight);
+
+					MarcarMensajeLeidoUP(mensaje.id,conversacion);
+					if($('#audio-chat').html()!==null)
+						$('#audio-chat')[0].play();
+
+					//Notificar a la premium
+
+					Notificacion(conversacion,'¡Te está hablando!',mensaje);
+					$('#'+conversacion).find('#hablando').css('visibility','');
+					$('#'+conversacion).find('#texto_hablando').html('¡Te está hablando!');
+					Parpadear($('#'+conversacion).find('#hablando'),1);
+				}
+			}
+		});
+	}
+
+	function IniciarCuentaAtrasUP(conversacion,duracion)
+	{
+		if($('#'+conversacion).find("#CountDownTimer").length > 0)
+			$('#'+conversacion).find("#CountDownTimer").TimeCircles().destroy();
+		$('#'+conversacion).find("#cuenta_atras").html('<div id="CountDownTimer" data-timer="'+duracion+'" style="height:50px;margin-right:18px;"></div>');
+
+		$('#'+conversacion).find("#CountDownTimer").TimeCircles({
+			count_past_zero: false,
+			circle_bg_color: "#4286F7",
+			time: {
+				Days: { show: false },
+				Hours: { show: false },
+				Minutes: { color: "#4286F7",text:"Minutos" },
+				Seconds: { color: "#4286F7",text:"",show:false }
+			}
+		})
+
+	}
+
+	function QuitarCuentaAtrasUP(conversacion)
+	{
+		if($('#'+conversacion).find("#CountDownTimer").length > 0)
+		{
+			$('#'+conversacion).find("#CountDownTimer").TimeCircles().destroy();
+			$('#'+conversacion).find("#CountDownTimer").css('display','none');
+		}
+	}
+
+	function EliminarConversacionesNoActivasUP(conversaciones_activas)
+	{
+		$('.fila-chat').each(function( index ) {
+			var result = jQuery.inArray($(this).attr("id"),conversaciones_activas);
+			if(result===-1)
+				$(this).remove();
+		});
+	}
+
+	function HtmlRevertida()
+	{
+		var html='';
+		html+='<div style="text-align: center;background-color: white;border: 1px solid #def1ea;padding: 7px;border-radius: 7px;font-weight: bold;color: red;" >';
+		html+="Rescuerda que este chat lo has abierto tú.<br> Se supone que la que has visto el anuncio del chico y le has dado a chatear eres tú.<br>";
+		html+='</div>';
+
+		return html;
+	}
+
+	function QuitarHablando(conversacion)
+	{
+		conversacion_actual=conversacion;
+		$('#'+conversacion).find('#hablando').css('visibility','hidden');
+	}
+
+	function Parpadear(elemento,n)
+	{
+		if (n===undefined)
+			n=1;
+		if (n>=10)
+			elemento.fadeIn(500);
+		else
+		{
+			elemento.fadeIn(500).delay(250).fadeOut(500, function ()
+			{
+				Parpadear(elemento,n+1);
+			});
+		}
+	}
+
+	function InfoChat(conversacion)
+	{
+		if($('#'+conversacion).find('#informacion_chat').hasClass('oculto'))
+			$('#'+conversacion).find('#informacion_chat').removeClass('oculto');
+		else
+			$('#'+conversacion).find('#informacion_chat').addClass('oculto');
+	}
+
+	function Notificacion(conversacion,texto,mensaje)
+	{
+		var texto = '';
+		if(conversacion!=conversacion_actual.toString())
+		{
+			texto = mensaje.nombre + " {!! trans('dashboard.chats.text.wrote') !!}"  + mensaje.texto;
+			alertify.log(texto);
+		}
+
+	}
+
 	function getDateNow()
 	{
 		var today = new Date();
@@ -670,7 +625,7 @@
 	function HtmlMensajeRecibido(mensaje)
 	{
 		var f=new Date();
-		var cad=f.getHours()+":"+f.getMinutes();
+		var cad=cad=addZero(f.getHours())+":"+addZero(f.getMinutes());
 
 		var foto=mensaje.foto;
 
@@ -680,14 +635,17 @@
 			foto= foto.replace("http:", "https:");
 
 		var html='';
-		html+='<li id="mensaje_'+mensaje.id+'">';
-		html+='<div class="chat-image"> <img alt="'+mensaje.nombre+'" src="'+foto+'"> </div>';
-		html+='<div class="chat-body">';
-		html+='<div class="chat-text">';
-		html+='<h4>'+mensaje.nombre+'</h4>';
-		html+='<p> '+mensaje.texto+' </p> <b> '+cad+' </b> </div>';
+		html+='<div class="direct-chat-msg" id="mensaje_'+mensaje.id+'">';
+		html+='<div class="direct-chat-info clearfix">';
+		html+='<span class="direct-chat-name pull-left">' + mensaje.nombre + '</span>';
+		html+='<span class="direct-chat-timestamp pull-right">' + cad + '</span>';
 		html+='</div>';
-		html+='</li>';
+		html+='<!-- /.direct-chat-info -->';
+		html+='<img class="direct-chat-img" src="' + foto + '" alt="' + mensaje.nombre + '">';
+		html+='<!-- /.direct-chat-img -->';
+		html+='<div class="direct-chat-text"> ' + mensaje.texto + ' </div>';
+		html+='<!-- /.direct-chat-text -->';
+		html+='</div>';
 
 		return html;
 	}
@@ -777,19 +735,57 @@
 			.toggleClass('icon-plus3 icon-minus4');
 	}
 
+	function ExisteConversacionEnPantalla(conversacion)
+	{
+		var existe=false;
+		$('.fila-chat').each(function( index ) {
+			if($(this).attr('id')===conversacion)
+				existe=true;
+		});
+
+		return existe;
+	}
+
+	function IntroEnviarUP2(e,conversacion)
+	{
+		var key = e.keyCode || e.which;
+		if (key === 13)
+			EnviarMensajeUP2(conversacion);
+
+		return true;
+	}
+
+	function HtmlMensajePremiumEnviado(texto,foto,nombre)
+	{
+		var f=new Date();
+		var cad=addZero(f.getHours())+":"+addZero(f.getMinutes());
+
+		if(/sin-foto/.test(foto))
+		{
+			if(!(/static.liruch.com/.test(foto)))
+				foto='https://static.liruch.com'+foto;
+		}
+
+		var html='';
+		html+='<div class="direct-chat-msg right" id="mensaje_id">';
+		html+='<div class="direct-chat-info clearfix">';
+		html+='<span class="direct-chat-name pull-right">' + nombre + '</span>';
+		html+='<span class="direct-chat-timestamp pull-left">' + cad + '</span>';
+		html+='</div>';
+		html+='<!-- /.direct-chat-info -->';
+		html+='<img class="direct-chat-img" src="' + foto + '" alt="' + foto + '">';
+		html+='<!-- /.direct-chat-img -->';
+		html+='<div class="direct-chat-text"> ' + texto + ' </div>';
+		html+='<!-- /.direct-chat-text -->';
+		html+='</div>';
+
+		return html;
+	}
+
 
 
 
 	$(document).ready(function() {
-		//////////////VARIABLES GLOBALES
-		var g_movil=0;
-		var conversacion_actual=0;
-		var lenap=1;
-		// $_SERVER['REMOTE_ADDR']
-		var prueba=1;
-		var chat_activo=0;
-		///////////////////////////////////////////
-
 		// Initialize Firebase
 		var config = {
 			apiKey: "AIzaSyCFsXB-qRqacz3JfwliVuYew5o285ELY_c",

@@ -35,9 +35,10 @@ function firebase_ActualizarConversacion(conversacion)
 	var mensajes_conversacionRef = firebase.database().ref('chats/conversaciones/'+conversacion).orderByChild('leido').equalTo(0);
 	mensajes_conversacionRef.off();
 	mensajes_conversacionRef.on("value", function(snapshot) {
-		//console.log(snapshot.val());
-		if(snapshot.val()!=null)
+		console.log(snapshot.val());
+		if(snapshot.val()!==null)
 		{
+			console.log("Actualiza");
 			ActualizarConversacionPremium(conversacion,snapshot.val());
 		}
 	});

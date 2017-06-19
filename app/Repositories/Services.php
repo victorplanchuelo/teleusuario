@@ -288,10 +288,11 @@ class Services extends APIRepository
 	 */
 	public function postMarkMessageAsRead($message, $conversation)
 	{
-		return $this->post('chat_marcar_mensaje_leido',
+		return $this->post('chat_marcar_mensaje_leido_nuevo_teleusuario',
 			[
 				"conversacion" => $conversation,
 				"mensaje" => $message,
+				"token_seguridad" => $this->token_seguridad,
 			]
 		);
 	}

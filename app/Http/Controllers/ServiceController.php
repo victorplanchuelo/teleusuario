@@ -487,7 +487,7 @@ class ServiceController extends Controller
 		}
 		else
 		{
-			$segundos_duracion=$send_message->segundos_duracion;
+			$segundos_duracion=$send_message->mensaje->segundos_duracion;
 			$mensaje=$send_message->mensaje;
 		}
 
@@ -510,7 +510,7 @@ class ServiceController extends Controller
 	{
 		$strErr='';
 
-		$message = $request['message'];
+		$message = $request['mensaje'];
 		$conversation = $request['conversacion'];
 
 		$read_message = json_decode($this->services->postMarkMessageAsRead($message, $conversation)->getBody()->getContents());

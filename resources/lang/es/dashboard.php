@@ -178,6 +178,9 @@ return [
 
 	'chats' => [
 		'title' => 'Servicio de Chats',
+		'text' => [
+			'wrote' => 'escribió: ',
+		],
 		'errors' => [
 			'entertainer_not_sent' => 'El código de la animadora no fue enviado correctamente',
 			'last_conn_not_updated' => 'La actualización de los datos en la base de datos ha devuelto un error inesperado.',
