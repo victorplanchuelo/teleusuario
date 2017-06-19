@@ -356,7 +356,7 @@ class Services extends APIRepository
 	 */
 	public function postCloseChatConversation($conversation, $premium, $client)
 	{
-		return $this->post('chat_cerrar_conversacion',
+		return $this->post('chat_cerrar_conversacion_nuevo_teleusuario',
 			[
 				"id_conversacion" => $conversation,
 				"token_seguridad" => $this->token_seguridad,

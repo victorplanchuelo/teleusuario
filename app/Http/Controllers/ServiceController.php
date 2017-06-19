@@ -626,7 +626,7 @@ class ServiceController extends Controller
 	{
 		$strErr='';
 
-		$close_chat = json_decode($this->services->postCloseChatConversation($request['conversacion'], $request['premium'], $request['cliente'])->getBody()->getContents());
+		$close_chat = json_decode($this->services->postCloseChatConversation($request['id_conversacion'], $request['premium'], $request['cliente'])->getBody()->getContents());
 
 		$success = ($close_chat->exito <= 0) ? 0 : 1 ;
 

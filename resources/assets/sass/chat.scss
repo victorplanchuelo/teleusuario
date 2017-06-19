@@ -123,6 +123,9 @@ $color-heading-chat: #f4f4f4;
 .icons-nav li {
   display: inline;
   font-size: 18px;
+  a i {
+    cursor: pointer;
+  }
 }
 
 .icon-blue {
