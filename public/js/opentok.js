@@ -30,8 +30,8 @@ function initializeSession(conversacion,sessionId,token)
 	session.on('streamCreated', function(event) {
 		session.subscribe(event.stream, 'subscriber_'+conversacion, {
 			insertMode: 'append',
-			width: '80%',
-			height: '150px',
+			width: '100%',
+			height: '300px',
 		});
 	});
 

@@ -650,49 +650,6 @@
 		return html;
 	}
 
-	function AbrirChat(chat)
-	{
-		if (!$('#btn-chat-'+chat).hasClass('abierto'))
-		{
-			$.ajax({
-				async:true,
-				type: "POST",
-				dataType: "json",
-				contentType: "application/x-www-form-urlencoded",
-				url:"/ajax.php?section=up_abrir_chat",
-				data: { "chat":chat },
-				beforeSend:function()
-				{
-					$('body').css('cursor', 'wait');
-				},
-				success:function(response)
-				{
-					$('body').css('cursor', 'default');
-
-					if (response.exito == 1)
-					{
-						$('#btn-chat-'+chat).removeClass('btn-info chat').addClass('btn-primary conversation abierto');
-						$('#chats-abiertos').append(response.html);
-					}
-					else
-						alert(response.error);
-				}
-				,timeout:30000
-				,error:function(objAJAXRequest,strError)
-				{
-					$('body').css('cursor', 'default');
-					console.log(objAJAXRequest);
-				}
-			});
-		}
-	}
-
-	function CerrarChat(chat)
-	{
-		$("#chat-"+chat).remove();
-		$("#btn-chat-"+chat).removeClass('abierto');
-	}
-
 	function ActualizarUltimaConexionAnimadora()
 	{
 		console.log('ActualizarUltimaConexionAnimadora');
