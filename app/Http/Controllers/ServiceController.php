@@ -259,15 +259,6 @@ class ServiceController extends Controller
 
 
 
-
-
-
-
-
-
-
-
-
 	/*
 	 * PARA LA PARTE DE GUIÑOS
 	 */
@@ -302,17 +293,6 @@ class ServiceController extends Controller
 
 		return view('dashboard.winks',  compact('success', 'wink', 'strErr'));
 	}
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -368,7 +348,6 @@ class ServiceController extends Controller
 	 */
 	public function postUpdatePremiumConnection(Request $request)
 	{
-
 		//SE DEBE PASAR EL CODIGO DE LA AUTONOMA Y LA IP
 		$ip = $request->ip();
 		$strErr='';
@@ -380,7 +359,6 @@ class ServiceController extends Controller
 		{
 			$strErr = trans('dashboard.task.chats.update_premium_connection.error') . ' ERROR - '. trans($update_premium_conn->error);
 		}
-
 
 		return response()->json([
 			'success' => $success,
@@ -636,19 +614,6 @@ class ServiceController extends Controller
 			'error' => [$strErr],
 		]);
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
