@@ -162,3 +162,13 @@ $color-heading-chat: #f4f4f4;
 .oculto {
   display: none;
 }
+
+.msg-revertido {
+  text-align: center;
+  background-color: red;
+  border: 1px solid #def1ea;
+  padding: 7px;
+  border-radius: 7px;
+  font-weight: bold;
+  color: white;
+}

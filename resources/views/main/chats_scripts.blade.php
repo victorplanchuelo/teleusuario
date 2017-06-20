@@ -356,7 +356,7 @@
 							{
 
 								//////// ESTO ES LO QUE NO SABEMOS /////////
-								var html=HtmlConversacion(response.conversacion,response.opciones.origen);
+								var html=HtmlActualizarConversacionesUsuarioPremium(response.conversacion,response.opciones.origen);
 								$('#chat_conversaciones').prepend(html);
 
 							}
@@ -407,17 +407,20 @@
 				{
 					try
 					{
-						if(response.conversacion.id!==null && response.conversacion.id>0)
+						if(response.conversacion>0)
 						{
-							$('#'+response.conversacion.id).attr('revertida','1');
+							if(response.conversacion.id!==null && response.conversacion.id>0)
+							{
+								$('#'+response.conversacion.id).attr('revertida','1');
 
-							//Notificar a la premium
+								//Notificar a la premium
 
-							$('#audio-chat')[0].play();
-							console.log('sonido de obtener chat revertido desconectado:'+response.conversacion.id);
-							$('#'+response.conversacion).find('#hablando').css('visibility','');
-							$('#'+response.conversacion).find('#texto_hablando').html('¡Chat revertido!');
-							Parpadear($('#'+response.conversacion.id).find('#hablando'),1);
+								$('#audio-chat')[0].play();
+								console.log('sonido de obtener chat revertido desconectado:'+response.conversacion.id);
+								$('#'+response.conversacion).find('#hablando').css('visibility','');
+								$('#'+response.conversacion).find('#texto_hablando').html('¡Chat revertido!');
+								Parpadear($('#'+response.conversacion.id).find('#hablando'),1);
+							}
 						}
 					}catch(err) { console.log(err); }
 				}
@@ -539,8 +542,11 @@
 	function HtmlRevertida()
 	{
 		var html='';
-		html+='<div style="text-align: center;background-color: white;border: 1px solid #def1ea;padding: 7px;border-radius: 7px;font-weight: bold;color: red;" >';
-		html+="Rescuerda que este chat lo has abierto tú.<br> Se supone que la que has visto el anuncio del chico y le has dado a chatear eres tú.<br>";
+		html+='<div class="msg-revertido">';
+		html+="{{ trans('dashboard.chats.text.reversed1') }}";
+		html+="<br/>";
+		html+="{{ trans('dashboard.chats.text.reversed2') }}";
+		html+="<br/>";
 		html+='</div>';
 
 		return html;

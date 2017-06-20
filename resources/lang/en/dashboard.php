@@ -178,6 +178,8 @@ return [
 		'title' => 'Chat Service',
 		'text' => [
 			'wrote' => 'wrote: ',
+			'reversed1' => 'Remember that you opened this chat.',
+			'reversed2' => 'It is supposed that you have been the one who has watched boy\'s advertisement and you has opened the chat.',
 		],
 		'errors' => [
 			'entertainer_not_sent' => 'The entertainer\'s code was not sent successfully',

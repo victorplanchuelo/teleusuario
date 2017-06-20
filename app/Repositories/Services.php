@@ -323,7 +323,7 @@ class Services extends APIRepository
 	 */
 	public function postReversedChat()
 	{
-		return $this->post('chat_obtener_chat_revertido',
+		return $this->post('chat_obtener_chat_revertido_nuevo_teleusuario',
 			[
 				"animadora" => Auth::user()->code,
 				"token_seguridad" => $this->token_seguridad,
@@ -338,7 +338,7 @@ class Services extends APIRepository
 	 */
 	public function postDisconnectedReversedChat()
 	{
-		return $this->post('chat_obtener_chat_revertido_desconectado',
+		return $this->post('chat_obtener_chat_revertido_desconectado_nuevo_teleusuario',
 			[
 				"animadora" => Auth::user()->code,
 				"token_seguridad" => $this->token_seguridad,

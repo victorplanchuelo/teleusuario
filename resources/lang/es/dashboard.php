@@ -180,6 +180,8 @@ return [
 		'title' => 'Servicio de Chats',
 		'text' => [
 			'wrote' => 'escribió: ',
+			'reversed1' => 'Recuerda que este chat lo has abierto tú.',
+			'reversed2' => 'Se supone que la que has visto el anuncio del chico y le has dado a chatear eres tú.',
 		],
 		'errors' => [
 			'entertainer_not_sent' => 'El código de la animadora no fue enviado correctamente',
