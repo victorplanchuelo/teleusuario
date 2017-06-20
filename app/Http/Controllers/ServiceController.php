@@ -604,9 +604,7 @@ class ServiceController extends Controller
 
 		$success = ($disconn_reversed->exito <= 0) ? 0 : 1 ;
 
-		if($success <= 0)
-			$strErr = trans('dashboard.task.chats.disconnected_reversed_chat.error') . ' ERROR - '. trans($disconn_reversed->error);
-		else
+		if($success > 0)
 			$conversacion = $disconn_reversed->conversacion;
 
 		return response()->json([

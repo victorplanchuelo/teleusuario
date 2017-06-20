@@ -32,31 +32,15 @@
 
 	function ActualizarConexionPremium()
 	{
-		// CSRF protection
-		$.ajaxSetup(
-			{
-				headers:
-					{
-						'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-					}
-			});
-
-		jQuery.ajax({
-			async:true,
-			type: "POST",
-			dataType: "json",
-			contentType: "application/x-www-form-urlencoded",
-			url: "{{ route('dashboard.chats.update_premium_connection') }}",
-			data: {  },
-			beforeSend:function() { },
-			success:function(response) { console.log(response); }
-			,timeout:60000
-			,error:function(objAJAXRequest,strError,response) { }
-		});
+		CallPageMethod("{{ route('dashboard.chats.update_premium_connection') }}","POST",{},true,
+			function(){},
+			function(response){
+				console.log(response);
+			},
+			function(objAJAXRequest,strError,response){}
+		);
 		setTimeout(function(){ ActualizarConexionPremium(); }, 200000);
 	}
-
-
 
 	function HtmlActualizarConversacionesUsuarioPremium(conversacion,datos)
 	{
@@ -73,29 +57,10 @@
 			if($('#'+conversacion).html()===null || typeof $('#'+conversacion).html()==='undefined')
 			{
 				console.log('no existe el id de la conversacion')
-				// CSRF protection
-				$.ajaxSetup(
-					{
-						headers:
-							{
-								'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-							}
-					});
 
-				jQuery.ajax({
-					type: "POST",
-					async: false,
-					dataType: "json",
-					contentType: "application/x-www-form-urlencoded",
-					url:"{{ route('dashboard.chats.load_conversation') }}",
-					data:
-						{
-							"conversacion":conversacion,
-							"video_chat":video_chat
-						},
-					beforeSend:function() { },
-					success:function(response)
-					{
+				CallPageMethod("{{ route('dashboard.chats.load_conversation') }}","POST",{"conversacion":conversacion,"video_chat":video_chat},false,
+					function(){},
+					function(response){
 						if(response.success===0)
 							alertify.error(response.error);
 						else
@@ -139,10 +104,9 @@
 								.on('hidden.bs.collapse', toggleIcon)
 								.on('shown.bs.collapse', toggleIcon);
 						}
-					}
-					,timeout:60000
-					,error:function(objAJAXRequest,strError,response) { /*console.log(objAJAXRequest);*/ }
-				});
+					},
+					function(objAJAXRequest,strError,response){}
+				);
 			}
 		}
 		else
@@ -150,29 +114,15 @@
 			if(video_chat)
 			{
 				console.log('es video_chat');
-				// CSRF protection
-				$.ajaxSetup(
-					{
-						headers:
-							{
-								'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-							}
-					});
 
-				jQuery.ajax({
-					async:true,
-					type: "POST",
-					dataType: "json",
-					contentType: "application/x-www-form-urlencoded",
-					url:"{{ route('dashboard.chats.videochat') }}",
-					data:
-						{
-							"conversacion":conversacion,
-						},
-					success:function(response) { IniciarVideoLlamadaUP(conversacion,datos.video.sessionId,response.token); }
-					,timeout:60000
-					,error:function(objAJAXRequest,strError,response) { console.log(objAJAXRequest); }
-				});
+				CallPageMethod("{{ route('dashboard.chats.videochat') }}","POST",{"conversacion":conversacion},true,
+					function(){},
+					function(response){
+						IniciarVideoLlamadaUP(conversacion,datos.video.sessionId,response.token);
+					},
+					function(objAJAXRequest,strError,response){console.log(objAJAXRequest);}
+				);
+
 			}
 			else
 			{
@@ -204,34 +154,10 @@
 			$('#'+conversacion).find('#texto_mensaje').val('');
 
 
-			// CSRF protection
-			$.ajaxSetup(
-				{
-					headers:
-						{
-							'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-						}
-				});
 
-			jQuery.ajax({
-				async:true,
-				type: "POST",
-				dataType: "json",
-				contentType: "application/x-www-form-urlencoded",
-				url:"{{ route('dashboard.chats.send_message') }}",
-				data:
-					{
-						"conversacion":conversacion,
-						"texto_mensaje":texto_mensaje,
-						"usuario":usuario,
-						"foto":foto,
-						"nombre":nombre,
-						"uic":uic,
-						"revertida":revertida
-					},
-				beforeSend:function() { },
-				success:function(response)
-				{
+			CallPageMethod("{{ route('dashboard.chats.send_message') }}","POST",{"conversacion":conversacion, "texto_mensaje":texto_mensaje, "usuario":usuario, "foto":foto, "nombre":nombre, "uic":uic, "revertida":revertida},true,
+				function(){},
+				function(response){
 					var ultimo=$('#'+conversacion).find('#chat_mensajes').find('.right').last();
 					$('#'+conversacion).attr('revertida','0');
 					console.log('Enviado');
@@ -245,11 +171,9 @@
 
 					if(typeof response.mensaje.id !== 'undefined' && response.mensaje.id>0)
 						$(ultimo).attr('id','mensaje_'+response.mensaje.id);
-
-				}
-				,timeout:60000
-				,error:function(objAJAXRequest,strError,response) { console.log(objAJAXRequest); }
-			});
+				},
+				function(objAJAXRequest,strError,response){ console.log(objAJAXRequest); }
+			);
 		}
 		else
 			alertify.error("{{ trans('dashboard.chats.errors.introduce_message') }}");
@@ -257,60 +181,20 @@
 
 	function MarcarMensajeLeidoUP(mensaje,conversacion)
 	{
-		// CSRF protection
-		$.ajaxSetup(
-			{
-				headers:
-					{
-						'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-					}
-			});
-
-		jQuery.ajax({
-			async:true,
-			type: "POST",
-			dataType: "json",
-			contentType: "application/x-www-form-urlencoded",
-			url:"{{ route('dashboard.chats.mark_message_as_read') }}",
-			data:
-				{
-					"mensaje":mensaje,
-					"conversacion":conversacion
-				},
-			beforeSend:function() { },
-			success:function(response) { }
-			,timeout:60000
-			,error:function(objAJAXRequest,strError,response) { }
-		});
+		CallPageMethod("{{ route('dashboard.chats.mark_message_as_read') }}","POST",{"mensaje":mensaje, "conversacion":conversacion},true,
+			function(){},
+			function(response){ },
+			function(objAJAXRequest,strError,response){}
+		);
 	}
 
 	function GuardarNotaChatUP(conversacion)
 	{
 		var texto=$('#'+conversacion).find('#texto_nota').val();
 
-		// CSRF protection
-		$.ajaxSetup(
-			{
-				headers:
-					{
-						'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-					}
-			});
-
-		jQuery.ajax({
-			async:true,
-			type: "POST",
-			dataType: "json",
-			contentType: "application/x-www-form-urlencoded",
-			url:"{{ route('dashboard.chats.create_note') }}",
-			data:
-				{
-					"conversacion":conversacion,
-					"texto":texto
-				},
-			beforeSend:function() { },
-			success:function(response)
-			{
+		CallPageMethod("{{ route('dashboard.chats.create_note') }}","POST",{"conversacion":conversacion, "texto":texto},true,
+			function(){},
+			function(response){
 				if(response.success>0)
 				{
 					$('#'+conversacion).find('#notas_conversacion ul').prepend('<li id="' + response.exito + '" class="notes">(' + getDateNow() + ') ' + $('#'+conversacion).find('#texto_nota').val().replace(/\n/g, '<br>\n')  + '</li>');
@@ -318,49 +202,22 @@
 				}
 				else
 					alertify.error(response.error);
-			}
-			,timeout:60000
-			,error:function(objAJAXRequest,strError,response) {/*console.log(objAJAXRequest);*/}
-		});
+			},
+			function(objAJAXRequest,strError,response){}
+		);
 	}
-
 
 	function ObtenerChatRevertido()
 	{
 		if($('#tabla_chat').children().length<=5)
 		{
-			// CSRF protection
-			$.ajaxSetup(
-				{
-					headers:
-						{
-							'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-						}
-				});
-
-			jQuery.ajax({
-				async:true,
-				type: "POST",
-				dataType: "json",
-				contentType: "application/x-www-form-urlencoded",
-				url:"{{ route('dashboard.chats.get_reversed_chat') }}",
-				data: { },
-				beforeSend:function() { },
-				success:function(response)
-				{
+			CallPageMethod("{{ route('dashboard.chats.get_reversed_chat') }}","POST",{},true,
+				function(){},
+				function(response){
 					try
 					{
 						if(response.conversacion!==null && response.conversacion>0)
 						{
-							if(!$('#'+response.conversacion).html()!=='')
-							{
-
-								//////// ESTO ES LO QUE NO SABEMOS /////////
-								var html=HtmlActualizarConversacionesUsuarioPremium(response.conversacion,response.opciones.origen);
-								$('#chat_conversaciones').prepend(html);
-
-							}
-
 							$('#'+response.conversacion).attr('revertida','1');
 
 							//Notificar a la premium
@@ -371,11 +228,10 @@
 							Parpadear($('#'+response.conversacion).find('#hablando'),1);
 							console.log('sonido de obtener chat revertido:'+response.conversacion);
 						}
-					}catch(err) { console.log(err); }
-				}
-				,timeout:60000
-				,error:function(objAJAXRequest,strError,response) { }
-			});
+					} catch(err) { console.log(err); }
+				},
+				function(objAJAXRequest,strError,response){}
+			);
 		}
 		else { console.log('tiene conversaciones'); }
 
@@ -386,24 +242,9 @@
 	{
 		if($('#tabla_chat').children().length<=5)
 		{
-			// CSRF protection
-			$.ajaxSetup(
-				{
-					headers:
-						{
-							'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-						}
-				});
-
-			jQuery.ajax({
-				async:true,
-				type: "POST",
-				dataType: "json",
-				contentType: "application/x-www-form-urlencoded",
-				url:"{{ route('dashboard.chats.get_disconnected_reversed_chat') }}",
-				data: { },
-				beforeSend:function() { },
-				success:function(response)
+			CallPageMethod("{{ route('dashboard.chats.get_disconnected_reversed_chat') }}","POST",{},true,
+				function(){},
+				function(response)
 				{
 					try
 					{
@@ -423,10 +264,9 @@
 							}
 						}
 					}catch(err) { console.log(err); }
-				}
-				,timeout:60000
-				,error:function(objAJAXRequest,strError,response) { /*console.log(objAJAXRequest);*/ }
-			});
+				},
+				function(objAJAXRequest,strError,response){}
+			);
 		}
 		else
 			console.log('tiene conversaciones');
@@ -436,44 +276,23 @@
 
 	function CerrarConversacionChat(conversacion,premium,cliente)
 	{
-		// CSRF protection
-		$.ajaxSetup(
-			{
-				headers:
-					{
-						'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-					}
-			});
-
-		jQuery.ajax({
-			async:true,
-			type: "POST",
-			dataType: "json",
-			contentType: "application/x-www-form-urlencoded",
-			url:"{{ route('dashboard.chats.close_chat_conversation') }}",
-			data:
-				{
-					'id_conversacion':conversacion,
-					'premium':premium,
-					'cliente':cliente
-				},
-			beforeSend:function() { $('body').css('cursor', 'wait'); },
-			success:function(response)
+		CallPageMethod("{{ route('dashboard.chats.close_chat_conversation') }}","POST",{'id_conversacion':conversacion, 'premium':premium, 'cliente':cliente},true,
+			function(){ $('body').css('cursor', 'wait'); },
+			function(response)
 			{
 				if(response.success===0)
 					alertify.error(response.error);
 
 				$('body').css('cursor', 'default');
-			}
-			,timeout:60000
-			,error:function(objAJAXRequest,strError,response) { $('body').css('cursor', 'default'); }
-		});
-
+			},
+			function(objAJAXRequest,strError,response){ $('body').css('cursor', 'default'); }
+		);
 	}
 
 
 
-	//FUNCIONES AUXILIARES
+	////////////////FUNCIONES AUXILIARES////////////////////////////
+	////////////////////////////////////////////////////////////////
 	function ActualizarConversacionPremium(conversacion,mensajes)
 	{
 		var usuario=$('#'+conversacion).attr('usuario');
@@ -606,14 +425,16 @@
 		if(mm<10){
 			mm='0'+mm;
 		}
-		return yyyy+'-'+mm+'-'+dd+' '+time;
+		return dd+'/'+mm+'/'+yyyy+' '+time;
 	}
 
-	function checkTime(i) {
+	function checkTime(i)
+	{
 		return (i < 10) ? "0" + i : i;
 	}
 
-	function getTime() {
+	function getTime()
+	{
 		var today = new Date(),
 			h = checkTime(today.getHours()),
 			m = checkTime(today.getMinutes()),
@@ -660,37 +481,22 @@
 	{
 		console.log('ActualizarUltimaConexionAnimadora');
 
-		// CSRF protection
-		$.ajaxSetup(
-			{
-				headers:
-					{
-						'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-					}
-			});
-
-		$.ajax({
-			async:true,
-			type: "POST",
-			dataType: "json",
-			contentType: "application/x-www-form-urlencoded",
-			url: "{{ route('dashboard.chats.update_last_conn_entertainer') }}",
-			data: {  },
-			beforeSend:function() { },
-			success:function(response)
+		CallPageMethod("{{ route('dashboard.chats.update_last_conn_entertainer') }}","POST",{},true,
+			function(){},
+			function(response)
 			{
 				if (response.exito == 0)
 					console.log("Ha ocurrido un error al actualizar la última conexión de la animadora.");
 				else
 					console.log(response);
-			}
-			,timeout:60000
-			,error:function(objAJAXRequest,strError) { console.log(strError); }
-		});
+			},
+			function(objAJAXRequest,strError,response){ console.log(strError); }
+		);
 	}
 
 	//Función para crear la animación de cuando el usuario abre/cierra la parte de las notas
-	function toggleIcon(e) {
+	function toggleIcon(e)
+	{
 		e.preventDefault();
 		$(e.target)
 			.parent()
@@ -745,6 +551,27 @@
 		return html;
 	}
 
+	function CallPageMethod(route, method, data, async, onBeforeSend, onSuccess, onFail)
+	{
+		$.ajaxSetup({
+			headers:
+				{
+					'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+				}
+		});
+
+		$.ajax({
+			type: method,
+			url: route,
+			data: data,
+			dataType: "json",
+			contentType: "application/x-www-form-urlencoded",
+			beforeSend: onBeforeSend,
+			success: onSuccess,
+			timeout:60000,
+			fail: onFail
+		});
+	}
 
 
 
