@@ -169,6 +169,12 @@ return [
 	    'password' => 'Contraseña',
 	    'password_confirmation' => 'Confirmación de contraseña',
 	    'code' => 'Código',
+
+	    //PARTE TICKETS
+	    'message' => 'Mensaje',
+	    'title' => 'Título',
+	    'category' => 'Categoría',
+	    'motive' => 'Motivo',
     ],
 
 ];

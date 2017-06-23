@@ -70,6 +70,22 @@
 			</ul>
 		</li>
 
+		<li class="{{ (request()->is('dashboard/tickets/*'))?'active':'' }}">
+			<a href="#">
+				<i class="icon-pricetags"></i>
+				<span class="menu-item">{{ trans('dashboard.navbar.tickets.title') }}</span>
+				<span class="down-arrow"></span>
+			</a>
+			<ul>
+				<li class="{{request()->is('dashboard/tickets/my-tickets') ? 'active selected' : ''}}">
+					<a href='{{ route('dashboard.tickets.list') }}'>{{ trans('dashboard.navbar.tickets.list') }}</a>
+				</li>
+				<li class="{{request()->is('dashboard/tickets/new') ? 'active selected' : ''}}">
+					<a href='{{ route('dashboard.tickets.new') }}'>{{ trans('dashboard.navbar.tickets.new') }}</a>
+				</li>
+			</ul>
+		</li>
+
 		<li class="{{ (request()->is('dashboard/profile') || request()->is('dashboard/password/change'))?'active':'' }}">
 			<a href="#">
 				<i class="icon-settings"></i>

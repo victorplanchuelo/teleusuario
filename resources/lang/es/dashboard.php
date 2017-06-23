@@ -36,6 +36,12 @@ return [
 			'ranking' => 'Ranking',
 		],
 
+		'tickets' => [
+			'title' => 'Sistema de Tickets',
+			'new' => 'Nuevo ticket',
+			'list' => 'Tus tickets',
+		],
+
 		'teleusuario' => [
 			'title' => 'Servicios activos',
 			'messages' => 'Mensajes',
@@ -250,6 +256,70 @@ return [
 			'disconnected_reversed_chat' => [
 				'error' => 'Se ha producido un error obteniendo los chats revertidos desconectados.',
 			],
+		],
+	],
+
+
+	'tickets' => [
+		'create_ticket' => [
+			'title' => 'Crear nuevo ticket',
+			'form' => [
+				'name' => 'Título del ticket',
+				'category' => 'Categoría',
+				'select_category' => 'Elige Categoría',
+				'message' => 'Descripción del ticket',
+				'open_ticket' => 'Crear ticket',
+				'motive' => 'Motivo',
+				'select_motive' => 'Elige Motivo',
+				'urgent' => '¿Es urgente?',
+			],
+
+			'responses' => [
+				'ticket_with_id' => 'El ticket con ID #',
+				'opened' => ' ha sido creado',
+				'closed' => ' ha sido cerrado',
+				'being_checked' => ' esta siendo revisado',
+				'answered' =>' ha sido contestado',
+			],
+
+			'message' => [
+				'success' => 'El ticket se ha creado correctamente',
+				'error' => 'Ha habido un problema al crear el ticket',
+			],
+		],
+		'list_tickets' => [
+			'title' => 'Listado de tus tickets',
+			'data' => [
+				'open' => 'Abierto',
+				'close' => 'Cerrado',
+				'motive' => 'Motivo',
+				'title' => 'Título',
+				'status' => 'Estado',
+				'last_updated' => 'Ultima actualización',
+				'empty' => 'Aún no has creado ningún ticket.'
+			],
+		],
+
+		'show_ticket' => [
+			'title' => 'Ticket',
+			'data' => [
+				'open' => 'Abierto',
+				'close' => 'Cerrado',
+				'cat&mot' => 'Categoría y Motivo',
+				'title' => 'Título',
+				'status' => 'Estado',
+				'created_at' => 'Fecha de creación',
+				'last_update' => 'Última actualización',
+				'submit' => 'Enviar comentario',
+			],
+		],
+
+		'close_ticket' => [
+			'success' => 'El ticket ha sido cerrado.',
+		],
+
+		'reopen_ticket' => [
+			'success' => 'El ticket ha sido reabierto',
 		],
 	],
 ];

@@ -34,6 +34,12 @@ return [
 			'ranking' => 'Ranking',
 		],
 
+		'tickets' => [
+			'title' => 'Ticket System',
+			'new' => 'New ticket',
+			'list' => 'Your tickets',
+		],
+
 		'teleusuario' => [
 			'title' => 'Active services',
 			'messages' => 'Messages',
@@ -247,6 +253,69 @@ return [
 				'error' => 'An error occurred getting the disconnected reversed chats.',
 			],
 
+		],
+	],
+
+	'tickets' => [
+		'create_ticket' => [
+			'title' => 'Create new ticket',
+			'form' => [
+				'name' => 'Title',
+				'category' => 'Category',
+				'select_category' => 'Select Category',
+				'message' => 'Description',
+				'open_ticket' => 'Open ticket',
+				'motive' => 'Motive',
+				'select_motive' => 'Select Motive',
+				'urgent' => 'Is it urgent?',
+			],
+
+			'responses' => [
+				'ticket_with_id' => 'Ticket with ID #',
+				'opened' => ' has been opened',
+				'closed' => ' has been closed',
+				'being_checked' => ' is being checked',
+				'answered' =>' has been answered',
+			],
+
+			'message' => [
+				'success' => 'The ticket has been created successfully',
+				'error' => 'There was a problem creating the ticket.',
+			],
+		],
+		'list_tickets' => [
+			'title' => 'List of your tickets',
+			'data' => [
+				'open' => 'Open',
+				'close' => 'Close',
+				'motive' => 'Motive',
+				'title' => 'Title',
+				'status' => 'Status',
+				'last_updated' => 'Last Updated',
+				'empty' => 'You have not created any tickets yet.'
+			],
+		],
+
+		'show_ticket' => [
+			'title' => 'Ticket',
+			'data' => [
+				'open' => 'Open',
+				'close' => 'Close',
+				'cat&mot' => 'Category and Motive',
+				'title' => 'Title',
+				'status' => 'Status',
+				'created_at' => 'Date of creation',
+				'last_update' => 'Last update',
+				'submit' => 'Submit comment',
+			],
+		],
+
+		'close_ticket' => [
+			'success' => 'The ticket has been closed.',
+		],
+
+		'reopen_ticket' => [
+			'success' => 'The ticket has been reopened.',
 		],
 	],
 ];

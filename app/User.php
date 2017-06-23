@@ -136,46 +136,56 @@ class User extends Authenticatable
 
     public function application()
     {
-    	return $this->hasOne('App\UserApplication');
+    	return $this->hasOne(UserApplication::class);
     }
 
 	public function services()
 	{
-		return $this->belongsToMany('App\Service');
+		return $this->belongsToMany(Service::class);
 	}
 
 	public function connections()
 	{
-		return $this->hasMany('App\Connection');
+		return $this->hasMany(Connection::class);
 	}
 
 	public function schedules()
 	{
-		return $this->hasMany('App\Schedule');
+		return $this->hasMany(Schedule::class);
 	}
 
 	public function company()
 	{
-		return $this->belongsTo('App\Company');
+		return $this->belongsTo(Company::class);
 	}
 
 	public function bank()
 	{
-		return $this->belongsTo('App\Bank');
+		return $this->belongsTo(Bank::class);
 	}
 
 	public function contract_state()
 	{
-		$this->belongsTo('App\ContractState');
+		$this->belongsTo(ContractState::class);
 	}
 
 	public function invoices()
 	{
-		return $this->hasMany('App\Invoice');
+		return $this->hasMany(Invoice::class);
 	}
 
 	public function delivery_notes()
 	{
-		return $this->hasMany('App\DeliveryNote');
+		return $this->hasMany(DeliveryNote::class);
+	}
+
+	public function tickets()
+	{
+		return $this->hasMany(Ticket::class);
+	}
+
+	public function comments()
+	{
+		return $this->hasMany(TicketComment::class);
 	}
 }

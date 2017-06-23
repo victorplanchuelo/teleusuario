@@ -162,6 +162,13 @@ return [
 	    'password' => 'Password',
 	    'password_confirmation' => 'Password Confirmation',
 	    'code' => 'Code',
+
+	    //PARTE TICKETS
+	    'message' => 'Message',
+	    'title' => 'Title',
+	    'category' => 'Category',
+	    'motive' => 'Motive',
+
     ],
 
 ];

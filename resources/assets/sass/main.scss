@@ -4647,3 +4647,13 @@ label {
 .init-tasks {
 	margin-top: 20px;
 }
+
+.margin-top-ticket-urgent {
+	margin-top: 5px;
+}
+
+@media(max-width: 767px) {
+	.margin-top-ticket-urgent {
+		margin-top: 12px;
+	}
+}
