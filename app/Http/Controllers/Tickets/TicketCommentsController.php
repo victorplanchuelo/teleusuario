@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Tickets;
 
 use App\Mail\UpdateTicketMail;
+use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
- use App\User;
- use App\Ticket;
- use App\TicketComment;
- use Illuminate\Support\Facades\Auth;
+use App\TicketComment;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class TicketCommentsController extends Controller
 {

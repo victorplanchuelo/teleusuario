@@ -106,16 +106,16 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
 
 	Route::group(['prefix' => 'tickets'], function() {
 		//RUTAS PARA EL SISTEMA DE TICKETS
-		Route::get('/new', 'TicketsController@create')->name('dashboard.tickets.new');
-		Route::post('/new', 'TicketsController@store')->name('create_ticket');
+		Route::get('/new', 'Tickets\TicketsController@create')->name('dashboard.tickets.new');
+		Route::post('/new', 'Tickets\TicketsController@store')->name('create_ticket');
 
-		Route::get('/my-tickets', 'TicketsController@userTickets')->name('dashboard.tickets.list');
-		Route::get('/load-motives','TicketsController@getMotives');
+		Route::get('/my-tickets', 'Tickets\TicketsController@userTickets')->name('dashboard.tickets.list');
+		Route::get('/load-motives','Tickets\TicketsController@getMotives');
 
-		Route::post('/ticket-comment', 'TicketCommentsController@postComment')->name('create_ticket_comment');
+		Route::post('/ticket-comment', 'Tickets\TicketCommentsController@postComment')->name('create_ticket_comment');
 
-		Route::get('/{ticket_id}', 'TicketsController@show');
-		Route::get('/{ticket_id}/{action}', 'TicketsController@openCloseTicket');
+		Route::get('/{ticket_id}', 'Tickets\TicketsController@show');
+		Route::get('/{ticket_id}/{action}', 'Tickets\TicketsController@openCloseTicket');
 
 
 

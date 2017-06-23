@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Tickets;
 
 use App\CategoryMotive;
+use App\Http\Controllers\Controller;
 use App\Mail\UpdateTicketMail;
 use App\TicketCategory;
 use App\Ticket;
