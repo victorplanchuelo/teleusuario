@@ -81,30 +81,12 @@
 									</a>
 								</div>
 								<div class="media-body">
-									<h4 class="media-heading">{{ $comment->user->name }}</h4><span class="pull-right comment-date small">{{ $comment->created_at->format('d/m/Y H:i') }}</span>
+									<span class="pull-right comment-date small">{{ $comment->created_at->format('d/m/Y H:i') }}</span>
+									<h4 class="media-heading">{{ $comment->user->name }}</h4>
 									{{ nl2br(e($comment->comment)) }}
 								</div>
 							</div>
 						</div>
-						<!--<div class="row">
-							<div class="col-md-2">
-								<div class="thumbnail">
-									<img class="img-thumbnail user-photo" src="@if(is_null($comment->user->thumb_path)) {{ asset('img/thumbs/user.png') }} @else {{ asset('storage/'.$comment->user->thumb_path) }}@endif" alt="">
-								</div>
-							</div>
-
-							<div class="col-md-8">
-								<div class="panel panel-default">
-									<div class="panel-heading">
-										<strong>{{-- $comment->user->name --}}</strong>
-										<span class="pull-right comment-date small">{{-- $comment->created_at->format('d/m/Y H:i') --}}</span>
-									</div>
-									<div class="panel-body">
-										{{-- nl2br(e($comment->comment)) --}}
-									</div>
-								</div>
-							</div>
-						</div>-->
 					@endforeach
 				</div>
 			</div>
