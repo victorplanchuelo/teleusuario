@@ -312,6 +312,7 @@ return [
 				'last_update' => 'Última actualización',
 				'submit' => 'Enviar comentario',
 				'message' => 'Mensaje',
+				'success' => 'Tu comentario ha sido registrado.',
 			],
 		],
 

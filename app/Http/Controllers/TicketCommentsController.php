@@ -36,6 +36,6 @@ class TicketCommentsController extends Controller
 				->send(new UpdateTicketMail($comment->ticket));
 		}
 
-		return redirect()->back()->with("status", "Your comment has be submitted.");
+		return redirect()->back()->with("status", trans('dashboard.tickets.show_ticket.data.success'));
 	}
 }

@@ -308,6 +308,7 @@ return [
 				'last_update' => 'Last update',
 				'submit' => 'Submit comment',
 				'message' => 'Message',
+				'success' => 'Your comment has be submitted.',
 			],
 		],
 

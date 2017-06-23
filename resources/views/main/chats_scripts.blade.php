@@ -134,7 +134,7 @@
 
 	function EnviarMensajeUP2(conversacion)
 	{
-		var foto=$('#'+conversacion).find('#up_foto').attr('src');
+		var foto=$('#'+conversacion).find('.img-premium').attr('src');
 		foto = foto.replace('https://www.liruch.com', '');
 
 		var nombre=$('#'+conversacion).data('nombre');
