@@ -40,7 +40,7 @@
 
 		<li @if($clase!=0) class="active" @endif>
 			<a href="#">
-				<i class="icon-lab3"></i>
+				<i class="icon-speech-bubble"></i>
 				<span class="menu-item">{{ trans('dashboard.navbar.teleusuario.title') }}</span>
 				<span class="down-arrow"></span>
 			</a>

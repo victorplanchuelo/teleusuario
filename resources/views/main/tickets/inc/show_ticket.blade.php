@@ -10,8 +10,6 @@
 				@include('main.tickets.inc.flash')
 
 				<div class="ticket-info">
-					<p>{{ $ticket->message }}</p>
-					<br/>
 					<p><strong>{{ trans('dashboard.tickets.show_ticket.data.cat&mot') }}:</strong> {{ $category }} - {{ $motive }}</p>
 					<p>
 						<strong>{{ trans('dashboard.tickets.show_ticket.data.status') }}</strong>
@@ -30,6 +28,13 @@
 					</p>
 					<p><strong>{{ trans('dashboard.tickets.show_ticket.data.created_at') }}:</strong> {{ $ticket->created_at->format('d/m/Y H:i') }}</p>
 					<p><strong>{{ trans('dashboard.tickets.show_ticket.data.last_update') }}:</strong> {{ $ticket->updated_at->format('d/m/Y H:i') }}</p>
+					<p><strong>{{ trans('dashboard.tickets.show_ticket.data.message') }}:</strong></p>
+					<div class="row gutter">
+						<div class="col-md-4 grey">
+							<p><i class="ticket-message icon-speech-bubble icon-5x text-info pull-left"></i>{!! nl2br(e($ticket->message)) !!}</p>
+						</div>
+					</div>
+					<br/>
 				</div>
 
 				<hr>

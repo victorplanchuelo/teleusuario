@@ -311,6 +311,7 @@ return [
 				'created_at' => 'Fecha de creación',
 				'last_update' => 'Última actualización',
 				'submit' => 'Enviar comentario',
+				'message' => 'Mensaje',
 			],
 		],
 

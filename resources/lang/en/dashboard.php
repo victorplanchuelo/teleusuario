@@ -307,6 +307,7 @@ return [
 				'created_at' => 'Date of creation',
 				'last_update' => 'Last update',
 				'submit' => 'Submit comment',
+				'message' => 'Message',
 			],
 		],
 
