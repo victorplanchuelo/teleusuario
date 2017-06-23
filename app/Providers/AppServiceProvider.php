@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Carbon\Carbon;
@@ -46,6 +47,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton('GuzzleHttp\Client', function() {
+			return new Client(
+				[
+					//'base_uri' => 'https://www.liruch.com',
+					'base_uri' => 'https://desarrollo.liruch.com',
+				]
+			);
+        });
     }
 }

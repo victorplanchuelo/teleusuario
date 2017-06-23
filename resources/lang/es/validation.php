@@ -139,6 +139,14 @@ return [
 		    'mime' => 'La imagen de perfil debe ser de tipo: jpeg,jpg o png',
 		    'image' => 'La imagen de perfil debe ser una imagen',
 	    ],
+	    'task' => [
+		    'messages' => [
+			    'note' => [
+				    'required' => 'Para crear una nueva nota debe rellenar con algún dato la caja de texto correspondiente',
+				    'min' => 'La nota debe tener, al menos, 4 carácteres',
+			    ],
+		    ],
+	    ],
     ],
 
     /*
@@ -161,6 +169,12 @@ return [
 	    'password' => 'Contraseña',
 	    'password_confirmation' => 'Confirmación de contraseña',
 	    'code' => 'Código',
+
+	    //PARTE TICKETS
+	    'message' => 'Mensaje',
+	    'title' => 'Título',
+	    'category' => 'Categoría',
+	    'motive' => 'Motivo',
     ],
 
 ];

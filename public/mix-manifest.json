@@ -5,5 +5,7 @@
   "/css/projects.css": "/css/projects.css",
   "/css/tasks.css": "/css/tasks.css",
   "/css/timeline.css": "/css/timeline.css",
+  "/css/chat.css": "/css/chat.css",
+  "/css/tickets.css": "/css/tickets.css",
   "/css/users.css": "/css/users.css"
 }

@@ -2107,7 +2107,6 @@ ul.contacts {
 			font-size: 13px;
 			padding: 0;
 			overflow: hidden;
-			white-space: nowrap;
 			text-overflow: ellipsis;
 		}
 		.message {
@@ -4635,4 +4634,26 @@ label {
 .gutter > [class^="col-"], .gutter-10 > [class^=" col-"] {
 	padding-right: 7px;
 	padding-left: 7px;
+}
+
+
+//Panel that will contain task messages
+.panel-task-messages, .panel-task-messages-info {
+	max-height: 604px;
+	overflow-y: scroll;
+}
+
+//Button to init tasks
+.init-tasks {
+	margin-top: 20px;
+}
+
+.margin-top-ticket-urgent {
+	margin-top: 5px;
+}
+
+@media(max-width: 767px) {
+	.margin-top-ticket-urgent {
+		margin-top: 12px;
+	}
 }

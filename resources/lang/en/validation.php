@@ -132,6 +132,14 @@ return [
 	        'mime' => 'Profile image must be a file of type: jpeg,jpg or png',
 	        'image' => 'Profile image must be an image',
         ],
+	    'task' => [
+	    	'messages' => [
+	    		'note' => [
+	    			'required' => 'In order to create a new note, the textarea field is mandatory',
+				    'min' => 'The note must have, at least, 4 characters',
+			    ],
+		    ],
+	    ],
     ],
 
     /*
@@ -154,6 +162,13 @@ return [
 	    'password' => 'Password',
 	    'password_confirmation' => 'Password Confirmation',
 	    'code' => 'Code',
+
+	    //PARTE TICKETS
+	    'message' => 'Message',
+	    'title' => 'Title',
+	    'category' => 'Category',
+	    'motive' => 'Motive',
+
     ],
 
 ];

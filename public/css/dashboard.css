@@ -6,6 +6,43 @@
     padding-top: 25px;
 }
 
+.fieldset_info {
+    margin-bottom: 10px;
+}
+
+.img_tarjeta_regalo {
+    height: 120px;
+    display: inline;
+}
+
+.image-msg
+{
+    height: 70px;
+    display: inline;
+}
+
+.border-red
+{
+    border: 3px solid red;
+}
+
+li.notes {
+    background-color: #e0e0e0;
+    padding: 5px 10px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.no-padding [class*="col-"] {
+    padding: 0;
+}
+
+.new-message {
+    resize:vertical;
+}
+
 @media screen and (max-width: 992px) {
     #active {
         position: static !important;

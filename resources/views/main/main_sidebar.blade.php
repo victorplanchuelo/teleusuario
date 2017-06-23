@@ -10,7 +10,7 @@
 	<!-- Current user starts -->
 	<div class="user-details clearfix">
 		<a href="{{ route('dashboard.profile') }}" class="user-img">
-			<img src="{{ asset('/img/thumbs/user.png') }}" alt="User Info">
+			<img id="img-sidebar" src="@if(is_null(Auth::user()->thumb_path)) {{ asset('/img/thumbs/user.png') }} @else {{ asset('/storage/'.Auth::user()->thumb_path) }} @endif" alt="User Info">
 			<!--<span class="likes-info">9</span>-->
 		</a>
 		<h5 class="user-name">{!! Auth::user()->name !!}</h5>
@@ -25,25 +25,32 @@
 				<span class="menu-item">{{ trans('dashboard.title') }}</span>
 			</a>
 		</li>
-		<li>
+
+		<?php
+			$clase=0;
+			foreach($services as $service)
+			{
+				if(request()->is('dashboard/services/' . $service->name))
+				{
+					$clase=1;
+					break;
+				}
+			}
+		?>
+
+		<li @if($clase!=0) class="active" @endif>
 			<a href="#">
-				<i class="icon-lab3"></i>
+				<i class="icon-speech-bubble"></i>
 				<span class="menu-item">{{ trans('dashboard.navbar.teleusuario.title') }}</span>
 				<span class="down-arrow"></span>
 			</a>
 			<ul>
-				<li>
-					<a href='tasks.html'>Tasks</a>
-				</li>
-				<li>
-					<a href='cards.html'>Cards</a>
-				</li>
-				<li>
-					<a href='users.html'>Users</a>
-				</li>
-				<li>
-					<a href='project-list.html'>Project List</a>
-				</li>
+
+				@foreach($services as $service)
+					<li class="{{request()->is('dashboard/services/' . $service->name) ? 'active selected' : ''}}">
+						<a href='{{ url($service->path) }}'>{{ trans('dashboard.navbar.teleusuario.' . $service->name) }}</a>
+					</li>
+				@endforeach
 			</ul>
 		</li>
 
@@ -59,6 +66,22 @@
 				</li>
 				<li class="{{request()->is('dashboard/tasks/ranking') ? 'active selected' : ''}}">
 					<a href='{{ route('dashboard.tasks.ranking') }}'>{{ trans('dashboard.navbar.tasks.ranking') }}</a>
+				</li>
+			</ul>
+		</li>
+
+		<li class="{{ (request()->is('dashboard/tickets/*'))?'active':'' }}">
+			<a href="#">
+				<i class="icon-pricetags"></i>
+				<span class="menu-item">{{ trans('dashboard.navbar.tickets.title') }}</span>
+				<span class="down-arrow"></span>
+			</a>
+			<ul>
+				<li class="{{request()->is('dashboard/tickets/my-tickets') ? 'active selected' : ''}}">
+					<a href='{{ route('dashboard.tickets.list') }}'>{{ trans('dashboard.navbar.tickets.list') }}</a>
+				</li>
+				<li class="{{request()->is('dashboard/tickets/new') ? 'active selected' : ''}}">
+					<a href='{{ route('dashboard.tickets.new') }}'>{{ trans('dashboard.navbar.tickets.new') }}</a>
 				</li>
 			</ul>
 		</li>

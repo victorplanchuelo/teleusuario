@@ -40,6 +40,13 @@ Route::get('/terms', 'Auth\RegisterController@getTerms');
 Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
 	Route::get('/', 'HomeController@index')->name('dashboard.home');
 
+	//Carga de tareas en la página inicial
+	//AUN NO SON NECESARIOS YA QUE ES LA CARGA DE LA PAGINA PRINCIPAL
+	//REVISAR LAS RUTAS YA QUE HAY MÁS ABAJO UN PREFIX A TASKS Y PUEDE HABER PROBLEMAS
+	Route::get('/tasks', 'HomeController@getTask')->name('dashboard.tasks');
+	Route::post('/tasks/note', 'HomeController@postCreateNote')->name('dashboard.tasks.create_note');
+	Route::post('/tasks/send', 'HomeController@postSend')->name('dashboard.tasks.send_message');
+
 	//Ruta para el cambio de contraseña
 	Route::get('/password/change',  'UserController@getChangePassword')->name('dashboard.change_pwd');
 	Route::post('/password/change',  'UserController@postChangePassword')->name('dashboard.change_pwd.edit');
@@ -48,9 +55,73 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
 	Route::get('/profile',  'UserController@getProfile')->name('dashboard.profile');
 	Route::post('/profile',  'UserController@postProfile')->name('dashboard.profile.update');
 
-	Route::group(['prefix' => 'tasks'], function() {
+
+
+	Route::group(['prefix' => 'task'], function() {
 		Route::get('/ranking', 'UserController@getRanking')->name('dashboard.tasks.ranking');
 	});
+
+
+
+	Route::group(['prefix' => 'services'], function() {
+		//Rutas para el apartado mensajes
+		Route::get('/messages', 'ServiceController@getMessage')->name('dashboard.message');
+		Route::post('/messages', 'ServiceController@postMessages')->name('dashboard.message.send_message');
+
+		Route::group(['prefix' => 'messages'], function() {
+			Route::post('/note/create', 'ServiceController@postCreateNote')->name('dashboard.message.create_note');
+			Route::get('/load', 'ServiceController@getNewMessage')->name('dashboard.message.load_new_message');
+			Route::post('/private-key', 'ServiceController@postSendPrivateKey')->name('dashboard.message.send_private_key');
+		});
+
+
+		//Rutas para los guiños
+		Route::get('/winks', 'ServiceController@getWink')->name('dashboard.wink');
+
+		//Rutas para los chats
+		Route::get('/chats', 'ServiceController@getChats')->name('dashboard.chats');
+
+		Route::group(['prefix' => 'chats'], function() {
+			// ESTAS RUTAS SON LAS LLAMADAS POR AJAX DE LA PARTE DE LOS CHATS
+			Route::post('/last-conn-entertainer', 'ServiceController@postLastConnEntertainer')->name('dashboard.chats.update_last_conn_entertainer');
+			Route::post('/update-premium-connection', 'ServiceController@postUpdatePremiumConnection')->name('dashboard.chats.update_premium_connection');
+			Route::post('/load-conversation', 'ServiceController@postLoadConversation')->name('dashboard.chats.load_conversation');
+			Route::post('/videochat', 'ServiceController@postVideoChat')->name('dashboard.chats.videochat');
+			Route::post('/send-message', 'ServiceController@postSendChatMessage')->name('dashboard.chats.send_message');
+			Route::post('/mark-message-read', 'ServiceController@postMarkMessageAsRead')->name('dashboard.chats.mark_message_as_read');
+			Route::post('/create-note', 'ServiceController@postCreateChatNote')->name('dashboard.chats.create_note');
+			Route::post('/get-reversed-chat', 'ServiceController@postReversedChat')->name('dashboard.chats.get_reversed_chat');
+			Route::post('/get-disconnected-reversed-chat', 'ServiceController@postDisconnectedReversedChat')->name('dashboard.chats.get_disconnected_reversed_chat');
+
+			Route::post('/close-chat-conversation', 'ServiceController@postCloseChatConversation')->name('dashboard.chats.close_chat_conversation');
+		});
+
+
+		//Rutas para el muropost
+		Route::get('/muropost', 'ServiceController@getMuropost')->name('dashboard.muropost');
+	});
+
+
+
+
+	Route::group(['prefix' => 'tickets'], function() {
+		//RUTAS PARA EL SISTEMA DE TICKETS
+		Route::get('/new', 'Tickets\TicketsController@create')->name('dashboard.tickets.new');
+		Route::post('/new', 'Tickets\TicketsController@store')->name('create_ticket');
+
+		Route::get('/my-tickets', 'Tickets\TicketsController@userTickets')->name('dashboard.tickets.list');
+		Route::get('/load-motives','Tickets\TicketsController@getMotives');
+
+		Route::post('/ticket-comment', 'Tickets\TicketCommentsController@postComment')->name('create_ticket_comment');
+
+		Route::get('/{ticket_id}', 'Tickets\TicketsController@show');
+		Route::get('/{ticket_id}/{action}', 'Tickets\TicketsController@openCloseTicket');
+
+
+
+
+	});
+
 });
 
 

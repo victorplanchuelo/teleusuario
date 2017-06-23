@@ -70,6 +70,7 @@
 					{
 						alertify.success('{{ trans('dashboard.profile.messages.success') }}');
 						$('#image').attr('src',  data.file);
+						$('#img-sidebar').attr('src',  data.file);
 						$('#user-image').val('');
 					}
 					else

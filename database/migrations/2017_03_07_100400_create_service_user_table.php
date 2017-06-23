@@ -13,7 +13,7 @@ class CreateServicesUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('services_users', function (Blueprint $table) {
+        Schema::create('service_user', function (Blueprint $table) {
             $table->unsignedSmallInteger('user_id');
 	        $table->foreign('user_id')->references('id')->on('users');
 
@@ -37,6 +37,6 @@ class CreateServicesUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('services_users');
+        Schema::dropIfExists('service_user');
     }
 }

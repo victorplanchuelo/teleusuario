@@ -153,3 +153,109 @@ $("#bootstrap").on( 'click', function () {
 	}, "Default Value");
 	return false;
 });
+
+
+
+
+
+
+
+
+
+
+
+////////////////////// MI CODIGO
+function mi_reset () {
+	$("#toggleCSS").attr("href", "../themes/alertify.default.css");
+	alertify.set({
+		labels : {
+			ok     : "Si",
+			cancel : "No"
+		},
+		delay : 5000,
+		buttonReverse : false,
+		buttonFocus   : "ok"
+	});
+}
+
+$("#send-private-key").on( 'click', function () {
+	mi_reset();
+	alertify.confirm($('#pkey-msg').data('message'), function (e) {
+		if (e) {
+
+			//Pulsó OK
+			action = $('#send-private-key').attr('action');
+
+			var token_seguridad = $('input[name="_token"]').val();
+
+			var id_autonoma = $('.id_anuncio_premium').data('anuncio');
+			var id_cliente = $('.id_anuncio_cliente').data('anuncio');
+
+			var formData = {
+				autonoma: id_autonoma,
+				cliente: id_cliente,
+				_token: token_seguridad,
+			};
+
+			// CSRF protection
+			$.ajaxSetup(
+			{
+				headers:
+				{
+					'X-CSRF-Token': token_seguridad
+				}
+			});
+
+			$.ajax({
+				url: action,
+				data: formData,
+				type: "POST",
+				success: function (data) {
+					if(data.success === 0)
+					{
+						alertify.error(data.alert);
+						return false;
+					}
+
+					//Si no es 0 quiere decirse que se ha guardado la nota bien
+					alertify.success(data.alert);
+
+					//Añadimos la nueva nota en el apartado de las notas
+					$('.chats').append(
+						createPKeyMessage(data.message)
+					).show(1000);
+					MostrarUltimoMensaje();
+				},
+				error: function(response) {
+					alertify.error(response.responseText);
+				}
+			});
+		}
+	});
+	return false;
+});
+
+
+function createPKeyMessage(message)
+{
+	var img = $('.img-premium').attr('src');
+	var name = $('.nombre_premium').text();
+
+	return '<li class="out"><img class="avatar" src="' + img + '" /><div class="message"><p class="date"><strong>' + name + ' - Ahora</strong></p><p class="inffo">' + message + '</p></div></li>';
+}
+
+
+/*
+*
+* //Llamada AJAX para cuando quiera la autónoma enviar la llave privada
+ $('#send-private-key').on('submit', function(e){
+ e.preventDefault();
+
+
+
+ e.stopPropagation();
+
+ });
+*
+*
+* */

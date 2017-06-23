@@ -1,0 +1,123 @@
+.tarjeta-regalo
+{
+    -webkit-transform: rotate(348deg);
+    -moz-transform: rotate(345deg);
+    -o-transform: rotate(345deg);
+    writing-mode: lr-tb;width: 200px;
+    text-align: center;
+    margin: 0 auto;
+    position: relative;
+    bottom: -213px;
+    left: -49px;
+    color: #ffffff;
+    letter-spacing: 0.7px;
+    text-shadow: #600000 1px 1px 0px;
+    font-size: 16px;
+    font-family: fantasy;
+    font-style: italic;"
+}
+
+.img_tarjeta_regalo
+{
+    height:120px;
+}
+
+.chat-main-box {
+    position: relative;
+    background: #ffffff;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.chat-main-box .chat-left-aside .chat-left-inner .form-control {
+    height: auto;
+
+}
+
+.chat-main-box .chat-right-aside .chat-list
+{
+    max-height:auto;
+}
+
+.chat-text
+{
+    color:#000000;
+}
+
+.chat-list .odd .chat-text h4 {
+    color: #000000;
+}
+
+
+
+
+.activa
+{
+    background-color: rgba(73, 179, 140, 0.18);
+}
+
+
+
+.oculto
+{
+    display:none;
+}
+
+.tab-content {
+    margin-top: 0px;
+}
+
+
+/********* RELOJ ************/
+
+.modal-minutos .modal-body
+{
+    text-align:center;
+    font-size: 11px;
+}
+
+.modal-minutos .modal-content
+{
+    margin:0 auto;
+    position:relative;
+    top:200px;
+}
+
+.btn_5min
+{
+    background-image:url("https://liruch.com/images/chat/icn-10min.png");
+    height:55px;
+    width:55px;
+    color:transparent;
+}
+
+.btn_15min
+{
+    background-image:url("https://liruch.com/images/chat/icn-20min.png");
+    height:55px;
+    width:55px;
+    color:transparent;
+}
+
+.btn_25min
+{
+    background-image:url("https://liruch.com/images/chat/icn-30min.png");
+    height:55px;
+    width:55px;
+    color:transparent;
+}
+
+.btn_5min:hover
+{
+    color:transparent;
+}
+
+.btn_15min:hover
+{
+    color:transparent;
+}
+.btn_25min:hover
+{
+    color:transparent;
+}
