@@ -97,6 +97,14 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
 		});
 
 
+		//Rutas para los novios
+		Route::group(['prefix' => 'boyfriends'], function() {
+			Route::get('/', 'ServiceController@getBoyfriends');
+			Route::get('/load', 'ServiceController@getLoadBoyfriends')->name('dashboard.boyfriends');
+		});
+
+
+
 		//Rutas para el muropost
 		Route::get('/muropost', 'ServiceController@getMuropost')->name('dashboard.muropost');
 	});

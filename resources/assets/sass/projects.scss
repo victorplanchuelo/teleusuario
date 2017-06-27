@@ -68,6 +68,7 @@ ul.project-time {
 	width: 100%;
 	border: 1px solid darken($body-bg, 15%);
 	padding: 5px;
+	height: 200px;
 	li {
 		padding: 0 12px;
 		margin: 5px 0;
@@ -102,18 +103,24 @@ ul.project-time {
 		}
 	}
 }
-ul.project-footer {
+
+ul.project-footer li {
+	width: 100%;
+}
+
+ul.project-header li {
+	width: 50%;
+}
+
+ul.project-footer, ul.project-header {
 	padding: 5px 10px;
 	border: 1px solid darken($body-bg, 15%);
 	li {
-		width: 33.33%;
 		padding: 3px 12px 0 12px;
 		float: left;
-		border-right: 1px solid darken($body-bg, 15%);
 		font-size: 13px;
 		font-weight: 500;
 		&:last-child {
-			border-right: 0;
 			padding-right: 0;
 		}
 		&:first-child {
@@ -189,5 +196,32 @@ ul.project-footer {
 			border-top: 10px solid $yellow;
 		}
 	}
+}
+
+.chat, .msg {
+	&:hover {
+		border: 1px solid $blue;
+	}
+}
+
+.conectado {
+	background-color: #efe;
+}
+.desconectado {
+	background-color: #fee;
+	.chat {
+		display: none;
+	}
+}
+
+.chat {
+	float:right;
+}
+.msg {
+	float: left;
+}
+
+.nombre {
+	color: orange;
 }
 

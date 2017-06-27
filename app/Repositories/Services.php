@@ -365,4 +365,19 @@ class Services extends APIRepository
 			]
 		);
 	}
+
+
+	/**
+	 * Get boyfriends
+	 *
+	 * @return mixed|\Psr\Http\Message\ResponseInterface
+	 */
+	public function getBoyfriends()
+	{
+		return $this->post('mostrar_novios_nuevo_teleusuario',
+			[
+				"animadora" => Auth::user()->code,
+			]
+		);
+	}
 }

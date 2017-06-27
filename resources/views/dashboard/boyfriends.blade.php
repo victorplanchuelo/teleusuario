@@ -1,0 +1,24 @@
+@extends('layouts.master')
+@section('head')
+	@parent
+	@include('layouts.head')
+	@include('layouts.dashboard_head')
+	@include('main.boyfriends_head')
+@endsection
+@section('header')
+	@include('main.main_header')
+@endsection
+@section('main')
+	@include('main.main_sidebar')
+	@include('main.boyfriends_main')
+@endsection
+@section('footer')
+	@include('main.main_footer')
+@endsection
+@section('scripts')
+	@include('layouts.scripts')
+	@include('layouts.dashboard_scripts')
+@endsection
+@section('scripts_extra')
+	@include('main.boyfriends_scripts')
+@endsection

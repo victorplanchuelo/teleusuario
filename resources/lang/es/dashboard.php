@@ -51,6 +51,7 @@ return [
 			'publish_posts' => 'Anuncios publicados',
 			'liruch_calls' => 'Llamadas Liruch',
 			'erotic_calls' => 'Llamadas eróticas',
+			'boyfriends' => 'Novios',
 		],
 
 	],
@@ -198,6 +199,13 @@ return [
 			'message_not_sent' => 'Se ha producido un error enviando el mensaje. Por favor, intentelo de nuevo.',
 			'introduce_message' => 'Por favor, introduce un mensaje válido',
 			'not_close_client_havent_time' => 'No puedes cerrar este chat. El cliente aún tiene tiempo para hablar contigo.',
+		],
+	],
+
+	'boyfriends' => [
+		'title' => 'Novios',
+		'errors' => [
+			'data_not_sent_correctly' => 'Algunos de los datos requeridos para realizar la acción no fueron enviados correctamente.',
 		],
 	],
 

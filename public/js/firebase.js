@@ -45,3 +45,18 @@ function firebase_ActualizarConversacion(conversacion)
 }
 
 ///////////////// FIN FUNCIONES QUE SE USAN
+
+
+
+//////////////////FUNCIONES PARA LOS NOVIOS
+function firebase_NoviosConectados()
+{
+	var usuarios_conectadosRef = firebase.database().ref('chats/conexiones_usuarios');
+
+	usuarios_conectadosRef.on('child_added', function(data) {
+		$('.cliente[data-anuncio="'+data.val().anuncio+'"]').parent().parent().removeClass('desconectado').addClass('conectado');
+	});
+	usuarios_conectadosRef.on('child_removed', function(data) {
+		$('.cliente[data-anuncio="'+data.val().anuncio+'"]').parent().parent().removeClass('conectado').addClass('desconectado');
+	});
+}

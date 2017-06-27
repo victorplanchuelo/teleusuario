@@ -630,4 +630,44 @@ class ServiceController extends Controller
 
 		return view('dashboard.muropost', compact('success', 'strErr'));
 	}
+
+
+
+	/*
+	 * ESTO ES PARA LA PARTE DE LOS NOVIOS
+	 */
+	public function getBoyfriends()
+	{
+		$success=1;
+		$strErr='';
+
+		return view('dashboard.boyfriends', compact('success', 'strErr'));
+	}
+
+	public function getLoadBoyfriends()
+	{
+		$success=1;
+		$strErr='';
+
+		//Se llama al servicio para saber si tiene novios. Los valores recuperados se mostrarán por pantalla
+		//Si no tiene novios o ya se han escrito a todos tendrá un caso especial, ya que contendrá un texto
+		// con variables dinámicas y hay que estructurar la frase
+		$boyfriends = json_decode($this->services->getBoyfriends()->getBody()->getContents());
+
+		if($boyfriends->exito !=1)
+		{
+			$success=0;
+
+			if($boyfriends->error2 > 0)
+				$strErr='';
+			else
+				$strErr = trans($boyfriends->error);
+		}
+
+		return response()->json([
+			'success' => $success,
+			'error' => [$strErr],
+			'boyfriends' => $boyfriends,
+		]);
+	}
 }
