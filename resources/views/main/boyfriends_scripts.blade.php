@@ -174,6 +174,73 @@
 				var m = loadMessage(response.message);
 				$('#conversacion').html(m);
 				MostrarUltimoMensaje();
+
+				//Añadimos al div de la conversacion el id de la conversacion
+				$('#conversacion').attr('data-id', response.conversation);
+
+
+
+
+				//Creamos la llamada AJAX del botón de enviar mensaje
+				$('.btn-send-msg').on('click', function(e){
+					e.preventDefault();
+
+					//Recuperamos el id de la conversacion
+					var id_conversacion = $('#conversacion').data('id');
+					var texto_mensaje = $('.new-message').val();
+
+					$.ajaxSetup({
+						headers:
+							{
+								'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+							}
+					});
+
+					$.ajax({
+						async:true,
+						type: "POST",
+						dataType: "json",
+						contentType: "application/x-www-form-urlencoded",
+						url:"{{ route('dashboard.boyfriends.send_message') }}",
+						data: {
+							'texto':texto_mensaje,
+							'conversacion': id_conversacion
+						},
+						beforeSend:function()
+						{
+							$('body').css('cursor', 'wait');
+						},
+						success:function(data)
+						{
+							$('body').css('cursor', 'default');
+
+							//Cuando el mensaje ya se ha enviado, debemos hacer como los mensajes. Hacer la transición
+							// para cargar el nuevo novio
+							if(data.success === 0)
+							{
+								$.each(data.error, function(index, msg){
+									alertify.error(msg);
+								});
+								return false;
+							}
+
+							//Si no es 0 quiere decirse que se ha enviado el mensaje
+							alertify.success('{{ trans('dashboard.task.message.send_message.success') }}');
+
+							//Habría que quitar las 3 ultimas lineas de código, ya que al enviar el mensaje bien
+							// debería cerrar el div de los datos, lanzar el spinner y mostrar los datos de otro mensaje
+							//loadNewMessage();
+							loadNewBoyfriend();
+
+						}
+						,timeout:30000,
+						error: function(response) {
+							$('body').css('cursor', 'default');
+							alertify.error(response.responseText);
+						}
+					});
+
+				});
 			}
 			,timeout:30000
 			,error:function(objAJAXRequest,strError)
@@ -183,6 +250,15 @@
 			}
 		});
 
+	}
+
+	function loadNewBoyfriend()
+	{
+		$('.novios').hide(1000, function() {
+			$(this).html('');
+			muestraNovios();
+			$(this).show(1000);
+		});
 	}
 
 	function loadMessage(msg)
@@ -244,9 +320,9 @@
 			'<input type="hidden" id="name-msg" data-name="' + msg.usuario_premium.nombre + '" />' +
 			'<textarea class="form-control new-message" rows="3"></textarea></div>' +
 			'<div class="col-lg-2 col-sm-4 col-md-12 col-xs-12">' +
-			'<button type="submit" class="btn btn-success btn-block">';
+			'<a href="#" class="btn btn-success btn-block btn-send-msg">';
 		html+= '{{ trans('dashboard.messages.form.submit') }}';
-		html+='</button></div></form></div>';
+		html+='</a></div></form></div>';
 
 		if(msg.tiene_fotos_privadas)
 		{
@@ -292,12 +368,32 @@
 			},
 			success: function(response) {
 				console.log(response);
+
 				$('body').css('cursor', 'default');
 				$('#spinner').loadingOverlay('remove');
 				$('#spinner').hide();
 
-				$('.novios').append(response.boyfriends.html);
+				if(response.success===0)
+				{
+					if(response.boyfriends.error2===1)
+					{
+						var errMsg = '<p>{{ trans('dashboard.boyfriends.errors.no_boyfriends_or_message_already_sent') }}'
+							+ response.boyfriends.frecuencia_envio + '{{ trans('dashboard.boyfriends.errors.no_boyfriends_or_message_already_sent_2') }}</p>'
+							+'<p>{{ trans('dashboard.boyfriends.errors.no_boyfriends_or_message_already_sent_3') }}'
+							+ response.boyfriends.req_mensajes_enviados + '{{ trans('dashboard.boyfriends.errors.no_boyfriends_or_message_already_sent_4') }}'
+							+ response.boyfriends.req_minutos_hablados + '{{ trans('dashboard.boyfriends.errors.no_boyfriends_or_message_already_sent_5') }}</p>';
 
+						$('.novios').html('<span class="alert alert-danger col-lg-12 col-md-12 col-sm-12 col-xs-12">' + errMsg + '</span>');
+						alertify.error(errMsg);
+					}
+					else
+					{
+						alertify.error("Se ha producido un error al cargar el novio o no tienes más novios a cargar")
+					}
+					return false;
+				}
+
+				$('.novios').append(response.boyfriends.html);
 			},
 			timeout:60000,
 			fail: function(objAJAXRequest,strError) {

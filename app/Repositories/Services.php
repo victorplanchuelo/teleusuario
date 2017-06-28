@@ -110,15 +110,17 @@ class Services extends APIRepository
 		);
 	}
 
+
+
 	/**
 	 * Send new message to a client
-	 * @var String $animadora
-	 * @var String $texto
-	 * @var String $conversacion
-	 * @var Integer $guinyo
-	 * @return Integer
+	 * @param $texto
+	 * @param $conversacion
+	 * @param $guinyo
+	 * @param int $novios
+	 * @return mixed|\Psr\Http\Message\ResponseInterface
 	 */
-	public function postSendMessage($texto, $conversacion, $guinyo)
+	public function postSendMessage($texto, $conversacion, $guinyo, $novios=0)
 	{
 		return $this->post('bandeja_entrada_enviar_mensaje_premium_nuevo_teleusuario',
 			[
@@ -126,6 +128,7 @@ class Services extends APIRepository
 				'texto' => $texto,
 				'conversacion' => $conversacion,
 				'guinyo' => $guinyo,
+				'novios' => $novios
 			]
 		);
 	}

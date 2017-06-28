@@ -145,6 +145,10 @@ return [
 				    'required' => 'Para crear una nueva nota debe rellenar con algún dato la caja de texto correspondiente',
 				    'min' => 'La nota debe tener, al menos, 4 carácteres',
 			    ],
+			    'message' => [
+				    'required' => 'Para enviar un mensaje debe escribir un texto de, al menos, 4 carácteres',
+				    'min' => 'El mensaje debe tener, al menos, 4 carácteres',
+			    ],
 		    ],
 	    ],
     ],

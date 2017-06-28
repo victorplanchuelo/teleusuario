@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SendMessageRequest;
 use App\Repositories\Services;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -130,7 +131,7 @@ class ServiceController extends Controller
 		}
 
 		//Si supera la validación se puede enviar el mensaje con los parámetros que se nos pide desde el servicio
-		$send_msg = json_decode($this->services->postSendMessage($request['texto'], session('conversacion_actual'), 0)->getBody()->getContents());
+		$send_msg = $this->sendMessage($request['texto'], session('conversacion_actual'), 0);
 
 		$success = ($send_msg->exito <= 0) ? 0 : 1 ;
 
@@ -149,6 +150,7 @@ class ServiceController extends Controller
 			'strDate' => Carbon::now()->format('d/m/Y'),
 		]);
 	}
+
 
 	/**
 	 * Función que se encarga de crear las notas de la conversación
@@ -698,8 +700,60 @@ class ServiceController extends Controller
 			'success' => $success,
 			'error' => [$strErr],
 			'message' => $message,
+			'conversation' => $conversacion->id,
 		]);
 
 
+	}
+
+	public function postSendMessageBoyfriends(SendMessageRequest $request)
+	{
+		$strErr = '';
+
+		//Si supera la validación se puede enviar el mensaje con los parámetros que se nos pide desde el servicio
+		$send_msg = $this->sendMessage($request['texto'], $request['conversacion'], 0, 1);
+
+		$success = ($send_msg->exito <= 0) ? 0 : 1 ;
+
+		if($success <= 0)
+		{
+			$strErr = trans('dashboard.task.message.send_message.error') . ' ERROR - '. $send_msg->error;
+		}
+
+
+		//Si se ha enviado correctamente el mensaje, borramos el id de la conversación actual (ya que ha sido terminada)
+		//Habría que comprobar si
+
+		return response()->json([
+			'success' => $success,
+			'error' => [$strErr],
+			'strDate' => Carbon::now()->format('d/m/Y'),
+		]);
+	}
+
+
+
+
+
+
+
+	/*
+	 *
+	 *
+	 * FUNCIONES AUXILIARES
+	 *
+	 *
+	 */
+	/**
+	 * CALL TO SEND MESSAGE SERVICE AND RETURN THE RESPONSE
+	 *
+	 * @param $texto
+	 * @param $conversacion
+	 * @param $guinyo
+	 * @return mixed
+	 */
+	private function sendMessage($texto, $conversacion, $guinyo, $novios)
+	{
+		return json_decode($this->services->postSendMessage($texto, $conversacion, $guinyo, $novios)->getBody()->getContents());
 	}
 }

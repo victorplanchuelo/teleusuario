@@ -204,6 +204,11 @@ return [
 		'title' => 'Novios',
 		'errors' => [
 			'data_not_sent_correctly' => 'Algunos de los datos requeridos para realizar la acción no fueron enviados correctamente.',
+			'no_boyfriends_or_message_already_sent' => 'Todavía no tienes novios o ya has enviado un mensaje o chat a todos ellos en los últimos ',
+			'no_boyfriends_or_message_already_sent_2' => ' días. Inténtalo más tarde.',
+			'no_boyfriends_or_message_already_sent_3' => 'Un chico será tu novio cuando le hayas enviado ',
+			'no_boyfriends_or_message_already_sent_4' => ' mensajes en el buzón de correo o hayas hablado con él ',
+			'no_boyfriends_or_message_already_sent_5' => ' horas por chat.',
 		],
 	],
 

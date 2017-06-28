@@ -200,6 +200,14 @@ return [
 
 	'boyfriends' => [
 		'title' => 'Boyfriends',
+		'errors' => [
+			'data_not_sent_correctly' => 'Some of the required data to realice the action was not sent correctly',
+			'no_boyfriends_or_message_already_sent' => 'You do not have boyfriends yet, or you have sent a message/chat to all of them in the last ',
+			'no_boyfriends_or_message_already_sent_2' => ' days. Try it again later.',
+			'no_boyfriends_or_message_already_sent_3' => 'A boy will be your boyfriend when you have sent him  ',
+			'no_boyfriends_or_message_already_sent_4' => ' messages to his inbox or you have chatting with him for ',
+			'no_boyfriends_or_message_already_sent_5' => ' hours.',
+		],
 	],
 
 	'task' => [

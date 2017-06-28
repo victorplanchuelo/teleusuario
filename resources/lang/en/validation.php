@@ -138,6 +138,10 @@ return [
 	    			'required' => 'In order to create a new note, the textarea field is mandatory',
 				    'min' => 'The note must have, at least, 4 characters',
 			    ],
+			    'message' => [
+				    'required' => 'In order to send a message, you must write a text with, at least, 4 characters.',
+				    'min' => 'The message must have, at least, 4 characters.',
+			    ],
 		    ],
 	    ],
     ],
