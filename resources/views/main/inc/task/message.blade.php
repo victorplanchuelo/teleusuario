@@ -168,9 +168,9 @@
 
 									@if(isset($item->regalo_deluxe))
 										<div class="tarjeta_regalo" id="regalo_deluxe_{{$item->regalo_deluxe->id}}">
-												<span class="hidden-xs">
-													De {{$item->regalo_deluxe->nombre_origen}} para {{$item->regalo_deluxe->nombre_destino}}
-												</span>
+											<span class="hidden-xs">
+												De {{$item->regalo_deluxe->nombre_origen}} para {{$item->regalo_deluxe->nombre_destino}}
+											</span>
 											<img class="img-responsive img_tarjeta_regalo" src="{{ config('constants.URL_STATIC') }}{{$item->regalo_deluxe->tarjeta}}" />
 										</div>
 									@endif

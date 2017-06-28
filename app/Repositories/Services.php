@@ -380,4 +380,14 @@ class Services extends APIRepository
 			]
 		);
 	}
+
+	public function getIdConversation($premium, $cliente)
+	{
+		return $this->post('be_existe_conversacion_premium_novios',
+			[
+				"anuncio_cliente" => $cliente,
+				"anuncio_premium" => $premium,
+			]
+		);
+	}
 }

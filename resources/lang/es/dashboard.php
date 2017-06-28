@@ -143,9 +143,7 @@ return [
 			],
 			'pkey' => [
 				'title' => 'Enviar llave privada',
-				'message' => 'Recuerda que este servicio se usa para mantener a los clientes con algo de suspense, 
-								por lo que te aconsejamos no usarlo con demasiada frecuencia. 
-								¿Estás segura que quieres enviar la llave privada a este usuario?',
+				'message' => 'Recuerda que este servicio se usa para mantener a los clientes con algo de suspense, por lo que te aconsejamos no usarlo con demasiada frecuencia. ¿Estás segura que quieres enviar la llave privada a este usuario?',
 				'success' => 'La llave privada ha sido enviada correctamente. Ahora, él cliente puede ver todas las fotos de tu actual perfil.',
 				'error' => 'Se ha producido un error enviando la llave privada. Por favor, inténtelo de nuevo más tarde.',
 				'msg_success' => 'Llave privada enviada. Ahora puedes ver todas sus fotos.',

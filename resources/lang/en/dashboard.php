@@ -141,9 +141,7 @@ return [
 			],
 			'pkey' => [
 				'title' => 'Send Private Key',
-				'message' => 'Remember that this service is used to maintain clients with a bit of suspense,
-								so we advice you not to use it too frequent. Are you sure you want to
-								send the private key to this user?',
+				'message' => 'Remember that this service is used to maintain clients with a bit of suspense, so we advice you not to use it too frequent. Are you sure you want to send the private key to this user?',
 				'success' => 'The private key was sent successfully. Now, he can watch all the photos of your profile.',
 				'error' => 'An error occurred sending the private key. Please, try it again later.',
 				'msg_success' => 'Private key sent. Now you can watch all her photos.',

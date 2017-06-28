@@ -84,7 +84,7 @@
 	{
 		$('#message').hide(1000, function() {
 			$(this).html('');
-			$('#spinner').loadingOverlay().show();
+			$('#spinner').show().removeClass('hidden').loadingOverlay();
 
 			var token_seguridad = $('input[name="_token"]').val();
 

@@ -101,6 +101,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
 		Route::group(['prefix' => 'boyfriends'], function() {
 			Route::get('/', 'ServiceController@getBoyfriends');
 			Route::get('/load', 'ServiceController@getLoadBoyfriends')->name('dashboard.boyfriends');
+			Route::post('/load/conversation', 'ServiceController@getLoadConversationBoyfriend')->name('dashboard.boyfriends.conversation');
 		});
 
 

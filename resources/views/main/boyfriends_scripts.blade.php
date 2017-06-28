@@ -12,6 +12,12 @@
 <script src="{{ asset('js/gallery/baguetteBox.js') }}"></script>
 <script src="{{ asset('js/gallery/plugins.js') }}"></script>
 
+<script>
+	window.translations = {
+		privateKey: '{{ trans('dashboard.messages.form.pkey.message') }}'
+	};
+</script>
+
 
 <script type="text/javascript">
 	function ResponderConversacionBENovios(id_conversacion,btn)
@@ -137,35 +143,25 @@
 
 	function MostrarEnviarMensajeNovio(id_novio)
 	{
-		var anuncio_cliente = $('#novios-listado [id_novio='+id_novio+'] [anuncio_cliente]');
-		var anuncio_premium = $('#novios-listado [id_novio='+id_novio+'] [anuncio_premium]');
+		var anuncio_cliente = $('.cliente').data('anuncio');
+		var anuncio_premium = $('.premium').data('anuncio');
 
-		var html = '<div class="box-generic" id_novio="'+id_novio+'">' +
-			'<div class="row-fluid" style="font-weight:bold;"' +
-			'><div class="span6">CLIENTE</div> ' +
-			'<div class="span6">PREMIUM</div>' +
-			'</div> ' +
-			'<div class="row-fluid">' +
-			'<div class="span6">' +
-			'<img src="'+$(anuncio_cliente).find('[foto]').attr('src')+'"> ' +
-			'<span style="margin-left:10px;">'+$(anuncio_cliente).find('[nombre]').html()+'</span>' +
-			'</div> ' +
-			'<div class="span6">' +
-			'<img src="'+$(anuncio_premium).find('[foto]').attr('src')+'"> ' +
-			'<span style="margin-left:10px;">'+$(anuncio_premium).find('[nombre]').html()+'</span>' +
-			'</div>' +
-			'</div>' +
-			'</div>';
+		$.ajaxSetup({
+			headers:
+				{
+					'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+				}
+		});
 
 		$.ajax({
 			async:true,
 			type: "POST",
 			dataType: "json",
 			contentType: "application/x-www-form-urlencoded",
-			url:"/ajax.php?section=up_be_leer_conversacion_novios",
+			url:"{{ route('dashboard.boyfriends.conversation') }}",
 			data: {
-				'anuncio_cliente':$(anuncio_cliente).attr('id_anuncio'),
-				'anuncio_premium':$(anuncio_premium).attr('id_anuncio')
+				'anuncio_cliente':anuncio_cliente,
+				'anuncio_premium':anuncio_premium
 			},
 			beforeSend:function()
 			{
@@ -175,8 +171,9 @@
 			{
 				$('body').css('cursor', 'default');
 
-				$('#novios-hablar').html(html+response.html);
-				$('#novios-hablar .cuadro_conversacion').scrollTop($('#novios-hablar .cuadro_conversacion').prop('scrollHeight'));
+				var m = loadMessage(response.message);
+				$('#conversacion').html(m);
+				MostrarUltimoMensaje();
 			}
 			,timeout:30000
 			,error:function(objAJAXRequest,strError)
@@ -188,32 +185,84 @@
 
 	}
 
-	function ReordenarNovios()
+	function loadMessage(msg)
 	{
-		console.log('reordenar novios');
-		var $novios = $('#boyfriends'),
-			$novio_div = $novios.find('.panel-boyfriend').parent();
+		var html = '';
+		var clase='';
+		var avatar='';
+		var nombre='';
 
-		$novio_div.sort(function(a,b){
-			var an = $(a).hasClass('conectado'),
-				bn = $(b).hasClass('conectado'),
-				an2 = parseInt($(a).attr('data-novio')),
-				bn2 = parseInt($(b).attr('data-novio'));
+		html+='<div class="panel"><div class="panel-body panel-task-messages"><ul class="chats">';
+		$.each(msg.conversacion, function(index, value) {
+			clase = (value.usuario_destino === msg.usuario_premium.usuario) ? 'in' : 'out';
+			html+='<li class="' + clase + '">';
+			if(value.usuario_destino === msg.usuario_premium.usuario)
+			{
+				if(msg.usuario_cliente.imagen === '')
+					avatar='{{ asset('/img/thumbs/user.png') }}';
+				else
+					avatar=msg.usuario_cliente.imagen;
+			}
+			else
+			{
+				if(msg.usuario_premium.imagen === '')
+					avatar='{{ asset('/img/thumbs/user.png') }}';
+				else
+					avatar = msg.usuario_premium.imagen;
+			}
 
-			if (an && !bn)
-				return -1;
-			if (!an && bn)
-				return 1;
+			html+='<img class="avatar" alt="" src="' + avatar + '" />';
+			html+='<div class="message"><p class="date">';
+			if(value.usuario_destino === msg.usuario_premium.usuario)
+				nombre =  msg.usuario_cliente.nombre;
+			else
+				nombre = msg.usuario_premium.nombre;
 
-			if (an2 > bn2)
-				return -1;
-			if (an2 < bn2)
-				return 1;
-
-			return 0;
+			html+='<strong>' + nombre + ' - ' + value.fecha + value.hora + '</strong></p>';
+			html+='<p class="inffo">';
+			html+=value.texto;
+			if(value.num_fotos!== "")
+			{
+				html+='<div class="img-messages">';
+				$.each(value.fotos, function(index2, value2) {
+					html+='<a href="' + value2 + '"><img class="img-responsive image-msg" src="' + value2 + '"></a>';
+				});
+				html+='</div>';
+			}
+			if(typeof value.regalo_deluxe !== 'undefined')
+			{
+				html+='<div class="tarjeta_regalo" id="regalo_deluxe_' + value.regalo_deluxe.id+ '"><span class="hidden-xs">';
+				html+='De '+ value.regalo_deluxe.nombre_origen +' para '+ value.regalo_deluxe.nombre_destino ;
+				html+='</span><img class="img-responsive img_tarjeta_regalo" src="https://static.liruch.com/' + value.regalo_deluxe.tarjeta +'" />';
+				html+='</div>';
+			}
+			html+='</p></div></li>';
 		});
 
-		$novio_div.detach().appendTo($novios[0].firstElementChild);
+		html+='</ul></div><div class="panel-footer"><div class="row gutter"><div class="row gutter">' +
+			'<form id="send-message" method="POST" action="#"><div class="col-lg-10 col-sm-8 col-md-12 col-xs-12">' +
+			'<input type="hidden" id="name-msg" data-name="' + msg.usuario_premium.nombre + '" />' +
+			'<textarea class="form-control new-message" rows="3"></textarea></div>' +
+			'<div class="col-lg-2 col-sm-4 col-md-12 col-xs-12">' +
+			'<button type="submit" class="btn btn-success btn-block">';
+		html+= '{{ trans('dashboard.messages.form.submit') }}';
+		html+='</button></div></form></div>';
+
+		if(msg.tiene_fotos_privadas)
+		{
+			html+='<br/><div class="row gutter">';
+			html+='<form id="send-private-key" method="POST" action="{{ route('dashboard.message.send_private_key') }}">';
+			html+='<div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">';
+			html+='<input type="hidden" id="pkey-msg" data-message="' + window.translations.privateKey + '" />';
+			html+='<a href="#" class="btn btn-info" id="send-private-key">';
+			html+='<span class="circless animate" style="height: 80px; width: 80px; top: -19px; left: -6.26562px;"></span>';
+			html+='<i class="icon-key"></i>{{ trans('dashboard.messages.form.pkey.title') }}</a></div></form></div>';
+		}
+
+		html+='</div></div></div>';
+
+		return html;
+
 	}
 
 	function muestraNovios()
@@ -248,7 +297,6 @@
 				$('#spinner').hide();
 
 				$('.novios').append(response.boyfriends.html);
-				setTimeout(ReordenarNovios,3000);
 
 			},
 			timeout:60000,
@@ -260,6 +308,16 @@
 
 			}
 		});
+	}
+
+	//Hace un scroll hasta el último mensaje enviado
+	function MostrarUltimoMensaje()
+	{
+		if($('.panel-task-messages').length)
+		{
+			var d = $('.panel-task-messages');
+			d.scrollTop(d.prop("scrollHeight"));
+		}
 	}
 
 	$(document).ready(function() {
@@ -275,8 +333,6 @@
 
 		muestraNovios();
 		firebase_NoviosConectados();
-
-		setInterval(ReordenarNovios,60000);
 
 	});
 </script>

@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use phpDocumentor\Reflection\Types\Integer;
 
 
 class ServiceController extends Controller
@@ -669,5 +670,36 @@ class ServiceController extends Controller
 			'error' => [$strErr],
 			'boyfriends' => $boyfriends,
 		]);
+	}
+
+	public function getLoadConversationBoyfriend(Request $request)
+	{
+		$anuncio_cliente = $request['anuncio_cliente'];
+		$anuncio_premium = $request['anuncio_premium'];
+
+		$success=1;
+		$strErr='';
+
+
+		$conversacion = json_decode($this->services->getIdConversation($anuncio_premium, $anuncio_cliente)->getBody()->getContents());
+
+
+		if($conversacion->id > 0)
+			$message = json_decode($this->services->getDataMessage($conversacion->id)->getBody()->getContents());
+		else
+		{
+			$message='';
+			$success=0;
+			$strErr = ['No se ha podido obtener el mensaje'];
+		}
+
+
+		return response()->json([
+			'success' => $success,
+			'error' => [$strErr],
+			'message' => $message,
+		]);
+
+
 	}
 }
