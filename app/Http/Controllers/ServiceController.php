@@ -752,7 +752,7 @@ class ServiceController extends Controller
 	 * @param $guinyo
 	 * @return mixed
 	 */
-	private function sendMessage($texto, $conversacion, $guinyo, $novios)
+	private function sendMessage($texto, $conversacion, $guinyo, $novios=0)
 	{
 		return json_decode($this->services->postSendMessage($texto, $conversacion, $guinyo, $novios)->getBody()->getContents());
 	}

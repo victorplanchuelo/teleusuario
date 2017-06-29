@@ -24,7 +24,7 @@
 
 		var formData = {
 			texto: txtNota,
-			conversacion_chat: $(this).data('conversation'),
+			conversacion_chat: $('#create_new_note').data('conversation'),
 			nombre_premium: $('.nombre_premium').text(),
 			nombre_cliente: $('.nombre_cliente').text(),
 			foto_premium: $('.img-premium').attr('src'),
@@ -70,7 +70,7 @@
 				$('.text-note').val('');
 
 				//Añadimos la nueva nota en el apartado de las notas
-				$('#collapseTwo .panel-body ul').prepend('<li>(' + data.strDate + ') ' + txtNota.replace(/\n/g, '<br>\n')  + '</li>');
+				$('#collapseTwo .panel-body ul').prepend('<li class="notes">(' + data.strDate + ') ' + txtNota.replace(/\n/g, '<br>\n')  + '</li>');
 			},
 			error: function(response) {
 				alertify.error(response.responseText);
