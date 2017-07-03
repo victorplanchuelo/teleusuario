@@ -735,6 +735,31 @@ class ServiceController extends Controller
 	}
 
 
+	public function getLoadBoyfriendChat(Request $request)
+	{
+		$anuncio_cliente = $request['anuncio_cliente'];
+		$anuncio_premium = $request['anuncio_premium'];
+
+		$success=1;
+		$strErr='';
+
+		$chat = json_decode($this->services->getBoyfriendChat($anuncio_premium, $anuncio_cliente)->getBody()->getContents());
+
+		if($chat->exito === 0)
+		{
+			$success=0;
+			$strErr = trans($chat->error);
+		}
+
+		return response()->json([
+			'success' => $success,
+			'error' => $strErr,
+		]);
+
+
+	}
+
+
 
 
 

@@ -370,6 +370,11 @@ class Services extends APIRepository
 	}
 
 
+
+	/*
+	 * PARTE API PARA NOVIOS
+	 */
+
 	/**
 	 * Get boyfriends
 	 *
@@ -384,12 +389,36 @@ class Services extends APIRepository
 		);
 	}
 
+	/**
+	 * Get the Id of the boyfriend conversation
+	 * @param $premium
+	 * @param $cliente
+	 * @return mixed|\Psr\Http\Message\ResponseInterface
+	 */
 	public function getIdConversation($premium, $cliente)
 	{
 		return $this->post('be_existe_conversacion_premium_novios',
 			[
 				"anuncio_cliente" => $cliente,
 				"anuncio_premium" => $premium,
+			]
+		);
+	}
+
+	/**
+	 * Get Boyfriend Chat
+	 * @param $premium
+	 * @param $cliente
+	 * @return mixed|\Psr\Http\Message\ResponseInterface
+	 */
+	public function getBoyfriendChat($premium, $cliente)
+	{
+		return $this->post('chat_obtener_chat_revertido_novio_nuevo_teleusuario',
+			[
+				"anuncio_cliente" => $cliente,
+				"anuncio_premium" => $premium,
+				"animadora" => Auth::user()->code,
+				"token_seguridad" => $this->token_seguridad,
 			]
 		);
 	}

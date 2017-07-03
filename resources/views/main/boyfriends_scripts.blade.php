@@ -91,30 +91,33 @@
 		}
 	}
 
-	function ConfirmarAbrirChatNovio(id_novio)
+	function ConfirmarAbrirChatNovio()
 	{
-		var anuncio_cliente = $('#novios-listado [id_novio='+id_novio+'] [anuncio_cliente]');
-		var anuncio_premium = $('#novios-listado [id_novio='+id_novio+'] [anuncio_premium]');
+		var anuncio_cliente = $('.cliente').data('anuncio');
+		var anuncio_premium = $('.premium').data('anuncio');
 
-
-		//var html = '<div class="row-fluid box-generic"><div class="span12">Vas a abrirle un chat a</div> <div class="span12"><img src="'+$(anuncio_cliente).find('[foto]').attr('src')+'"> <span style="margin-left:10px;">'+$(anuncio_cliente).find('[nombre]').html()+'</span></div> <div class="span12" style="margin-top:20px;">con el siguiente perfil</div> <div class="span12"><img src="'+$(anuncio_premium).find('[foto]').attr('src')+'"> <span style="margin-left:10px;">'+$(anuncio_premium).find('[nombre]').html()+'</span></div> <div class="span12" style="margin-top:20px;">¿Estás seguro?<br><button class="btn btn-success" onclick="AbrirChatNovio('+id_novio+')">Sí</button> <button class="btn btn-danger" onclick="$(\'#novios-hablar\').empty()" style="margin-left:20px;">No</button></div> </div>';
-
-		var html = '<div class="box-generic"><div class="row-fluid" style="font-weight:bold;"><div class="span6">CLIENTE</div> <div class="span6">PREMIUM</div></div> <div class="row-fluid"><div class="span6"><img src="'+$(anuncio_cliente).find('[foto]').attr('src')+'"> <span style="margin-left:10px;">'+$(anuncio_cliente).find('[nombre]').html()+'</span></div> <div class="span6"><img src="'+$(anuncio_premium).find('[foto]').attr('src')+'"> <span style="margin-left:10px;">'+$(anuncio_premium).find('[nombre]').html()+'</span></div></div> <div class="row-fluid" style="margin-top:20px;"><div class="span12">Vas a abrir un chat a este cliente con este perfil premium. ¿Estás seguro?<br><button class="btn btn-success" onclick="AbrirChatNovio('+id_novio+')">Sí</button> <button class="btn btn-danger" onclick="$(\'#novios-hablar\').empty()" style="margin-left:20px;">No</button></div></div></div>';
-
-		$('#novios-hablar').html(html);
+		reset();
+		alertify.confirm("Se va a abrir un chat con este usuario. ¿Estas seguro?", function (e) {
+			if (e) {
+				//alertify.success(anuncio_cliente + '---' + anuncio_premium);
+				//Ha pulsado OK. Se le manda a chats y se le carga el nuevo chat
+				AbrirChatNovio(anuncio_cliente, anuncio_premium);
+			}
+		});
+		return false;
 	}
 
-	function AbrirChatNovio(id_novio)
+	function AbrirChatNovio(cliente, premium)
 	{
 		$.ajax({
 			async:true,
-			type: "POST",
+			type: "GET",
 			dataType: "json",
 			contentType: "application/x-www-form-urlencoded",
-			url:"ajax.php?section=up_abrir_chat_novio",
+			url:"{{ route('dashboard.boyfriends.open_boyfriend_chat') }}",
 			data:{
-				'anuncio_cliente':$('#novios-listado [id_novio='+id_novio+'] [anuncio_cliente]').attr('id_anuncio'),
-				'anuncio_premium':$('#novios-listado [id_novio='+id_novio+'] [anuncio_premium]').attr('id_anuncio')
+				'anuncio_cliente':cliente,
+				'anuncio_premium':premium
 			},
 			beforeSend:function()
 			{
@@ -124,13 +127,21 @@
 			{
 				$('body').css('cursor', 'default');
 
-				if (response.exito == 1)
+				if (response.success === 1)
 				{
-					$('#novios-hablar').html('<p class="alert" style="font-size:16px;">Pulsa en la pestaña de chat y en breve aparecerá el nuevo chat.<br><button onclick="$(\'[href=#Chat]\').click()" class="btn btn-default">Ir al chat</button></p>');
-					$('#novios-listado [id_novio='+id_novio+']').remove();
+					//SE HA CREADO. Alertify y redirección???
+					alertify.success("{{ trans('dashboard.boyfriends.load_boyfriend_chat.success') }}");
+
+					setTimeout(function() {
+						window.location.href = '{{ route('dashboard.chats') }}';
+					}, 2500);
 				}
 				else
-					$('#novios-hablar').html('<p class="alert" style="font-size:16px;">'+response.error+'</p>');
+				{
+					//ERROR
+					console.log(response);
+					alertify.error(response.error);
+				}
 			},
 			timeout:30000,
 			error:function(objAJAXRequest,strError)

@@ -208,6 +208,15 @@ return [
 			'no_boyfriends_or_message_already_sent_4' => ' messages to his inbox or you have chatting with him for ',
 			'no_boyfriends_or_message_already_sent_5' => ' hours.',
 		],
+		'load_boyfriend_chat' => [
+			'success' => 'The chat has been loaded successfully. Next, we redirect you to the chat page in order to be able to start the conversation.',
+			'error' => [
+				'session_not_created' => 'An error has occurred trying to create the session.',
+				'conversation_not_getting' => 'An error has occurred trying to obtain the conversation.',
+				'user_not_connected_or_already_chatting' => 'User is not connected or is already chatting. Try it later.',
+				'chat_not_opened' => 'An error has occurred trying to open the chat',
+			],
+		],
 	],
 
 	'task' => [

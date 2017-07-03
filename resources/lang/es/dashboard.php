@@ -210,6 +210,15 @@ return [
 			'no_boyfriends_or_message_already_sent_4' => ' mensajes en el buzón de correo o hayas hablado con él ',
 			'no_boyfriends_or_message_already_sent_5' => ' horas por chat.',
 		],
+		'load_boyfriend_chat' => [
+			'success' => 'El chat ha sido cargado correctamente. A continuación te redirigimos a la página de chat para que puedas empezar la conversación.',
+			'error' => [
+				'session_not_created' => 'Ha ocurrido un error al intentar crear la sesión.',
+				'conversation_not_getting' => 'Ha ocurrido un error al intentar obtener la conversación.',
+				'user_not_connected_or_already_chatting' => 'El usuario no está conectado o ya está chateando. Inténtalo más tarde.',
+				'chat_not_opened' => 'Ha ocurrido un error al intentar abrir el chat.',
+			],
+		],
 	],
 
 

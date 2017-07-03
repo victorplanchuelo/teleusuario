@@ -103,6 +103,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
 			Route::get('/load', 'ServiceController@getLoadBoyfriends')->name('dashboard.boyfriends');
 			Route::post('/load/conversation', 'ServiceController@getLoadConversationBoyfriend')->name('dashboard.boyfriends.conversation');
 			Route::post('/send-message', 'ServiceController@postSendMessageBoyfriends')->name('dashboard.boyfriends.send_message');
+			Route::get('/open-boyfriend-chat', 'ServiceController@getLoadBoyfriendChat')->name('dashboard.boyfriends.open_boyfriend_chat');
 		});
 
 
