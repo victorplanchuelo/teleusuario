@@ -178,7 +178,8 @@ function mi_reset () {
 	});
 }
 
-$("#send-private-key").on( 'click', function () {
+function pkey(id_autonoma, id_cliente)
+{
 	mi_reset();
 	alertify.confirm($('#pkey-msg').data('message'), function (e) {
 		if (e) {
@@ -188,9 +189,6 @@ $("#send-private-key").on( 'click', function () {
 
 			var token_seguridad = $('input[name="_token"]').val();
 
-			var id_autonoma = $('.id_anuncio_premium').data('anuncio');
-			var id_cliente = $('.id_anuncio_cliente').data('anuncio');
-
 			var formData = {
 				autonoma: id_autonoma,
 				cliente: id_cliente,
@@ -199,12 +197,12 @@ $("#send-private-key").on( 'click', function () {
 
 			// CSRF protection
 			$.ajaxSetup(
-			{
-				headers:
 				{
-					'X-CSRF-Token': token_seguridad
-				}
-			});
+					headers:
+						{
+							'X-CSRF-Token': token_seguridad
+						}
+				});
 
 			$.ajax({
 				url: action,
@@ -232,6 +230,10 @@ $("#send-private-key").on( 'click', function () {
 			});
 		}
 	});
+}
+
+$("#send-private-key").on( 'click', function () {
+	pkey($('.id_anuncio_premium').data('anuncio'), $('.id_anuncio_cliente').data('anuncio'));
 	return false;
 });
 

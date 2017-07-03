@@ -190,8 +190,6 @@
 				$('#conversacion').attr('data-id', response.conversation);
 
 
-
-
 				//Creamos la llamada AJAX del botón de enviar mensaje
 				$('.btn-send-msg').on('click', function(e){
 					e.preventDefault();
@@ -252,6 +250,14 @@
 					});
 
 				});
+
+				//AQUI FALTA LA ACCION DEL BOTÓN DE ENVIAR LLAVE PRIVADA
+				$("#send-private-key").on( 'click', function () {
+					pkey(anuncio_premium, anuncio_cliente);
+					return false;
+				});
+
+
 			}
 			,timeout:30000
 			,error:function(objAJAXRequest,strError)
