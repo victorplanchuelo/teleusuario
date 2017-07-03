@@ -68,7 +68,7 @@ ul.project-time {
 	width: 100%;
 	border: 1px solid darken($body-bg, 15%);
 	padding: 5px;
-	height: 200px;
+	height: 175px;
 	li {
 		padding: 0 12px;
 		margin: 5px 0;
@@ -223,5 +223,11 @@ ul.project-footer, ul.project-header {
 
 .nombre {
 	color: orange;
+}
+
+.bf_title {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
