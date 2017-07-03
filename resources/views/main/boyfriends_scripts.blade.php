@@ -268,6 +268,7 @@
 		$('.novios').hide(1000, function() {
 			$(this).html('');
 			muestraNovios();
+			firebase_NoviosConectados();
 			$(this).show(1000);
 		});
 	}
