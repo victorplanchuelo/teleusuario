@@ -553,7 +553,10 @@ class ServiceController extends Controller
 		$success = ($reversed->exito <= 0) ? 0 : 1 ;
 
 		if($success <= 0)
-			$strErr = trans('dashboard.task.chats.reversed_chat.error') . ' ERROR - '. trans($reversed->error);
+		{
+			$strErr = trans('dashboard.task.chats.reversed_chat.error') . ' ERROR - '. (isset($reversed->error)) ? trans($reversed->error) : '';
+		}
+
 		else
 		{
 			//SI DEVUELVE EXITO RECUPERAMOS LOS DATOS QUE NECESITAMOS
