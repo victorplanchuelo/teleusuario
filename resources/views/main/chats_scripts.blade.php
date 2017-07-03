@@ -68,10 +68,7 @@
 							$('#tabla_chat').append(response.html_fila);
 
 							if(parseInt($('#'+conversacion).attr('revertida'))===1)
-							{
-								var revertida=HtmlRevertida();
-								$('#'+conversacion).find('#chat_mensajes').append(revertida);
-							}
+								$('#'+conversacion).find('#chat_mensajes').append(HtmlRevertida());
 
 							if(response.segundos_quedan>0)
 							{
@@ -599,8 +596,8 @@
 
 
 		$('.fila-chat').each(function( index ) {
-			var conversacion=$(this).attr("id");
-			$('#'+conversacion).find('#chat_mensajes').scrollTop($('#'+conversacion).find('#chat_mensajes')[0].scrollHeight);
+			var conv=$(this).attr("id");
+			$('#'+conv).find('#chat_mensajes').scrollTop($('#'+conv).find('#chat_mensajes')[0].scrollHeight);
 
 		});
 
