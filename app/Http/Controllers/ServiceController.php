@@ -642,6 +642,10 @@ class ServiceController extends Controller
 	/*
 	 * ESTO ES PARA LA PARTE DE LOS NOVIOS
 	 */
+	/**
+	 * Get the boyfriend's view
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
 	public function getBoyfriends()
 	{
 		$success=1;
@@ -650,6 +654,10 @@ class ServiceController extends Controller
 		return view('dashboard.boyfriends', compact('success', 'strErr'));
 	}
 
+	/**
+	 * Load a boyfriend and returns him to the view
+	 * @return \Illuminate\Http\JsonResponse
+	 */
 	public function getLoadBoyfriends()
 	{
 		$success=1;
@@ -677,6 +685,11 @@ class ServiceController extends Controller
 		]);
 	}
 
+	/**
+	 * Load the conversation of the current boyfriend
+	 * @param Request $request
+	 * @return \Illuminate\Http\JsonResponse
+	 */
 	public function getLoadConversationBoyfriend(Request $request)
 	{
 		$anuncio_cliente = $request['anuncio_cliente'];
@@ -709,6 +722,11 @@ class ServiceController extends Controller
 
 	}
 
+	/**
+	 * Function fired when a message was sent to the current boyfriend
+	 * @param SendMessageRequest $request
+	 * @return \Illuminate\Http\JsonResponse
+	 */
 	public function postSendMessageBoyfriends(SendMessageRequest $request)
 	{
 		$strErr = '';
@@ -734,7 +752,11 @@ class ServiceController extends Controller
 		]);
 	}
 
-
+	/**
+	 * Load the chat conversation for the current boyfriend
+	 * @param Request $request
+	 * @return \Illuminate\Http\JsonResponse
+	 */
 	public function getLoadBoyfriendChat(Request $request)
 	{
 		$anuncio_cliente = $request['anuncio_cliente'];
@@ -773,7 +795,7 @@ class ServiceController extends Controller
 	 *
 	 */
 	/**
-	 * CALL TO SEND MESSAGE SERVICE AND RETURN THE RESPONSE
+	 * CALL TO SEND MESSAGE SERVICE AND RETURN THE RESPONSE. IT IS USED BY POSTMESSAGES AND POSTSENDMESSAGEBOYFRIEND
 	 *
 	 * @param $texto
 	 * @param $conversacion
