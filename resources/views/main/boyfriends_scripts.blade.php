@@ -236,9 +236,6 @@
 							//Si no es 0 quiere decirse que se ha enviado el mensaje
 							alertify.success('{{ trans('dashboard.task.message.send_message.success') }}');
 
-							//Habría que quitar las 3 ultimas lineas de código, ya que al enviar el mensaje bien
-							// debería cerrar el div de los datos, lanzar el spinner y mostrar los datos de otro mensaje
-							//loadNewMessage();
 							loadNewBoyfriend();
 
 						}

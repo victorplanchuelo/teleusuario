@@ -197,6 +197,7 @@ return [
 			'message_not_sent' => 'Se ha producido un error enviando el mensaje. Por favor, intentelo de nuevo.',
 			'introduce_message' => 'Por favor, introduce un mensaje válido',
 			'not_close_client_havent_time' => 'No puedes cerrar este chat. El cliente aún tiene tiempo para hablar contigo.',
+			'data_missing' => 'Algunos datos no han podido ser cargados correctamente',
 		],
 	],
 

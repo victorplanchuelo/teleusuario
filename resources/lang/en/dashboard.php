@@ -195,6 +195,7 @@ return [
 			'message_not_sent' => 'An error has occurred sending the message. Please, try again.',
 			'introduce_message' => 'Please, introduce a valid message',
 			'not_close_client_havent_time' => 'You cannot close this chat. The client haven\'t got time to speak with you yet.',
+			'data_missing' => 'Some data hasn\'t been able to load correctly',
 		],
 	],
 
