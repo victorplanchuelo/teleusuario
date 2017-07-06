@@ -9,7 +9,7 @@
 
 	<!-- Header actions starts -->
 	<ul id="header-actions" class="clearfix">
-		<li class="list-box hidden-xs dropdown">
+		<li class="list-box hidden-xs dropdown @if(count(Auth::user()->unreadNotifications)) blink_icon @endif">
 			<a id="drop3" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
 				<i class="icon-bell2"></i>
 			</a>
