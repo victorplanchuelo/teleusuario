@@ -106,15 +106,6 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
 			Route::get('/open-boyfriend-chat', 'ServiceController@getLoadBoyfriendChat')->name('dashboard.boyfriends.open_boyfriend_chat');
 		});
 
-
-		Route::group(['prefix' => 'notifications'], function() {
-			Route::get('/', 'NotificationController@index')->name('dashboard.notifications');
-			Route::get('/new', 'NotificationController@create')->name('dashboard.notifications.new');
-			Route::post('/new', 'NotificationController@store')->name('dashboard.notifications.store');
-		});
-
-
-
 		//Rutas para el muropost
 		Route::get('/muropost', 'ServiceController@getMuropost')->name('dashboard.muropost');
 	});
@@ -135,9 +126,12 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
 		Route::get('/{ticket_id}', 'Tickets\TicketsController@show');
 		Route::get('/{ticket_id}/{action}', 'Tickets\TicketsController@openCloseTicket');
 
+	});
 
-
-
+	Route::group(['prefix' => 'notifications'], function() {
+		Route::get('/', 'NotificationController@index')->name('dashboard.notifications');
+		Route::get('/new', 'NotificationController@create')->name('dashboard.notifications.new');
+		Route::post('/new', 'NotificationController@store')->name('dashboard.notifications.store');
 	});
 
 });
