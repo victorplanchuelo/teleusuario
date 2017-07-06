@@ -40,7 +40,7 @@
 
 		<li @if($clase!=0) class="active" @endif>
 			<a href="#">
-				<i class="icon-speech-bubble"></i>
+				<i class="icon-chat"></i>
 				<span class="menu-item">{{ trans('dashboard.navbar.teleusuario.title') }}</span>
 				<span class="down-arrow"></span>
 			</a>
@@ -82,6 +82,22 @@
 				</li>
 				<li class="{{request()->is('dashboard/tickets/new') ? 'active selected' : ''}}">
 					<a href='{{ route('dashboard.tickets.new') }}'>{{ trans('dashboard.navbar.tickets.new') }}</a>
+				</li>
+			</ul>
+		</li>
+
+		<li class="{{ (request()->is('dashboard/notifications/*'))?'active':'' }}">
+			<a href="#">
+				<i class="icon-megaphone"></i>
+				<span class="menu-item">{{ trans('dashboard.navbar.notifications.title') }}</span>
+				<span class="down-arrow"></span>
+			</a>
+			<ul>
+				<li class="{{request()->is('dashboard/notifications') ? 'active selected' : ''}}">
+					<a href='{{ route('dashboard.notifications') }}'>{{ trans('dashboard.navbar.notifications.list') }}</a>
+				</li>
+				<li class="{{request()->is('dashboard/notifications/new') ? 'active selected' : ''}}">
+					<a href='{{ route('dashboard.notifications.new') }}'>{{ trans('dashboard.navbar.notifications.new') }}</a>
 				</li>
 			</ul>
 		</li>

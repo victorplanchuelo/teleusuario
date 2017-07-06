@@ -144,6 +144,19 @@ return [
 			    ],
 		    ],
 	    ],
+	    'notifications' => [
+	    	'type' => [
+	    		'required' => 'You need to choose one type of notification',
+		    ],
+		    'user' => [
+		    	'required' => 'You need to select the users who will receive the notification',
+			    'choose' => 'You must select "All users" in order to send the notifications to all users, or mark the users that will receive the notification'
+		    ],
+		    'message' => [
+		        'require' => 'You must write the message of the notification',
+			    'min' => 'You must write a message with, at least, 10 characters',
+		    ],
+	    ],
     ],
 
     /*

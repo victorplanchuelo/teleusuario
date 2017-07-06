@@ -16,6 +16,15 @@
 		<div class="row gutter">
 			<!-- Panel de Tasks -->
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+				@if(count(Auth::user()->unreadNotifications) > 0)
+					<div class="alert alert-danger no-margin">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+						<i class="icon-cross2"></i> {{ trans('dashboard.notifications.pending_notification') }}
+							<a class="notif_link" href="{{ route('dashboard.notifications') }}">{{ trans('dashboard.notifications.list_notification') }}</a>
+					</div>
+				@endif
+
 				<div class="panel">
 					<div class="panel-heading">
 						<h4>Tareas</h4>

@@ -151,6 +151,19 @@ return [
 			    ],
 		    ],
 	    ],
+	    'notifications' => [
+		    'type' => [
+			    'required' => 'Debes elegir un tipo de notificación',
+		    ],
+		    'user' => [
+			    'required' => 'Debes elegir los usuarios que recibirán la notificación',
+			    'choose' => 'Debes seleccionar "Todos los usuarios" para enviar la notificación a todos, o marcar los usuarios específicos que recibirán la notificación'
+		    ],
+		    'message' => [
+			    'require' => 'Debes escribir un mensaje para la notificación',
+			    'min' => 'Debes escribir un mensaje con, al menos, 10 caracteres',
+		    ],
+	    ],
     ],
 
     /*

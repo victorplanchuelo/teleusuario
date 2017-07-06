@@ -15,11 +15,42 @@ return [
 	'level'                => 'Nivel',
 	'scores'               => 'Puntuación',
 
+	'notifications' => [
+		'pending_notification' => 'Tienes notificaciones importantes sin leer. Por favor, accede a tu ',
+		'list_notification' => 'listado de notificaciones',
+		'new' => [
+			'success' => 'La notificación ha sido enviada correctamente a los usuarios seleccionados.',
+			'form' => [
+				'message' => 'Mensaje',
+				'type' => 'Tipo de mensaje',
+				'aimed_at' => 'Dirigido a',
+				'new' => 'Crear Notificación',
+				'types' => [
+					'select' => 'Selecciona tipo',
+					'danger' => 'Error',
+					'warning' => 'Advertencia',
+					'info' => 'Información',
+					'congrat' => 'Felicitación',
+				],
+				'user' => 'Usuarios',
+				'users' => [
+					'select' => 'Selecciona usuario(s)',
+					'all' => 'Todos los usuarios',
+				],
+			],
+		],
+	],
+
 	'header' => [
 		'logout' => 'Desconectar',
 		'code'   => 'Código',
 		'profile' => 'Ver perfil',
 		'change_pwd' => 'Cambiar contraseña',
+		'notifications' => [
+			'message1' => 'Tienes ',
+			'message2' => ' notificacion(es) sin leer',
+			'all_notifications' => 'Ver todas las notificaciones',
+		],
 	],
 
 	'navbar' => [
@@ -40,6 +71,12 @@ return [
 			'title' => 'Sistema de Tickets',
 			'new' => 'Nuevo ticket',
 			'list' => 'Tus tickets',
+		],
+
+		'notifications' => [
+			'title' => 'Notificaciones',
+			'new' => 'Nueva notificacion',
+			'list' => 'Listado de notificaciones',
 		],
 
 		'teleusuario' => [

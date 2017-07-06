@@ -14,11 +14,42 @@ return [
 	'level'                => 'Level',
 	'scores'               => 'Scores',
 
+	'notifications' => [
+		'pending_notification' => 'You have important unread notifications. Please, go to your ',
+		'list_notification' => 'list of notifications',
+		'new' => [
+			'success' => 'The notification was sent successfully to the users selected',
+			'form' => [
+				'message' => 'Message',
+				'type' => 'Type of message',
+				'aimed_at' => 'Aimed at',
+				'new' => 'Create Notification',
+				'types' => [
+					'select' => 'Select type',
+					'danger' => 'Danger',
+					'warning' => 'Warning',
+					'info' => 'Info',
+					'congrat' => 'Congratulation',
+				],
+				'user' => 'Users',
+				'users' => [
+					'select' => 'Select user(s)',
+					'all' => 'All users',
+				],
+			],
+		],
+	],
+
 	'header' => [
 		'logout' => 'Logout',
 		'code'   => 'Code',
 		'profile' => 'View profile',
 		'change_pwd' => 'Change password',
+		'notifications' => [
+			'message1' => 'You have ',
+			'message2' => ' unread notifications',
+			'all_notifications' => 'See all notifications',
+		],
 	],
 
 	'navbar' => [
@@ -38,6 +69,12 @@ return [
 			'title' => 'Ticket System',
 			'new' => 'New ticket',
 			'list' => 'Your tickets',
+		],
+
+		'notifications' => [
+			'title' => 'Notifications',
+			'new' => 'New notification',
+			'list' => 'List of notifications',
 		],
 
 		'teleusuario' => [

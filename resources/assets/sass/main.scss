@@ -957,25 +957,29 @@ ul#header-actions {
 
 // Messages Dropdown
 ul.imp-notify {
+	li:not(:first-child), li:not(:last-child)
+	{
+		border-bottom: 1px solid $white10;
+	}
 	li {
 		padding: 10px;
 		@include transition(All, 0.5s, ease);
-		.icon {
+		/*.icon {
 			float: left;
 			img {
 				width: 36px;
 				height: 36px;
 				border-left: 3px solid $red;
 			}
-		}
+		}*/
 		.details {
 			line-height: 18px;
 			font-size: 13px;
 			display: block;
 			background: transparent;
 			border: none;
-			width: auto;
-			margin-left: 48px;
+			width: 100%;
+			/*margin-left: 48px;*/
 			strong {
 				font-weight: 500;
 				margin-right: 3px;
@@ -996,16 +1000,6 @@ ul.imp-notify {
 		}
 		&:hover {
 			background-color: darken($body-bg, 2%);
-		}
-		&:nth-child(3){
-			img {
-				border-left: 3px solid $green;
-			}
-		}
-		&:nth-child(4){
-			img {
-				border-left: 3px solid $blue;
-			}
 		}
 	}
 }
@@ -4656,4 +4650,11 @@ label {
 	.margin-top-ticket-urgent {
 		margin-top: 12px;
 	}
+}
+
+
+//Pending notification alert
+.notif_link {
+	color: $white;
+	font-weight: bold;
 }
