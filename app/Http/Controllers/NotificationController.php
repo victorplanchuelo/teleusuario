@@ -19,7 +19,7 @@ class NotificationController extends Controller
      */
     public function index()
     {
-        $notifications = Auth::user()->notifications();
+        $notifications = Auth::user()->notifications;
         return view('dashboard.notifications.notifications', compact('notifications'));
     }
 
