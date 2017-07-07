@@ -15,6 +15,9 @@ return [
 	'scores'               => 'Scores',
 
 	'notifications' => [
+		'data' => [
+			'empty' => 'There are no notifications yet',
+		],
 		'pending_notification' => 'You have important unread notifications. Please, go to your ',
 		'list_notification' => 'list of notifications',
 		'new' => [
