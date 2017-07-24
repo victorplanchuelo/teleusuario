@@ -40,7 +40,6 @@ class NewNotificationMessage extends Notification
 		return [
 			'message' => $this->message->message,
 			'type' => $this->message->type,
-			'created_at' => $this->message->created_at,
 		];
 	}
 

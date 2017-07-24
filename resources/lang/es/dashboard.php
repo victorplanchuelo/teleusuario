@@ -18,6 +18,12 @@ return [
 	'notifications' => [
 		'data' => [
 			'empty' => 'Aún no hay notificaciones',
+			'title' => [
+				'error' => 'ERROR',
+				'warning' => 'AVISO',
+				'info' => 'INFORMACIÓN',
+				'success' => 'ENHORABUENA',
+			],
 		],
 		'pending_notification' => 'Tienes notificaciones importantes sin leer. Por favor, accede a tu ',
 		'list_notification' => 'listado de notificaciones',

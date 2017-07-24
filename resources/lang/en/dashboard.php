@@ -17,6 +17,12 @@ return [
 	'notifications' => [
 		'data' => [
 			'empty' => 'There are no notifications yet',
+			'title' => [
+				'error' => 'ERROR',
+				'warning' => 'WARNING',
+				'info' => 'INFO',
+				'success' => 'SUCCESS',
+			],
 		],
 		'pending_notification' => 'You have important unread notifications. Please, go to your ',
 		'list_notification' => 'list of notifications',

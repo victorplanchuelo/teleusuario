@@ -120,14 +120,20 @@ $(function() {
 
 // Bootstrap Dropdown Hover
 $(function(){
-	$("#header-actions .dropdown").hover(            
+	dropdownMenu()
+});
+
+
+function dropdownMenu()
+{
+	$("#header-actions .dropdown").hover(
 		function() {
 			$('.dropdown-menu', this).stop( true, true ).fadeIn("fast");
-			$(this).toggleClass('open');              
+			$(this).toggleClass('open');
 		},
 		function() {
 			$('.dropdown-menu', this).stop( true, true ).fadeOut("fast");
-			$(this).toggleClass('open');            
+			$(this).toggleClass('open');
 		}
 	);
-});
+}

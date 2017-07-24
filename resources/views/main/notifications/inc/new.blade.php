@@ -9,7 +9,7 @@
 					{!! csrf_field() !!}
 
 					<div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
-						<label for="type" class="col-md-4 control-label">{{ trans('dashboard.notifications.new.form.type') }}</label>
+						<label for="type" class="col-lg-3 col-md-4 control-label">{{ trans('dashboard.notifications.new.form.type') }}</label>
 
 						<div class="col-md-6">
 							<select id="type" class="form-control" name="type">
@@ -29,7 +29,7 @@
 					</div>
 
 					<div class="form-group{{ $errors->has('user') ? ' has-error' : '' }}">
-						<label for="user" class="col-md-4 control-label">{{ trans('dashboard.notifications.new.form.user') }}</label>
+						<label for="user" class="col-lg-3 col-md-4 control-label">{{ trans('dashboard.notifications.new.form.user') }}</label>
 
 						<div class="col-md-6">
 							<select id="user" class="form-control" name="user[]" multiple="multiple">
@@ -48,7 +48,7 @@
 					</div>
 
 					<div class="form-group{{ $errors->has('message') ? ' has-error' : '' }}">
-						<label for="message" class="col-md-4 control-label">{{ trans('dashboard.notifications.new.form.message') }}</label>
+						<label for="message" class="col-lg-3 col-md-4 control-label">{{ trans('dashboard.notifications.new.form.message') }}</label>
 
 						<div class="col-md-6">
 							<textarea rows="10" id="message" class="form-control new-message" name="message">{{ nl2br(e(old('message'))) }}</textarea>
@@ -62,7 +62,7 @@
 					</div>
 
 					<div class="form-group">
-						<div class="col-md-6 col-md-offset-4">
+						<div class="col-lg-2 col-lg-offset-5 col-md-3 col-md-offset-5 col-xs-12">
 							<button type="submit" class="btn btn-info">
 								{{ trans('dashboard.notifications.new.form.new') }}
 							</button>

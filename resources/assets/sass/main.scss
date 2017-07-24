@@ -957,29 +957,29 @@ ul#header-actions {
 
 // Messages Dropdown
 ul.imp-notify {
-	li:not(:first-child), li:not(:last-child)
+	li.notification:not(:first-child), li.notification:not(:last-child)
 	{
 		border-bottom: 1px solid $white10;
 	}
 	li {
 		padding: 10px;
 		@include transition(All, 0.5s, ease);
-		/*.icon {
+		.icon {
 			float: left;
 			img {
 				width: 36px;
 				height: 36px;
 				border-left: 3px solid $red;
 			}
-		}*/
+		}
 		.details {
 			line-height: 18px;
 			font-size: 13px;
 			display: block;
 			background: transparent;
 			border: none;
-			width: 100%;
-			/*margin-left: 48px;*/
+			/*width: 100%;*/
+			margin-left: 48px;
 			strong {
 				font-weight: 500;
 				margin-right: 3px;
@@ -998,9 +998,18 @@ ul.imp-notify {
 				display: block;
 			}
 		}
-		&:hover {
-			background-color: darken($body-bg, 2%);
+		&:first-child:hover {
+			cursor: default;
 		}
+		&:not(:first-child):hover {
+			background-color: darken($body-bg, 10%);
+			cursor: pointer;
+		}
+	}
+	a.all-notifications {
+		padding: 0;
+		cursor: pointer;
+		text-align: center;
 	}
 }
 
@@ -3059,12 +3068,14 @@ ul.menu {
 	font-size: 13px;
 	color: $black30;
 	border-bottom: 1px solid darken($body-bg, 5%);
+	text-align: center;
 }
 .dropdown-footer {
-	border-top: 1px solid darken($body-bg, 5%);
+	/*border-top: 1px solid darken($body-bg, 5%);*/
 	padding: 10px 15px;
 	color: $blue;
 	font-size: 11px;
+	text-align: center;
 }
 
 .panel-sortable {
@@ -3997,7 +4008,7 @@ a.list-group-item-info {
 }
 a.list-group-item-warning {
 	background-color: $yellow;
-	color: $black;
+	color: $white;
 	&:hover, &:focus {
 		background-color: darken($yellow, 10%);
 		color: $white;

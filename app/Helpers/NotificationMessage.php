@@ -2,14 +2,10 @@
 
 namespace App\Helpers;
 
-
-use Carbon\Carbon;
-
 class NotificationMessage
 {
 	public $message;
 	public $type;
-	public $created_at;
 
 	/**
 	 * NotificationMessage constructor.
@@ -20,8 +16,6 @@ class NotificationMessage
 	{
 		$this->message = $message;
 		$this->type = $type;
-		$this->created_at = Carbon::now()->format('d/m/Y h:i');
 	}
-
 
 }

@@ -19,7 +19,7 @@ class NotificationController extends Controller
      */
     public function index()
     {
-        $notifications = Auth::user()->notifications;
+        $notifications = Auth::user()->notifications()->paginate(5);
         return view('dashboard.notifications.notifications', compact('notifications'));
     }
 
@@ -85,6 +85,35 @@ class NotificationController extends Controller
 	    return redirect()->back()
 		    ->with('status', trans('dashboard.notifications.new.success'));
 
+    }
+
+
+    public function markAsRead(Request $request)
+    {
+    	$strErr = "";
+    	$success = 0;
+    	$html='';
+
+    	$notification = Auth::user()->notifications()->where('id',$request->notification)->first();
+	    if ($notification)
+	    {
+
+		    $notification->markAsRead();
+		    $html = view('main.inc.notifications')->render();
+		    $success=1;
+
+		    return response()->json([
+		    	'success' => $success,
+			    'html' => $html,
+			    'error' => [$strErr],
+		    ]);
+	    }
+	    else
+		    return response()->json([
+		    	'success' => $success,
+			    'html' => $html,
+			    'error' => [$strErr],
+		    ]);
     }
 
 }

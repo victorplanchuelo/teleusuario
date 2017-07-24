@@ -132,6 +132,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
 		Route::get('/', 'NotificationController@index')->name('dashboard.notifications');
 		Route::get('/new', 'NotificationController@create')->name('dashboard.notifications.new');
 		Route::post('/new', 'NotificationController@store')->name('dashboard.notifications.store');
+		Route::get('/mark-as-read', 'NotificationController@markAsRead')->name('dashboard.notifications.mark_as_read');
 	});
 
 });
