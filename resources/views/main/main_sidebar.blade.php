@@ -86,7 +86,7 @@
 			</ul>
 		</li>
 
-		<li class="{{ (request()->is('dashboard/notifications/*'))?'active':'' }}">
+		<li class="{{ (request()->is('dashboard/notifications/*') || request()->is('dashboard/notifications'))?'active':'' }}">
 			<a href="#">
 				<i class="icon-megaphone"></i>
 				<span class="menu-item">{{ trans('dashboard.navbar.notifications.title') }}</span>
