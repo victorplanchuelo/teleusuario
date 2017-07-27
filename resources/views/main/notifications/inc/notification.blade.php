@@ -148,7 +148,11 @@
 								<?php $cont++; ?>
 							@endforeach
 						@else
-							<p>{{ trans('dashboard.notifications.data.empty') }}</p>
+							<tr>
+								<td>
+									<p>{{ trans('dashboard.notifications.data.empty') }}</p>
+								</td>
+							</tr>
 						@endif
 						</tbody>
 					</table>

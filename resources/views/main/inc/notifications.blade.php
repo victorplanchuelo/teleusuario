@@ -2,13 +2,13 @@
 	<a id="drop3" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
 		<i class="icon-bell2"></i>
 	</a>
-	<span class="info-label red-bg">{{ count(Auth::user()->unreadNotifications) }}</span>
+	<span class="info-label red-bg" data-count="{{ count(Auth::user()->unreadNotifications) }}">{{ count(Auth::user()->unreadNotifications) }}</span>
 	<ul class="dropdown-menu imp-notify">
 		<li class="dropdown-header">{{ trans('dashboard.header.notifications.message1') }} {{ count(Auth::user()->unreadNotifications) }} {{ trans('dashboard.header.notifications.message2') }}</li>
 		<?php $i=0; ?>
 		@foreach(Auth::user()->unreadNotifications as $notification)
 			@if($i < 3)
-				<li class="notification">
+				<li class="notification" data-id="{{ $notification->id }}">
 					<div class="icon">
 						<i class="@if($notification->data['type']==="1") text-danger @elseif($notification->data['type']==="2") text-warning @elseif($notification->data['type']==="3")) text-info @else text-success @endif @if($notification->data['type']==="1") icon-cross2 @elseif($notification->data['type']==="2") icon-info @elseif($notification->data['type']==="3")) icon-comment-stroke @else icon-trophy @endif"></i>
 					</div>

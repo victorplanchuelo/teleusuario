@@ -5,7 +5,7 @@
 			<div class="panel-body">
 				@include('main.notifications.inc.flash')
 
-				<form class="form-horizontal" role="form" method="POST" action="{{ route('dashboard.notifications.store') }}">
+				<form class="form-horizontal" role="form"">
 					{!! csrf_field() !!}
 
 					<div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
@@ -63,7 +63,7 @@
 
 					<div class="form-group">
 						<div class="col-lg-2 col-lg-offset-5 col-md-3 col-md-offset-5 col-xs-12">
-							<button type="submit" class="btn btn-info">
+							<button id="create-notification" type="button" class="btn btn-info">
 								{{ trans('dashboard.notifications.new.form.new') }}
 							</button>
 						</div>

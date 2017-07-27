@@ -24,13 +24,14 @@
 			e.preventDefault();
 
 			var noti = $(this).find('.btn');
+			var id = $(this).data('id');
 
 			$.ajax({
 				type: "GET",
 				dataType: "json",
 				url:"{{ route('dashboard.notifications.mark_as_read') }}",
 				data:{
-					'notification':$(this).data('id')
+					'notification':id
 				},
 				beforeSend:function()
 				{
@@ -42,14 +43,19 @@
 
 					if (response.success === 1)
 					{
-						//SE HA MARCADO COMO LEIDO CORRECTAMENTE
+						if(response.ya_leido===0)
+						{
+							//SE HA MARCADO COMO LEIDO CORRECTAMENTE
 
-						// SE CAMBIA EL COLOR AL OJO Y SE MODIFICA EL HEADER
-						// PARA RESTARLE UNO AL NUMERO DE NOTIFICACIONES SIN LEER
-						noti.removeClass('btn-danger').addClass('btn-success');
-						$('#header-actions').html(response.html);
-						$('.dropdown-toggle').dropdown();
-						dropdownMenu();
+							// SE CAMBIA EL COLOR AL OJO Y SE MODIFICA EL HEADER
+							// PARA RESTARLE UNO AL NUMERO DE NOTIFICACIONES SIN LEER
+							noti.removeClass('btn-danger').addClass('btn-success');
+
+							//////////
+							// AQUI LANZAMOS EL BORRADO EN FIREBASE
+							/////////
+							firebase_EliminarNotificacion(response.html, '{{ Auth::user()->code }}', id);
+						}
 
 					}
 					else

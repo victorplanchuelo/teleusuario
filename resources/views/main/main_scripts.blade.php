@@ -2,6 +2,9 @@
 <script src="{{ asset('js/custom.js') }}"></script>
 <script src="{{ asset('js/loading-overlay.min.js') }}"></script>
 
+<script src="https://www.gstatic.com/firebasejs/4.1.5/firebase.js"></script>
+<script type="text/javascript" src="{{ asset('/js/firebase.js') }}"></script>
+
 <!-- Gallery JS -->
 <script src="{{ asset('js/gallery/baguetteBox.js') }}"></script>
 <script src="{{ asset('js/gallery/plugins.js') }}"></script>
@@ -24,7 +27,7 @@
 
 	$(document).ready(function() {
 
-		$("#spinner").hide();
+		/*$("#spinner").hide();
 
 		function toggleIcon(e) {
 			$(e.target)
@@ -202,6 +205,7 @@
 				}
 			});
 		});
+		*/
 
 	});
 

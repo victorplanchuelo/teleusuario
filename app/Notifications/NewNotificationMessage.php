@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use GuzzleHttp\Client;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -37,6 +38,21 @@ class NewNotificationMessage extends Notification
 
 	public function toDatabase($notifiable)
 	{
+		//Antes de guardar en la BD de SQL Server lo metemos en Firebase vía Guzzle
+
+		$url = 'https://notifications-9c63f.firebaseio.com/' . $notifiable->code . '/notifications/' . $this->id . '.json';
+		$client = new Client();
+
+		$notification = array(
+			'id' => $this->id,
+			'type' => $this->message->type,
+			'message' => $this->message->message,
+		);
+
+		$response = $client->patch($url, [
+			'json' => $notification
+		]);
+
 		return [
 			'message' => $this->message->message,
 			'type' => $this->message->type,
@@ -53,7 +69,6 @@ class NewNotificationMessage extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
         ];
     }
 }

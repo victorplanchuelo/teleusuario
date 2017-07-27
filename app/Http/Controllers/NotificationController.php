@@ -19,7 +19,7 @@ class NotificationController extends Controller
      */
     public function index()
     {
-        $notifications = Auth::user()->notifications()->paginate(5);
+        $notifications = Auth::user()->notifications();
         return view('dashboard.notifications.notifications', compact('notifications'));
     }
 
@@ -60,16 +60,18 @@ class NotificationController extends Controller
 	    ], $messages);
 
 	    if ($validator->fails()) {
-		    return redirect()->back()
-			    ->withErrors($validator)
-			    ->withInput();
+		    return response()->json([
+		    	'success' => 0,
+			    'error' => $validator->errors()->all(),
+		    ]);
 	    }
 
 	    if(in_array("0", $request->user) && count($request->user)>1)
 	    {
-		    return redirect()->back()
-			    ->withErrors(['user' => trans('validation.custom.notifications.user.choose')])
-			    ->withInput();
+		    return response()->json([
+			    'success' => 0,
+			    'error' => trans('validation.custom.notifications.user.choose'),
+		    ]);
 	    }
 
 	    // SI PASAN LAS VALIDACIONES SE CREA LA NOTIFICACIÓN SEGÚN LO INSERTADO
@@ -82,8 +84,10 @@ class NotificationController extends Controller
 
 	    Notification::send($users, new NewNotificationMessage($notification));
 
-	    return redirect()->back()
-		    ->with('status', trans('dashboard.notifications.new.success'));
+	    return response()->json([
+	    	'success' => 1,
+		    'message' => trans('dashboard.notifications.new.success')
+	    ]);
 
     }
 
@@ -97,15 +101,23 @@ class NotificationController extends Controller
     	$notification = Auth::user()->notifications()->where('id',$request->notification)->first();
 	    if ($notification)
 	    {
+	    	$leido_anteriormente = 1;
 
-		    $notification->markAsRead();
-		    $html = view('main.inc.notifications')->render();
+	    	if($notification->where('read_at')===null)
+		    {
+			    $notification->markAsRead();
+			    $html = view('main.inc.notifications')->render();
+			    $leido_anteriormente=0;
+		    }
+
 		    $success=1;
 
 		    return response()->json([
 		    	'success' => $success,
 			    'html' => $html,
 			    'error' => [$strErr],
+			    'notification_deleted' => $notification->id,
+			    'ya_leido' => $leido_anteriormente,
 		    ]);
 	    }
 	    else
