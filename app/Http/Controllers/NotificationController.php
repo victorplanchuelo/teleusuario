@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\NotificationMessage;
 use App\Notifications\NewNotificationMessage;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Notification;
 use Validator;
 use App\User;
@@ -102,10 +103,11 @@ class NotificationController extends Controller
 	    if ($notification)
 	    {
 	    	$leido_anteriormente = 1;
-
-	    	if($notification->where('read_at')===null)
+	    	//dd($notification->data['read']);
+	    	if($notification->data['read']===0)
 		    {
 			    $notification->markAsRead();
+			    $notification->update(['data->read'=>1]);
 			    $html = view('main.inc.notifications')->render();
 			    $leido_anteriormente=0;
 		    }

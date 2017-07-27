@@ -14,6 +14,8 @@ class NewNotificationMessage extends Notification
 
     protected $message;
 
+	protected $dateFormat = 'M j Y h:i:s:000A';
+
     /**
      * Create a new notification instance.
      *
@@ -56,6 +58,7 @@ class NewNotificationMessage extends Notification
 		return [
 			'message' => $this->message->message,
 			'type' => $this->message->type,
+			'read' => 0,
 		];
 	}
 

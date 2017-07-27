@@ -16,7 +16,6 @@
 						</tr>
 						</thead>
 						<tbody>
-
 						@if (count($notifications)>0)
 							<!-- AQUI SE MOSTRARA EL DATATABLE DE LOS MENSAJES. VER EL TEMPLATE -->
 							<?php $cont=0; ?>
