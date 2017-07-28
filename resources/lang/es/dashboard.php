@@ -98,6 +98,7 @@ return [
 			'liruch_calls' => 'Llamadas Liruch',
 			'erotic_calls' => 'Llamadas eróticas',
 			'boyfriends' => 'Novios',
+			'webcam' => 'Webcam',
 		],
 
 	],

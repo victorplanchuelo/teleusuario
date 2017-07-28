@@ -96,6 +96,7 @@ return [
 			'liruch_calls' => 'Liruch calls',
 			'erotic_calls' => ' Erotics calls',
 			'boyfriends' => 'Boyfriends',
+			'webcam' => 'Webcam',
 		],
 	],
 

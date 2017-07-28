@@ -25,7 +25,6 @@
 				<span class="menu-item">{{ trans('dashboard.title') }}</span>
 			</a>
 		</li>
-
 		<?php
 			$clase=0;
 			foreach($services as $service)
