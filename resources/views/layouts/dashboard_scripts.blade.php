@@ -6,12 +6,12 @@
 	$(document).ready(function() {
 		// Initialize Firebase
 		var config = {
-			apiKey: "AIzaSyBzbqWeE3jKUmxKcXGkT4am3kPswgrO2AY",
-			authDomain: "notifications-9c63f.firebaseapp.com",
-			databaseURL: "https://notifications-9c63f.firebaseio.com",
-			projectId: "notifications-9c63f",
-			storageBucket: "notifications-9c63f.appspot.com",
-			messagingSenderId: "1067087567114"
+			apiKey: "AIzaSyBECU9XRs56GqGpg8IHdY2NgWD3GEGQJmQ",
+			authDomain: "teleusuario-1a83e.firebaseapp.com",
+			databaseURL: "https://teleusuario-1a83e.firebaseio.com",
+			projectId: "teleusuario-1a83e",
+			storageBucket: "teleusuario-1a83e.appspot.com",
+			messagingSenderId: "994279558096"
 		};
 		firebase.initializeApp(config);
 

@@ -67,18 +67,18 @@ function firebase_NoviosConectados()
 ///////////////////////// FUNCIONES DEL MAIN DEL DASHBOARD
 function firebase_EliminarNotificacion(strHtml, usuario, id_notificacion)
 {
-	var usuarioRef = firebase.database().ref(usuario);
-	update_unread_notif_html(usuarioRef, strHtml);
+	var htmlNotificacionesRef = firebase.database().ref('notifications/' + usuario + '/html');
+	update_unread_notif_html(htmlNotificacionesRef, strHtml);
 
-	var notificacionesUsuarioRef = firebase.database().ref(usuario + '/notifications/'+id_notificacion);
+	var notificacionesUsuarioRef = firebase.database().ref('notifications/'+ usuario + '/notifications/' + id_notificacion);
 	notificacionesUsuarioRef.remove();
 }
 
 function firebase_ActualizarNotificaciones(usuario)
 {
 	var newItems = false;
-	var notificacionesUsuarioRef = firebase.database().ref(usuario + '/notifications');
-	var usuarioRef = firebase.database().ref(usuario);
+	var notificacionesUsuarioRef = firebase.database().ref('notifications/'+ usuario + '/notifications');
+	var htmlNotificacionesRef = firebase.database().ref('notifications/'+ usuario + '/html');
 
 	notificacionesUsuarioRef.on('child_added', function(data) {
 		if (!newItems) return;
@@ -95,11 +95,10 @@ function firebase_ActualizarNotificaciones(usuario)
 		change_count_unread_notifications(0);
 
 		//Actualizamos el nodo HTML en firebase
-		update_unread_notif_html(usuarioRef, $('.list-box:first-child').html());
+		update_unread_notif_html(htmlNotificacionesRef, $('.list-box:first-child').html());
 
 		//Lanzamos la función para que el icono de notificaciones parpadee
 		blink($('.list-box:first-child'));
-
 
 	});
 	notificacionesUsuarioRef.once('value', function(messages) {
@@ -115,8 +114,8 @@ function firebase_ActualizarNotificaciones(usuario)
 	notificacionesUsuarioRef.on('child_removed', function(data) {
 		change_count_unread_notifications(1);
 
-		usuarioRef.child('html').on("value", function(snapshot) {
-			var new_html='';
+		htmlNotificacionesRef.on("value", function(snapshot) {
+			var new_html;
 
 			console.log(snapshot.key+": "+snapshot.val());
 			new_html = snapshot.val();
@@ -201,5 +200,5 @@ function change_count_unread_notifications(operacion)
 
 function update_unread_notif_html(ref, html)
 {
-	ref.update({'/html': html});
+	ref.set(html);
 }

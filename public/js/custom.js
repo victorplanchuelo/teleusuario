@@ -137,4 +137,26 @@ function dropdownMenu()
 		}
 	);
 
+
+	var tid = setInterval( function () {
+		if ( document.readyState !== 'complete' ) return;
+		clearInterval( tid );
+		var querySelector = document.querySelector.bind(document);
+		var nav = document.querySelector('.vertical-nav');
+
+		// Minify menu on menu_minifier click
+		querySelector('.collapse-menu').onclick = function () {
+			nav.classList.toggle('vertical-nav-sm');
+			$('.dashboard-wrapper').toggleClass(('dashboard-wrapper-lg'), 200);
+			$('footer').toggleClass(('footer-sm'), 200);
+			$("i", this).toggleClass("icon-menu2 icon-cross2");
+		};
+
+		// Toggle menu click
+		querySelector('.toggle-menu').onclick = function () {
+			nav.classList.toggle('vertical-nav-opened');
+		};
+
+	}, 1000 );
+
 }

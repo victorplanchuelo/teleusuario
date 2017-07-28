@@ -42,7 +42,7 @@ class NewNotificationMessage extends Notification
 	{
 		//Antes de guardar en la BD de SQL Server lo metemos en Firebase vía Guzzle
 
-		$url = 'https://notifications-9c63f.firebaseio.com/' . $notifiable->code . '/notifications/' . $this->id . '.json';
+		$url = 'https://teleusuario-1a83e.firebaseio.com/notifications/' . $notifiable->code . '/notifications/' . $this->id . '.json';
 		$client = new Client();
 
 		$notification = array(
