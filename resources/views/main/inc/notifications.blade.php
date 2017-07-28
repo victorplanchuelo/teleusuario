@@ -1,4 +1,4 @@
-<li class="list-box hidden-xs dropdown @if(count(Auth::user()->unreadNotifications)) blink_icon @endif">
+<li class="list-box dropdown @if(count(Auth::user()->unreadNotifications)) blink_icon @endif">
 	<a id="drop3" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
 		<i class="icon-bell2"></i>
 	</a>
