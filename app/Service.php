@@ -23,7 +23,7 @@ class Service extends Model
 
 	public function users()
 	{
-		return $this->belongsToMany('App\User');
+		return $this->belongsToMany('App\User')->withPivot(array('active', 'end_date'));
 	}
 
 	public function delivery_note_lines()

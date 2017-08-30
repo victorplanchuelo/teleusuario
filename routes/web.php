@@ -63,7 +63,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
 
 
 
-	Route::group(['prefix' => 'services'], function() {
+	Route::group(['prefix' => 'services', 'middleware' => 'service.active'], function() {
 		//Rutas para el apartado mensajes
 		Route::get('/messages', 'ServiceController@getMessage')->name('dashboard.message');
 		Route::post('/messages', 'ServiceController@postMessages')->name('dashboard.message.send_message');
