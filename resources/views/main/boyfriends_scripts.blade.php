@@ -3,7 +3,7 @@
 <script src="{{ asset('js/loading-overlay.min.js') }}"></script>
 
 <script type="text/javascript" src="{{ asset('/js/firebase.js') }}"></script>
-<script src="https://www.gstatic.com/firebasejs/3.4.0/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.1.5/firebase.js"></script>
 
 <script src="https://static.opentok.com/v2/js/opentok.js"></script>
 <script type="text/javascript" src="{{ asset('/js/opentok.js') }}"></script>
@@ -432,15 +432,17 @@
 	}
 
 	$(document).ready(function() {
-		// Initialize Firebase
-		var config = {
-			apiKey: "AIzaSyCFsXB-qRqacz3JfwliVuYew5o285ELY_c",
-			authDomain: "liruch-50ed4.firebaseapp.com",
-			databaseURL: "https://liruch-50ed4.firebaseio.com",
-			storageBucket: "liruch-50ed4.appspot.com",
-			messagingSenderId: "1092206030458"
-		};
-		firebase.initializeApp(config);
+		if (fire==null) {
+			// Initialize Firebase
+			var config = {
+				apiKey: "AIzaSyCFsXB-qRqacz3JfwliVuYew5o285ELY_c",
+				authDomain: "liruch-50ed4.firebaseapp.com",
+				databaseURL: "https://liruch-50ed4.firebaseio.com",
+				storageBucket: "liruch-50ed4.appspot.com",
+				messagingSenderId: "1092206030458"
+			};
+			fire = firebase.initializeApp(config, 'boyfriend');
+		}
 
 		muestraNovios();
 		firebase_NoviosConectados();

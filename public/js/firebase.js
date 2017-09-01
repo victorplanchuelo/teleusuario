@@ -1,13 +1,13 @@
 /**
  * Created by victorplanchuelo on 12/6/17.
  */
-
+var firebase2, fire;
 
 
 //////////// FUNCIONES QUE SE USAN
 function firebase_ConversacionesActivasUP(usuario)
 {
-	var conversaciones_activasRef = firebase.database().ref('chats/usuarios_premium_conversaciones/'+usuario);
+	var conversaciones_activasRef = fire.database().ref('chats/usuarios_premium_conversaciones/'+usuario);
 	conversaciones_activasRef.on("value", function(snapshot) {
 		console.log('snapshot');
 		console.log(snapshot.val());
@@ -32,7 +32,7 @@ function firebase_ConversacionesActivasUP(usuario)
 function firebase_ActualizarConversacion(conversacion)
 {
 	//orderByChild('conversacion').equalTo(conversacion)
-	var mensajes_conversacionRef = firebase.database().ref('chats/conversaciones/'+conversacion).orderByChild('leido').equalTo(0);
+	var mensajes_conversacionRef = fire.database().ref('chats/conversaciones/'+conversacion).orderByChild('leido').equalTo(0);
 	mensajes_conversacionRef.off();
 	mensajes_conversacionRef.on("value", function(snapshot) {
 		console.log(snapshot.val());
@@ -51,7 +51,7 @@ function firebase_ActualizarConversacion(conversacion)
 //////////////////FUNCIONES PARA LOS NOVIOS
 function firebase_NoviosConectados()
 {
-	var usuarios_conectadosRef = firebase.database().ref('chats/conexiones_usuarios');
+	var usuarios_conectadosRef = fire.database().ref('chats/conexiones_usuarios');
 
 	usuarios_conectadosRef.on('child_added', function(data) {
 		$('.cliente[data-anuncio="'+data.val().anuncio+'"]').parent().parent().removeClass('desconectado').addClass('conectado');
@@ -67,18 +67,18 @@ function firebase_NoviosConectados()
 ///////////////////////// FUNCIONES DEL MAIN DEL DASHBOARD
 function firebase_EliminarNotificacion(strHtml, usuario, id_notificacion)
 {
-	var htmlNotificacionesRef = firebase.database().ref('notifications/' + usuario + '/html');
+	var htmlNotificacionesRef = firebase2.database().ref('notifications/' + usuario + '/html');
 	update_unread_notif_html(htmlNotificacionesRef, strHtml);
 
-	var notificacionesUsuarioRef = firebase.database().ref('notifications/'+ usuario + '/notifications/' + id_notificacion);
+	var notificacionesUsuarioRef = firebase2.database().ref('notifications/'+ usuario + '/notifications/' + id_notificacion);
 	notificacionesUsuarioRef.remove();
 }
 
 function firebase_ActualizarNotificaciones(usuario)
 {
 	var newItems = false;
-	var notificacionesUsuarioRef = firebase.database().ref('notifications/'+ usuario + '/notifications');
-	var htmlNotificacionesRef = firebase.database().ref('notifications/'+ usuario + '/html');
+	var notificacionesUsuarioRef = firebase2.database().ref('notifications/'+ usuario + '/notifications');
+	var htmlNotificacionesRef = firebase2.database().ref('notifications/'+ usuario + '/html');
 
 	notificacionesUsuarioRef.on('child_added', function(data) {
 		if (!newItems) return;
