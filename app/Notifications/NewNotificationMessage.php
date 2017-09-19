@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Helpers\NotificationMessage;
 use GuzzleHttp\Client;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
@@ -14,14 +15,12 @@ class NewNotificationMessage extends Notification
 
     protected $message;
 
-	protected $dateFormat = 'M j Y h:i:s:000A';
-
-    /**
-     * Create a new notification instance.
-     *
-     * @return void
-     */
-    public function __construct($message)
+	/**
+	 * Create a new notification instance.
+	 *
+	 * @param $message
+	 */
+    public function __construct(NotificationMessage $message)
     {
         $this->message = $message;
     }
@@ -38,6 +37,10 @@ class NewNotificationMessage extends Notification
     }
 
 
+	/**
+	 * @param $notifiable
+	 * @return array
+	 */
 	public function toDatabase($notifiable)
 	{
 		//Antes de guardar en la BD de SQL Server lo metemos en Firebase vía Guzzle

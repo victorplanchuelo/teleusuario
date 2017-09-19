@@ -17,5 +17,4 @@ class NotificationMessage
 		$this->message = $message;
 		$this->type = $type;
 	}
-
 }

@@ -106,7 +106,17 @@ class NotificationController extends Controller
 	    	//dd($notification->data['read']);
 	    	if($notification->data['read']===0)
 		    {
+		    	//dd($notification);
 			    $notification->markAsRead();
+
+			    // OJO. Se ha cambiado una clase en la carpeta vendor
+			    // es Database/Query/Grammars/SqlServerGrammars
+			    // linea 403 (getDateFormat)
+			    //Se pone esto:     return env('SYS_DATE_FORMAT', 'Y-m-d H:i:s.000');
+			    // y en el .env se añade el SYS_DATE_FORMAT
+
+
+			    //dd(Carbon::now()->format('Y-m-d H:i:s'));
 			    $notification->update(['data->read'=>1]);
 			    $html = view('main.inc.notifications')->render();
 			    $leido_anteriormente=0;
